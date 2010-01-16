@@ -1,14 +1,13 @@
-=Heading1=
-Project Plan for Team Awesome
+=Project Plan for Team Awesome=
   
-Table of Contents: 
+==Table of Contents: ==
 ... todo 
   
-Revision History: 
-Revision 
- Status 
- Revision date 
- By: 
+==Revision History:==
+||Revision 
+  Status|| 
+ ||Revision date|| 
+ ||By: ||
  
 1.0 
  Created general outline.  13/January/2010  All Team Members  
@@ -243,4 +242,3 @@ Steven Verner - Game Engine Design and Meeting Management
 John Kehler - Storyboarding and Main Interface Programmer  
 Tony Wu - Web Design and Database Administrator 
 Le Fang - Level Design, Web Design and Database Administrator
-
