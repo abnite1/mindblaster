@@ -1,0 +1,246 @@
+=Heading1=
+Project Plan for Team Awesome
+  
+Table of Contents: 
+... todo 
+  
+Revision History: 
+Revision 
+ Status 
+ Revision date 
+ By: 
+ 
+1.0 
+ Created general outline.  13/January/2010  All Team Members  
+1.1  Team Meetings and Risk Analysis added.  14/January/2010
+ Yaniv  
+
+1.2  Important Characteristics added.
+
+ 15/January/2010
+
+ 
+Le Fang
+ 
+1.3  Important Characeristics Part 1 added and compiled with Le Fang's previous submission for this area  15/January/2010
+ 
+Steve Verner  
+1.4  Project Overview              
+
+  
+ 15/January/2010  Jonathan Kehler  
+   
+
+  
+   
+   
+
+  
+   
+
+  
+Project Overview: 
+Do you find it difficult to get your children to study?  Hard to force them to do their homework?  Well get ready for the ultimate in educational gaming as an old classic is revamped with a unique spin!  Based on the arcade cult classic "Astroids", MindBlaster combines classic game play, mind blowing graphics and sound and an exciting learning component to create an educational experience unlike any before. 
+
+
+Geared at the elementary school level (approx grades 2-6) MindBlaster has users utilize a unique profile to battle their friends for high scores, completion % and hidden bonuses!  With custom designed ships, they battle hoards of astroids in a multitude of learning based games following basic school curriculum.  Scores and stats are automatically uploaded to the MindBlaster webserver for access by both teachers and parents as an indication of users learning progress.  Teachers can post rankings for encouragement and to reward successful learning. 
+       
+Users can progress through varying levels of difficulty, testing and strengthening their knowledge of math, trivia and spelling. Mixing the learning process with interactive competitive gameplay while capturing their attention with immersive dynamic animation and fast-paced action, MindBlaster perfectly balances study and play; they won't even know they're learning! 
+
+
+Coming soon: Customized curriculum! Enhanced animation! Superior AI! 
+Project Planning 
+Key Game Components:
+
+
+
+
+The Asteroid Attack game will require new users to create a profile upon beginning the game by entering their screen name and password and selecting a character picture.  This Data, along with their future high scores and progress through the game will be stored and updated in an online mySQL Database which will be accessed by the MindBlaster app through a PHP interface.   Every time a user logs in to the app this online profile will be loaded to the app (as an input file) so the user can access their high scores and continue the game from where they finished the previous time.  These profiles will also be stored and analyzed online in an app support website.  App users will be able to log in with their screen name and password and access statistics on high scoring players, average scores, and a graph of all high scores with their high score outlined in red: 
+Perhaps we can be less specific here to what we commmit too, just in terms of exactly what stats will be available (in case we change our minds) (John) 
+
+  
+
+
+Figure 1: High Scores Online Graph 
+
+  
+
+This Graph will also be displayed with the game over screen.  Finally the online profiles and statistics will be accessible at the app support website in password protected administrator accounts to allow administrators full access to fix bugs, update data storage, analysis and display features, and to analyze data for marketing purposes. 
+
+Data security will be less of an issue against children from age 6 to 9 (the target age group for this game) since they are not likely to try to tamper with the game data or hack into the app support website, as might be the case with older users.  High scores will be uploaded to the web directly and cannot be modified even with an administrator account.  
+The game will provide guide and in-game tips.  The guide and tips will pop up automatically as the user progresses through the game and can also be accessed with an in-game help button.  Online help information is also available and can be accessed either within the game or through the website. 
+An exception error report will be generated automatically and sent to the website whenever the game encounters an error or crashes.  The report will include a detailed description of the error.  All bugs will be tracked with a simple log file (stored in a flat file) which will be available to administrators on the app support website.  No in-game manual bug reporting option is provided as children from 6-9 would be unlikely to use this.  However, there will be a help email provided both in the in-game help screen and at the app support website where users can ask for advice or report bugs that they may have encountered. In the future a message board may be provided on the website to allow users to discuss game strategies and issues though this isn`t a goal for this project. 
+Just remember we actually HAVE to do all this, cause he's gonna be bringing this project plan and checking we met all our promises! (John) 
+
+that's why i took out the the mesage board idea. too much work. (yaniv) 
+
+contact information is just a page withsome text saying "if you wish to send us your feedback..." and an email address. 
+
+note that we need [user], [admin], [developer] logins but they all access the same page, so it's very little work. 
+
+  
+
+  
+
+Original (combined into the above paragraphs) 
+
+    edited version: 
+
+Users can log on to the supporting website to view and modify their accounts (user name, password). On the website they may also view their progress report. The website should have an administrator logon that allows editing of user accounts and a developer logon that allows viewing of error log. 
+As we're not dealing with sensitive information, security isn't a real issue. Scores, however, cannot be edited by anyone. 
+Online help will be available via the website for every game screen, and can be accessed using the help button.  
+Runtime exceptions will generate an automatic error report that will be appended to an error log on the website. 
+Contact information should be available on the website, users can provide feedback via email. 
+We need an email address dedicated to user feedback. 
+Development language is objective-C. 
+User accounts and profiles are stored online on a MySql database and accessed through the PHP interface. 
+Website should have a highest scores page that shows relative position of logged users to top-ten scores and average score. 
+  
+Features: 
+Phase 1: 
+GAME INTERFACE 
+Login screens 
+Asteroids converge towards coordinates (center) 
+Astroids disappear when hit 
+Game over screen 
+  
+SHEEP INTERFACE 
+Ship rotates via two rotation buttons 
+Ship fires up to a given distance 
+  
+ASTEROID INTERFACE 
+Asteroids can be destroyed with gun (simply disappear) 
+Asteroids have varying velocities 
+  
+WEBSITE INTERFACE 
+Supporting website implemented without direct interaction with the application 
+Login screen, separate access for admin/user/developer 
+Empty MySql database created with defined tables 
+Top-10 scores and some graph showing relative position to top-10 and overal average
+View individual score, manage personal account (admin has access to all accounts)
+  
+Phase 2: 
+Ships, asteroids and firing are fully animated and integrated into the game interface
+Levels are implemented (several levels for each of addition, subtraction, multiplication, division)
+App support website integrated so that high scores and error reports ent from iphone to website  
+App support website viewable from the internet 
+  
+Phase 3: 
+Accelerometers implemented for ship rotation 
+Website Graphs and Statistics Implemented
+Heat Seeker Missiles which follow some one's touch on the screen implemented 
+Future Development: 
+Enemy Ships with unpredictable movement replace some asteroids
+Bosses at the end of levels
+Levels and Questions for subject other than math such as synonymns, trivia, etc implemented
+Ship can move around the screen with an acceleration button
+when ship moves off one edge of the screen it reappears on the other edge
+this feature will allow for much longer game-play
+once movement is implemented, dodging is possible so enemy ships returning fire can be implemented 
+bosses can become harder and more complex
+enemy ship's AI can be improved
+Project Schedule (Gantt chart): 
+... todo: tony 
+
+  
+Risk Analysis: 
+  
+Risk: 
+ Severity: 
+ Solution: 
+ 
+Misallocated time for each portion of the assignments could result in failure to meet deadlines, reducing the time we have to work on the next phase. 
+
+  
+ Severe 
+ Personal and group commitment to uphold deadlines combined with team oversight.  
+Individual task assignments for each team member may lead to an inconsistent final result.  Medium-Severe 
+ Coordinate our efforts and frequently review each other's progress 
+
+  
+ 
+Miscommunication may lead to duplicate effort.  Low-Medium 
+ Project manager should act as oversight to make sure everyone is doing what they have been assigned to. This way errors can be quickly corrected with minimal delay. 
+
+  
+ 
+Lack of familiarity with Objective-C may affect our project's chances of success. 
+
+  
+   Severe 
+ Preparation is half the battle, therefore we must recognize our weakness and choose a simple initial design with an optional modular extension.  
+Testing the Accelerometer functionality may be difficult, if not impossible to test on the simulator. We will likely require an actual device for the testing phase. 
+
+  
+ Low-Medium  
+ Tony has an iphone.  
+Considering that our target demographics consists of children of ages 6-12, we would require test subjects fitting that description. 
+
+  
+  Medium-Severe 
+ kidnap random children and subject them to forced labor as simulated testers.  
+Inappropriate scheduling or unforseen events may result in insufficient time for each phase, testing particular. 
+
+  
+ Medium-Severe 
+ We must ensure that enough time is alotted to each phase, especially for final testing and retesting after modification of the first prototype. 
+
+  
+ 
+Conflicts that may arise between team members will hinder the necessary cooperative effort our project requires. 
+
+  
+ Low-Medium 
+ all team members should be ready to assist each other where needed. Everyone makes it or nobody eats. Project manager will act as resident therapist if required. 
+
+  
+ 
+Presentations require a different set of skills. Key components of a successful presentation are preparation and a handsome confident speaker. 
+
+  
+ Low 
+ Allocate time to prepare our presentations, reherse, modify, make sure it's perfect.  
+Phase manager may fail to provide necessary oversight. Who watches the watchmen? 
+
+  
+ Low-Medium 
+ Team members should be responsible for themselves first and foremost and should make sure the phase manager does his duty as well. 
+
+  
+ 
+
+  
+Original: 
+Misallocated time for each portion of the assignments could result in failure to meet deadlines, reducing the time we have to work on the next phase. 
+Individual task assignments for each team member may lead to an inconsistent final result. We must coordinate our efforts and frequently review each other's progress. 
+Miscommunication may lead to duplicate effort. Project manager should act as oversight to make sure everyone is doing what they have been assigned to. This way errors can be quickly corrected with minimal delay. 
+Lack of familiarity with Objective-C may affect our project's chances of success. Preparation is half the battle, therefore we must recognize our weakness and choose a simple initial design with an optional modular extension. The initial design should bring our project into a working state to which we may add optional components to increase its functionality. 
+Namely, simple animation and graphics. 
+Added functionatlity may include a moving ship, random direction vectors for the asteroids, simulated collisions, explosion animation, more sophisticated statystical analysis or graphical representation of data on the webpage. 
+Every component should be its own atomic class so that we may test it individually once finished and this will also simplify role distribution. 
+The initial "simple" design should include adaptive animation that displays where the ship is facing at any given time, a cluster of asteroids converging on the ship's location at constant speed, the question presented to the user and possible answers on the asteroids. The "simple" design must also support multi-user profiles, keeping a unique login for each user and storing their progress via the webpage. The webpage should also display the ten best results and the user's current placement in reference. Web page must also support admin functionality and assigned read/write/view permissions per access level (user/admin), touch-activated targetting, and Accelerometer directed movement. 
+  
+
+Testing the Accelerometer functionality may be difficult, if not impossible to test on the simulator. We will likely require an actual device for the testing phase. 
+Considering that our target demographics consists of children of ages 6-12, we would require test subjects fitting that description. 
+Do we really have access to children? Children that we can bring whereever the simulation is? 
+my neighbor has children, maybe i can borrow them and hopefully not go to jail. doesn't anyone have little siblings that fit our age group? 
+Assuming no product is perfect in version 1.0, we must schedule appropriate time for modification after testing and possibly schedule multiple testing phases to accomodate the next version changes. 
+Conflicts that may arise between team members will hinder the necessary cooperative effort our project requires. Therefore, all team members should be ready to assist each other where needed. Everyone makes it or nobody eats. Project manager will act as resident therapist if required.LOL 
+Presentations require a different set of skills. Key components of a successful presentation are preparation and a handsome confident speaker. 
+Project manager may fail to provide necessary oversight in which case a team member must depose him and take over leadership of the project. 
+  
+  
+Team Meetings (agenda and minutes): steven, if you have the dates of the meetings that would probably be good to add. 
+Our group members get introduced and formulate a general concept of what it is we want to do. After a quick brainstorming session two candidate ideas are selected but we delay the final decision for meeting 2. 
+We decide unanimously to go with the asteroid concept due to its simpler design that we feel is more cost effective under our time constraints. We formulate a general storyboard, and a group page is created at http://cmpt275-3.wetpaint.com/ 
+Inspired by class discussion we decide to port the page to Google Code, however, we fail to make a unanimous decision as to our group name. Roles are distributed among group members. It is decided that Yaniv will manage the project and the group web page. Tony and Le Fang are assigned to create the website supporting our application, Steven fearlessly volunteers to take team minutes and we will all contribute to the application coding process.  At present, we decide that each member is responsible for documenting their assigned process. At the end of the meeting, team spirits are high, but we have yet to choose a group name. We schedule a next meeting and assign roles for formulating the project plan. On our next meeting we should have a first draft of the plan and hopefully a group name. In addition, we've decided that the website portion of the project is sufficiently defined and tasked Tony to search for a suitable host, free or otherwise, so that he may begin developing its design autonomously. 
+(15/jan) Project plan revised and we've set a color scheme for individiual revision. It's been decided that we need a consistent reference to our target audience, "Users" has been selected. Finally, the day has come, we are group "Awesome" and a our application title is "MindBlaster". A possible schedule is for another meeting on Saturday the 16th, in case we're not happy with the overnight online revision.  Created Gantt chart and divided the code complexity into modular isolated section each person can work on individually. 
+  
+ Team Members: 
+Yaniv Haramati - Phase Manager (in charge of submissions) 
+Steven Verner - Game Engine Design and Meeting Management 
+John Kehler - Storyboarding and Main Interface Programmer  
+Tony Wu - Web Design and Database Administrator 
+Le Fang - Level Design, Web Design and Database Administrator
+
