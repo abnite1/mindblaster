@@ -1,5 +1,5 @@
 =Assignment 2= 
 ==stubs for finished documents:==
-===Requirements: [link_to_requirements_file]===
-===Design: [link_to_Design_file]===
-===QA: [link_to_QA_file]===
+===Requirements: [link_to_requirements_file Requirements]===
+===Design: [link_to_Design_file Design]===
+===QA: [link_to_QA_file QA]===
