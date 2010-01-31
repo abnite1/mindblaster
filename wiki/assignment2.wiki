@@ -1,1 +1,4 @@
-=Assignment 2: [link_to requirements file]=
+=Assignment 2= 
+=Requirements: [link_to_requirements_file]=
+=Design: [link_to_Design_file]=
+=QA: [link_to_QA_file]=
