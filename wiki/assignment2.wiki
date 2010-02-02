@@ -1,5 +1,5 @@
 =Assignment 2= 
 ==stubs for finished documents:==
-===[http://mindblaster.googlecode.com/files/Group-3-Requirements.pdf Requirements]===
-===[http://mindblaster.googlecode.com/files/Group-3-Design.pdf Design]===
-===[http://mindblaster.googlecode.com/files/Group-3-QA.pdf QA]===
+===[http://mindblaster.googlecode.com/files/Group-3-Requirements.doc Requirements]===
+===[http://mindblaster.googlecode.com/files/Group-3-Design.doc Design]===
+===[http://mindblaster.googlecode.com/files/Group-3-QA.doc QA]===
