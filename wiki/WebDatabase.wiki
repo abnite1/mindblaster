@@ -14,3 +14,7 @@ Initially built on Jan. 16th, 2010: http://mindblaster.x10hosting.com/
     * the user has limited read/write access to the database for relevant account settings and read-only privileges for viewing results.
     * the admin has limited read/write access to the database that provides access to all account tables and user feedback logs.
     * developer has full access to the database.
+
+= CSS License =
+All of the free CSS templates provided on this website are licensed under a Creative Commons Attribution 2.5 License, so they are free to use for both commercial and noncommercial purposes provided you link back to FreeCSSTemplates.org. For more information about this license, please click on the button below.
+http://creativecommons.org/licenses/by/2.5/
