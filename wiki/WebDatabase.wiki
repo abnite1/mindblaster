@@ -3,7 +3,7 @@
 = Introduction =
 
 Initially built on Jan. 16th, 2010: http://mindblaster.x10hosting.com/
-
+Alpha Stage: http://mindblaster.x10hosting.com/alpha/
 
 = Details =
 
