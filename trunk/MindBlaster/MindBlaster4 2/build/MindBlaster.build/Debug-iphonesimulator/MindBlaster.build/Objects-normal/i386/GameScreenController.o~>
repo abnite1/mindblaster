@@ -1,0 +1,2 @@
+/Users/jka37/Desktop/MindBlaster/Classes/GameScreenController.m:75: warning: property 'mBall' requires method '-mBall' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/jka37/Desktop/MindBlaster/Classes/GameScreenController.m:75: warning: property 'mBall' requires the method 'setMBall:' to be defined - use @synthesize, @dynamic or provide a method implementation
