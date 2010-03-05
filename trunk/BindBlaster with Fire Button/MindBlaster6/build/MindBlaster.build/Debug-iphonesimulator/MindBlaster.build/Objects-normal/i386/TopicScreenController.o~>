@@ -1,0 +1,5 @@
+In file included from /Volumes/jka37/MindBlaster/Classes/TopicScreenController.m:9:
+/Volumes/jka37/MindBlaster/Classes/TopicScreenController.h:17: error: expected ')' before 'IBaction'
+/Volumes/jka37/MindBlaster/Classes/TopicScreenController.m: In function '-[TopicScreenController NextScreen]':
+/Volumes/jka37/MindBlaster/Classes/TopicScreenController.m:57: warning: conflicting types for '-(void)NextScreen'
+/Volumes/jka37/MindBlaster/Classes/TopicScreenController.h:17: warning: previous declaration of '-(id)NextScreen'
