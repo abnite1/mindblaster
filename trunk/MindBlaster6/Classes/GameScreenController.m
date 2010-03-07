@@ -10,8 +10,12 @@
 #import "GameOverScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
+#import "MindBlasterAppDelegate.h"
+#import "UserProfile.h"
 
 @implementation GameScreenController
+
+@synthesize ship;
 
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
 @synthesize asteroids;  //this is the vector which will hold all of the above asteroid objects
@@ -23,6 +27,17 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	/************* This will load profile settings ****************/
+	//for now just print the settings to the log!
+	NSLog(@"UserName is set to: %@ \n",[UIAppDelegate.currentUser getName]);
+	NSLog(@"Diff is set to: %d \n",[UIAppDelegate.currentUser getDiff]);
+	NSLog(@"Stage is set to: %d \n",[UIAppDelegate.currentUser getStage]);
+	NSLog(@"Score is set to: %d \n",[UIAppDelegate.currentUser getScore]);
+	
+		
+	/**************** done loading settings ******************/
+	
+	
 	int i;  //used as a counter 
 	
 	//values used to describe the direction the ship is facing, derived from the rotation wheel
@@ -81,7 +96,8 @@
 	//NSLog(@"shipX = %f,   shipY = %f", shipDirectionX, shipDirectionY); 
 	//sets the bullet being fired's movement vector to the vector defined by the direction in which the ship is pointing
 	bulletPos[bulletsFired] = CGPointMake(shipDirectionX,shipDirectionY); 
-	tempBullet.center = CGPointMake(200,120); 
+	//tempBullet.center = CGPointMake(200,120); 
+	tempBullet.center = CGPointMake(242,167);
 	tempBullet.hidden = NO; 
 	
 	if(bulletsFired == 5)   //there are only six bullets so once all 6 have been fired start at 0 again
@@ -192,6 +208,10 @@
 }
 */
 
+// rotate ship according to rotation wheel angle
+-(IBAction) rotateByAngle:(CGFloat)angle {
+	ship.transform = CGAffineTransformMakeRotation(angle);
+}
 
 
 /*This function is called when a touch on the screen is first detected
@@ -246,6 +266,15 @@
 		
 		//NSLog(@"X: %f",x);
 		//NSLog(@"Y: %f",y);
+		
+		
+		// get the radian angle of rotation (0 <-> 2 pi) based on point of contact with the wheel
+		CGPoint arcTop = CGPointMake(xcenter, ycenter - radius);	// point of reference for angle formula
+		CGFloat rotationAngle =  2 * atan2(location.y - arcTop.y, location.x - arcTop.x);
+		[self rotateByAngle: rotationAngle];
+		//NSLog(@"Angle: %f", rotationAngle); // for debug
+	
+		//[ship rotateByAngle: rotationAngle];
 		
 		//rotation ball is moved to the approximation of the closest point on the
 		//rotation wheel to the point where to user actually touched the screen
