@@ -10,6 +10,8 @@
 #import "TopicScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
+#import "MindBlasterAppDelegate.h"
+#import "UserProfile.h"
 
 @implementation LoadGameScreenController
 
@@ -25,6 +27,21 @@
 //and then continue
 -(IBAction) LoadGame
 {
+	//First we will test this by creating a pretend structure
+	//later that structure will be filled from a file
+	UserProfile *loadedProfile;
+	loadedProfile = UIAppDelegate.currentUser;
+	
+	//later this would be filled with data from textfile
+	[loadedProfile setName:@"Blanka"];
+	//[loadedProfile setStage:5];
+	//[loadedProfile setDiff:5];
+	[loadedProfile setScore:9999];
+	
+	
+	
+	
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];

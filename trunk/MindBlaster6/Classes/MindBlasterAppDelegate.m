@@ -8,18 +8,29 @@
 
 #import "MindBlasterAppDelegate.h"
 #import "RootViewController.h"
+#import "UserProfile.h"
 
 @implementation MindBlasterAppDelegate
 
 @synthesize window;
 @synthesize navigationController;
+@synthesize currentUser;
 
 
 #pragma mark -
 #pragma mark Application lifecycle
 
+
+
+
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    
+    //GLOBAL USER PROFILE!
+	//myGlobalObject = [[MyGlobalObject alloc] init];
+	currentUser = [[UserProfile alloc] init];
+	//[currentUser setName:@"NewName"];
+	
+	
     // Override point for customization after app launch    
 	
 	[window addSubview:[navigationController view]];
