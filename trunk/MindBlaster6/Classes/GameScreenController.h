@@ -11,6 +11,10 @@
 
 @interface GameScreenController : UIViewController 
 {
+	
+
+	IBOutlet UIImageView *ship;
+	
 	IBOutlet UIImageView *asteroid0;
 	IBOutlet UIImageView *asteroid1;
 	IBOutlet UIImageView *asteroid2;
@@ -42,6 +46,8 @@
 
 	int bulletsFired;
 }
+
+@property (nonatomic,retain) IBOutlet UIImageView *ship;
 
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid0;
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid1;
