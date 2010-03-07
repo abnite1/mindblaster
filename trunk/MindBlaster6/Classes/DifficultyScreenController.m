@@ -10,6 +10,8 @@
 #import "GameScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
+#import "MindBlasterAppDelegate.h"
+#import "UserProfile.h"
 
 @implementation DifficultyScreenController
 @synthesize difficultyDescription;
@@ -23,6 +25,8 @@
 }
 -(IBAction) NextScreen
 {
+	//NSLog(@"The diff now set to %d \n",[UIAppDelegate.currentUser getDiff]);
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	GameScreenController *gamesScreenView = [[GameScreenController alloc] initWithNibName:@"GameScreenController" bundle:nil];
 	[self.navigationController pushViewController:gamesScreenView animated:YES];
@@ -31,24 +35,33 @@
 
 -(IBAction) DiffOne
 {
+	[UIAppDelegate.currentUser setDiff:1];
+	//NSLog(@"The difficulty setting is now: %d \n", [UIAppDelegate.currentUser getDiff]);
+	
 	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyOne Description"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
 -(IBAction) DiffTwo
 {
+	[UIAppDelegate.currentUser setDiff:2];
+	
 	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyTwo Description"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
 -(IBAction) DiffThree
 {
+	[UIAppDelegate.currentUser setDiff:3];
+	
 	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyThree Description"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
 -(IBAction) DiffFour
 {
+	[UIAppDelegate.currentUser setDiff:4];
+	
 	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyFour Description"];
 	[difficultyDescription setText:msg];
 	[msg release];
