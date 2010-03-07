@@ -13,6 +13,7 @@
 
 
 @implementation CharacterScreenController
+@synthesize profilePic;
 
 -(IBAction) HelpScreen
 {
@@ -27,6 +28,9 @@
  */
 - (IBAction) CharacterOne
 {
+	//profilePic = [[self CharacterOne] image];
+	
+	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
 	[self.navigationController pushViewController:userNameView animated:YES];
@@ -34,6 +38,10 @@
 }
 - (IBAction) CharacterTwo
 {
+	
+	
+	
+	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
 	[self.navigationController pushViewController:userNameView animated:YES];

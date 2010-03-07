@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
+#import <CoreData/CoreData.h>
 
 @interface CharacterScreenController : UIViewController {
+	UIImage *profilePic;
+	
 }
+@property(nonatomic, retain) UIImage *profilePic;
+
 - (IBAction) CharacterOne;
 - (IBAction) CharacterTwo;
 - (IBAction) CharacterThree;

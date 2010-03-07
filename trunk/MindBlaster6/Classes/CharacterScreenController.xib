@@ -62,10 +62,14 @@
 					<object class="IBUIButton" id="769262669">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{81, 121}, {72, 37}}</string>
+						<string key="NSFrame">{{32, 76}, {122, 126}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<int key="IBUIContentMode">2</int>
+						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+							<integer value="5" key="IBUIAccessibilityTraits"/>
+						</object>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<object class="NSFont" key="IBUIFont" id="666843129">
@@ -86,6 +90,10 @@
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="834300564">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">boy.PNG</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="500148432">
@@ -129,7 +137,7 @@
 					<object class="IBUIButton" id="698320769">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{167, 121}, {72, 37}}</string>
+						<string key="NSFrame">{{176, 84}, {127, 111}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -144,11 +152,15 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="834300564"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">girl.PNG</string>
+						</object>
 					</object>
 					<object class="IBUIButton" id="591310993">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{247, 121}, {72, 37}}</string>
+						<string key="NSFrame">{{327, 84}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -167,7 +179,7 @@
 					<object class="IBUIButton" id="760366006">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{327, 121}, {72, 37}}</string>
+						<string key="NSFrame">{{327, 158}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -280,10 +292,10 @@
 							<reference ref="375132651"/>
 							<reference ref="388911505"/>
 							<reference ref="500148432"/>
-							<reference ref="769262669"/>
-							<reference ref="698320769"/>
-							<reference ref="591310993"/>
 							<reference ref="760366006"/>
+							<reference ref="591310993"/>
+							<reference ref="698320769"/>
+							<reference ref="769262669"/>
 						</object>
 						<reference key="parent" ref="788379356"/>
 					</object>
