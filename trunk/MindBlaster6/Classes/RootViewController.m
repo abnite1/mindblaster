@@ -11,12 +11,19 @@
 #import "LoadGameScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
+#import "UserProfile.h"
+
+///UserProfile *user = [UserProfile new];
 
 @implementation RootViewController
 @synthesize mBall;
 
+
+
 -(IBAction) HelpScreen
 {
+	
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
