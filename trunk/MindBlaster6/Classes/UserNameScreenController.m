@@ -10,7 +10,8 @@
 #import "TopicScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
-
+#import "UserProfile.h"
+#import "MindBlasterAppDelegate.h"
 
 @implementation UserNameScreenController
 @synthesize txtName;
@@ -37,6 +38,12 @@
 //So this method should save txtName to the user data profile.
 -(IBAction) NextScreen
 {
+
+	//NSLog(@"Checking: The name was chosen as: %@ \n",[txtName text]);
+	[(UIAppDelegate.currentUser) setName:[txtName text]];
+	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
+	
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];
