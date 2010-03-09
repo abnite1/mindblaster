@@ -31,7 +31,7 @@
 
 @synthesize scoreLabel;
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//  Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	
 	UILabel *tempSolution;
