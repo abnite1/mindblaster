@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072972C31146DB49004ED361 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 072972C21146DB49004ED361 /* UserProfile.m */; };
 		07BBE0AE113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */; };
 		07BBE0B71137109E00BAF196 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* Ball.m */; };
+		07E3F5DF1146DDD5005E5D37 /* boy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DB1146DDD5005E5D37 /* boy.png */; };
+		07E3F5E01146DDD5005E5D37 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DC1146DDD5005E5D37 /* cat.png */; };
+		07E3F5E11146DDD5005E5D37 /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DD1146DDD5005E5D37 /* dog.png */; };
+		07E3F5E21146DDD5005E5D37 /* girl.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DE1146DDD5005E5D37 /* girl.png */; };
 		1D3623260D0F684500981E51 /* MindBlasterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MindBlasterAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -47,9 +52,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		072972C11146DB3C004ED361 /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
+		072972C21146DB49004ED361 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
 		07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Space-Art-Wallpapers-12.jpg"; sourceTree = "<group>"; };
 		07BBE0B51137109E00BAF196 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
 		07BBE0B61137109E00BAF196 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
+		07E3F5DB1146DDD5005E5D37 /* boy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy.png; sourceTree = "<group>"; };
+		07E3F5DC1146DDD5005E5D37 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		07E3F5DD1146DDD5005E5D37 /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog.png; sourceTree = "<group>"; };
+		07E3F5DE1146DDD5005E5D37 /* girl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = girl.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MindBlasterAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindBlasterAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MindBlasterAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MindBlasterAppDelegate.m; sourceTree = "<group>"; };
@@ -179,6 +190,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07E3F5DB1146DDD5005E5D37 /* boy.png */,
+				07E3F5DC1146DDD5005E5D37 /* cat.png */,
+				07E3F5DD1146DDD5005E5D37 /* dog.png */,
+				07E3F5DE1146DDD5005E5D37 /* girl.png */,
+				072972C21146DB49004ED361 /* UserProfile.m */,
+				072972C11146DB3C004ED361 /* UserProfile.h */,
 				B4F2EF121144743B006BFA7D /* ship3.png */,
 				77203D841141114000127EC1 /* ship.gif */,
 				B4D628ED113F5C50003093D8 /* bullet2.png */,
@@ -296,6 +313,10 @@
 				B4D628EE113F5C50003093D8 /* bullet2.png in Resources */,
 				77203D851141114000127EC1 /* ship.gif in Resources */,
 				B4F2EF131144743B006BFA7D /* ship3.png in Resources */,
+				07E3F5DF1146DDD5005E5D37 /* boy.png in Resources */,
+				07E3F5E01146DDD5005E5D37 /* cat.png in Resources */,
+				07E3F5E11146DDD5005E5D37 /* dog.png in Resources */,
+				07E3F5E21146DDD5005E5D37 /* girl.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +343,7 @@
 				B4F2EFDA11447E78006BFA7D /* asteroidClass.m in Sources */,
 				77B6953811461F940055EFD6 /* Questions.m in Sources */,
 				77B6953911461F940055EFD6 /* Question.m in Sources */,
+				072972C31146DB49004ED361 /* UserProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
