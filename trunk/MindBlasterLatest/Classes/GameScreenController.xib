@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">9L31a</string>
+		<string key="IBDocument.SystemVersion">9L30</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
@@ -365,9 +365,9 @@
 							<double key="NSSize">2.000000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<object class="NSColor" key="IBUITextColor">
+						<object class="NSColor" key="IBUITextColor" id="332520595">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
+							<bytes key="NSRGB">MC45MDE5NjA3OSAwLjkwMTk2MDc5IDAuOTAxOTYwNzkAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -384,10 +384,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="IBUIText">18</string>
 						<reference key="IBUIFont" ref="151896564"/>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
-						</object>
+						<reference key="IBUITextColor" ref="332520595"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
@@ -403,10 +400,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="IBUIText">18</string>
 						<reference key="IBUIFont" ref="151896564"/>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
-						</object>
+						<reference key="IBUITextColor" ref="332520595"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
@@ -422,10 +416,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="IBUIText">18</string>
 						<reference key="IBUIFont" ref="151896564"/>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
-						</object>
+						<reference key="IBUITextColor" ref="332520595"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
@@ -443,7 +434,7 @@
 						<reference key="IBUIFont" ref="151896564"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
+							<bytes key="NSRGB">MC44MDAwMDAwMSAwLjgwMDAwMDAxIDAuODAwMDAwMDEAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -460,10 +451,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="IBUIText">18</string>
 						<reference key="IBUIFont" ref="151896564"/>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
-						</object>
+						<reference key="IBUITextColor" ref="332520595"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
@@ -472,17 +460,14 @@
 					<object class="IBUILabel" id="608680224">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 251}, {480, 29}}</string>
+						<string key="NSFrame">{{180, 231}, {105, 29}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">4 + 9 = ??</string>
+						<string key="IBUIText"/>
 						<reference key="IBUIFont" ref="151896564"/>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44Njk1NjUyNSAwLjExODAxMjQ0IDAuMTI4MjY0MjgAA</bytes>
-						</object>
+						<reference key="IBUITextColor" ref="332520595"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
@@ -691,14 +676,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">ship</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="534705347"/>
-					</object>
-					<int key="connectionID">59</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">solution0</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="993727628"/>
@@ -747,19 +724,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">question</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="608680224"/>
-					</object>
-					<int key="connectionID">75</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">scoreLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1011176714"/>
 					</object>
 					<int key="connectionID">77</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shipIcon</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="534705347"/>
+					</object>
+					<int key="connectionID">78</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">questionLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="608680224"/>
+					</object>
+					<int key="connectionID">79</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -806,9 +791,9 @@
 							<reference ref="920413523"/>
 							<reference ref="993727628"/>
 							<reference ref="663303594"/>
-							<reference ref="608680224"/>
 							<reference ref="44941196"/>
 							<reference ref="1011176714"/>
+							<reference ref="608680224"/>
 						</object>
 						<reference key="parent" ref="935461785"/>
 					</object>
@@ -1024,7 +1009,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameScreenController</string>
 					<string>UIResponder</string>
-					<string>{{128, 145}, {480, 320}}</string>
+					<string>{{129, 145}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1079,7 +1064,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">77</int>
+			<int key="maxID">79</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1094,9 +1079,11 @@
 							<string>FireButton</string>
 							<string>HelpScreen</string>
 							<string>NextScreen</string>
+							<string>setQuestion</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1124,10 +1111,10 @@
 							<string>bullet4</string>
 							<string>bullet5</string>
 							<string>bullets</string>
-							<string>question</string>
+							<string>questionLabel</string>
 							<string>rotationBall</string>
 							<string>scoreLabel</string>
-							<string>ship</string>
+							<string>shipIcon</string>
 							<string>solution0</string>
 							<string>solution1</string>
 							<string>solution2</string>
