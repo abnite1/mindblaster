@@ -18,7 +18,8 @@
 }
 @property (nonatomic,retain) IBOutlet UIImageView *ship;
 
--(IBAction)rotate;
+-(void)setIcon:(UIImageView*)icon;
+-(IBAction)rotate:(CGFloat)angle;
 -(IBAction)fire;
 
 @end

@@ -12,24 +12,15 @@
 
 @implementation asteroidClass
 
--(void)setAsteroidDirection:(int)x:(int)y;
+@synthesize asteroidType, asteroidDirection;
+
+
+-(void)setAsteroidDirection:(int)x :(int)y;
 {
 	asteroidDirection = CGPointMake(x,y);
-
-}
--(CGPoint)getAsteroidDirection;
-{
-	return asteroidDirection;
-}
--(void)setAsteroidType:(int)type;
-{
-	asteroidType = type;
 }
 
--(int)getAsteroidType;
-{
-	return asteroidType;
-}
+
 
 @end
 

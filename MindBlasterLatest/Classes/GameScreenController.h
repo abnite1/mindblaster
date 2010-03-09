@@ -4,17 +4,20 @@
 //
 //  Created by Steven Verner on 2/21/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
 #import "asteroidClass.h"
+#import "Questions.h"
+#import "Ship.h"
 
 @interface GameScreenController : UIViewController 
 {
 	
-
-	IBOutlet UIImageView *ship;
+	Ship *ship;
+	IBOutlet UIImageView *shipIcon;
+	
 	
 	IBOutlet UIImageView *asteroid0;
 	IBOutlet UIImageView *asteroid1;
@@ -42,7 +45,8 @@
 	double shipDirectionX;
 	double shipDirectionY;
 
-	IBOutlet UILabel *question; 
+	Question *question;
+	IBOutlet UILabel *questionLabel; 
 	IBOutlet UILabel *solution0;
 	IBOutlet UILabel *solution1;
 	IBOutlet UILabel *solution2;
@@ -61,7 +65,10 @@
 
 //@property (nonatomic,retain) IBOutlet NSMutableArray *asteroidDetails2;
 
-@property (nonatomic,retain) IBOutlet UIImageView *ship;
+@property (nonatomic,retain) IBOutlet UIImageView *shipIcon;
+@property (nonatomic,retain) Ship *ship;
+@property (nonatomic,retain) Question *question;
+
 
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid0;
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid1;
@@ -85,7 +92,7 @@
 @property(nonatomic,retain) IBOutlet UIImageView *bullet5;
 @property(nonatomic,retain) IBOutlet NSMutableArray *bullets;
 
-@property(nonatomic,retain) IBOutlet UILabel *question;
+@property(nonatomic,retain) IBOutlet UILabel *questionLabel;
 @property(nonatomic,retain) IBOutlet UILabel *solution0;
 @property(nonatomic,retain) IBOutlet UILabel *solution1;
 @property(nonatomic,retain) IBOutlet UILabel *solution2;
@@ -96,8 +103,9 @@
 
 @property(nonatomic,retain) IBOutlet UILabel *scoreLabel;
 
+-(IBAction) setQuestion;
 -(IBAction) NextScreen;
-- (IBAction) HelpScreen;
+-(IBAction) HelpScreen;
 -(IBAction) FireButton;
 
 @end

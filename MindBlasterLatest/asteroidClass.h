@@ -8,17 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 @interface asteroidClass : NSObject {
 
-	int asteroidType;		//0 represents the correct solution asteroid, 1 means its an incorrect solution asteroid and 2 means its a blank asteroid
+
+	int		asteroidType;			//0 represents the correct solution asteroid, 1 means its an incorrect solution asteroid and 2 means its a blank asteroid
 	CGPoint asteroidDirection;  //direction of the asteroid's movement
 }
+
+@property (nonatomic) int asteroidType;
+@property (nonatomic) CGPoint asteroidDirection;
+
+
 -(void)setAsteroidDirection:(int)x:(int)y;
--(CGPoint)getAsteroidDirection;
--(void)setAsteroidType:(int)type;
--(int)getAsteroidType;
+
 
 @end
+
+
 

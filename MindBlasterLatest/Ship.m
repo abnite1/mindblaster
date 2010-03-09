@@ -12,15 +12,22 @@
 @implementation Ship
 @synthesize ship;
 
--(void) rotateByAngle: (CGFloat)angle {
+
+-(void)setIcon:(UIImageView*)icon {
+	ship = icon;
+}
+
+-(void) rotate: (CGFloat)angle {
 	ship.transform = CGAffineTransformMakeRotation(angle);
 }
 
+/*
 -(IBAction)rotate {
 	
 	//direction += M_PI_4;
 	[self rotateByAngle: direction];
 }
+ */
 
 -(IBAction)fire {
 }

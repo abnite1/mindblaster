@@ -19,6 +19,8 @@
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		77203D851141114000127EC1 /* ship.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77203D841141114000127EC1 /* ship.gif */; };
 		77203E431141272E00127EC1 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 77203E421141272E00127EC1 /* Ship.m */; };
+		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
+		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
 		B437022C1131E25A002A55F5 /* TopicScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B437022A1131E25A002A55F5 /* TopicScreenController.m */; };
 		B437022D1131E25A002A55F5 /* TopicScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B437022B1131E25A002A55F5 /* TopicScreenController.xib */; };
 		B43702441131E453002A55F5 /* DifficultyScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43702421131E453002A55F5 /* DifficultyScreenController.m */; };
@@ -63,6 +65,10 @@
 		77203D841141114000127EC1 /* ship.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ship.gif; sourceTree = "<group>"; };
 		77203E411141272E00127EC1 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		77203E421141272E00127EC1 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
+		77B6953411461F940055EFD6 /* Questions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Questions.m; sourceTree = "<group>"; };
+		77B6953511461F940055EFD6 /* Questions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Questions.h; sourceTree = "<group>"; };
+		77B6953611461F940055EFD6 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		77B6953711461F940055EFD6 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MindBlaster-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MindBlaster-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B43702291131E25A002A55F5 /* TopicScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicScreenController.h; sourceTree = "<group>"; };
 		B437022A1131E25A002A55F5 /* TopicScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicScreenController.m; sourceTree = "<group>"; };
@@ -213,6 +219,10 @@
 				B43702B51131EBF4002A55F5 /* GameScreenController.m */,
 				77203E411141272E00127EC1 /* Ship.h */,
 				77203E421141272E00127EC1 /* Ship.m */,
+				77B6953511461F940055EFD6 /* Questions.h */,
+				77B6953411461F940055EFD6 /* Questions.m */,
+				77B6953711461F940055EFD6 /* Question.h */,
+				77B6953611461F940055EFD6 /* Question.m */,
 				B4F2EFD811447E78006BFA7D /* asteroidClass.h */,
 				B4F2EFD911447E78006BFA7D /* asteroidClass.m */,
 			);
@@ -310,6 +320,8 @@
 				07BBE0B71137109E00BAF196 /* Ball.m in Sources */,
 				77203E431141272E00127EC1 /* Ship.m in Sources */,
 				B4F2EFDA11447E78006BFA7D /* asteroidClass.m in Sources */,
+				77B6953811461F940055EFD6 /* Questions.m in Sources */,
+				77B6953911461F940055EFD6 /* Question.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
