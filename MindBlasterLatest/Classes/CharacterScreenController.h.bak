@@ -8,21 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
-#import <CoreData/CoreData.h>
 
 @interface CharacterScreenController : UIViewController {
-
-    IBOutlet UIButton *charOne;
-	IBOutlet UIButton *charTwo;
-	IBOutlet UIButton *charThree;
-	IBOutlet UIButton *charFour;
 }
-@property (nonatomic, retain) UIButton *charOne;
-@property (nonatomic, retain) UIButton *charTwo;
-@property (nonatomic, retain) UIButton *charThree;
-@property (nonatomic, retain) UIButton *charFour;
-
-
 - (IBAction) CharacterOne;
 - (IBAction) CharacterTwo;
 - (IBAction) CharacterThree;

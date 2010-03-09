@@ -1,20 +1,30 @@
 //
-//  DifficultyScreenController.m
+//  UserNameScreenController.m
 //  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "DifficultyScreenController.h"
-#import "GameScreenController.h"
+#import "UserNameScreenController.h"
+#import "TopicScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
-#import "MindBlasterAppDelegate.h"
-#import "UserProfile.h"
 
-@implementation DifficultyScreenController
-@synthesize difficultyDescription;
+
+@implementation UserNameScreenController
+@synthesize txtName;
+
+-(IBAction) MakeKeyboardGoAway //not working?
+{
+	[txtName resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+	return YES;
+}
 
 -(IBAction) HelpScreen
 {
@@ -23,51 +33,15 @@
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
+
+//So this method should save txtName to the user data profile.
 -(IBAction) NextScreen
 {
-	//NSLog(@"The diff now set to %d \n",[UIAppDelegate.currentUser getDiff]);
-	
 	// Navigation logic may go here -- for example, create and push another view controller.
-	GameScreenController *gamesScreenView = [[GameScreenController alloc] initWithNibName:@"GameScreenController" bundle:nil];
-	[self.navigationController pushViewController:gamesScreenView animated:YES];
-	[gamesScreenView release];
+	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
+	[self.navigationController pushViewController:topicView animated:YES];
+	[topicView release];
 }
-
--(IBAction) DiffOne
-{
-	[UIAppDelegate.currentUser setDiff:1];
-	//NSLog(@"The difficulty setting is now: %d \n", [UIAppDelegate.currentUser getDiff]);
-	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyOne Description"];
-	[difficultyDescription setText:msg];
-	[msg release];
-}
--(IBAction) DiffTwo
-{
-	[UIAppDelegate.currentUser setDiff:2];
-	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyTwo Description"];
-	[difficultyDescription setText:msg];
-	[msg release];
-}
--(IBAction) DiffThree
-{
-	[UIAppDelegate.currentUser setDiff:3];
-	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyThree Description"];
-	[difficultyDescription setText:msg];
-	[msg release];
-}
--(IBAction) DiffFour
-{
-	[UIAppDelegate.currentUser setDiff:4];
-	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyFour Description"];
-	[difficultyDescription setText:msg];
-	[msg release];
-}
-
-
 - (IBAction) BackScreen
 {
 	[self.navigationController popViewControllerAnimated:TRUE];
@@ -97,7 +71,6 @@
     // return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
-
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

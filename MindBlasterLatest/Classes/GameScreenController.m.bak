@@ -41,33 +41,8 @@ const int CORRECT_ASTEROID = 0;
 const int INCORRECT_ASTEROID = 1;
 const int BLANK_ASTEROID = 2;
 
--(void)animateBackground
-{
-	[background move];
-}
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//  Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	/************* This will load profile settings ****************/
-	//for now just print the settings to the log!
-	NSLog(@"UserName is set to: %@ \n",[UIAppDelegate.currentUser getName]);
-	NSLog(@"Diff is set to: %d \n",[UIAppDelegate.currentUser getDiff]);
-	NSLog(@"Stage is set to: %d \n",[UIAppDelegate.currentUser getStage]);
-	NSLog(@"Score is set to: %d \n",[UIAppDelegate.currentUser getScore]);
-	
-	//load the profile pic!
-	[profilePic setImage:[UIAppDelegate.currentUser getPic] forState:0];
-	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
-	/**************** done loading settings ******************/
-	
-	/************** Load Background *****************/
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
-									   selector:@selector(animateBackground) userInfo:nil repeats:YES];
-	[background setSpeedX:0.2 Y:0.2];
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		// self.navigationItem.rightBarButtonItem = self.editButtonItem
-	//[background move];
-	/************************************************/
 	
 	// create game objects
 	ship = [[Ship alloc] init];				// create the ship object
