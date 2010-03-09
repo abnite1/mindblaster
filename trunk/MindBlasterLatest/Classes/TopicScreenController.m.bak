@@ -10,8 +10,6 @@
 #import "DifficultyScreenController.h"
 #import "HelpScreenController.h"
 #import "Ball.h"
-#import "MindBlasterAppDelegate.h"
-#import "UserProfile.h"
 
 @implementation TopicScreenController
 @synthesize label;
@@ -32,32 +30,24 @@
 //This location will be accessed when the game is being loaded.
 -(IBAction) TopicOne
 {
-	[UIAppDelegate.currentUser setStage:1];
-	
 	NSString *msg = [[NSString alloc] initWithFormat:@"TopicOne Description"];
 	[label setText:msg];
 	[msg release];
 }
 -(IBAction) TopicTwo
 {
-	[UIAppDelegate.currentUser setStage:2];
-	
 	NSString *msg = [[NSString alloc] initWithFormat:@"TopicTwo Description"];
 	[label setText:msg];
 	[msg release];
 }
 -(IBAction) TopicThree
 {
-	[UIAppDelegate.currentUser setStage:3];
-	
 	NSString *msg = [[NSString alloc] initWithFormat:@"TopicThree Description"];
 	[label setText:msg];
 	[msg release];
 }
 -(IBAction) TopicFour
 {
-	[UIAppDelegate.currentUser setStage:4];
-	
 	NSString *msg = [[NSString alloc] initWithFormat:@"TopicFour Description"];
 	[label setText:msg];
 	[msg release];
@@ -65,10 +55,6 @@
 
 -(IBAction) NextScreen
 {
-	//DEBUGGING
-	//NSLog(@"The topic now set to %d \n",[UIAppDelegate.currentUser getStage]);
-	
-	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	DifficultyScreenController *difficultyView = [[DifficultyScreenController alloc] initWithNibName:@"DifficultyScreenController" bundle:nil];
 	[self.navigationController pushViewController:difficultyView animated:YES];

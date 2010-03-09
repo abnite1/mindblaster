@@ -11,13 +11,8 @@
 
 @interface UserNameScreenController : UIViewController {
 	IBOutlet UITextField *txtName;
-	
-	//TEST
-	//IBOutlet UIButton *temp;
 }
 @property(nonatomic, retain) IBOutlet UITextField *txtName;
-//TEST
-//@property(nonatomic, retain) IBOutlet UIButton *temp;
 		  
 - (IBAction) MakeKeyboardGoAway;
 - (IBAction) NextScreen;

@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="39"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -100,7 +100,7 @@
 						<string key="IBUIText">MindBlaster</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">MarkerFelt-Thin</string>
-							<double key="NSSize">3.000000e+01</double>
+							<double key="NSSize">4.800000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
@@ -108,14 +108,19 @@
 							<bytes key="NSRGB">MC45OTQ1NjUxOSAwLjg5OTM0MjI0IDAuMDgwOTg1Nzk5AA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIShadowColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC45ODk1NTIwOCAwLjk5NzA1NDk5IDAuOTU4MTI5NTMAA</bytes>
+						</object>
+						<string key="IBUIShadowOffset">{1, 1}</string>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">2.500000e+01</float>
+						<float key="IBUIMinimumFontSize">4.800000e+01</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIButton" id="323730953">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{188, 114}, {101, 37}}</string>
+						<string key="NSFrame">{{186, 120}, {101, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -126,6 +131,7 @@
 							<double key="NSSize">1.500000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<string key="IBUITitleShadowOffset">{1, 1}</string>
 						<string key="IBUINormalTitle">New Game</string>
 						<reference key="IBUIHighlightedTitleColor" ref="38790617"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -140,13 +146,14 @@
 					<object class="IBUIButton" id="885148596">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{186, 142}, {106, 37}}</string>
+						<string key="NSFrame">{{184, 165}, {106, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="749358247"/>
+						<string key="IBUITitleShadowOffset">{1, 1}</string>
 						<string key="IBUINormalTitle">Load Game</string>
 						<reference key="IBUIHighlightedTitleColor" ref="38790617"/>
 						<object class="NSColor" key="IBUINormalTitleColor" id="984208107">
@@ -158,13 +165,14 @@
 					<object class="IBUIButton" id="634324699">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{200, 169}, {72, 37}}</string>
+						<string key="NSFrame">{{202, 210}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="749358247"/>
+						<string key="IBUITitleShadowOffset">{1, 1}</string>
 						<string key="IBUINormalTitle">Quit</string>
 						<reference key="IBUIHighlightedTitleColor" ref="38790617"/>
 						<reference key="IBUINormalTitleColor" ref="984208107"/>
@@ -303,13 +311,13 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="497462819"/>
-							<reference ref="885148596"/>
-							<reference ref="634324699"/>
-							<reference ref="323730953"/>
 							<reference ref="622245714"/>
 							<reference ref="890084184"/>
 							<reference ref="504022228"/>
 							<reference ref="627932385"/>
+							<reference ref="634324699"/>
+							<reference ref="885148596"/>
+							<reference ref="323730953"/>
 						</object>
 						<reference key="parent" ref="282882509"/>
 					</object>
