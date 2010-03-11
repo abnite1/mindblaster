@@ -2,7 +2,7 @@
 
 = Introduction =
 
-{{{Web server for iPhone App: MindBlaster}}}
+`Web server for iPhone App: MindBlaster`
 Initially built on Jan. 16th, 2010: http://mindblaster.x10hosting.com/
 
 = Details =
