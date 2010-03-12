@@ -13,6 +13,7 @@
 @interface Questions : NSObject {
 	NSMutableArray *questions;
 	Question *question;
+	
 }
 @property (nonatomic,retain) Question *question;
 

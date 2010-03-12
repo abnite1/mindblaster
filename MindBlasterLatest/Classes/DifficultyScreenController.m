@@ -7,11 +7,11 @@
 //
 
 #import "DifficultyScreenController.h"
-#import "GameScreenController.h"
-#import "HelpScreenController.h"
-#import "Ball.h"
-#import "MindBlasterAppDelegate.h"
-#import "UserProfile.h"
+
+//#import "HelpScreenController.h"
+//#import "Ball.h"
+//#import "MindBlasterAppDelegate.h"
+//#import "UserProfile.h"
 
 @implementation DifficultyScreenController
 @synthesize difficultyDescription;
@@ -33,36 +33,36 @@
 	[gamesScreenView release];
 }
 
--(IBAction) DiffOne
+-(IBAction) selectedEasiest
 {
-	[UIAppDelegate.currentUser setDiff:1];
+	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
 	//NSLog(@"The difficulty setting is now: %d \n", [UIAppDelegate.currentUser getDiff]);
 	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyOne Description"];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,10]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
--(IBAction) DiffTwo
+-(IBAction) selectedEasy
 {
-	[UIAppDelegate.currentUser setDiff:2];
+	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASY];
 	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyTwo Description"];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,20]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
--(IBAction) DiffThree
+-(IBAction) selectedHard
 {
-	[UIAppDelegate.currentUser setDiff:3];
+	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARD];
 	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyThree Description"];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,30]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
--(IBAction) DiffFour
+-(IBAction) selectedHardest
 {
-	[UIAppDelegate.currentUser setDiff:4];
+	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARDEST];
 	
-	NSString *msg = [[NSString alloc] initWithFormat:@"DifficultyFour Description"];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,40]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }

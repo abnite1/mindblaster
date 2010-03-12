@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
+#import "GameScreenController.h"
+#import "UserProfile.h"
 
 @interface DifficultyScreenController : UIViewController {
 	IBOutlet UILabel *difficultyDescription;
@@ -15,11 +17,11 @@
 @property (nonatomic,retain) IBOutlet UILabel *difficultyDescription;
 
 -(IBAction) NextScreen;
--(IBAction) DiffOne;
--(IBAction) DiffTwo;
--(IBAction) DiffThree;
--(IBAction) DiffFour;
-- (IBAction) BackScreen;
-- (IBAction) HelpScreen;
+-(IBAction) selectedEasiest;
+-(IBAction) selectedEasy;
+-(IBAction) selectedHard;
+-(IBAction) selectedHardest;
+-(IBAction) BackScreen;
+-(IBAction) HelpScreen;
 
 @end

@@ -7,11 +7,6 @@
 //
 
 #import "TopicScreenController.h"
-#import "DifficultyScreenController.h"
-#import "HelpScreenController.h"
-#import "Ball.h"
-#import "MindBlasterAppDelegate.h"
-#import "UserProfile.h"
 
 @implementation TopicScreenController
 @synthesize label;
@@ -30,37 +25,53 @@
 
 //These will store in some location which game module will be used.
 //This location will be accessed when the game is being loaded.
--(IBAction) TopicOne
+
+// addition
+-(IBAction) firstTopicSelected
 {
-	[UIAppDelegate.currentUser setStage:1];
-	
-	NSString *msg = [[NSString alloc] initWithFormat:@"TopicOne Description"];
+	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_ADDITION]];	// possible memory leak
+
+	NSString *msg = [[NSString alloc] initWithFormat:@"Addition."];
+	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
 	[label setText:msg];
 	[msg release];
+	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'+'];
 }
--(IBAction) TopicTwo
+
+// subtraction
+-(IBAction) secondTopicSelected
 {
-	[UIAppDelegate.currentUser setStage:2];
-	
-	NSString *msg = [[NSString alloc] initWithFormat:@"TopicTwo Description"];
+	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_SUBTRACTION]];	// possible memory leak
+
+	NSString *msg = [[NSString alloc] initWithFormat:@"Subtraction."];
+	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
 	[label setText:msg];
 	[msg release];
+	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'-'];
 }
--(IBAction) TopicThree
+
+// multiplication
+-(IBAction) thirdTopicSelected
 {
-	[UIAppDelegate.currentUser setStage:3];
+	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_MULTIPLICATION]];		// possible memory leak
 	
-	NSString *msg = [[NSString alloc] initWithFormat:@"TopicThree Description"];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Multiplication."];
+	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
 	[label setText:msg];
 	[msg release];
+	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'X'];
 }
--(IBAction) TopicFour
+
+// division
+-(IBAction) fourthTopicSelected
 {
-	[UIAppDelegate.currentUser setStage:4];
+	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_DIVISION]];		// possible memory leak
 	
-	NSString *msg = [[NSString alloc] initWithFormat:@"TopicFour Description"];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Division."];
+	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
 	[label setText:msg];
 	[msg release];
+	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'/'];
 }
 
 -(IBAction) NextScreen
@@ -88,6 +99,7 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	self.title = @"Topic";
     [super viewDidLoad];
 
 }

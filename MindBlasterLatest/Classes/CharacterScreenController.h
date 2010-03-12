@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Ball.h"
 #import <CoreData/CoreData.h>
+#import "UserNameScreenController.h"
+#import "HelpScreenController.h"
+#import "MindBlasterAppDelegate.h"
 
 @interface CharacterScreenController : UIViewController {
 

@@ -8,16 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
-#import "asteroidClass.h"
+#import "Asteroid.h"
 #import "Questions.h"
 #import "Ship.h"
+#import "GameOverScreenController.h"
+#import "HelpScreenController.h"
+#import "MindBlasterAppDelegate.h"
 
 @interface GameScreenController : UIViewController 
 {
 	IBOutlet Ball *background;
 	IBOutlet UIButton *profilePic;
+	IBOutlet UILabel *difficultyLabel;
 	Ship *ship;
 	IBOutlet UIImageView *shipIcon;
+	NSMutableArray *asteroids;
 	//IBOutlet UIImageView *ship;
 	
 	IBOutlet UIImageView *asteroid0;
@@ -31,7 +36,8 @@
 	IBOutlet UIImageView *asteroid8;
 	IBOutlet UIImageView *asteroid9;
 	
-	NSMutableArray *asteroids;
+	NSMutableArray *asteroidIcons;
+	
 	
 	IBOutlet UIImageView *rotationBall;
 	
@@ -49,17 +55,19 @@
 	double shipDirectionY;
 
 	Question *question;
-	IBOutlet UILabel *questionLabel; 
-	IBOutlet UILabel *solution0;
-	IBOutlet UILabel *solution1;
-	IBOutlet UILabel *solution2;
-	IBOutlet UILabel *solution3;
-	IBOutlet UILabel *solution4;
-	IBOutlet UILabel *solution5;
-	IBOutlet NSMutableArray *solutions;
 	
-	asteroidClass asteroidDetails[10];
-	asteroidClass *asteroidDetailsTemp;
+	IBOutlet UILabel *questionLabel; 
+	
+	IBOutlet UILabel *solutionLabel0;
+	IBOutlet UILabel *solutionLabel1;
+	IBOutlet UILabel *solutionLabel2;
+	IBOutlet UILabel *solutionLabel3;
+	IBOutlet UILabel *solutionLabel4;
+	IBOutlet UILabel *solutionLabel5;
+	
+
+	NSMutableArray *solutionLabels;
+	
 	
 	IBOutlet UILabel *scoreLabel;
 	int score;
@@ -72,6 +80,7 @@
 @property (nonatomic,retain) IBOutlet UIImageView *shipIcon;
 @property (nonatomic,retain) Ship *ship;
 @property (nonatomic,retain) Question *question;
+@property (nonatomic,retain) IBOutlet UILabel *difficultyLabel;
 
 
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid0;
@@ -84,7 +93,9 @@
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid7;
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid8;
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid9;
-@property(nonatomic,retain) IBOutlet NSMutableArray *asteroids;
+
+//@property(nonatomic,retain) NSMutableArray *asteroidIcons;
+ 
 
 @property(nonatomic,retain) IBOutlet UIImageView *rotationBall;
 
@@ -94,16 +105,19 @@
 @property(nonatomic,retain) IBOutlet UIImageView *bullet3;
 @property(nonatomic,retain) IBOutlet UIImageView *bullet4;
 @property(nonatomic,retain) IBOutlet UIImageView *bullet5;
-@property(nonatomic,retain) IBOutlet NSMutableArray *bullets;
+
+//@property(nonatomic,retain) NSMutableArray *bullets;
 
 @property(nonatomic,retain) IBOutlet UILabel *questionLabel;
-@property(nonatomic,retain) IBOutlet UILabel *solution0;
-@property(nonatomic,retain) IBOutlet UILabel *solution1;
-@property(nonatomic,retain) IBOutlet UILabel *solution2;
-@property(nonatomic,retain) IBOutlet UILabel *solution3;
-@property(nonatomic,retain) IBOutlet UILabel *solution4;
-@property(nonatomic,retain) IBOutlet UILabel *solution5;
-@property(nonatomic,retain) IBOutlet NSMutableArray *solutions;
+
+@property(nonatomic,retain) IBOutlet UILabel *solutionLabel0;
+@property(nonatomic,retain) IBOutlet UILabel *solutionLabel1;
+@property(nonatomic,retain) IBOutlet UILabel *solutionLabel2;
+@property(nonatomic,retain) IBOutlet UILabel *solutionLabel3;
+@property(nonatomic,retain) IBOutlet UILabel *solutionLabel4;
+@property(nonatomic,retain) IBOutlet UILabel *solutionLabel5;
+
+//@property(nonatomic,retain) NSMutableArray	*solutionLabels;
 
 @property(nonatomic,retain) IBOutlet UILabel *scoreLabel;
 
@@ -111,5 +125,14 @@
 -(IBAction) NextScreen;
 -(IBAction) HelpScreen;
 -(IBAction) FireButton;
+-(void) hitCorrectAsteroid:(int)index;
+-(void) hitWrongAsteroid:(int)index;
+-(void) hitBlankAsteroid:(int)index;
+-(IBAction) setDifficultyLabel;
+-(void) setAnswer;
+-(void) initializeBulletPosition;
 -(void) animateBackground;
+-(void) loseScenario;
+-(void) winScenario;
+-(void) checkScore;
 @end

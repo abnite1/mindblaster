@@ -7,11 +7,6 @@
 //
 
 #import "RootViewController.h"
-#import "CharacterScreenController.h"
-#import "LoadGameScreenController.h"
-#import "HelpScreenController.h"
-#import "Ball.h"
-#import "UserProfile.h"
 
 ///UserProfile *user = [UserProfile new];
 
@@ -46,6 +41,7 @@
 
 
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	

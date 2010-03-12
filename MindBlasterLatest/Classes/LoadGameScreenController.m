@@ -33,7 +33,7 @@
 	loadedProfile = UIAppDelegate.currentUser;
 	
 	//later this would be filled with data from textfile
-	[loadedProfile setName:@"Blanka"];
+	[loadedProfile setUserName:@"Blanka"];
 	//[loadedProfile setStage:5];
 	//[loadedProfile setDiff:5];
 	[loadedProfile setScore:9999];
