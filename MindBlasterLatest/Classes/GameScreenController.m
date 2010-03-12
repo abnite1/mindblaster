@@ -180,12 +180,12 @@
 
 // sets the answers on the asteroid labels
 -(void)setAnswer {
-	srand(clock());
+	
 	// define the solution set of labels on asteroids
 	NSLog(@"starting setAnswer");	
 		 
 	// determine the correct_answer asteroid randomly and set its value and type
-	int randomCorrectAsteroid = random() % 5;	 // from 0 to 5
+	int randomCorrectAsteroid = arc4random() % 5;	 // from 0 to 5
 	NSString *inputString = [[NSString alloc] initWithFormat:@"%d",(int)[question answer]];
 	[[[asteroids objectAtIndex: randomCorrectAsteroid] asteroidLabel] setText: inputString];
 		
@@ -205,7 +205,7 @@
 			// that isn't the correct answer
 			int wrongAnswer = 0;
 			do {
-					wrongAnswer = [question answer] + (random() % 7 * pow(-1, (int)(random() % 7)));
+					wrongAnswer = [question answer] + (arc4random() % 7 * pow(-1, (int)(arc4random() % 7)));
 			} while (wrongAnswer == [question answer]);
 			NSString *inputString = [[NSString alloc] initWithFormat:@"%d",wrongAnswer];
 			[[[asteroids objectAtIndex: asteroidIndex] asteroidLabel] setText: inputString];
@@ -215,7 +215,7 @@
 			
 			// then send it on a random path
 			[[asteroids objectAtIndex: asteroidIndex] 
-			 setAsteroidDirection:((random() %30 ) / 5  -3) :((random() % 30) / 5 -3)];
+			 setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
 			[inputString release];
 			//[[asteroids objectAtIndex: asteroidIndex] move];
 		}
@@ -227,7 +227,7 @@
 		
 		[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:BLANK_ASTEROID];
 		[[asteroids objectAtIndex: asteroidIndex] 
-				setAsteroidDirection:((random() %30 ) / 5  -3) :((random() % 30) / 5 -3)];
+				setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
 		[[asteroids objectAtIndex: asteroidIndex] move];
 	}
 	NSLog(@"end of answer");
@@ -364,16 +364,8 @@
 
 // hit wrong asteroid
 -(void) hitWrongAsteroid:(int)index {
-	srand(clock());
-	NSLog(@"hit incorrect asteroid.");
 	
-	// update the answer label to correct_answer + random [0,5]
-	//int newAnswer = [[self question] answer] + random() % 5;
-	//NSString *inputString = [[NSString alloc] initWithFormat:@"%d", newAnswer ];
-	//[[[asteroids objectAtIndex: index] asteroidLabel] setText: inputString];
-	//[inputString release];
-
-		
+	NSLog(@"hit incorrect asteroid.");
 	
 	// decrement score by 2 and update the scoreboard
 	score = score - INCORRECT_ANSWER_PENALTY;
@@ -399,7 +391,7 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	[[asteroids objectAtIndex: index] setAsteroidPosition: (random() % 500 - 50) : (random() % 300 - 20)];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 500 - 50) : (arc4random() % 300 - 20)];
 	
 	// check if game is over
 	[self checkScore];
