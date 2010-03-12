@@ -7,45 +7,32 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Topic.h"
+
+static const int DIFFICULTY_EASIEST = 1;
+static const int DIFFICULTY_EASY	= 2;
+static const int DIFFICULTY_HARD	= 3;
+static const int DIFFICULTY_HARDEST = 4;
+
+static const int DIFFICULTY_LIMIT = 100;
+
 
 @interface UserProfile : NSObject {
 	NSString *userName;
 	UIImage *profilePic;
 	int score;
-	int stageChosen;
-	int diffChosen;
+	Topic *currentTopic;
+	Topic *lastTopicCompleted;			
+	int currentDifficulty;
 	NSString *email;
-	int highestStageComplete;
-	
-	int highestStageOneDiff;
-	int highestStageTwoDiff;
-	int highestStageThreeDiff;
-	int highestStageFourDiff;
 }
-
-//public method signatures
-- (void)setPic: (UIImage *) newPic;
-- (UIImage *)getPic;
-- (void)setName: (NSString *) newName;
-- (NSString *) getName;
-- (void) setStage: (int)  newStage;
-- (int) getStage;
-- (void) setDiff: (int) newDiff;
-- (int) getDiff;
-- (void) setScore: (int) newScore;
-- (int) getScore;
-
-- (void) setHighStage: (int) newHighStage;
-- (int) getHighStage;
-- (void) setHighStageOneDiff: (int) newDiff;
-- (void) setHighstageTwoDiff: (int) newDiff;
-- (void) setHighstageThreeDiff: (int) newDiff;
-- (void) setHighstageFourDiff: (int) newDiff;
-- (int) getHighStageOneDiff;
-- (int) getHighStageTwoDiff;
-- (int) getHighStageThreeDiff;
-- (int) getHighStageFourDiff;
-
-
+@property (nonatomic, retain) Topic *currentTopic;
+@property (nonatomic,retain) Topic *lastTopicCompleted;
+@property (nonatomic) int currentDifficulty;
+@property (nonatomic,retain) NSString *userName;
+@property (nonatomic,retain) NSString *email;
+@property (nonatomic,retain) UIImage *profilePic;
+@property (nonatomic) int score;
+		   
 
 @end

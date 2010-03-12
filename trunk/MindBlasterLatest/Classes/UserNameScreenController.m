@@ -42,7 +42,7 @@
 {
 
 	//NSLog(@"Checking: The name was chosen as: %@ \n",[txtName text]);
-	[(UIAppDelegate.currentUser) setName:[txtName text]];
+	[(UIAppDelegate.currentUser) setUserName:[txtName text]];
 	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
 	
 	

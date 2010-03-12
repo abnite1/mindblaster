@@ -22,6 +22,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
+#import "HelpScreenController.h"
+#import "CharacterScreenController.h"
+#import "LoadGameScreenController.h"
 
 @interface RootViewController : UIViewController {
 	IBOutlet Ball* mBall;

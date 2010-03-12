@@ -7,18 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MindBlasterAppDelegate.h"
 
+static const int INCORRECT_ANSWER_PENALTY = 4;
+static const int CORRECT_ANSWER_REWARD = 10;
+static const int BLANK_REWARD = 2;
 
 @interface Question : NSObject {
 
 	int operand1, operand2, answer;
+	
 	IBOutlet UILabel *questionLabelOutletPointer;
 	IBOutlet UILabel *answerLabelOutletPointer;
+
 }
 
 @property (nonatomic,retain) IBOutlet UILabel *questionLabelOutletPointer;
 @property (nonatomic,retain) IBOutlet UILabel *answerLabelOutletPointer;
+@property (nonatomic) int answer;
 
 -(IBAction)generateCorrectAnswer;
--(IBAction)setQuestion:(NSString*)topic difficulty:(int)diff;
+-(IBAction)setQuestion;
 @end

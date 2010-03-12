@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Ball.h"
+#import "Topic.h"
+#import "DifficultyScreenController.h"
+#import "HelpScreenController.h"
+#import "MindBlasterAppDelegate.h"
 
 @interface TopicScreenController : UIViewController {
 	IBOutlet UILabel *label;
@@ -15,10 +19,10 @@
 @property (nonatomic,retain) IBOutlet UILabel *label;
 
 -(IBAction) NextScreen;
--(IBAction) TopicOne;
--(IBAction) TopicTwo;
--(IBAction) TopicThree;
--(IBAction) TopicFour;
+-(IBAction) firstTopicSelected;
+-(IBAction) secondTopicSelected;
+-(IBAction) thirdTopicSelected;
+-(IBAction) fourthTopicSelected;
 - (IBAction) BackScreen;
 - (IBAction) HelpScreen;
 

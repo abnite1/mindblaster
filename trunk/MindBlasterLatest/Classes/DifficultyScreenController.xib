@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">9L31a</string>
+		<string key="IBDocument.SystemVersion">9L30</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
@@ -39,7 +39,7 @@
 					<object class="IBUIButton" id="746141081">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{117, 84}, {72, 37}}</string>
+						<string key="NSFrame">{{115, 84}, {77, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -51,7 +51,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">D1</string>
+						<string key="IBUINormalTitle">Easiest</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="670861946">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -137,7 +137,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="702498071"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">D3</string>
+						<string key="IBUINormalTitle">Easy</string>
 						<reference key="IBUIHighlightedTitleColor" ref="670861946"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -148,7 +148,7 @@
 					<object class="IBUIButton" id="653880681">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{117, 129}, {72, 37}}</string>
+						<string key="NSFrame">{{113, 129}, {81, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -156,7 +156,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="702498071"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">D2</string>
+						<string key="IBUINormalTitle">Hard</string>
 						<reference key="IBUIHighlightedTitleColor" ref="670861946"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -167,7 +167,7 @@
 					<object class="IBUIButton" id="844769476">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{290, 129}, {72, 37}}</string>
+						<string key="NSFrame">{{286, 129}, {80, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -175,7 +175,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="702498071"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">D4</string>
+						<string key="IBUINormalTitle">Hardest</string>
 						<reference key="IBUIHighlightedTitleColor" ref="670861946"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -260,42 +260,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">DiffOne</string>
-						<reference key="source" ref="746141081"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">14</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">DiffTwo</string>
-						<reference key="source" ref="653880681"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">15</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">DiffThree</string>
-						<reference key="source" ref="174564550"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">DiffFour</string>
-						<reference key="source" ref="844769476"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">17</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">NextScreen</string>
 						<reference key="source" ref="336013354"/>
 						<reference key="destination" ref="372490531"/>
@@ -310,6 +274,42 @@
 						<reference key="destination" ref="315348688"/>
 					</object>
 					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">selectedEasiest</string>
+						<reference key="source" ref="746141081"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">selectedEasy</string>
+						<reference key="source" ref="174564550"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">selectedHard</string>
+						<reference key="source" ref="653880681"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">24</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">selectedHardest</string>
+						<reference key="source" ref="844769476"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">25</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -332,10 +332,10 @@
 							<reference ref="534130243"/>
 							<reference ref="850511393"/>
 							<reference ref="746141081"/>
-							<reference ref="174564550"/>
 							<reference ref="653880681"/>
 							<reference ref="844769476"/>
 							<reference ref="336013354"/>
+							<reference ref="174564550"/>
 							<reference ref="315348688"/>
 						</object>
 						<reference key="parent" ref="851173418"/>
@@ -453,7 +453,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">21</int>
+			<int key="maxID">25</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -466,12 +466,12 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>BackScreen</string>
-							<string>DiffFour</string>
-							<string>DiffOne</string>
-							<string>DiffThree</string>
-							<string>DiffTwo</string>
 							<string>HelpScreen</string>
 							<string>NextScreen</string>
+							<string>selectedEasiest</string>
+							<string>selectedEasy</string>
+							<string>selectedHard</string>
+							<string>selectedHardest</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>

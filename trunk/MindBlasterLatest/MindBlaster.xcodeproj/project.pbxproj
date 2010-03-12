@@ -26,6 +26,7 @@
 		77203E431141272E00127EC1 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 77203E421141272E00127EC1 /* Ship.m */; };
 		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
 		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
+		77D33A851148CE4600D066DD /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D33A841148CE4600D066DD /* Topic.m */; };
 		B437022C1131E25A002A55F5 /* TopicScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B437022A1131E25A002A55F5 /* TopicScreenController.m */; };
 		B437022D1131E25A002A55F5 /* TopicScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B437022B1131E25A002A55F5 /* TopicScreenController.xib */; };
 		B43702441131E453002A55F5 /* DifficultyScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43702421131E453002A55F5 /* DifficultyScreenController.m */; };
@@ -48,7 +49,7 @@
 		B4EA944A1132074700016680 /* HelpScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EA94481132074700016680 /* HelpScreenController.m */; };
 		B4EA944B1132074700016680 /* HelpScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4EA94491132074700016680 /* HelpScreenController.xib */; };
 		B4F2EF131144743B006BFA7D /* ship3.png in Resources */ = {isa = PBXBuildFile; fileRef = B4F2EF121144743B006BFA7D /* ship3.png */; };
-		B4F2EFDA11447E78006BFA7D /* asteroidClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F2EFD911447E78006BFA7D /* asteroidClass.m */; };
+		B4F2EFDA11447E78006BFA7D /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F2EFD911447E78006BFA7D /* Asteroid.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,8 @@
 		77B6953511461F940055EFD6 /* Questions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Questions.h; sourceTree = "<group>"; };
 		77B6953611461F940055EFD6 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		77B6953711461F940055EFD6 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		77D33A831148CE4600D066DD /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
+		77D33A841148CE4600D066DD /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MindBlaster-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MindBlaster-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B43702291131E25A002A55F5 /* TopicScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicScreenController.h; sourceTree = "<group>"; };
 		B437022A1131E25A002A55F5 /* TopicScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicScreenController.m; sourceTree = "<group>"; };
@@ -111,8 +114,8 @@
 		B4EA94481132074700016680 /* HelpScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpScreenController.m; sourceTree = "<group>"; };
 		B4EA94491132074700016680 /* HelpScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HelpScreenController.xib; path = Classes/HelpScreenController.xib; sourceTree = "<group>"; };
 		B4F2EF121144743B006BFA7D /* ship3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship3.png; sourceTree = "<group>"; };
-		B4F2EFD811447E78006BFA7D /* asteroidClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroidClass.h; sourceTree = "<group>"; };
-		B4F2EFD911447E78006BFA7D /* asteroidClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asteroidClass.m; sourceTree = "<group>"; };
+		B4F2EFD811447E78006BFA7D /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asteroid.h; sourceTree = "<group>"; };
+		B4F2EFD911447E78006BFA7D /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asteroid.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +197,6 @@
 				07E3F5DC1146DDD5005E5D37 /* cat.png */,
 				07E3F5DD1146DDD5005E5D37 /* dog.png */,
 				07E3F5DE1146DDD5005E5D37 /* girl.png */,
-				072972C21146DB49004ED361 /* UserProfile.m */,
-				072972C11146DB3C004ED361 /* UserProfile.h */,
 				B4F2EF121144743B006BFA7D /* ship3.png */,
 				77203D841141114000127EC1 /* ship.gif */,
 				B4D628ED113F5C50003093D8 /* bullet2.png */,
@@ -204,10 +205,10 @@
 				B4C71231113E4E2A00C50561 /* rightwheel.png */,
 				B463F0A3113DE27A0009796E /* asteroid6.png */,
 				07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */,
+				B43702B61131EBF4002A55F5 /* GameScreenController.xib */,
 				B4EA94491132074700016680 /* HelpScreenController.xib */,
 				B43702EE1131F201002A55F5 /* LoadGameScreenController.xib */,
 				B43702E21131F094002A55F5 /* GameOverScreenController.xib */,
-				B43702B61131EBF4002A55F5 /* GameScreenController.xib */,
 				B43702431131E453002A55F5 /* DifficultyScreenController.xib */,
 				B437022B1131E25A002A55F5 /* TopicScreenController.xib */,
 				B4C0FF171131E04600EBC1D9 /* UserNameScreenController.xib */,
@@ -236,12 +237,16 @@
 				B43702B51131EBF4002A55F5 /* GameScreenController.m */,
 				77203E411141272E00127EC1 /* Ship.h */,
 				77203E421141272E00127EC1 /* Ship.m */,
+				072972C11146DB3C004ED361 /* UserProfile.h */,
+				072972C21146DB49004ED361 /* UserProfile.m */,
 				77B6953511461F940055EFD6 /* Questions.h */,
 				77B6953411461F940055EFD6 /* Questions.m */,
 				77B6953711461F940055EFD6 /* Question.h */,
 				77B6953611461F940055EFD6 /* Question.m */,
-				B4F2EFD811447E78006BFA7D /* asteroidClass.h */,
-				B4F2EFD911447E78006BFA7D /* asteroidClass.m */,
+				B4F2EFD811447E78006BFA7D /* Asteroid.h */,
+				B4F2EFD911447E78006BFA7D /* Asteroid.m */,
+				77D33A831148CE4600D066DD /* Topic.h */,
+				77D33A841148CE4600D066DD /* Topic.m */,
 			);
 			name = "Game Play Classes";
 			sourceTree = "<group>";
@@ -340,10 +345,11 @@
 				B4EA944A1132074700016680 /* HelpScreenController.m in Sources */,
 				07BBE0B71137109E00BAF196 /* Ball.m in Sources */,
 				77203E431141272E00127EC1 /* Ship.m in Sources */,
-				B4F2EFDA11447E78006BFA7D /* asteroidClass.m in Sources */,
+				B4F2EFDA11447E78006BFA7D /* Asteroid.m in Sources */,
 				77B6953811461F940055EFD6 /* Questions.m in Sources */,
 				77B6953911461F940055EFD6 /* Question.m in Sources */,
 				072972C31146DB49004ED361 /* UserProfile.m in Sources */,
+				77D33A851148CE4600D066DD /* Topic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

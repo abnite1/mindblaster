@@ -7,12 +7,6 @@
 //
 
 #import "CharacterScreenController.h"
-#import "UserNameScreenController.h"
-#import "HelpScreenController.h"
-#import "MindBlasterAppDelegate.h"
-#import "UserProfile.h"
-#import "Ball.h"
-
 
 @implementation CharacterScreenController
 @synthesize charOne;
@@ -39,7 +33,7 @@
 	//use "[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];"
 	//to set it to a button, where "temp" is a IBOutlet UIButton connected to button
 	//in interface builder.
-	[(UIAppDelegate.currentUser) setPic:[charOne currentImage]];
+	[(UIAppDelegate.currentUser) setProfilePic:[charOne currentImage]];
 	//NSLog(@"Ponter to picture is: %x \n",[(UIAppDelegate.currentUser) getPic]);
 	
     // Navigation logic may go here -- for example, create and push another view controller.
@@ -49,7 +43,7 @@
 }
 - (IBAction) CharacterTwo
 {
-	[(UIAppDelegate.currentUser) setPic:[charTwo currentImage]];
+	[(UIAppDelegate.currentUser) setProfilePic:[charTwo currentImage]];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
@@ -58,7 +52,7 @@
 }
 - (IBAction) CharacterThree
 {
-	[(UIAppDelegate.currentUser) setPic:[charThree currentImage]];
+	[(UIAppDelegate.currentUser) setProfilePic:[charThree currentImage]];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
@@ -67,7 +61,7 @@
 }
 - (IBAction) CharacterFour
 {
-	[(UIAppDelegate.currentUser) setPic:[charFour currentImage]];
+	[(UIAppDelegate.currentUser) setProfilePic:[charFour currentImage]];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];

@@ -7,8 +7,7 @@
 //
 
 #import "MindBlasterAppDelegate.h"
-#import "RootViewController.h"
-#import "UserProfile.h"
+
 
 @implementation MindBlasterAppDelegate
 
@@ -46,6 +45,7 @@
 
 - (void)dealloc {
 	[navigationController release];
+	[currentUser release];
 	[window release];
 	[super dealloc];
 }
