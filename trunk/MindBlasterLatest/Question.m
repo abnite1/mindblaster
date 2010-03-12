@@ -14,15 +14,14 @@
 
 // set the question
 -(IBAction)setQuestion{
-	
-	srand(clock());
+
 	// base range =  (0 - 10), add +10 to max positive range for every added difficulty level.
 	int diff = [UIAppDelegate.currentUser currentDifficulty];
 	
-	// get random operators
-	operand1 = random() % (10 * diff); 	
-	operand2 = random() % (10 * diff);
-
+	// get random nonzero operands
+	operand1 = 1 + arc4random() % (10 * diff); 	
+	operand2 = 1 + arc4random() % (10 * diff);
+	
 	char *operator = [UIAppDelegate.currentUser.currentTopic operator];
 
 	// calculate the answer
@@ -53,19 +52,15 @@
 	// and we cannot divide by 0
 	else if ( operator == (char*) '/' ) {
 
-		// round it up to an integer solution and arrange max val to be first
-		if (operand1 == 0) operand1++;
-		if (operand2 == 0) operand2++;
-		int maxVal = MAX (operand1, operand2);
-		int minVal = MIN (operand1, operand2);
-		operand1 = maxVal;
-		operand2 = minVal;
-		int remainder = operand1 % operand2;
-		operand2 = remainder + operand2;
+		operand1 = 1 + arc4random() % (2 * diff); 	
+		operand2 = 1 + arc4random() % (10 * diff);
+		
+		answer = operand1 * operand2;
+		operand1 = answer;
 		answer = operand1 / operand2;
+		
 	}
 	
-	NSLog(@"op1: %d, op2: %d : Answer: %d",operand1, operand2, answer);
 	// set the string question for the label
 	NSString *numericQuestion = [[NSString alloc] initWithFormat:@"%d %c %d = ?",
 								 operand1,operator,operand2];
@@ -78,7 +73,7 @@
 
 // for debug and testing
 -(IBAction)generateCorrectAnswer {
-	NSLog(@"%d",answer);
+	NSLog(@"answer: %d",answer);
 }
 
 

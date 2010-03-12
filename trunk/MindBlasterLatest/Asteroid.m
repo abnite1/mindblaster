@@ -73,7 +73,7 @@
 	
 
 	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 )
-		[self setAsteroidDirection:((random() %30 ) / 5  -3) :((random() % 30) / 5 -3)];
+		[self setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
 		
 }
 
