@@ -110,10 +110,11 @@
 					PBXFindDataSource_LocationID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 289720604;
-			PBXWorkspaceStateSaveDate = 289720604;
+			PBXPerProjectTemplateStateSaveDate = 290134028;
+			PBXWorkspaceStateSaveDate = 290134028;
 		};
 		perUserProjectItems = {
+			B42D2EEB114B187700D4A63A /* PBXTextBookmark */ = B42D2EEB114B187700D4A63A /* PBXTextBookmark */;
 			B43703261131F735002A55F5 /* PBXTextBookmark */ = B43703261131F735002A55F5 /* PBXTextBookmark */;
 			B43703271131F735002A55F5 /* PBXTextBookmark */ = B43703271131F735002A55F5 /* PBXTextBookmark */;
 			B43703281131F735002A55F5 /* PBXTextBookmark */ = B43703281131F735002A55F5 /* PBXTextBookmark */;
@@ -149,7 +150,6 @@
 			B4D371C21144C33300A7F6B9 /* PBXTextBookmark */ = B4D371C21144C33300A7F6B9 /* PBXTextBookmark */;
 			B4D371C31144C33300A7F6B9 /* PBXTextBookmark */ = B4D371C31144C33300A7F6B9 /* PBXTextBookmark */;
 			B4D371C41144C33300A7F6B9 /* PBXTextBookmark */ = B4D371C41144C33300A7F6B9 /* PBXTextBookmark */;
-			B4D371E81144C90200A7F6B9 /* PBXTextBookmark */ = B4D371E81144C90200A7F6B9 /* PBXTextBookmark */;
 			B4D371FA1144C93800A7F6B9 /* PBXTextBookmark */ = B4D371FA1144C93800A7F6B9 /* PBXTextBookmark */;
 			B4D62933113F65C2003093D8 /* PBXBookmark */ = B4D62933113F65C2003093D8 /* PBXBookmark */;
 			B4D62935113F65C2003093D8 /* PBXBookmark */ = B4D62935113F65C2003093D8 /* PBXBookmark */;
@@ -214,6 +214,16 @@
 			sepNavVisRange = "{0, 785}";
 		};
 	};
+	B42D2EEB114B187700D4A63A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B43702B51131EBF4002A55F5 /* GameScreenController.m */;
+		name = "GameScreenController.m: 8";
+		rLen = 0;
+		rLoc = 166;
+		rType = 0;
+		vrLen = 1069;
+		vrLoc = 0;
+	};
 	B43702291131E25A002A55F5 /* TopicScreenController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1160, 457}}";
@@ -253,9 +263,9 @@
 	};
 	B43702B51131EBF4002A55F5 /* GameScreenController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1055, 7182}}";
-			sepNavSelRange = "{10482, 0}";
-			sepNavVisRange = "{9883, 1218}";
+			sepNavIntBoundsRect = "{{0, 0}, {1055, 8736}}";
+			sepNavSelRange = "{166, 0}";
+			sepNavVisRange = "{0, 1069}";
 			sepNavWindowFrame = "{{130, 210}, {750, 558}}";
 		};
 	};
@@ -749,22 +759,12 @@
 		vrLen = 1349;
 		vrLoc = 1099;
 	};
-	B4D371E81144C90200A7F6B9 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B43702B51131EBF4002A55F5 /* GameScreenController.m */;
-		name = "GameScreenController.m: 264";
-		rLen = 0;
-		rLoc = 10482;
-		rType = 0;
-		vrLen = 1218;
-		vrLoc = 9883;
-	};
 	B4D371FA1144C93800A7F6B9 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B43702B51131EBF4002A55F5 /* GameScreenController.m */;
 		name = "GameScreenController.m: 264";
 		rLen = 0;
-		rLoc = 10482;
+		rLoc = 10497;
 		rType = 0;
 		vrLen = 1218;
 		vrLoc = 9883;
@@ -1047,14 +1047,14 @@
 		path = "/Volumes/sverner/cmpt 275/MindBlaster7/Classes/GameScreenController.h";
 		sourceTree = "<absolute>";
 	};
-	B4F2EFD811447E78006BFA7D /* asteroidClass.h */ = {
+	B4F2EFD811447E78006BFA7D /* Asteroid.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1055, 481}}";
 			sepNavSelRange = "{237, 11}";
 			sepNavVisRange = "{0, 280}";
 		};
 	};
-	B4F2EFD911447E78006BFA7D /* asteroidClass.m */ = {
+	B4F2EFD911447E78006BFA7D /* Asteroid.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1055, 481}}";
 			sepNavSelRange = "{272, 0}";
@@ -1073,7 +1073,7 @@
 	};
 	B4F2EFE611447E85006BFA7D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = B4F2EFD811447E78006BFA7D /* asteroidClass.h */;
+		fRef = B4F2EFD811447E78006BFA7D /* Asteroid.h */;
 		name = "asteroidClass.h: 1";
 		rLen = 0;
 		rLoc = 0;
@@ -1083,7 +1083,7 @@
 	};
 	B4F2EFF111447EC2006BFA7D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = B4F2EFD911447E78006BFA7D /* asteroidClass.m */;
+		fRef = B4F2EFD911447E78006BFA7D /* Asteroid.m */;
 		name = "asteroidClass.m: 1";
 		rLen = 0;
 		rLoc = 0;
