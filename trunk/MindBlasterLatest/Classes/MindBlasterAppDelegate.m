@@ -1,8 +1,8 @@
 //
 //  MindBlasterAppDelegate.m
-//  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
+//	modified by john kehler (see .h)
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 //
 
@@ -14,11 +14,6 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize currentUser;
-
-
-#pragma mark -
-#pragma mark Application lifecycle
-
 
 
 
@@ -40,9 +35,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Memory management
-
+// release memory
 - (void)dealloc {
 	[navigationController release];
 	[currentUser release];

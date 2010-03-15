@@ -8,24 +8,21 @@
 
 #import "DifficultyScreenController.h"
 
-//#import "HelpScreenController.h"
-//#import "Ball.h"
-//#import "MindBlasterAppDelegate.h"
-//#import "UserProfile.h"
 
 @implementation DifficultyScreenController
 @synthesize difficultyDescription;
 
--(IBAction) HelpScreen
-{
+// navigate to the help screen
+-(IBAction) helpScreen {
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
--(IBAction) NextScreen
-{
-	//NSLog(@"The diff now set to %d \n",[UIAppDelegate.currentUser getDiff]);
+
+// navigate to GameScreen view
+-(IBAction) nextScreen {
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	GameScreenController *gamesScreenView = [[GameScreenController alloc] initWithNibName:@"GameScreenController" bundle:nil];
@@ -33,33 +30,43 @@
 	[gamesScreenView release];
 }
 
--(IBAction) selectedEasiest
-{
+// user selected easiest difficulty
+-(IBAction) selectedEasiest {
+	
+	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
-	//NSLog(@"The difficulty setting is now: %d \n", [UIAppDelegate.currentUser getDiff]);
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,10]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
--(IBAction) selectedEasy
-{
+
+// user selected easy difficulty
+-(IBAction) selectedEasy {
+	
+	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASY];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,20]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
--(IBAction) selectedHard
-{
+
+// user selected hard difficulty
+-(IBAction) selectedHard {
+	
+	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARD];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,30]"];
 	[difficultyDescription setText:msg];
 	[msg release];
 }
--(IBAction) selectedHardest
-{
+
+// user selected hardest difficulty
+-(IBAction) selectedHardest {
+	
+	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARDEST];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,40]"];
@@ -68,8 +75,8 @@
 }
 
 
-- (IBAction) BackScreen
-{
+// navigate back to the previous screen
+- (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
@@ -83,10 +90,24 @@
 }
 */
 
+// animate the space background
+-(void)animateBackground {
+	[background move];
+}
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+// default to the easiest difficulty level, then set up the space background animation
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
+	
+	// default to easiest
+	[self selectedEasiest];
+	
+	// start space animation
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
+	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
+	[background setSpeedX:0.2 Y:0.2];
 
 }
 

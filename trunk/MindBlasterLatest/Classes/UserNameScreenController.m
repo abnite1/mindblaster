@@ -3,46 +3,41 @@
 //  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
+//	modified by yaniv harmati to abide by coding standards
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import "UserNameScreenController.h"
-#import "TopicScreenController.h"
-#import "HelpScreenController.h"
-#import "Ball.h"
-#import "UserProfile.h"
-#import "MindBlasterAppDelegate.h"
+
 
 @implementation UserNameScreenController
-@synthesize txtName;
-//TEST
-//@synthesize temp;
+@synthesize name;
 
--(IBAction) MakeKeyboardGoAway //not working?
-{
-	[txtName resignFirstResponder];
+
+// hide the keyboard after name is entered
+-(IBAction) makeKeyboardGoAway {
+	[name resignFirstResponder];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+// show the text field after the keyboard is gone
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return YES;
 }
 
--(IBAction) HelpScreen
-{
+// navigate to the help screen
+-(IBAction) helpScreen {
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
 
-//So this method should save txtName to the user data profile.
--(IBAction) NextScreen
-{
+//navigate to topic selection
+-(IBAction) nextScreen {
 
-	//NSLog(@"Checking: The name was chosen as: %@ \n",[txtName text]);
-	[(UIAppDelegate.currentUser) setUserName:[txtName text]];
+	//NSLog(@"Checking: The name was chosen as: %@ \n",[name text]);
+	[(UIAppDelegate.currentUser) setUserName:[name text]];
 	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
 	
 	
@@ -51,8 +46,8 @@
 	[self.navigationController pushViewController:topicView animated:YES];
 	[topicView release];
 }
-- (IBAction) BackScreen
-{
+
+- (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
@@ -67,11 +62,20 @@
 */
 
 
+// animate the space background
+-(void)animateBackground {
+	[background move];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
-	 //TEMP
-	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
+	[super viewDidLoad];
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
+	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
+	[background setSpeedX:0.2 Y:0.2];
+	
 }
 
 

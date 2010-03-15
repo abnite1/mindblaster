@@ -15,6 +15,7 @@
 @synthesize difficulty, topic, description, operator;
 
 // initializer that sets a new topic. 
+
 // USE THE DEFINED CONSTANTS IN Topic.h
 - (id)initWithTopic:(int)newTopic {
 	

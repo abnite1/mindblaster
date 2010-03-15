@@ -7,20 +7,16 @@
 //
 
 #import "HelpScreenController.h"
-#import "Ball.h"
-#import "RootViewController.h"
-#import "TopicScreenController.h"
+
 
 @implementation HelpScreenController
 @synthesize help;
 
-- (IBAction) BackScreen
-{
+- (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
--(IBAction) Quit
-{
+-(IBAction) quit {
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -7,48 +7,33 @@
 //
 
 #import "LoadGameScreenController.h"
-#import "TopicScreenController.h"
-#import "HelpScreenController.h"
-#import "Ball.h"
-#import "MindBlasterAppDelegate.h"
-#import "UserProfile.h"
+
+
 
 @implementation LoadGameScreenController
 
--(IBAction) HelpScreen
-{
+-(IBAction) helpScreen {
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
 
-//So in here would obviously do something to load settings into an init struct 
-//and then continue
--(IBAction) LoadGame
-{
-	//First we will test this by creating a pretend structure
-	//later that structure will be filled from a file
-	UserProfile *loadedProfile;
-	loadedProfile = UIAppDelegate.currentUser;
+// this leads to another screen where the player loads a profile from the web server
+// currently only a stub for the implementation to follow in phase II
+-(IBAction) loadGame {
 	
-	//later this would be filled with data from textfile
-	[loadedProfile setUserName:@"Blanka"];
-	//[loadedProfile setStage:5];
-	//[loadedProfile setDiff:5];
-	[loadedProfile setScore:9999];
-	
-	
-	
-	
+	// after loading a file it would be set as the new current user.
+	// [UIAppDelegate setCurrentUser: /* new object goes here */];
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];
 	[topicView release];
 }
-- (IBAction) BackScreen
-{
+
+// go back to the previous screen
+- (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
@@ -63,13 +48,20 @@
 */
 
 
+// animate the space background
+-(void)animateBackground {
+	[background move];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
+	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
+	[background setSpeedX:0.2 Y:0.2];
 }
-
-
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

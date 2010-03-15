@@ -6,6 +6,10 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+/*
+ * this is currently an empty class, we may need to add more properties to questions, which will go here. 
+ */
+
 #import <Foundation/Foundation.h>
 #import "Question.h"
 

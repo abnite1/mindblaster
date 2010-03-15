@@ -6,34 +6,24 @@
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 
 /*
-	So the basic concept would seem to be all the different screen and options
- simply edit a configuration struct which 
- everytime a game starts it checks the status of the configuration struct for details
- and loads those details.
- Therefore same procedure, varied results.
+ *	first application view, displays the moving space animation and allows the user to load a game or starta new one.
 */
 
 
-//Issues:
-
-//1. When go to help - changetopic - back --the screen changes to portrait.....???
-
-//
-
 #import <UIKit/UIKit.h>
-#import "Ball.h"
+#import "BackgroundAnimation.h"
 #import "HelpScreenController.h"
 #import "CharacterScreenController.h"
 #import "LoadGameScreenController.h"
 
 @interface RootViewController : UIViewController {
-	IBOutlet Ball* mBall;
+	IBOutlet BackgroundAnimation *bgAnimation;
 }
-@property(retain, nonatomic) IBOutlet Ball* mBall;
 
-- (IBAction) NextScreen;
-- (IBAction) LoadGame;
-- (IBAction) HelpScreen;
+- (IBAction) nextScreen;
+- (IBAction) loadGame;
+- (IBAction) helpScreen;
+
 
 
 @end
