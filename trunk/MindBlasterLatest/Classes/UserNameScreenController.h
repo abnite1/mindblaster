@@ -7,22 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Ball.h"
+#import "BackgroundAnimation.h"
+#import "HelpScreenController.h"
 
 @interface UserNameScreenController : UIViewController {
-	IBOutlet UITextField *txtName;
+	IBOutlet UITextField *name;
+	IBOutlet BackgroundAnimation *background;
 	
-	//TEST
-	//IBOutlet UIButton *temp;
+
 }
-@property(nonatomic, retain) IBOutlet UITextField *txtName;
+
 //TEST
 //@property(nonatomic, retain) IBOutlet UIButton *temp;
-		  
-- (IBAction) MakeKeyboardGoAway;
-- (IBAction) NextScreen;
-- (IBAction) BackScreen;
-- (IBAction) HelpScreen;
+@property (nonatomic,retain) IBOutlet UITextField *name;
+- (IBAction) makeKeyboardGoAway;
+- (IBAction) nextScreen;
+- (IBAction) backScreen;
+- (IBAction) helpScreen;
 
 
 @end

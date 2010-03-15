@@ -146,7 +146,7 @@
 
 
 // handle bullet animation and interaction with asteroids
--(IBAction) FireButton{
+-(IBAction) fireButton{
 	UIImageView *tempBullet; //temperary UIImageView allows manipulation of the elements of the asteroids array
 	
 	tempBullet = [bullets objectAtIndex:bulletsFired]; 
@@ -440,14 +440,14 @@
 
 
 
--(IBAction) HelpScreen
+-(IBAction) helpScreen
 {
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
--(IBAction) NextScreen
+-(IBAction) nextScreen
 {
 	// Navigation logic may go here -- for example, create and push another view controller.
 	GameOverScreenController *gamesOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
