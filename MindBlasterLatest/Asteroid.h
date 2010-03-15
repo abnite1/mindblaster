@@ -2,9 +2,18 @@
 //  Asteroid.h
 //  MindBlaster
 //
-//  Created by Steven Verner on 3/7/10.
+//  AsteroidClass Created by Steven Verner on 3/7/10.
+//  Restructured as Asteroid by yaniv haramati on 11/03/10 : added constants, initWithElements, 
+//	bounceOffBoudnaries, move, setAsteroidPosition/Direction, dealloc.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
+// 
+
+/*
+ *	the asteroid class is responsible for all asteroid related stuff, collission detection and handling should be moved here,
+ *  asteroids currently phase through each other instead of colliding and changing direction, and bounce off the wall instead
+ *  of phasing through to the other side of the screen as is more appropriate in a space setting.
+ *
+*/
 
 #import <Foundation/Foundation.h>
 

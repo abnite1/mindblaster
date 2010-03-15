@@ -3,6 +3,7 @@
 //  MindBlaster
 //
 //  Created by yaniv haramati on 07/03/10.
+//  Modified by yaniv haramati 
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -71,10 +72,12 @@
 	[numericQuestion release];
 }
 
+
 // for debug and testing
 -(IBAction)generateCorrectAnswer {
 	NSLog(@"answer: %d",answer);
 }
+
 
 
 @end

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		072972C31146DB49004ED361 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 072972C21146DB49004ED361 /* UserProfile.m */; };
 		07BBE0AE113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */; };
-		07BBE0B71137109E00BAF196 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* Ball.m */; };
+		07BBE0B71137109E00BAF196 /* BackgroundAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */; };
 		07E3F5DF1146DDD5005E5D37 /* boy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DB1146DDD5005E5D37 /* boy.png */; };
 		07E3F5E01146DDD5005E5D37 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DC1146DDD5005E5D37 /* cat.png */; };
 		07E3F5E11146DDD5005E5D37 /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DD1146DDD5005E5D37 /* dog.png */; };
@@ -56,8 +56,8 @@
 		072972C11146DB3C004ED361 /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
 		072972C21146DB49004ED361 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
 		07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Space-Art-Wallpapers-12.jpg"; sourceTree = "<group>"; };
-		07BBE0B51137109E00BAF196 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
-		07BBE0B61137109E00BAF196 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
+		07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundAnimation.h; sourceTree = "<group>"; };
+		07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundAnimation.m; sourceTree = "<group>"; };
 		07E3F5DB1146DDD5005E5D37 /* boy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy.png; sourceTree = "<group>"; };
 		07E3F5DC1146DDD5005E5D37 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
 		07E3F5DD1146DDD5005E5D37 /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog.png; sourceTree = "<group>"; };
@@ -153,8 +153,8 @@
 				B43702ED1131F201002A55F5 /* LoadGameScreenController.m */,
 				B4EA94471132074700016680 /* HelpScreenController.h */,
 				B4EA94481132074700016680 /* HelpScreenController.m */,
-				07BBE0B51137109E00BAF196 /* Ball.h */,
-				07BBE0B61137109E00BAF196 /* Ball.m */,
+				07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */,
+				07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */,
 			);
 			name = "Screen Controller Classes";
 			path = Classes;
@@ -343,7 +343,7 @@
 				B43702E31131F094002A55F5 /* GameOverScreenController.m in Sources */,
 				B43702EF1131F201002A55F5 /* LoadGameScreenController.m in Sources */,
 				B4EA944A1132074700016680 /* HelpScreenController.m in Sources */,
-				07BBE0B71137109E00BAF196 /* Ball.m in Sources */,
+				07BBE0B71137109E00BAF196 /* BackgroundAnimation.m in Sources */,
 				77203E431141272E00127EC1 /* Ship.m in Sources */,
 				B4F2EFDA11447E78006BFA7D /* Asteroid.m in Sources */,
 				77B6953811461F940055EFD6 /* Questions.m in Sources */,

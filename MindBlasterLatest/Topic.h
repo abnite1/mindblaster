@@ -2,9 +2,14 @@
 //  Topic.h
 //  MindBlaster
 //
-//  Created by yaniv haramati on 10/03/10.
+//  Created by yaniv haramati on 10/03/10 : constants, properties, function: initWithTopic.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
+
+/*
+ * the topic class represents a topic under the assumption that we may add more features and properties to topics in the future.
+ * should possibly include top score (for each topic)
+ */
 
 #import <Foundation/Foundation.h>
 

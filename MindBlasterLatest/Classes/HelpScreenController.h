@@ -6,21 +6,25 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-//Somehowthis screen should accept some kind of text DEPENDING on what page called it
-//so then we can populate the help label with the help instructions .....????
-//OR will it be more elaborate than that.
+/*
+ *	the help screen should provide view-specific help, by noticing where the user has navigated from and providing the appropriate
+ *	help label describing available options in the view-of-origin.
+ *	currently exists as a stub, screen-specific help labels should be added in phase II.
+ *
+ */
 
 
 #import <UIKit/UIKit.h>
-#import "Ball.h"
+#import "BackgroundAnimation.h"
+#import "TopicScreenController.h"
 
 @interface HelpScreenController : UIViewController {
 	IBOutlet UILabel *help;
 }
 @property (nonatomic,retain) IBOutlet UILabel *help;
 
-- (IBAction) BackScreen;
-- (IBAction) Quit;
+- (IBAction) backScreen;
+- (IBAction) quit;
 
 
 @end

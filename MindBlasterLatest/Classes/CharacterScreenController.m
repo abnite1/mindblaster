@@ -14,8 +14,7 @@
 @synthesize charThree;
 @synthesize charFour;
 
--(IBAction) HelpScreen
-{
+-(IBAction) helpScreen {
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
@@ -25,14 +24,7 @@
 /*
  The following will save an image to the user profile data.
  */
-- (IBAction) CharacterOne
-{
-	//passing the character pic "currentImage" from the button "charOne" 
-	//into and setting the profile accounts picture with "setPic" setter function
-	//CONFIRMED THIS WORKS!!!
-	//use "[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];"
-	//to set it to a button, where "temp" is a IBOutlet UIButton connected to button
-	//in interface builder.
+- (IBAction) firstCharacterSelected {
 	[(UIAppDelegate.currentUser) setProfilePic:[charOne currentImage]];
 	//NSLog(@"Ponter to picture is: %x \n",[(UIAppDelegate.currentUser) getPic]);
 	
@@ -41,8 +33,8 @@
 	[self.navigationController pushViewController:userNameView animated:YES];
 	[userNameView release];
 }
-- (IBAction) CharacterTwo
-{
+
+- (IBAction) secondCharacterSelected {
 	[(UIAppDelegate.currentUser) setProfilePic:[charTwo currentImage]];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
@@ -50,8 +42,8 @@
 	[self.navigationController pushViewController:userNameView animated:YES];
 	[userNameView release];
 }
-- (IBAction) CharacterThree
-{
+
+- (IBAction) thirdCharacterSelected {
 	[(UIAppDelegate.currentUser) setProfilePic:[charThree currentImage]];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
@@ -59,8 +51,8 @@
 	[self.navigationController pushViewController:userNameView animated:YES];
 	[userNameView release];
 }
-- (IBAction) CharacterFour
-{
+
+- (IBAction) fourthCharacterSelected {
 	[(UIAppDelegate.currentUser) setProfilePic:[charFour currentImage]];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
@@ -69,8 +61,7 @@
 	[userNameView release];
 }
 
-- (IBAction) BackScreen
-{
+- (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
@@ -85,12 +76,22 @@
 */
 
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
+// animate the space background
+-(void)animateBackground {
+	[background move];
 }
 
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	//self.title = @"Topic";
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
+	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
+	[background setSpeedX:0.2 Y:0.2];
+	
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.

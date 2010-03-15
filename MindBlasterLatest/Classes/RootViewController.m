@@ -3,42 +3,51 @@
 //  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
+//  modified by john kehler on early march : added space animation
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 //
 
 #import "RootViewController.h"
 
-///UserProfile *user = [UserProfile new];
-
 @implementation RootViewController
-@synthesize mBall;
 
 
 
--(IBAction) HelpScreen
-{
-	
+/*
+ *	navigate to the help screen
+ */
+-(IBAction) helpScreen {
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
-- (IBAction) NextScreen
-{
+
+/*
+ *	navigate to the next screen, which is character selection
+ */
+- (IBAction) nextScreen {
     // Navigation logic may go here -- for example, create and push another view controller.
 	CharacterScreenController *characterView = [[CharacterScreenController alloc] initWithNibName:@"CharacterScreenController" bundle:nil];
 	[self.navigationController pushViewController:characterView animated:YES];
 	[characterView release];
 }
-- (IBAction) LoadGame
-{
+
+/*
+ *	navigate to the loadgame screen
+ */
+- (IBAction) loadGame {
     // Navigation logic may go here -- for example, create and push another view controller.
 	LoadGameScreenController *loadGameView = [[LoadGameScreenController alloc] initWithNibName:@"LoadGameScreenController" bundle:nil];
 	[self.navigationController pushViewController:loadGameView animated:YES];
 	[loadGameView release];
 }
 
+/*
+ * perform these actions when view first loads:
+ * animate the background space image
+*/
 
 - (void)viewDidLoad {
 	
@@ -46,15 +55,15 @@
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
-								   selector:@selector(moveBall) userInfo:nil repeats:YES];
-	[mBall setSpeedX:0.2 Y:0.2];
+								   selector:@selector(moveBackground) userInfo:nil repeats:YES];
+	[bgAnimation setSpeedX:0.2 Y:0.2];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)moveBall
-{
-	[mBall move];
+// selector function for the background animation
+-(void)moveBackground {
+	[bgAnimation move];
 }
 
 /*
@@ -93,7 +102,7 @@
 
 
  
-//////////
+
 /*
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,15 +116,14 @@
 
 
 // override to allow orientations other than the default portrait orientation
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void)dealloc {
+	[bgAnimation dealloc];
     [super dealloc];
-	[mBall dealloc];
 }
 
 

@@ -3,6 +3,7 @@
 //  MindBlaster
 //
 //  Created by Steven Verner on 3/7/10.
+//  Recreated by yaniv haramati on 12/3/10
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 //
@@ -70,8 +71,6 @@
 	[asteroidIcon setCenter: newPosition];
 	
 	//sets the initial movement vectors
-	
-
 	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 )
 		[self setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
 		
