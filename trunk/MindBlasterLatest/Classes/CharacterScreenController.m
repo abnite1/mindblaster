@@ -83,8 +83,15 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	[super viewDidLoad];
+	/*[super viewDidLoad];
 	//self.title = @"Topic";
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
+	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
+	[background setSpeedX:0.2 Y:0.2];*/
+	
+	[super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
