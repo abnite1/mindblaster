@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">9L31a</string>
+		<string key="IBDocument.SystemVersion">9L30</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="39"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -162,22 +162,6 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="234495223"/>
 					</object>
-					<object class="IBUIButton" id="634324699">
-						<reference key="NSNextResponder" ref="855729640"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{202, 210}, {72, 37}}</string>
-						<reference key="NSSuperview" ref="855729640"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="749358247"/>
-						<string key="IBUITitleShadowOffset">{1, 1}</string>
-						<string key="IBUINormalTitle">Quit</string>
-						<reference key="IBUIHighlightedTitleColor" ref="38790617"/>
-						<reference key="IBUINormalTitleColor" ref="984208107"/>
-						<reference key="IBUINormalTitleShadowColor" ref="234495223"/>
-					</object>
 					<object class="IBUIButton" id="497462819">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
@@ -243,39 +227,39 @@
 					<int key="connectionID">7</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">NextScreen</string>
-						<reference key="source" ref="323730953"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">bgAnimation</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="627932385"/>
 					</object>
-					<int key="connectionID">10</int>
+					<int key="connectionID">41</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">LoadGame</string>
-						<reference key="source" ref="885148596"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">HelpScreen</string>
+						<string key="label">helpScreen</string>
 						<reference key="source" ref="497462819"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">15</int>
+					<int key="connectionID">42</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">mBall</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="627932385"/>
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">loadGame</string>
+						<reference key="source" ref="885148596"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">40</int>
+					<int key="connectionID">43</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">nextScreen</string>
+						<reference key="source" ref="323730953"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">44</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -315,7 +299,6 @@
 							<reference ref="890084184"/>
 							<reference ref="504022228"/>
 							<reference ref="627932385"/>
-							<reference ref="634324699"/>
 							<reference ref="885148596"/>
 							<reference ref="323730953"/>
 						</object>
@@ -329,11 +312,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">11</int>
 						<reference key="object" ref="885148596"/>
-						<reference key="parent" ref="855729640"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="634324699"/>
 						<reference key="parent" ref="855729640"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -375,7 +353,6 @@
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
 					<string>11.IBPluginDependency</string>
-					<string>12.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
@@ -395,15 +372,14 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{264, 461}, {320, 247}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>Ball</string>
+					<string>BackgroundAnimation</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{282, 289}, {480, 320}}</string>
+					<string>{{244, 289}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -429,17 +405,17 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">44</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">Ball</string>
+					<string key="className">BackgroundAnimation</string>
 					<string key="superclassName">UIImageView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Ball.h</string>
+						<string key="minorKey">Classes/BackgroundAnimation.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -449,9 +425,9 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>HelpScreen</string>
-							<string>LoadGame</string>
-							<string>NextScreen</string>
+							<string>helpScreen</string>
+							<string>loadGame</string>
+							<string>nextScreen</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -461,8 +437,8 @@
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">mBall</string>
-						<string key="NS.object.0">Ball</string>
+						<string key="NS.key.0">bgAnimation</string>
+						<string key="NS.object.0">BackgroundAnimation</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
