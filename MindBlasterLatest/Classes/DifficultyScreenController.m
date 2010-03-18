@@ -11,6 +11,10 @@
 
 @implementation DifficultyScreenController
 @synthesize difficultyDescription;
+@synthesize easiest;
+@synthesize easy;
+@synthesize hard;
+@synthesize hardest;
 
 // navigate to the help screen
 -(IBAction) helpScreen {
@@ -101,6 +105,24 @@
 	
 	// default to easiest
 	[self selectedEasiest];
+	
+	//lock the unlocked choices!
+	
+	switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]){
+		case 1:
+			[easy setEnabled:NO];
+			//purposely don't do break so excecute all rest as well
+		case 2:
+			[hard setEnabled:NO];
+		case 3:
+			[hardest setEnabled:NO];
+		default:
+			break;
+	}
+	//test the topic reversion YES IT WORKS, viewdidload runs again (only if go to game and lose), can't go back from here (viewdidload won't run)
+	/*Topic *temp = [Topic new];
+	[temp setTopic:3];
+	[UIAppDelegate.currentUser setLastTopicCompleted:temp];*/
 	
 	// start space animation
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];

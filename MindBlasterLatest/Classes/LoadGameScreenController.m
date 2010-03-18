@@ -25,6 +25,11 @@
 	
 	// after loading a file it would be set as the new current user.
 	// [UIAppDelegate setCurrentUser: /* new object goes here */];
+	//load a test profile to test deactivation of locked topics
+	Topic *testing = [Topic new];
+	[testing setTopic:1];
+	[testing setDifficulty:3];
+	[UIAppDelegate.currentUser setLastTopicCompleted:testing];
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];

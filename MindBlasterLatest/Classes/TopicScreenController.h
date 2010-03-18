@@ -23,8 +23,17 @@
 @interface TopicScreenController : UIViewController {
 	IBOutlet UILabel *label;
 	IBOutlet BackgroundAnimation *background;
+	IBOutlet UIButton *addition;
+	IBOutlet UIButton *subtraction;
+	IBOutlet UIButton *multiplication;
+	IBOutlet UIButton *division;
+	
 }
 @property (nonatomic,retain) IBOutlet UILabel *label;
+@property (nonatomic, retain) IBOutlet UIButton *addition;
+@property (nonatomic, retain) IBOutlet UIButton *subtraction;
+@property (nonatomic, retain) IBOutlet UIButton *multiplication;
+@property (nonatomic, retain) IBOutlet UIButton *division;
 
 -(IBAction) nextScreen;
 -(IBAction) firstTopicSelected;

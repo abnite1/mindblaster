@@ -11,6 +11,10 @@
 
 @implementation TopicScreenController
 @synthesize label;
+@synthesize addition;
+@synthesize subtraction;
+@synthesize multiplication;
+@synthesize division;
 
 -(IBAction) helpScreen {
 	// navigate to the help screen
@@ -103,6 +107,31 @@
 	
 	// default to the first topic
 	[self firstTopicSelected];
+	
+	//block any locked topics
+	//NSLog(@"Topic is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
+	switch([[UIAppDelegate.currentUser lastTopicCompleted] topic]){
+		case 1:
+			[subtraction setEnabled:NO];
+			//purposely don't do break so excecute all rest as well
+		case 2:
+			[multiplication setEnabled:NO];
+		case 3:
+			[division setEnabled:NO];
+		default:
+			break;
+	}
+	/*
+	 The locking aspect was tested as follows:
+	  LoadGame loaded a userprofile with Topics 2,3,4 locked and diff 1,2,3 unlocked on that topic
+	  This was evident in choice availability on topic and diff screens.
+	  Then diffscreen changed the topics available to 1,2,3 (only 4 locked) 
+	  Went back to topicscreen to see if changes took effect:
+		Changes only took effect if got back from GameOver (quit -> mainmenu) OR changetopic
+		If went straight back to topic from diff, viewdidload did not run and didn't take effect.
+		This shouldn't cause any problems.
+	*/
+
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
