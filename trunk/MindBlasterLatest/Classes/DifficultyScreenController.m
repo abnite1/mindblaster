@@ -38,7 +38,10 @@
 -(IBAction) selectedEasiest {
 	
 	// set it in the profile
-	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
+	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASY];
+	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
+	//[self updateTopic];
 	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,10]"];
@@ -50,7 +53,9 @@
 -(IBAction) selectedEasy {
 	
 	// set it in the profile
-	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASY];
+	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASY];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASY];
+	//[self updateTopic];
 	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,20]"];
@@ -62,7 +67,9 @@
 -(IBAction) selectedHard {
 	
 	// set it in the profile
-	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARD];
+	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARD];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARD];
+	//[self updateTopic];
 	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,30]"];
@@ -74,7 +81,9 @@
 -(IBAction) selectedHardest {
 	
 	// set it in the profile
-	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARDEST];
+	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARDEST];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARDEST];
+	//[self updateTopic];
 	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,40]"];
@@ -85,8 +94,10 @@
 // updates the topic difficulty as well
 -(void) updateTopic {
 	
-	int diff = [UIAppDelegate.currentUser currentDifficulty];
-	[UIAppDelegate.currentUser.currentTopic setDifficulty: diff];
+	//int diff = [UIAppDelegate.currentUser currentDifficulty];
+	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
+	//[UIAppDelegate.currentUser.currentTopic setDifficulty: diff];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff];
 }
 
 

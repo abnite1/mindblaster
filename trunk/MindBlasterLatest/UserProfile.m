@@ -10,17 +10,17 @@
 #import "UserProfile.h"
 
 @implementation UserProfile
-@synthesize currentTopic, lastTopicCompleted, currentDifficulty, 
+@synthesize currentTopic, lastTopicCompleted, 
 			userName, profilePic, score, highestScore, email;
 
 // updates the highestScore if the player has surpassed it
 -(IBAction) checkHighestScore {
 	
 	// if the current score is higher than highestScore
-	if (score > highestScore) {
+	if ([score score] > highestScore) {
 		
 		// update the highest score
-		highestScore = score;
+		highestScore = [score score];
 		
 	}
 }

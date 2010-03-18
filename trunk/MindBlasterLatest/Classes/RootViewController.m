@@ -47,7 +47,7 @@
 // continute to topic selection with the current profile
 - (IBAction) continue {
 	
-	// check if a profile file has been created before continuing.
+	//Load the stored plist into the profile.
 	
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
@@ -62,6 +62,9 @@
 */
 
 - (void)viewDidLoad {
+	
+	///Check if profile exists, if so, fine
+	//IF not, then hide the "Continue" button.
 	
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];

@@ -17,7 +17,8 @@
 -(IBAction)setQuestion{
 
 	// base range =  (0 - 10), add +10 to max positive range for every added difficulty level.
-	int diff = [UIAppDelegate.currentUser currentDifficulty];
+	//int diff = [UIAppDelegate.currentUser currentDifficulty];
+	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
 	
 	// get random nonzero operands
 	operand1 = 1 + arc4random() % (10 * diff); 	
