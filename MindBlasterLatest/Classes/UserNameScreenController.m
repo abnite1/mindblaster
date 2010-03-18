@@ -37,20 +37,23 @@
 //navigate to topic selection
 -(IBAction) nextScreen {
 
-	//NSLog(@"Checking: The name was chosen as: %@ \n",[name text]);
-	[(UIAppDelegate.currentUser) setUserName:[name text]];
-	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
-	//also lock the topics and diffs.
-	Topic *temp = [Topic new];
-	[temp setTopic:TOPIC_ADDITION];
-	[temp setDifficulty:DIFFICULTY_EASIEST];
-	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
-	
+
+	[self initUserProfileSettings];
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];
 	[topicView release];
+}
+
+// initializes the default topic to ADDITION
+-(void) initUserProfileSettings {
+	//NSLog(@"Checking: The name was chosen as: %@ \n",[name text]);
+	[(UIAppDelegate.currentUser) setUserName:[name text]];
+	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
+	
+	// set the last topic completed to the first choice
+	[UIAppDelegate.currentUser setLastTopicCompleted:[[Topic alloc] initWithTopic: TOPIC_ADDITION]];
 }
 
 - (IBAction) backScreen {
