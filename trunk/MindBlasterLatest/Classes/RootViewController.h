@@ -23,7 +23,7 @@
 - (IBAction) nextScreen;
 - (IBAction) loadGame;
 - (IBAction) helpScreen;
-- (IBAction) continue;
+- (IBAction) continueSelected;
 
 
 

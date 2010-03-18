@@ -21,6 +21,7 @@
 //@property(nonatomic, retain) IBOutlet UIButton *temp;
 @property (nonatomic,retain) IBOutlet UITextField *name;
 - (IBAction) makeKeyboardGoAway;
+- (void) initUserProfileSettings;
 - (IBAction) nextScreen;
 - (IBAction) backScreen;
 - (IBAction) helpScreen;

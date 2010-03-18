@@ -45,7 +45,7 @@
 }
 
 // continute to topic selection with the current profile
-- (IBAction) continue {
+- (IBAction) continueSelected {
 	
 	//Load the stored plist into the profile.
 	
@@ -69,7 +69,7 @@
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
 								   selector:@selector(moveBackground) userInfo:nil repeats:YES];
 	[bgAnimation setSpeedX:0.2 Y:0.2];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
