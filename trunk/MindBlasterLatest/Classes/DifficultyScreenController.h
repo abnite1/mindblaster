@@ -16,8 +16,16 @@
 	
 	IBOutlet UILabel *difficultyDescription;
 	IBOutlet BackgroundAnimation *background;
+	IBOutlet UIButton *easiest;
+	IBOutlet UIButton *easy;
+	IBOutlet UIButton *hard;
+	IBOutlet UIButton *hardest;
 }
 @property (nonatomic,retain) IBOutlet UILabel *difficultyDescription;
+@property (nonatomic,retain) IBOutlet UIButton *easiest;
+@property (nonatomic,retain) IBOutlet UIButton *easy;
+@property (nonatomic,retain) IBOutlet UIButton *hard;
+@property (nonatomic,retain) IBOutlet UIButton *hardest;
 
 
 -(IBAction) nextScreen;

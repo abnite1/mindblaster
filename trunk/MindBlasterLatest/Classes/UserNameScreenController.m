@@ -39,6 +39,11 @@
 	//NSLog(@"Checking: The name was chosen as: %@ \n",[name text]);
 	[(UIAppDelegate.currentUser) setUserName:[name text]];
 	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
+	//also lock the topics and diffs.
+	Topic *temp = [Topic new];
+	[temp setTopic:1];
+	[temp setDifficulty:1];
+	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
 	
 	
 	// Navigation logic may go here -- for example, create and push another view controller.

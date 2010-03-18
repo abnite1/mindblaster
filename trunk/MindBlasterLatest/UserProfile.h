@@ -38,6 +38,10 @@ static const int DIFFICULTY_LIMIT = 100;
 	Topic *lastTopicCompleted;			
 	int currentDifficulty;
 	NSString *email;
+	
+	//going on the assumption that for user to unlock next TOPIC, they must have unlocked all diff's on the previous topic first.
+	//Therefore only need "lasttopiccomplete" which contains diff complete of the current topic, all previous topics have all diff's unlocked and all latter have none.
+	
 }
 @property (nonatomic, retain) Topic *currentTopic;
 @property (nonatomic,retain) Topic *lastTopicCompleted;

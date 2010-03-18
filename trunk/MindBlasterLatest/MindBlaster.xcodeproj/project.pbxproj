@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		072972C31146DB49004ED361 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 072972C21146DB49004ED361 /* UserProfile.m */; };
-		07786E37114EDB630039C9FA /* ExampleUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 07786E36114EDB630039C9FA /* ExampleUnitTest.m */; };
 		07BBE0AE113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */; };
 		07BBE0B71137109E00BAF196 /* BackgroundAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */; };
 		07E3F5DF1146DDD5005E5D37 /* boy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DB1146DDD5005E5D37 /* boy.png */; };
@@ -53,23 +52,10 @@
 		B4F2EFDA11447E78006BFA7D /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F2EFD911447E78006BFA7D /* Asteroid.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		07786E25114EDAB70039C9FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
-			remoteInfo = MindBlaster;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		072972C11146DB3C004ED361 /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
 		072972C21146DB49004ED361 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
-		07786E19114EDAB00039C9FA /* UnitTesting.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTesting.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTesting-Info.plist"; sourceTree = "<group>"; };
-		07786E35114EDB630039C9FA /* ExampleUnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleUnitTest.h; sourceTree = "<group>"; };
-		07786E36114EDB630039C9FA /* ExampleUnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleUnitTest.m; sourceTree = "<group>"; };
 		07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Space-Art-Wallpapers-12.jpg"; sourceTree = "<group>"; };
 		07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundAnimation.h; sourceTree = "<group>"; };
 		07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundAnimation.m; sourceTree = "<group>"; };
@@ -134,13 +120,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		07786E16114EDAB00039C9FA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,15 +133,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07786E34114EDB4C0039C9FA /* UnitTest Classes */ = {
-			isa = PBXGroup;
-			children = (
-				07786E35114EDB630039C9FA /* ExampleUnitTest.h */,
-				07786E36114EDB630039C9FA /* ExampleUnitTest.m */,
-			);
-			name = "UnitTest Classes";
-			sourceTree = "<group>";
-		};
 		080E96DDFE201D6D7F000001 /* Screen Controller Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* MindBlaster.app */,
-				07786E19114EDAB00039C9FA /* UnitTesting.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -203,7 +172,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				07786E34114EDB4C0039C9FA /* UnitTest Classes */,
 				B4B012DF1140810B00E0D5DB /* Game Play Classes */,
 				080E96DDFE201D6D7F000001 /* Screen Controller Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -288,25 +256,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		07786E18114EDAB00039C9FA /* UnitTesting */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 07786E24114EDAB10039C9FA /* Build configuration list for PBXNativeTarget "UnitTesting" */;
-			buildPhases = (
-				07786E14114EDAB00039C9FA /* Resources */,
-				07786E15114EDAB00039C9FA /* Sources */,
-				07786E16114EDAB00039C9FA /* Frameworks */,
-				07786E17114EDAB00039C9FA /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				07786E26114EDAB70039C9FA /* PBXTargetDependency */,
-			);
-			name = UnitTesting;
-			productName = UnitTesting;
-			productReference = 07786E19114EDAB00039C9FA /* UnitTesting.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 		1D6058900D05DD3D006BFB54 /* MindBlaster */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MindBlaster" */;
@@ -344,19 +293,11 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* MindBlaster */,
-				07786E18114EDAB00039C9FA /* UnitTesting */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		07786E14114EDAB00039C9FA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,31 +329,7 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		07786E17114EDAB00039C9FA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		07786E15114EDAB00039C9FA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				07786E37114EDB630039C9FA /* ExampleUnitTest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,73 +357,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		07786E26114EDAB70039C9FA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D6058900D05DD3D006BFB54 /* MindBlaster */;
-			targetProxy = 07786E25114EDAB70039C9FA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		07786E22114EDAB10039C9FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MindBlaster.app/Contents/MacOS/MindBlaster";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "UnitTesting-Info.plist";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-					"-framework",
-					UIKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = UnitTesting;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MindBlaster.app/Contents/MacOS/MindBlaster";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		07786E23114EDAB10039C9FA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				INFOPLIST_FILE = "UnitTesting-Info.plist";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					SenTestingKit,
-					"-framework",
-					UIKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = UnitTesting;
-				WRAPPER_EXTENSION = octest;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -562,15 +413,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07786E24114EDAB10039C9FA /* Build configuration list for PBXNativeTarget "UnitTesting" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				07786E22114EDAB10039C9FA /* Debug */,
-				07786E23114EDAB10039C9FA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MindBlaster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
