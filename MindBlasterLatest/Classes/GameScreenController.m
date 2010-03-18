@@ -56,7 +56,8 @@
 
 	NSLog(@"allocated asteroids");
 	
-	// for all 6 correct/incorrect solution asteroids in the array, attach an image and a label
+	// for all 6 correct/incorrect solution asteroids in the array, attach an image andd a label
+
 	for (int i = 0; i < 10; i++) {
 		
 		if (i < 6) {
@@ -78,7 +79,7 @@
 		}
 	}
 	
-	// logger (for debug)
+
 	for (int i = 0; i < 10; i++) {
 		int x = [[asteroids objectAtIndex: i] asteroidPosition].x;
 		NSLog(@"class at index %d : %f", i, x);
@@ -173,9 +174,11 @@
 	question.questionLabelOutletPointer = questionLabel;	// connect the local outlet to the object outlet
 
 	//set the question on the screen
+	NSLog(@"Calling SetQuestion for question class\n");
 	[question setQuestion];
 
 	// set the answers on the asteroid labels
+	NSLog(@"Calling setAnswer on self, next function\n");
 	[self setAnswer];
 	//[question release];
 }
@@ -203,7 +206,8 @@
 	{
 		if (asteroidIndex != randomCorrectAsteroid) {
 			
-			// set wrong answer equal to some random value of +- [1-7] from the correct answer
+			// set wrong answer equal to some random value of + [1-7] from the correct answer
+
 			// that isn't the correct answer
 			int wrongAnswer = 0;
 			do {
@@ -238,8 +242,10 @@
 // updates the difficulty label to the current difficulty in the user profile
 -(IBAction) setDifficultyLabel {
 	NSLog(@"start setDifficultyLabel");
-	[UIAppDelegate.currentUser setCurrentDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
-	int diff = [UIAppDelegate.currentUser currentDifficulty];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
+	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
+	
+	//int diff = [UIAppDelegate.currentUser currentDifficulty];
 	
 	NSString *diffMsg;
 	if (diff == 1) diffMsg = @"Easiest";
@@ -406,7 +412,8 @@
 // if it's over the limit of the hardest difficulty then the game is over (win scenario)
 -(void) checkScore {
 	
-	int diff = [UIAppDelegate.currentUser.currentTopic difficulty];
+	//int diff = [UIAppDelegate.currentUser currentDifficulty];
+	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
 	
 	// update the profile's lastTopicCompleted if this one is higher
 	if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
@@ -416,8 +423,8 @@
 	
 	// if score is higher than set for difficulty, then raise the difficulty
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
-		[UIAppDelegate.currentUser setCurrentDifficulty: diff + 1];
-		[UIAppDelegate.currentUser.currentTopic setDifficulty: diff + 1];
+		//[UIAppDelegate.currentUser setCurrentDifficulty: diff + 1];
+		[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff + 1];
 		
 		// reset the label
 		[self setDifficultyLabel];

@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">9L30</string>
+		<string key="IBDocument.SystemVersion">9L31a</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
@@ -58,7 +58,7 @@
 					<object class="IBUIImageView" id="627932385">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-196, -210}, {1380, 702}}</string>
+						<string key="NSFrame">{{-221, -248}, {1380, 702}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -120,7 +120,7 @@
 					<object class="IBUIButton" id="323730953">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{186, 123}, {101, 37}}</string>
+						<string key="NSFrame">{{186, 149}, {101, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -146,7 +146,7 @@
 					<object class="IBUIButton" id="885148596">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{185, 160}, {106, 37}}</string>
+						<string key="NSFrame">{{185, 186}, {106, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -184,7 +184,7 @@
 					<object class="IBUIButton" id="1055791845">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{186, 199}, {85, 37}}</string>
+						<string key="NSFrame">{{195, 111}, {85, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -323,10 +323,10 @@
 							<reference ref="622245714"/>
 							<reference ref="890084184"/>
 							<reference ref="504022228"/>
-							<reference ref="885148596"/>
 							<reference ref="323730953"/>
-							<reference ref="627932385"/>
+							<reference ref="885148596"/>
 							<reference ref="1055791845"/>
+							<reference ref="627932385"/>
 						</object>
 						<reference key="parent" ref="282882509"/>
 					</object>

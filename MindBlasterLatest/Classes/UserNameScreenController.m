@@ -8,6 +8,7 @@
 //
 
 #import "UserNameScreenController.h"
+#import "Topic.h"
 
 
 @implementation UserNameScreenController
@@ -41,8 +42,8 @@
 	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
 	//also lock the topics and diffs.
 	Topic *temp = [Topic new];
-	[temp setTopic:1];
-	[temp setDifficulty:1];
+	[temp setTopic:TOPIC_ADDITION];
+	[temp setDifficulty:DIFFICULTY_EASIEST];
 	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
 	
 	

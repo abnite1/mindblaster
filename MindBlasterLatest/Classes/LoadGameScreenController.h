@@ -23,9 +23,14 @@
 	
 	IBOutlet BackgroundAnimation *background;
 }
--(IBAction)loadGame;
+-(IBAction)upload;
+-(IBAction)download;
 - (IBAction) backScreen;
 - (IBAction) helpScreen;
 -(void)animateBackground; 
+
+//save data on "ApplicationWillTerminate"
+//http://cocoadevcentral.com/articles/000059.php
+
 
 @end
