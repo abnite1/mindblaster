@@ -19,21 +19,11 @@
 #import "Topic.h"
 
 
-// defined constants representing difficulty types
-static const int DIFFICULTY_EASIEST = 1;
-static const int DIFFICULTY_EASY	= 2;
-static const int DIFFICULTY_HARD	= 3;
-static const int DIFFICULTY_HARDEST = 4;
-
-// this constant is the multiplier that determines the number of points necessary to transition to the next difficulty level
-// during gameplay
-static const int DIFFICULTY_LIMIT = 100;
-
-
 @interface UserProfile : NSObject {
 	NSString *userName;
 	UIImage *profilePic;
 	int score;
+	int highestScore;
 	Topic *currentTopic;
 	Topic *lastTopicCompleted;			
 	int currentDifficulty;
@@ -50,6 +40,7 @@ static const int DIFFICULTY_LIMIT = 100;
 @property (nonatomic,retain) NSString *email;
 @property (nonatomic,retain) UIImage *profilePic;
 @property (nonatomic) int score;
+@property (nonatomic) int highestScore;
 		   
 
 @end

@@ -56,7 +56,7 @@
 
 	NSLog(@"allocated asteroids");
 	
-	// for all 6 correct/incorrect solution asteroids in the array, attach an image andd a label
+	// for all 6 correct/incorrect solution asteroids in the array, attach an image and a label
 	for (int i = 0; i < 10; i++) {
 		
 		if (i < 6) {
@@ -78,6 +78,7 @@
 		}
 	}
 	
+	// logger (for debug)
 	for (int i = 0; i < 10; i++) {
 		int x = [[asteroids objectAtIndex: i] asteroidPosition].x;
 		NSLog(@"class at index %d : %f", i, x);
@@ -202,7 +203,7 @@
 	{
 		if (asteroidIndex != randomCorrectAsteroid) {
 			
-			// set wrong answer equal to some random value of + [1-7] from the correct answer
+			// set wrong answer equal to some random value of +- [1-7] from the correct answer
 			// that isn't the correct answer
 			int wrongAnswer = 0;
 			do {
@@ -237,7 +238,7 @@
 // updates the difficulty label to the current difficulty in the user profile
 -(IBAction) setDifficultyLabel {
 	NSLog(@"start setDifficultyLabel");
-	
+	[UIAppDelegate.currentUser setCurrentDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
 	int diff = [UIAppDelegate.currentUser currentDifficulty];
 	
 	NSString *diffMsg;
@@ -254,7 +255,8 @@
 	
 }
 
-//this function is called every 0.05 seconds, and updates the game screen
+// this function is the general animation selector for gamescreen, 
+// which updates the screen frequently as defined in the caller object
 -(void) onTimer {
 
 
@@ -316,6 +318,7 @@
 				tempBullet.hidden = YES;
 				bulletPos[bulletIndex] = CGPointMake(0,0);
 			}
+			// if we have no collision, check the next bullet.
 			else continue;
 				
 			// if we hit the right asteroid
@@ -403,11 +406,18 @@
 // if it's over the limit of the hardest difficulty then the game is over (win scenario)
 -(void) checkScore {
 	
-	int diff = [UIAppDelegate.currentUser currentDifficulty];
+	int diff = [UIAppDelegate.currentUser.currentTopic difficulty];
+	
+	// update the profile's lastTopicCompleted if this one is higher
+	if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
+		
+		[UIAppDelegate.currentUser setLastTopicCompleted: UIAppDelegate.currentUser.currentTopic];
+	}
 	
 	// if score is higher than set for difficulty, then raise the difficulty
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
 		[UIAppDelegate.currentUser setCurrentDifficulty: diff + 1];
+		[UIAppDelegate.currentUser.currentTopic setDifficulty: diff + 1];
 		
 		// reset the label
 		[self setDifficultyLabel];
@@ -415,13 +425,51 @@
 	
 	// if negative score, game is over (lose)
 	if (score < 0 ) {
+
+		// reset the score
+		score = 0;
+		[self updateScoreLabel];
+
+		
+		// initiate lose scenario
 		[self loseScenario];
 	}
 	
 	// if score is over the max limit, game is over (win)
 	if (score > DIFFICULTY_HARDEST * DIFFICULTY_LIMIT) {
-		[self winScenario];
+		
+		// if we haven't yet exhaused all our topics, progress to the next topic
+		if ([UIAppDelegate.currentUser.currentTopic nextTopic]) {
+			
+			// update the profile's lastTopicCompleted if this one is higher
+			if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
+				
+				[UIAppDelegate.currentUser setLastTopicCompleted: UIAppDelegate.currentUser.currentTopic];
+			}
+			else {};	// avoid nested ambiguities.
+			
+			
+			// reset the score
+			score = 0;
+			
+			// reset the labels
+			[self setDifficultyLabel];
+			[self updateScoreLabel];
+		}
+		
+		// otherwise, you've won.
+		else {
+			[self winScenario];
+		}
 	}
+}
+
+// update the score label to the current score value
+-(void) updateScoreLabel {
+	
+	NSString *inputString = [[NSString alloc] initWithFormat:@"Score: %d", score ];
+	[scoreLabel setText:inputString];
+	[inputString release];
 }
 
 // begin lose scenario
@@ -465,11 +513,10 @@
 
 /*This function is called when a touch on the screen is first detected
  */
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
-	
-    UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
+	UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
     CGPoint location = [touch locationInView:touch.view]; //records touch's location
-
+	
 	double x,y;
 	double radius = 24;  //radius of rotation wheel
 	double radiusSquared = radius*radius; //radius squared
@@ -478,8 +525,7 @@
 	
 	//if location of a touch is in the area of the rotation wheel, update the 
 	//rotation wheel
-	if(location.x > 22 && location.x < 80 && location.y > 226 && location.y < 285)
-	{
+	if(location.x > 22 && location.x < 80 && location.y > 226 && location.y < 285) {
 		
 		//code to approximate the closest point on the rotation wheel to the point
 		//where the user touched the screen (they usually will not touch the 
@@ -522,15 +568,14 @@
 		// get the radian angle of rotation (0 <-> 2 pi) based on point of contact with the wheel	
 		CGFloat rotationAngle = atan2( shipDirectionY,shipDirectionX) + M_PI_2;
 		[ship rotate: rotationAngle];
-
+		
 	}
+		
 }
-
 /*This function is called when a finger is dragged on the screen */
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	
-    UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
+{ 
+	UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
     CGPoint location = [touch locationInView:touch.view]; //records touch's location
     //NSLog(@"X: %f",location.x);
     //NSLog(@"Y: %f",location.y);
@@ -584,8 +629,9 @@
 		shipDirectionY = (y - ycenter);
 		
 		CGFloat rotationAngle = atan2( shipDirectionY,shipDirectionX) + M_PI_2;
-		[ship rotate: rotationAngle];		
+		[ship rotate: rotationAngle]; 		
 	}
+	
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

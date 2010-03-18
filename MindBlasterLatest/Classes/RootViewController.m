@@ -44,6 +44,18 @@
 	[loadGameView release];
 }
 
+// continute to topic selection with the current profile
+- (IBAction) continue {
+	
+	// check if a profile file has been created before continuing.
+	
+	
+	// Navigation logic may go here -- for example, create and push another view controller.
+	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
+	[self.navigationController pushViewController:topicView animated:YES];
+	[topicView release];
+}
+
 /*
  * perform these actions when view first loads:
  * animate the background space image

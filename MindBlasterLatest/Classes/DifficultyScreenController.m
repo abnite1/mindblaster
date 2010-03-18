@@ -39,6 +39,7 @@
 	
 	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
+	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,10]"];
 	[difficultyDescription setText:msg];
@@ -50,6 +51,7 @@
 	
 	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASY];
+	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,20]"];
 	[difficultyDescription setText:msg];
@@ -61,6 +63,7 @@
 	
 	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARD];
+	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,30]"];
 	[difficultyDescription setText:msg];
@@ -72,10 +75,18 @@
 	
 	// set it in the profile
 	[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARDEST];
+	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,40]"];
 	[difficultyDescription setText:msg];
 	[msg release];
+}
+
+// updates the topic difficulty as well
+-(void) updateTopic {
+	
+	int diff = [UIAppDelegate.currentUser currentDifficulty];
+	[UIAppDelegate.currentUser.currentTopic setDifficulty: diff];
 }
 
 
@@ -107,15 +118,19 @@
 	[self selectedEasiest];
 	
 	//lock the unlocked choices!
+	//purposely don't do break so excecute all rest as well
 	
 	switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]){
 		case 1:
 			[easy setEnabled:NO];
-			//purposely don't do break so excecute all rest as well
+			easy.hidden = YES;
 		case 2:
 			[hard setEnabled:NO];
+			hard.hidden = YES;
 		case 3:
 			[hardest setEnabled:NO];
+			hardest.hidden = YES;
+			
 		default:
 			break;
 	}

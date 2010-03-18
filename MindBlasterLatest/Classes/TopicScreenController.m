@@ -102,22 +102,30 @@
 
 // default to the first topic selection, start the sapce background animation
 - (void)viewDidLoad {
-	self.title = @"Topic";
+	
 	[super viewDidLoad];
 	
 	// default to the first topic
 	[self firstTopicSelected];
 	
-	//block any locked topics
-	//NSLog(@"Topic is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
-	switch([[UIAppDelegate.currentUser lastTopicCompleted] topic]){
-		case 1:
-			[subtraction setEnabled:NO];
-			//purposely don't do break so excecute all rest as well
-		case 2:
+	//block and hide any locked topics
+	NSLog(@"Last Topic Completed is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
+	//purposely don't do break so excecute all rest as well
+
+	switch([[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
+		
+		case 0:		// addition
+			[subtraction setEnabled: NO];
+			subtraction.hidden = YES;
+			
+		case 1:		// subtraction
 			[multiplication setEnabled:NO];
-		case 3:
+			multiplication.hidden = YES;
+			
+		case 2:		// multiplication
 			[division setEnabled:NO];
+			division.hidden = YES;
+			
 		default:
 			break;
 	}

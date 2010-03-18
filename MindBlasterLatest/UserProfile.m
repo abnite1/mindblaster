@@ -11,6 +11,18 @@
 
 @implementation UserProfile
 @synthesize currentTopic, lastTopicCompleted, currentDifficulty, 
-			userName, profilePic, score, email;
+			userName, profilePic, score, highestScore, email;
+
+// updates the highestScore if the player has surpassed it
+-(IBAction) checkHighestScore {
+	
+	// if the current score is higher than highestScore
+	if (score > highestScore) {
+		
+		// update the highest score
+		highestScore = score;
+		
+	}
+}
 
 @end
