@@ -18,6 +18,19 @@ static const int TOPIC_SUBTRACTION = 1;
 static const int TOPIC_MULTIPLICATION = 2;
 static const int TOPIC_DIVISION = 3;
 
+// defined constants representing difficulty types
+static const int DIFFICULTY_EASIEST = 1;
+static const int DIFFICULTY_EASY	= 2;
+static const int DIFFICULTY_HARD	= 3;
+static const int DIFFICULTY_HARDEST = 4;
+
+// this constant is the multiplier that determines the number of points necessary to transition to the next difficulty level
+// during gameplay
+static const int DIFFICULTY_LIMIT = 100;
+
+// last topic number
+static const int MAX_TOPICS = 3;
+
 @interface Topic : NSObject {
 	
 	int difficulty;
@@ -32,5 +45,7 @@ static const int TOPIC_DIVISION = 3;
 @property (nonatomic,retain) NSString *description;
 
 -(id)initWithTopic:(int)newTopic;
+-(BOOL) nextTopic;
+-(void) initOperator;
 
 @end

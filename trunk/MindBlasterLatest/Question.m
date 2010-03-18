@@ -23,17 +23,21 @@
 	operand1 = 1 + arc4random() % (10 * diff); 	
 	operand2 = 1 + arc4random() % (10 * diff);
 	
-	char *operator = [UIAppDelegate.currentUser.currentTopic operator];
+	// get the current topic in order to determine operator type
+	int topicType = [UIAppDelegate.currentUser.currentTopic topic];
+	
+	// get the operator
+	char* operator = [UIAppDelegate.currentUser.currentTopic operator];
 
-	// calculate the answer
-	if ( operator == (char*) '+' )  {
+	// calculate the answer based on topic type
+	if (topicType == TOPIC_ADDITION) {
 		
 		answer = operand1 + operand2;
 	}
 	
 	// the max value should be on the left for subtraction
-	else if ( operator == (char*) '-' ) {
-		
+	else if (topicType == TOPIC_SUBTRACTION) {
+	
 		int maxVal = MAX (operand1, operand2);
 		int minVal = MIN (operand1, operand2);
 		operand1 = maxVal;
@@ -42,7 +46,7 @@
 	} 
 	
 	// both operands should be less than 10 for  multiplication
-	else if ( operator == (char*) 'X' ) {
+	else if ( topicType == TOPIC_MULTIPLICATION ) {
 		
 		operand1 /= diff;	// we don't want it to be too hard for now.
 		operand2 /= diff;	// we dont' want it to be too hard for now.
@@ -51,7 +55,7 @@
 	
 	// there should always be an integer solution for division
 	// and we cannot divide by 0
-	else if ( operator == (char*) '/' ) {
+	else if ( topicType == TOPIC_DIVISION ) {
 
 		operand1 = 1 + arc4random() % (2 * diff); 	
 		operand2 = 1 + arc4random() % (10 * diff);

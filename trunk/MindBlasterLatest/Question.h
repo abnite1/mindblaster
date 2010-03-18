@@ -23,7 +23,7 @@
 #import "MindBlasterAppDelegate.h"
 
 static const int INCORRECT_ANSWER_PENALTY = 5;
-static const int CORRECT_ANSWER_REWARD = 10;
+static const int CORRECT_ANSWER_REWARD = 400;
 static const int BLANK_REWARD = 1;
 
 @interface Question : NSObject {

@@ -150,4 +150,5 @@
 -(void) loseScenario;
 -(void) winScenario;
 -(void) checkScore;
+-(void) updateScoreLabel;
 @end
