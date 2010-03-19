@@ -151,4 +151,5 @@
 -(void) winScenario;
 -(void) checkScore;
 -(void) updateScoreLabel;
+-(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event;
 @end

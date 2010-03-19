@@ -52,6 +52,7 @@ static const int ASTEROID_SIZE_Y = 30;
 -(void)setAsteroidPosition:(int)x :(int)y;
 -(IBAction)move;
 -(void)bounceOffBoundaries;
+-(void) phaseToOtherSide;
 -(void)dealloc;
 
 
