@@ -131,19 +131,30 @@
 	//lock the unlocked choices!
 	//purposely don't do break so excecute all rest as well
 	
-	switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]){
-		case 1:
-			[easy setEnabled:NO];
-			easy.hidden = YES;
-		case 2:
-			[hard setEnabled:NO];
-			hard.hidden = YES;
-		case 3:
-			[hardest setEnabled:NO];
-			hardest.hidden = YES;
+	if([[UIAppDelegate.currentUser currentTopic] topic] == [[UIAppDelegate.currentUser lastTopicCompleted] topic])
+	{
+		switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]){
+			case 1:
+				[easy setEnabled:NO];
+				easy.hidden = YES;
+			case 2:
+				[hard setEnabled:NO];
+				hard.hidden = YES;
+			case 3:
+				[hardest setEnabled:NO];
+				hardest.hidden = YES;
 			
-		default:
-			break;
+			default:
+				break;
+		}
+	}else if([[UIAppDelegate.currentUser currentTopic] topic] > [[UIAppDelegate.currentUser lastTopicCompleted] topic])
+	{
+		[easy setEnabled:NO];
+		easy.hidden = YES;
+		[hard setEnabled:NO];
+		hard.hidden = YES;
+		[hardest setEnabled:NO];
+		hardest.hidden = YES;
 	}
 	//test the topic reversion YES IT WORKS, viewdidload runs again (only if go to game and lose), can't go back from here (viewdidload won't run)
 	/*Topic *temp = [Topic new];
