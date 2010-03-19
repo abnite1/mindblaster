@@ -10,15 +10,15 @@
 
 
 @implementation Ship
-@synthesize ship;
+@synthesize shipIcon, pos, direction;
 
 
 -(void)setIcon:(UIImageView*)icon {
-	ship = icon;
+	shipIcon = icon;
 }
 
 -(void) rotate: (CGFloat)angle {
-	ship.transform = CGAffineTransformMakeRotation(angle);
+	shipIcon.transform = CGAffineTransformMakeRotation(angle);
 }
 
 /*

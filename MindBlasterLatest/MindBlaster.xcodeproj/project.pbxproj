@@ -25,6 +25,7 @@
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		77203D851141114000127EC1 /* ship.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77203D841141114000127EC1 /* ship.gif */; };
 		77203E431141272E00127EC1 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 77203E421141272E00127EC1 /* Ship.m */; };
+		773CC9321153663A00D8F598 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 773CC9311153663A00D8F598 /* Bullet.m */; };
 		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
 		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
 		77D33A851148CE4600D066DD /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D33A841148CE4600D066DD /* Topic.m */; };
@@ -81,6 +82,8 @@
 		77203D841141114000127EC1 /* ship.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ship.gif; sourceTree = "<group>"; };
 		77203E411141272E00127EC1 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		77203E421141272E00127EC1 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
+		773CC9301153663A00D8F598 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		773CC9311153663A00D8F598 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		77B6953411461F940055EFD6 /* Questions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Questions.m; sourceTree = "<group>"; };
 		77B6953511461F940055EFD6 /* Questions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Questions.h; sourceTree = "<group>"; };
 		77B6953611461F940055EFD6 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				77D33A841148CE4600D066DD /* Topic.m */,
 				075E0B49115295560062948C /* Score.h */,
 				075E0B4A115295560062948C /* Score.m */,
+				773CC9301153663A00D8F598 /* Bullet.h */,
+				773CC9311153663A00D8F598 /* Bullet.m */,
 			);
 			name = "Game Play Classes";
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				072972C31146DB49004ED361 /* UserProfile.m in Sources */,
 				77D33A851148CE4600D066DD /* Topic.m in Sources */,
 				075E0B4B115295560062948C /* Score.m in Sources */,
+				773CC9321153663A00D8F598 /* Bullet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

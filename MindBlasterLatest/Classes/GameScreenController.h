@@ -17,6 +17,7 @@
 #import <UIKit/UIKit.h>
 #import "BackgroundAnimation.h"
 #import "Asteroid.h"
+#import "Bullet.h"
 #import "Question.h"
 #import "Ship.h"
 #import "GameOverScreenController.h"
@@ -34,6 +35,8 @@
 	
 	// this holds an array of asteroids
 	NSMutableArray *asteroids;
+	
+	
 	//IBOutlet UIImageView *ship;
 	
 	// the initial image outlets, because we don't yet know how to create images without connecting
@@ -65,6 +68,7 @@
 	IBOutlet UIImageView *bullet5;
 	
 	// one array to bind the bullet icons
+	NSMutableArray *bulletIcons;
 	NSMutableArray *bullets;
 
 	CGPoint bulletPos[6];
@@ -76,6 +80,7 @@
 	Question *question;
 	
 	IBOutlet UILabel *questionLabel; 
+	IBOutlet UILabel *livesLabel;
 	
 	// the outlets for the 5 labels
 	IBOutlet UILabel *solutionLabel0;
@@ -92,6 +97,8 @@
 	IBOutlet UILabel *scoreLabel;
 	
 	int score;
+	int lives;
+	int shield;
 	
 	int bulletsFired;
 }
@@ -145,11 +152,17 @@
 -(void) hitBlankAsteroid:(int)index;
 -(IBAction) setDifficultyLabel;
 -(void) setAnswer;
--(void) initializeBulletPosition;
+//-(void) initializeBulletPosition;
 -(void) animateBackground;
 -(void) loseScenario;
 -(void) winScenario;
 -(void) checkScore;
+-(void) asteroidCollision: (int) asteroidIndex;
+-(void) handle2AsteroidsColliding: (Asteroid*)as1 with:(Asteroid*)as2;
+-(BOOL) checkCollisionOf:(Asteroid*)as1 with:(Asteroid*)as1;
+-(BOOL) checkCollisionOf:(Asteroid*)as withShip:(Ship*)aShip;
 -(void) updateScoreLabel;
+-(void) decreaseShield;
+-(void) decreaseLives;
 -(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event;
 @end

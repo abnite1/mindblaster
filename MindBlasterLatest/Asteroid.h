@@ -23,8 +23,9 @@ static const int INCORRECT_ASTEROID = 1;
 static const int BLANK_ASTEROID = 2;
 
 // asteroid size constants
-static const int ASTEROID_SIZE_X = 32;
-static const int ASTEROID_SIZE_Y = 30;
+static const int ASTEROID_SIZE_X = 36;
+static const int ASTEROID_SIZE_Y = 32;
+
 
 @interface Asteroid : NSObject {
 

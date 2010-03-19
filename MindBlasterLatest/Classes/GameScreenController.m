@@ -46,6 +46,7 @@
 									 solutionLabel3, solutionLabel4, solutionLabel5, nil];
 	
 	asteroids = [[NSMutableArray alloc] init];
+	bullets = [[NSMutableArray alloc] init];
 	
 	NSLog(@"allocated solutionLabels");
 	// set the gamescreen label for the selected difficulty
@@ -53,6 +54,12 @@
 	
 	// create a temp object for the initialization
 	Asteroid *asteroid;
+	
+	// initialize shield
+	shield = 3;
+	
+	// initialize lives
+	lives = 3;
 
 	NSLog(@"allocated asteroids");
 	
@@ -80,19 +87,26 @@
 	}
 	
 	// check their position (debug)
+	/*
 	for (int i = 0; i < 10; i++) {
 		int x = [[asteroids objectAtIndex: i] asteroidPosition].x;
 		NSLog(@"class at index %d : %f", i, x);
 	}
-	
-	
-
+	 */
  
-	bullets = [[NSMutableArray alloc] initWithObjects: bullet0,bullet1,bullet2,bullet3,bullet4,bullet5,nil];
-	
+	// allocate bullet icons to each bullet object
+	bulletIcons = [[NSMutableArray alloc] initWithObjects: bullet0,bullet1,bullet2,bullet3,bullet4,bullet5,nil];
+	for (int i = 0; i < 6; i++) {
+		
+		Bullet *bullet = [[Bullet alloc] init];
+		[bullet setBulletIcon: [bulletIcons objectAtIndex: i]];
+		[bullet setBulletPosition: 0 :500];	// set initial position offscreen so they won't hit asteroids.
+		[bullets addObject: bullet];
+
+	}
 	
 	// reset the position of the bullets to be offscreen
-	[self initializeBulletPosition];
+//	[self initializeBulletPosition];
 	
 
 	//load the profile pic!
@@ -111,9 +125,10 @@
 	// create game objects
 	ship = [[Ship alloc] init];				// create the ship object
 	[ship setIcon: shipIcon];				// connect the ship icon to the Ship object so it can be rotated
+	[ship setPos: CGPointMake(shipIcon.center.x , shipIcon.center.y)];
 	
-	// move everything.
-	[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+	// controls movement of bullets and asteroids.
+	[NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
 
 	[self setQuestion];						// set the initial question
 	NSLog(@"after question");
@@ -133,32 +148,37 @@
 }
 
 // sets the initial location of bullets on screen
+/*
 -(void)initializeBulletPosition {
 
-	NSLog(@"starting initializeBulletPosition");
+	//NSLog(@"starting initializeBulletPosition");
 	UIImageView *tempBullet;  //temperary UIImageView allows manipulation of the elements of the bullets array
 	for(int i = 0; i < 6;  i++)
 	{
-		tempBullet = [bullets objectAtIndex:i];
+		tempBullet = [bulletIcons objectAtIndex:i];
 		tempBullet.center = CGPointMake(0,500); //set all bullets starting location as off-screen so they don't destroy any asteroids yet
 	}
 	
-	NSLog(@"finished initializeBulletPosition");
+	//NSLog(@"finished initializeBulletPosition");
 }
+ */
 
 
 // handle bullet animation and interaction with asteroids
 -(IBAction) fireButton{
-	UIImageView *tempBullet; //temperary UIImageView allows manipulation of the elements of the asteroids array
 	
-	tempBullet = [bullets objectAtIndex:bulletsFired]; 
+	Bullet *tempBullet  = [bullets objectAtIndex:bulletsFired];
 	//assigns element of bullets array to tempBullet to allow manipulation of that element
 	
 	//sets the bullet being fired's movement vector to the vector defined by the direction in which the ship is pointing
 	bulletPos[bulletsFired] = CGPointMake(shipDirectionX,shipDirectionY); 
 
-	tempBullet.center = CGPointMake(242,167);
-	tempBullet.hidden = NO; 
+	// set it to the location of the ship icon
+	[tempBullet setBulletPosition: ship.pos.x : ship.pos.y];
+	//[tempBullet setBulletDirection: shipDirectionX :shipDirectionY];
+	
+	tempBullet.bulletIcon.hidden = NO;
+	
 	
 	if(bulletsFired == 5)   //there are only six bullets so once all 6 have been fired start at 0 again
 		bulletsFired = 0;
@@ -169,16 +189,16 @@
 // sets the label for the question according to the profile settings
 -(IBAction) setQuestion {
 	
-	NSLog(@"starting setQuestion");
+	//NSLog(@"starting setQuestion");
 	question = [[Question alloc] init];						// create a new question object
 	question.questionLabelOutletPointer = questionLabel;	// connect the local outlet to the object outlet
 
 	//set the question on the screen
-	NSLog(@"Calling SetQuestion for question class\n");
+	//NSLog(@"Calling SetQuestion for question class\n");
 	[question setQuestion];
 
 	// set the answers on the asteroid labels
-	NSLog(@"Calling setAnswer on self, next function\n");
+	//NSLog(@"Calling setAnswer on self, next function\n");
 	[self setAnswer];
 	//[question release];
 }
@@ -187,9 +207,10 @@
 -(void)setAnswer {
 	
 	// define the solution set of labels on asteroids
-	NSLog(@"starting setAnswer");	
+	//NSLog(@"starting setAnswer");	
 		 
 	// determine the correct_answer asteroid randomly and set its value and type
+	// because we have 6 labeled asteroids
 	int randomCorrectAsteroid = arc4random() % 5;	 // from 0 to 5
 	NSString *inputString = [[NSString alloc] initWithFormat:@"%d",(int)[question answer]];
 	[[[asteroids objectAtIndex: randomCorrectAsteroid] asteroidLabel] setText: inputString];
@@ -199,7 +220,7 @@
 	[[asteroids objectAtIndex: randomCorrectAsteroid] setAsteroidType:CORRECT_ASTEROID];
 	[inputString release];
 				
-	NSLog(@"inside setAnswer and random correct asteroid index is : %d", randomCorrectAsteroid);
+	//NSLog(@"inside setAnswer and random correct asteroid index is : %d", randomCorrectAsteroid);
 	
 	// sort through the incorrect_answer asteroids and set their value and type and direction
 	for(int asteroidIndex = 0; asteroidIndex < 6; asteroidIndex++)
@@ -236,12 +257,12 @@
 				setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
 		[[asteroids objectAtIndex: asteroidIndex] move];
 	}
-	NSLog(@"end of answer");
+	//NSLog(@"end of answer");
 }
 
 // updates the difficulty label to the current difficulty in the user profile
 -(IBAction) setDifficultyLabel {
-	NSLog(@"start setDifficultyLabel");
+	//NSLog(@"start setDifficultyLabel");
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
 	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
 	
@@ -257,51 +278,54 @@
 	[difficultyLabel setText:msg];
 	[diffMsg release];
 	[msg release];
-	NSLog(@"finished setDifficultyLabel");
+	//NSLog(@"finished setDifficultyLabel");
 	
 }
 
-// this function is the general animation selector for gamescreen, 
-// which updates the screen frequently as defined in the caller object
+/*
+ *	this function is the animation selector for the asteroids and the bullets
+ *	it is also where we check for collisions
+ */
 -(void) onTimer {
-
-
-	UIImageView *tempBullet;
-
+	
+	
+	Bullet *tempBullet;
+	
 	
 	//updates asteroid movement for each of the 10 asteroids, 0-9
 	for(int asteroidIndex = 0; asteroidIndex < 10; asteroidIndex++)
 	{
 		
 		[[asteroids objectAtIndex: asteroidIndex] move];
-
+		
 	}
-			
+	
 	
 	//updates the bullet movement for each of the 6 bullets and checks for collisions with asteroids 
 	//in which case both bullet and asteroid are destroyed
 	for(int bulletIndex = 0; bulletIndex < 6; bulletIndex++)
 	{
-
+		
 		tempBullet = [bullets objectAtIndex: bulletIndex];
 		
 		//moves bullet
-		tempBullet.center = CGPointMake(tempBullet.center.x+bulletPos[bulletIndex].x,
-										tempBullet.center.y+bulletPos[bulletIndex].y);
+		[tempBullet setBulletPosition: (tempBullet.bulletPosition.x + bulletPos[bulletIndex].x) 
+									 : (tempBullet.bulletPosition.y + bulletPos[bulletIndex].y)];
 		
-		//if bullet is off-screen then destroy the bullet by setting its movement to 0 and setting its location to 0,500, far off screen,
-		//and finally hiding the bullet
-		if( (tempBullet.center.x > 486 )|| ( tempBullet.center.x < -6 ) 
-		   || (tempBullet.center.y > 300 ) || ( tempBullet.center.y < -6 ))
-		{
+		
+		
+		// hide the bullet if it's offscreen
+		if( tempBullet.bulletPosition.x > 486 ||  tempBullet.bulletPosition.x < -6 
+		   || tempBullet.bulletPosition.y > 300  ||  tempBullet.bulletPosition.y < -6 ) {
+			
 			bulletPos[bulletIndex].x = 0;
 			bulletPos[bulletIndex].y = 0;
 			
-			tempBullet.center = CGPointMake(0,500);
-			tempBullet.hidden = YES;
+			[tempBullet setBulletPosition: 0 : 500];
+			tempBullet.bulletIcon.hidden = YES;
 		}
 		
-		//for every asteroid (10 asteroids) check for collision with the bullet
+		//for every asteroid (10 asteroids) check for collision 
 		for( int asteroidIndex = 0; asteroidIndex < 10; asteroidIndex++)
 		{
 			
@@ -309,50 +333,156 @@
 			//move the asteroid to just above and to the left of the screen so it can move back into the screen area
 			//as a new asteroid
 			
-			// if we collide with ANY of the 10 asteroids
-			if(  ((tempBullet.center.x < [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].center.x + 20 ) 
-				  && (tempBullet.center.x > [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].center.x - 20))
-			     &&((tempBullet.center.y < [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].center.y + 20) 
-					&& (tempBullet.center.y > [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].center.y - 20)) )
-			{
-				NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
-				NSLog(@"bullet position: %f", tempBullet.center.x);
+			// if bullets collide with ANY of the 10 asteroids
+			if(  ((tempBullet.bulletPosition.x < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x + 20 ) 
+				  && (tempBullet.bulletPosition.x > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x - 20))
+			   &&((tempBullet.bulletPosition.y < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y + 20) 
+				  && (tempBullet.bulletPosition.y > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y - 20)) ) {		
+				
+				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
+				//NSLog(@"bullet position: %f", tempBullet.center.x);
 				
 				// destroy asteroid and bullet by hiding them off screen
-				[[asteroids objectAtIndex: asteroidIndex] setAsteroidPosition: CGPointMake(-10,-10)];
-				tempBullet.center = CGPointMake(0,500);
-				tempBullet.hidden = YES;
+				[[asteroids objectAtIndex: asteroidIndex] setAsteroidPosition: -10 :-10];
+				[tempBullet setBulletPosition: 0 :500];
+				tempBullet.bulletIcon.hidden = YES;
 				bulletPos[bulletIndex] = CGPointMake(0,0);
+				
 			}
+			
 			// if we have no collision, check the next bullet.
 			else continue;
-				
-			// if we hit the right asteroid
-			if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
-			{
-				// update the score and reset asteroid positions/labels/types
-				[self hitCorrectAsteroid: asteroidIndex];
-			}
 			
-			// if we hit a wrong asteroid
-			else if ([[asteroids objectAtIndex: asteroidIndex] asteroidType] == INCORRECT_ASTEROID) 
-			{
-				// update the score and reset only position/label of current asteroid
-				[self hitWrongAsteroid: asteroidIndex];
-			}
-			
-			// if we hit a blank asteroid
-			else if ([[asteroids objectAtIndex: asteroidIndex] asteroidType] == BLANK_ASTEROID)
-			{
-				[self hitBlankAsteroid: asteroidIndex];
-			}
+			// handle correct/incorrect collision with bullets scenarios
+			[self asteroidCollision: asteroidIndex];
 			
 			// no need to check the other asteroids if we made a hit.
 			break;
+
+		} // end of asteroidIndex
+	
+	} // end of bulletIndex
+	
+	
+	/*
+	 *	check for asteroid x asteroid collision and collision with the ship
+	 */
+	// for every asteroid i
+	for (int i = 0; i < 10; i++) {
+		
+		// and for every asteroid j > i
+		for (int j = i + 1; j < 10; j++) {
+			
+			// check for collision with other asteroids
+			[self checkCollisionOf: [asteroids objectAtIndex: i] with : [asteroids objectAtIndex: j]];
 		}
+		
+		// check for collision with the ship
+		[self checkCollisionOf: [asteroids objectAtIndex: i] withShip: ship];
+		
 	}
 }
-					
+
+// check collision of asteroid with ship
+-(BOOL) checkCollisionOf:(Asteroid*)as withShip:(Ship*)aShip {
+	
+	if(  ((as.asteroidPosition.x < ship.pos.x + SHIP_SIZE_X / 2 ) 
+		  && (as.asteroidPosition.x > ship.pos.x - SHIP_SIZE_X	/ 2))
+	   && ((as.asteroidPosition.y < ship.pos.y + SHIP_SIZE_Y / 2) 
+		   && (as.asteroidPosition.y > ship.pos.y - SHIP_SIZE_Y / 2)) ) {
+		
+		// set the asteroid somewhere off screen
+		[as setAsteroidPosition: -10 :-10];
+
+		// decrease the shield by a third of its power
+		[self decreaseShield];
+	
+	}
+	return NO;
+	
+}
+
+// reduce the shield of the ship by a third of its power
+// and check if lives are lost
+-(void) decreaseShield {
+	
+	// check that shield isn't at 0
+	if (shield > 0)  {
+		
+		shield--;
+	}
+	else {
+		// if shield is at 0, reset it, and decrease lives.
+		shield = 3;
+		[self decreaseLives];
+	}
+}
+
+// decrease lives by one and update the livesLabel
+-(void) decreaseLives {
+	if (lives == 0) [self loseScenario];
+	else {
+		lives--;
+		NSString *msg = [[NSString alloc] initWithFormat:@"Lives: %d",lives];
+		[livesLabel setText:msg];
+		[msg release];
+	}
+}
+
+// checks if two asteroids collide
+-(BOOL) checkCollisionOf:(Asteroid*)as1 with:(Asteroid*)as2 {
+	
+	if(  ((as1.asteroidPosition.x < as2.asteroidPosition.x + ASTEROID_SIZE_X ) 
+		  && (as1.asteroidPosition.x > as2.asteroidPosition.x - ASTEROID_SIZE_X	))
+	   && ((as1.asteroidPosition.y < as2.asteroidPosition.y + ASTEROID_SIZE_Y) 
+		  && (as1.asteroidPosition.y > as2.asteroidPosition.y - ASTEROID_SIZE_Y)) ) {
+	
+		// if they collide, handle the collision.
+		[self handle2AsteroidsColliding: as1 with : as2];
+		return YES;
+	}
+	return NO;
+}
+	
+// handle the case of asteroids colliding with each other
+-(void) handle2AsteroidsColliding: (Asteroid*)as1 with:(Asteroid*)as2 {
+	
+	// reverse their x directions
+	//NSLog(@"asteroid x: %f asteroid y: %f", as1.asteroidSize.x , as1.asteroidSize.y);
+
+	// currently leads to very funky results
+	/*
+	[as1 setAsteroidDirection: -as1.asteroidDirection.x : as1.asteroidDirection.y];
+	[as1 setAsteroidDirection: as1.asteroidDirection.x : -as1.asteroidDirection.y];
+	[as2 setAsteroidDirection: -as2.asteroidDirection.x : as2.asteroidDirection.y];
+	[as2 setAsteroidDirection: as2.asteroidDirection.x : -as2.asteroidDirection.y];
+	 */
+	
+	
+}
+
+// handles the asteroid collision scenarios
+-(void) asteroidCollision: (int) asteroidIndex {
+	// if we hit the right asteroid
+	if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
+	{
+		// update the score and reset asteroid positions/labels/types
+		[self hitCorrectAsteroid: asteroidIndex];
+	}
+	
+	// if we hit a wrong asteroid
+	else if ([[asteroids objectAtIndex: asteroidIndex] asteroidType] == INCORRECT_ASTEROID) 
+	{
+		// update the score and reset only position/label of current asteroid
+		[self hitWrongAsteroid: asteroidIndex];
+	}
+	
+	// if we hit a blank asteroid
+	else if ([[asteroids objectAtIndex: asteroidIndex] asteroidType] == BLANK_ASTEROID)
+	{
+		[self hitBlankAsteroid: asteroidIndex];
+	}
+}
 
 // what to do when a bullet collides with the correct_answer asteroid
 -(void) hitCorrectAsteroid: (int) index {

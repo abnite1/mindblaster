@@ -24,11 +24,11 @@
 		asteroidLabel = label;
 		int x = icon.center.x;
 		int y = icon.center.y;
-		NSLog(@"inside the asteroid initWIthElements constructor");
+		//NSLog(@"inside the asteroid initWIthElements constructor");
 		[self setAsteroidPosition: CGPointMake(x,y)];
     }
 	
-	NSLog(@"end of initWIthElements");
+	//NSLog(@"end of initWIthElements");
     return self;
 	
 }
