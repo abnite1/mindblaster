@@ -33,7 +33,6 @@
 -(IBAction) selectedEasy;
 -(IBAction) selectedHard;
 -(IBAction) selectedHardest;
--(void) updateTopic;
 -(IBAction) backScreen;
 -(IBAction) helpScreen;
 -(void) animateBackground;

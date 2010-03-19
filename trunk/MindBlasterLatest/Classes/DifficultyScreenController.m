@@ -38,11 +38,7 @@
 -(IBAction) selectedEasiest {
 	
 	// set it in the profile
-	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
-	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASY];
-	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASIEST];
-	//[self updateTopic];
-	[self updateTopic];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASIEST];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,10]"];
 	[difficultyDescription setText:msg];
@@ -53,10 +49,7 @@
 -(IBAction) selectedEasy {
 	
 	// set it in the profile
-	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_EASY];
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASY];
-	//[self updateTopic];
-	[self updateTopic];
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,20]"];
 	[difficultyDescription setText:msg];
@@ -67,11 +60,8 @@
 -(IBAction) selectedHard {
 	
 	// set it in the profile
-	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARD];
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARD];
-	//[self updateTopic];
-	[self updateTopic];
-	
+
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,30]"];
 	[difficultyDescription setText:msg];
 	[msg release];
@@ -81,23 +71,12 @@
 -(IBAction) selectedHardest {
 	
 	// set it in the profile
-	//[UIAppDelegate.currentUser setCurrentDifficulty:DIFFICULTY_HARDEST];
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARDEST];
-	//[self updateTopic];
-	[self updateTopic];
+
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,40]"];
 	[difficultyDescription setText:msg];
 	[msg release];
-}
-
-// updates the topic difficulty as well
--(void) updateTopic {
-	
-	//int diff = [UIAppDelegate.currentUser currentDifficulty];
-	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
-	//[UIAppDelegate.currentUser.currentTopic setDifficulty: diff];
-	[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff];
 }
 
 
@@ -128,12 +107,9 @@
 	// default to easiest
 	[self selectedEasiest];
 	
-	//lock the unlocked choices!
-	//purposely don't do break so excecute all rest as well
-	
-	if([[UIAppDelegate.currentUser currentTopic] topic] == [[UIAppDelegate.currentUser lastTopicCompleted] topic])
-	{
-		switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]){
+
+	if([[UIAppDelegate.currentUser currentTopic] topic] == [[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
+		switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]) {
 			case 1:
 				[easy setEnabled:NO];
 				easy.hidden = YES;
@@ -147,8 +123,9 @@
 			default:
 				break;
 		}
-	}else if([[UIAppDelegate.currentUser currentTopic] topic] > [[UIAppDelegate.currentUser lastTopicCompleted] topic])
-	{
+
+	} 
+	else if([[UIAppDelegate.currentUser currentTopic] topic] > [[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
 		[easy setEnabled:NO];
 		easy.hidden = YES;
 		[hard setEnabled:NO];
@@ -156,6 +133,7 @@
 		[hardest setEnabled:NO];
 		hardest.hidden = YES;
 	}
+		 
 	//test the topic reversion YES IT WORKS, viewdidload runs again (only if go to game and lose), can't go back from here (viewdidload won't run)
 	/*Topic *temp = [Topic new];
 	[temp setTopic:3];

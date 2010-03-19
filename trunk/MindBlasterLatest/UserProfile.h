@@ -29,12 +29,6 @@
 	Topic *lastTopicCompleted;			
 	NSString *email;
 	
-	//if currenttopic is indicating the one chosen to play now, it doesn't have to a Topic type, OR if it is, then we don't need the variable "currentDifficulty"
-	//cause that can be contained inside the topic type of currenttopic.
-	
-	//going on the assumption that for user to unlock next TOPIC, they must have unlocked all diff's on the previous topic first.
-	//Therefore only need "lasttopiccomplete" which contains diff complete of the current topic, all previous topics have all diff's unlocked and all latter have none.
-	
 }
 @property (nonatomic, retain) Topic *currentTopic;
 @property (nonatomic,retain) Topic *lastTopicCompleted;

@@ -79,7 +79,7 @@
 		}
 	}
 	
-
+	// check their position (debug)
 	for (int i = 0; i < 10; i++) {
 		int x = [[asteroids objectAtIndex: i] asteroidPosition].x;
 		NSLog(@"class at index %d : %f", i, x);
@@ -365,6 +365,9 @@
 	[scoreLabel setText: inputString];
 	[inputString release];
 	
+	// update the location of the asteroid to a random point on the screen
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	
 	// check if gameover
 	[self checkScore];
 	
@@ -382,6 +385,9 @@
 	NSString *inputString = [[NSString alloc] initWithFormat: @"Score: %d", score ];
 	[scoreLabel setText: inputString];
 	[inputString release];
+	
+	// update the location of the asteroid to a random point on the screen
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	// check if game is over
 	[self checkScore];
@@ -401,7 +407,7 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 500 - 50) : (arc4random() % 300 - 20)];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	// check if game is over
 	[self checkScore];
@@ -423,7 +429,7 @@
 	
 	// if score is higher than set for difficulty, then raise the difficulty
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
-		//[UIAppDelegate.currentUser setCurrentDifficulty: diff + 1];
+
 		[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff + 1];
 		
 		// reset the label
@@ -494,7 +500,7 @@
 }
 
 
-
+// navigate to the help screen
 -(IBAction) helpScreen
 {
 	// Navigation logic may go here -- for example, create and push another view controller.
@@ -502,6 +508,8 @@
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
 }
+
+// navigate to the gameover screen
 -(IBAction) nextScreen
 {
 	// Navigation logic may go here -- for example, create and push another view controller.
@@ -510,78 +518,10 @@
 	[gamesOverScreenView release];
 }
 
-/*
-// rotate ship according to rotation wheel angle
--(IBAction) rotateByAngle:(CGFloat)angle {
-	ship.transform = CGAffineTransformMakeRotation(angle);
-}
- */
 
-
-/*This function is called when a touch on the screen is first detected
- */
-- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
-	UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
-    CGPoint location = [touch locationInView:touch.view]; //records touch's location
+// update the touch events (rotation wheel)
+-(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event {
 	
-	double x,y;
-	double radius = 24;  //radius of rotation wheel
-	double radiusSquared = radius*radius; //radius squared
-	double xcenter = 50; //center of rotation wheel, x coordinate
-	double ycenter = 252; //center of rotation wheel, y coordinate
-	
-	//if location of a touch is in the area of the rotation wheel, update the 
-	//rotation wheel
-	if(location.x > 22 && location.x < 80 && location.y > 226 && location.y < 285) {
-		
-		//code to approximate the closest point on the rotation wheel to the point
-		//where the user touched the screen (they usually will not touch the 
-		//rotation wheel right on so an approximation is necessary:
-		
-		if(location.y < ycenter-radius)
-			location.y = ycenter-radius;
-		else if (location.y > ycenter+radius )
-			location.y = ycenter+radius ;
-		
-		if(location.x < xcenter-radius)
-			location.x = xcenter-radius;
-		else if (location.x > xcenter+radius )
-			location.x = xcenter+radius ;
-		
-		if(location.y >= ycenter)
-			y = sqrt( radiusSquared - (xcenter- location.x )*(xcenter- location.x ) ) + ycenter; 
-		else
-		{
-			y = -sqrt( radiusSquared - (xcenter- location.x )*(xcenter- location.x ) ) + ycenter; 
-		}
-		
-		y = (y + location.y)/2.0;
-		//NSLog(@"inter2 Y: %f",y);
-		
-		if(location.x >= xcenter)
-			x = sqrt(radiusSquared - (ycenter - y)*(ycenter - y) ) + xcenter;
-		else
-			x = -sqrt(radiusSquared - (ycenter - y)*(ycenter - y) ) + xcenter;
-		
-		//rotation ball is moved to the approximation of the closest point on the
-		//rotation wheel to the point where to user actually touched the screen
-		rotationBall.center = CGPointMake(x,y); 
-		
-		//shipDirection (used for ship rotation and firing direction) is updated
-		shipDirectionX = (x - xcenter);
-		shipDirectionY = (y - ycenter);
-		
-		
-		// get the radian angle of rotation (0 <-> 2 pi) based on point of contact with the wheel	
-		CGFloat rotationAngle = atan2( shipDirectionY,shipDirectionX) + M_PI_2;
-		[ship rotate: rotationAngle];
-		
-	}
-		
-}
-/*This function is called when a finger is dragged on the screen */
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{ 
 	UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
     CGPoint location = [touch locationInView:touch.view]; //records touch's location
     //NSLog(@"X: %f",location.x);
@@ -626,7 +566,7 @@
 			x = sqrt(radiusSquared - (ycenter - y)*(ycenter - y) ) + xcenter;
 		else
 			x = -sqrt(radiusSquared - (ycenter - y)*(ycenter - y) ) + xcenter;
-
+		
 		//rotation ball is moved to the approximation of the closest point on the
 		//rotation wheel to the point where to user actually touched the screen
 		rotationBall.center = CGPointMake(x,y); 
@@ -641,12 +581,25 @@
 	
 }
 
+/*This function is called when a touch on the screen is first detected
+ */
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
+	
+	[self touchesUpdate:touches : event];
+	
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	//NSLog(@"touchesEnded");
 }
 
-
+/*This function is called when a finger is dragged on the screen */
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{ 
+	[self touchesUpdate:touches : event];
+	
+}
 
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

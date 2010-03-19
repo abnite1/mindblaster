@@ -91,7 +91,8 @@
 									  asteroidPosition.y + asteroidDirection.y);
 	asteroidLabel.center = CGPointMake(asteroidPosition.x + asteroidDirection.x, 
 									  asteroidPosition.y + asteroidDirection.y);
-	[self bounceOffBoundaries];
+	//[self bounceOffBoundaries];
+	[self phaseToOtherSide];
 		
 	//NSLog(@"end of move");	
 }
@@ -113,6 +114,38 @@
 	{
 		// invert the y direction
 		[self setAsteroidDirection: asteroidDirection.x : -asteroidDirection.y];
+	}
+}
+
+// asteroids phase to the other side of the screen when they hit the borders
+-(void) phaseToOtherSide {
+	
+	// if it hits the right side of the screen
+	if( asteroidPosition.x  > 480 + ASTEROID_SIZE_X ) {
+		
+		// change the x position to the other side of screen
+		[self setAsteroidPosition: -ASTEROID_SIZE_X + 1 : asteroidPosition.y];
+	}
+	
+	// if it hits the left side of the screen
+	if ( asteroidPosition.x < 0 - ASTEROID_SIZE_X ) {
+		
+		// change the x position to the other side of screen
+		[self setAsteroidPosition: 480 + ASTEROID_SIZE_X - 1 : asteroidPosition.y];	
+	}
+	
+	// if it hits the upper side of the screen
+	if( asteroidPosition.y  > 320 + ASTEROID_SIZE_Y ) {
+		
+		// change the x position to the other side of screen
+		[self setAsteroidPosition: asteroidPosition.x : 0 - ASTEROID_SIZE_Y + 1 ];
+	}
+	
+	// if it hits the bottom side of the screen
+	if ( asteroidPosition.y < 0 - ASTEROID_SIZE_Y ) {
+		
+		// change the x position to the other side of screen
+		[self setAsteroidPosition: asteroidPosition.x : 320 + ASTEROID_SIZE_Y -1];	
 	}
 }
 
