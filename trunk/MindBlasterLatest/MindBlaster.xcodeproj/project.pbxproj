@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		072972C31146DB49004ED361 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 072972C21146DB49004ED361 /* UserProfile.m */; };
 		075E0B4B115295560062948C /* Score.m in Sources */ = {isa = PBXBuildFile; fileRef = 075E0B4A115295560062948C /* Score.m */; };
+		0772316911559422004D023F /* GlobalAdmin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0772316811559422004D023F /* GlobalAdmin.m */; };
 		07BBE0AE113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */; };
 		07BBE0B71137109E00BAF196 /* BackgroundAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */; };
 		07E3F5DF1146DDD5005E5D37 /* boy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07E3F5DB1146DDD5005E5D37 /* boy.png */; };
@@ -59,6 +60,8 @@
 		072972C21146DB49004ED361 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
 		075E0B49115295560062948C /* Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Score.h; sourceTree = "<group>"; };
 		075E0B4A115295560062948C /* Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Score.m; sourceTree = "<group>"; };
+		0772316711559422004D023F /* GlobalAdmin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalAdmin.h; sourceTree = "<group>"; };
+		0772316811559422004D023F /* GlobalAdmin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalAdmin.m; sourceTree = "<group>"; };
 		07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTesting-Info.plist"; sourceTree = "<group>"; };
 		07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Space-Art-Wallpapers-12.jpg"; sourceTree = "<group>"; };
 		07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundAnimation.h; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 				075E0B4A115295560062948C /* Score.m */,
 				773CC9301153663A00D8F598 /* Bullet.h */,
 				773CC9311153663A00D8F598 /* Bullet.m */,
+				0772316711559422004D023F /* GlobalAdmin.h */,
+				0772316811559422004D023F /* GlobalAdmin.m */,
 			);
 			name = "Game Play Classes";
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				77D33A851148CE4600D066DD /* Topic.m in Sources */,
 				075E0B4B115295560062948C /* Score.m in Sources */,
 				773CC9321153663A00D8F598 /* Bullet.m in Sources */,
+				0772316911559422004D023F /* GlobalAdmin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

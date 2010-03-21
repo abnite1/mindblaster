@@ -7,6 +7,7 @@
 //
 
 #import "CharacterScreenController.h"
+#import "GlobalAdmin.h"
 
 @implementation CharacterScreenController
 @synthesize charOne;
@@ -90,6 +91,13 @@
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];*/
+	
+	GlobalAdmin *admin = [GlobalAdmin new];
+	[admin InitProfile];
+	[admin release];
+	
+	
+	
 	
 	[super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];

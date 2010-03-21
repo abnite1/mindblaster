@@ -8,6 +8,7 @@
 //
 
 #import "RootViewController.h"
+#import "GlobalAdmin.h"
 
 @implementation RootViewController
 
@@ -48,12 +49,16 @@
 - (IBAction) continueSelected {
 	
 	//Load the stored plist into the profile.
-	
-	
-	// Navigation logic may go here -- for example, create and push another view controller.
-	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
-	[self.navigationController pushViewController:topicView animated:YES];
-	[topicView release];
+	GlobalAdmin *admin = [GlobalAdmin new];
+	if([admin ReadFromFile] == YES)
+	{
+		[admin release];
+		// Navigation logic may go here -- for example, create and push another view controller.
+			TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
+		[self.navigationController pushViewController:topicView animated:YES];
+		[topicView release];
+	}else
+		NSLog(@"Unable to load plist profile\n");
 }
 
 /*
