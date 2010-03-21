@@ -105,11 +105,18 @@
 	
 	[super viewDidLoad];
 	
+	NSLog(@"Current Username is: %@ \n",[UIAppDelegate.currentUser userName]);
+	NSLog(@"Current email is: %@ \n",[UIAppDelegate.currentUser email]);
+	NSLog(@"LasttopicDiff is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] difficulty]);
+	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
+	NSLog(@"Score is: %d \n",[[UIAppDelegate.currentUser score] score]);
+	NSLog(@"HighestScore is: %d \n",[UIAppDelegate.currentUser highestScore]);
+	
 	// default to the first topic
 	[self firstTopicSelected];
 	
 	//block and hide any locked topics
-	NSLog(@"Last Topic Completed is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
+	//NSLog(@"Last Topic Completed is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
 	//purposely don't do break so excecute all rest as well
 
 	switch([[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
