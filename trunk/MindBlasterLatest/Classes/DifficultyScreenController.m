@@ -7,7 +7,7 @@
 //
 
 #import "DifficultyScreenController.h"
-
+#import "Topic.h"
 
 @implementation DifficultyScreenController
 @synthesize difficultyDescription;
@@ -107,7 +107,7 @@
 	// default to easiest
 	[self selectedEasiest];
 	
-
+	/* HARDCODING OF DIFF"S AND TOPICS */
 	if([[UIAppDelegate.currentUser currentTopic] topic] == [[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
 		switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]) {
 			case 1:
@@ -125,14 +125,6 @@
 		}
 
 	} 
-	else if([[UIAppDelegate.currentUser currentTopic] topic] > [[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
-		[easy setEnabled:NO];
-		easy.hidden = YES;
-		[hard setEnabled:NO];
-		hard.hidden = YES;
-		[hardest setEnabled:NO];
-		hardest.hidden = YES;
-	}
 		 
 	//test the topic reversion YES IT WORKS, viewdidload runs again (only if go to game and lose), can't go back from here (viewdidload won't run)
 	/*Topic *temp = [Topic new];

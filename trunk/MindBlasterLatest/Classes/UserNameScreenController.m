@@ -38,7 +38,9 @@
 -(IBAction) nextScreen {
 
 
-	[self initUserProfileSettings];
+	//[self initUserProfileSettings];
+	//then obviously set the name to what theychose.
+	[UIAppDelegate.currentUser setUserName:[name text]];
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
@@ -47,6 +49,8 @@
 }
 
 // initializes the default topic to ADDITION
+//THIS IS NOW HANDLED AT CHARCTER SCREEN CONTROLLER, by calling the GlobalAdmin function "initProfile"
+/*
 -(void) initUserProfileSettings {
 	//NSLog(@"Checking: The name was chosen as: %@ \n",[name text]);
 	[(UIAppDelegate.currentUser) setUserName:[name text]];
@@ -54,7 +58,7 @@
 	
 	// set the last topic completed to the first choice
 	[UIAppDelegate.currentUser setLastTopicCompleted:[[Topic alloc] initWithTopic: TOPIC_ADDITION]];
-}
+}*/
 
 - (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
