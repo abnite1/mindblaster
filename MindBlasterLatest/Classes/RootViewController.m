@@ -50,7 +50,7 @@
 	
 	//Load the stored plist into the profile.
 	GlobalAdmin *admin = [GlobalAdmin new];
-	if([admin ReadFromFile] == YES)
+	if([admin readFromFile] == YES)
 	{
 		[admin release];
 		// Navigation logic may go here -- for example, create and push another view controller.

@@ -93,7 +93,7 @@
 	[background setSpeedX:0.2 Y:0.2];*/
 	
 	GlobalAdmin *admin = [GlobalAdmin new];
-	[admin InitProfile];
+	[admin initProfile];
 	[admin release];
 	
 	

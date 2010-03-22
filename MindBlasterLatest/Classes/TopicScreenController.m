@@ -109,6 +109,8 @@
 	NSLog(@"Current email is: %@ \n",[UIAppDelegate.currentUser email]);
 	NSLog(@"LasttopicDiff is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] difficulty]);
 	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
+	NSLog(@"LasttopicDescr is: %@ \n",[[UIAppDelegate.currentUser lastTopicCompleted] description]);
+	NSLog(@"LasttopicOperator is: %s \n",[[UIAppDelegate.currentUser lastTopicCompleted] operator]);
 	NSLog(@"Score is: %d \n",[[UIAppDelegate.currentUser score] score]);
 	NSLog(@"HighestScore is: %d \n",[UIAppDelegate.currentUser highestScore]);
 	

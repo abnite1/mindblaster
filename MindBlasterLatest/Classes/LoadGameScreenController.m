@@ -34,12 +34,12 @@
 	[UIAppDelegate.currentUser setEmail:@"johnnythejew@hotmail.com"];
 	[UIAppDelegate.currentUser setHighestScore:10000];
 	Topic *current = [Topic new];
-	[current setTopic:3];
-	[current setDifficulty:3];
+	[current setTopic:TOPIC_MULTIPLICATION];
+	[current setDifficulty:DIFFICULTY_HARD];
 	[current setDescription:@"blank"];
 	Topic *last = [Topic new];
-	[last setTopic:4];
-	[last setDifficulty:4];
+	[last setTopic:TOPIC_DIVISION];
+	[last setDifficulty:DIFFICULTY_HARDEST];
 	[last setDescription:@"blank"];
 	[UIAppDelegate.currentUser setCurrentTopic:current];
 	[UIAppDelegate.currentUser setLastTopicCompleted:last];
@@ -63,7 +63,7 @@
 -(IBAction) download {
 
 	GlobalAdmin *admin = [GlobalAdmin new];
-	[admin WriteToFile];
+	[admin writeToFile];
 
 	[admin release];
 	

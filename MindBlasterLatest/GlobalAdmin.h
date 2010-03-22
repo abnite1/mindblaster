@@ -11,9 +11,9 @@
 @interface GlobalAdmin : NSObject {
 }
 
--(void)InitProfile;
--(BOOL)WriteToFile;
--(BOOL)ReadFromFile;
+-(void)initProfile;
+-(BOOL)writeToFile;
+-(BOOL)readFromFile;
 //-(NSString)Rename;
 
 @end

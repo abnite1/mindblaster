@@ -11,29 +11,30 @@
 
 @implementation GlobalAdmin
 
--(void)InitProfile
+-(void)initProfile
 {
 	[UIAppDelegate.currentUser setUserName:@"blank"];
-	[UIAppDelegate.currentUser setEmail:@"blank"];
+	[UIAppDelegate.currentUser setEmail:@"blank"]; 
 	[UIAppDelegate.currentUser setHighestScore:0];
 	Score *score = [Score new];
 	[score setScore:0];
 	[UIAppDelegate.currentUser setScore:score];
 	[score release];
 	Topic *temp = [Topic new];
-	[temp setDifficulty:1];
-	[temp setTopic:0];
+	[temp setDifficulty:DIFFICULTY_EASIEST];
+	[temp setTopic:TOPIC_ADDITION];
 	[temp setDescription:@"blank"];
-	char x='x';
-	[temp setOperator:&x];
+	//char x='+';
+	//[temp setOperator:&x];
 	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
 	
 	[temp release];
-	NSLog(@"Profile initialized\n");
 	
+	NSLog(@"Profile initialized\n");
+
 }
 
--(BOOL)WriteToFile
+-(BOOL)writeToFile
 {
 	//SAVE IT TO PLIST
 	NSMutableDictionary * prefs;
@@ -53,6 +54,7 @@
 	[prefs setObject:lastTopicCompletedDiff forKey:@"lastTopicCompletedDiff"];
 	[prefs setObject:LastTopicCompletedTopic forKey:@"lastTopicCompletedTopic"];
 	[prefs setObject:[[UIAppDelegate.currentUser lastTopicCompleted] description] forKey:@"lastTopicCompletedDescription"];
+	//MUST WRITE THE OPERATOR
 	[lastTopicCompletedDiff release];
 	[LastTopicCompletedTopic release];
  
@@ -74,9 +76,10 @@
 		NSLog(@"there is no profile pic associated with this account.\n");
 	
 	
+	//CHECK THAT NO ELEMENTS OF DICTIONARY ARE NULL
 	
     // save our buddy list to the user's home directory/Library/Preferences.
-    if([prefs writeToFile:[@"~/userProfile.plist"
+    if([prefs writeToFile:[@"~/Documents/userProfile.plist"
 						   stringByExpandingTildeInPath] atomically: TRUE] == YES)
 	{
 		NSLog(@"Plist written\n");
@@ -87,12 +90,12 @@
 	
 }
 
--(BOOL)ReadFromFile
+-(BOOL)readFromFile
 {
 	//READ IT BACK TO PROFILE
 	NSDictionary *prefs2;
     prefs2 = [NSDictionary dictionaryWithContentsOfFile: 
-			  [@"~/userProfile.plist" 
+			  [@"~/Documents/userProfile.plist" 
 			   stringByExpandingTildeInPath]];
 	
 	if (prefs2) {
