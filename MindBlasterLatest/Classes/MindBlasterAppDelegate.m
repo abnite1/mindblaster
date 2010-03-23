@@ -7,7 +7,7 @@
 //
 
 #import "MindBlasterAppDelegate.h"
-
+#import "GlobalAdmin.h"
 
 @implementation MindBlasterAppDelegate
 
@@ -31,7 +31,8 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
+	// Save userprofile to plist
+	[GlobalAdmin writeToFile];
 }
 
 

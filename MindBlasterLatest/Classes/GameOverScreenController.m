@@ -8,6 +8,7 @@
 //
 
 #import "GameOverScreenController.h"
+#import "GlobalAdmin.h"
 
 /*
  * this screen appears when the player either wins the game (over 400 points at hardest level) or loses the game
@@ -66,6 +67,10 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	//save profile to plist UNCOMMENT THIS ONCE gamescreen proplerly updates the userprofile with score andlasttopiccomplete.
+	//[GlobalAdmin writeToFile];
+	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
