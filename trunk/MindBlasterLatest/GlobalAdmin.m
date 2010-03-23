@@ -24,8 +24,8 @@
 	[temp setDifficulty:DIFFICULTY_EASIEST];
 	[temp setTopic:TOPIC_ADDITION];
 	[temp setDescription:@"blank"];
-	char x='+';
-	[temp setOperator:&x];
+	//char x='+';
+	//[temp setOperator:&x];
 	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
 	
 	[temp release];
@@ -56,10 +56,10 @@
 	[prefs setObject:[[UIAppDelegate.currentUser lastTopicCompleted] description] forKey:@"lastTopicCompletedDescription"];
 	
 	//NEEDS FIXING!!!!
-	NSNumber *operator = [NSNumber numberWithInt:(int)(*[[UIAppDelegate.currentUser lastTopicCompleted] operator])];
+//	NSNumber *operator = [NSNumber numberWithInt:(int)(*[[UIAppDelegate.currentUser lastTopicCompleted] operator])];
 	//[operator initWithCharacters:(const unichar *)[[UIAppDelegate.currentUser lastTopicCompleted] operator] length:2];
-	[prefs setObject:operator forKey:@"lastTopicCompletedOperator"];
-	[operator release];
+	//[prefs setObject:operator forKey:@"lastTopicCompletedOperator"];
+	//[operator release];
 	
 	
 	[lastTopicCompletedDiff release];
