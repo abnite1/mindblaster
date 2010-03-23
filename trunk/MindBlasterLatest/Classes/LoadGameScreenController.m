@@ -62,10 +62,10 @@
 }
 -(IBAction) download {
 
-	GlobalAdmin *admin = [GlobalAdmin new];
-	[admin writeToFile];
+	//GlobalAdmin *admin = [GlobalAdmin new];
+	[GlobalAdmin writeToFile];
 
-	[admin release];
+	//[admin release];
 	
    	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];
