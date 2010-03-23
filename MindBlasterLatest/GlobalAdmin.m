@@ -11,7 +11,7 @@
 
 @implementation GlobalAdmin
 
--(void)initProfile
++(void)initProfile
 {
 	[UIAppDelegate.currentUser setUserName:@"blank"];
 	[UIAppDelegate.currentUser setEmail:@"blank"]; 
@@ -24,8 +24,8 @@
 	[temp setDifficulty:DIFFICULTY_EASIEST];
 	[temp setTopic:TOPIC_ADDITION];
 	[temp setDescription:@"blank"];
-	//char x='+';
-	//[temp setOperator:&x];
+	char x='+';
+	[temp setOperator:&x];
 	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
 	
 	[temp release];
@@ -34,30 +34,36 @@
 
 }
 
--(BOOL)writeToFile
++(BOOL)writeToFile
 {
-	//SAVE IT TO PLIST
 	NSMutableDictionary * prefs;
     prefs = [[NSMutableDictionary alloc] init];
 	
+	//IS THERE A PROFILE TO WRITE??
 	if([UIAppDelegate.currentUser userName] == NULL && [[UIAppDelegate.currentUser score] score] == 0)
 	{
 		NSLog(@"There is not valid profile to save.\n");
 		return NO;
 	}
 	
-    [prefs setObject:[UIAppDelegate.currentUser userName] forKey:@"userName"];
 	
-//	//last topic complete
+    [prefs setObject:[UIAppDelegate.currentUser userName] forKey:@"userName"];
+	//last topic complete
 	NSNumber *lastTopicCompletedDiff = [NSNumber numberWithInt:[[UIAppDelegate.currentUser lastTopicCompleted] difficulty]];
 	NSNumber *LastTopicCompletedTopic = [NSNumber numberWithInt:[[UIAppDelegate.currentUser lastTopicCompleted] topic]];
 	[prefs setObject:lastTopicCompletedDiff forKey:@"lastTopicCompletedDiff"];
 	[prefs setObject:LastTopicCompletedTopic forKey:@"lastTopicCompletedTopic"];
 	[prefs setObject:[[UIAppDelegate.currentUser lastTopicCompleted] description] forKey:@"lastTopicCompletedDescription"];
-	//MUST WRITE THE OPERATOR
+	
+	//NEEDS FIXING!!!!
+	NSNumber *operator = [NSNumber numberWithInt:(int)(*[[UIAppDelegate.currentUser lastTopicCompleted] operator])];
+	//[operator initWithCharacters:(const unichar *)[[UIAppDelegate.currentUser lastTopicCompleted] operator] length:2];
+	[prefs setObject:operator forKey:@"lastTopicCompletedOperator"];
+	[operator release];
+	
+	
 	[lastTopicCompletedDiff release];
 	[LastTopicCompletedTopic release];
- 
 	//score
 	NSNumber *score = [NSNumber numberWithInt:[[UIAppDelegate.currentUser score] score]];
 	[prefs setObject:score forKey:@"score"];
@@ -65,18 +71,18 @@
 	NSNumber *highestScore = [NSNumber numberWithInt:[UIAppDelegate.currentUser highestScore]];
 	[prefs setObject:highestScore forKey:@"highestScore"];
 	[highestScore release];
-	
 	[prefs setObject:[UIAppDelegate.currentUser email] forKey:@"email"];
 	
 	//profilepicture:
 	if([UIAppDelegate.currentUser profilePic] != NULL)
-	{
-		[prefs setObject:[UIAppDelegate.currentUser profilePic] forKey:@"profilePic"];
+	{//profile pic is causing it to fail to write (even when NOT null)
+		NSData *profilePicData = UIImagePNGRepresentation([UIAppDelegate.currentUser profilePic]);
+		[prefs setObject:profilePicData forKey:@"profilePic"];
+		[profilePicData release];
+		//[prefs setObject:[UIAppDelegate.currentUser profilePic] forKey:@"profilePic"];
 	}else
 		NSLog(@"there is no profile pic associated with this account.\n");
 	
-	
-	//CHECK THAT NO ELEMENTS OF DICTIONARY ARE NULL
 	
     // save our buddy list to the user's home directory/Library/Preferences.
     if([prefs writeToFile:[@"~/Documents/userProfile.plist"
@@ -90,7 +96,7 @@
 	
 }
 
--(BOOL)readFromFile
++(BOOL)readFromFile
 {
 	//READ IT BACK TO PROFILE
 	NSDictionary *prefs2;
@@ -103,11 +109,18 @@
 		
 		NSNumber *lastTopicCompletedDiff = [prefs2 objectForKey:@"lastTopicCompletedDiff"];
 		NSNumber *lastTopicCompletedTopic = [prefs2 objectForKey:@"lastTopicCompletedTopic"];	
+		[[UIAppDelegate.currentUser lastTopicCompleted] setDescription:[prefs2 objectForKey:@"lastTopicCompletedDescription"]];
+		//READ THE OPERATOR AND DESCRIPTIONS
 		Topic *lastTopic = [Topic new];
 		[lastTopic setDifficulty:[lastTopicCompletedDiff intValue]];
 		[lastTopic setTopic:[lastTopicCompletedTopic intValue]];
 		[UIAppDelegate.currentUser setLastTopicCompleted:lastTopic];
 
+		//MUST READ PROFILE PICTURE
+		UIImage *profilePic = [UIImage new];
+		[profilePic initWithData:[prefs2 objectForKey:@"profilePic"]];
+		[UIAppDelegate.currentUser setProfilePic:profilePic];
+		[profilePic release];
 		//score
 		Score *score = [Score new];
 		[score setScore: [[prefs2 objectForKey:@"score"] intValue]]

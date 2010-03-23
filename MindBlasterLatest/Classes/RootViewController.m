@@ -49,10 +49,10 @@
 - (IBAction) continueSelected {
 	
 	//Load the stored plist into the profile.
-	GlobalAdmin *admin = [GlobalAdmin new];
-	if([admin readFromFile] == YES)
+	//GlobalAdmin *admin = [GlobalAdmin new];
+	if([GlobalAdmin readFromFile] == YES)
 	{
-		[admin release];
+		//[admin release];
 		// Navigation logic may go here -- for example, create and push another view controller.
 			TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 		[self.navigationController pushViewController:topicView animated:YES];

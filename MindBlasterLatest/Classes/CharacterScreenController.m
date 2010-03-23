@@ -92,9 +92,9 @@
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];*/
 	
-	GlobalAdmin *admin = [GlobalAdmin new];
-	[admin initProfile];
-	[admin release];
+	//GlobalAdmin *admin = [GlobalAdmin new];
+	[GlobalAdmin initProfile];
+	//[admin release];
 	
 	
 	
