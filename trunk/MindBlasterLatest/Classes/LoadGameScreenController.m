@@ -31,7 +31,7 @@
 	[score setScore:9999];
 	[UIAppDelegate.currentUser setScore:score];
 	//[[UIAppDelegate.currentUser score] setScore:9999];
-	[UIAppDelegate.currentUser setEmail:@"johnnythejew@hotmail.com"];
+	[UIAppDelegate.currentUser setEmail:@"generallyUnoffensiveEmail@hotmail.com"];
 	[UIAppDelegate.currentUser setHighestScore:10000];
 	Topic *current = [Topic new];
 	[current setTopic:TOPIC_MULTIPLICATION];
@@ -61,11 +61,7 @@
  */
 }
 -(IBAction) download {
-
-	//GlobalAdmin *admin = [GlobalAdmin new];
 	[GlobalAdmin writeToFile];
-
-	//[admin release];
 	
    	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];

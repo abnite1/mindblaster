@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface GlobalAdmin : NSObject {
+
 }
 
++(NSString *)getPath;
 +(void)initProfile;
 +(BOOL)writeToFile;
 +(BOOL)readFromFile;

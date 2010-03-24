@@ -21,7 +21,8 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     //GLOBAL USER PROFILE!
 	currentUser = [[UserProfile alloc] init];
-	
+	//[currentUser lastTopicCompleted] = [[Topic alloc] init];
+	//[currentUser score] = [[Score alloc] init];
 	
     // Override point for customization after app launch    
 	
