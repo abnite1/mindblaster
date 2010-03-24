@@ -8,7 +8,7 @@
 //
 
 #import "RootViewController.h"
-#import "GlobalAdmin.h"
+
 
 @implementation RootViewController
 
@@ -39,10 +39,17 @@
  *	navigate to the loadgame screen
  */
 - (IBAction) loadGame {
+	
+	// Navigation logic may go here -- for example, create and push another view controller.
+	NetworkController *netView = [[NetworkController alloc] initWithNibName:@"NetworkController" bundle:nil];
+	[self.navigationController pushViewController:netView animated:YES];
+	[netView release];
+	/*
     // Navigation logic may go here -- for example, create and push another view controller.
 	LoadGameScreenController *loadGameView = [[LoadGameScreenController alloc] initWithNibName:@"LoadGameScreenController" bundle:nil];
 	[self.navigationController pushViewController:loadGameView animated:YES];
 	[loadGameView release];
+	 */
 }
 
 // continute to topic selection with the current profile

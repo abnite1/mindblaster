@@ -144,7 +144,32 @@
 		NSLog(@"ERROR with the plist\n");
 		return NO;
 	}	
-	
 }
+
+// returns the picture at array location
++(id) getPic:(int)position {
+	
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	
+	NSArray *pics = [[NSArray alloc] initWithObjects: 
+					 [UIImage imageWithContentsOfFile: [path stringByAppendingPathComponent:@"boy.png"]], 
+					 [UIImage imageWithContentsOfFile: [path stringByAppendingPathComponent:@"girl.png"]], 
+					 [UIImage imageWithContentsOfFile: [path stringByAppendingPathComponent:@"dog.png"]],
+					 [UIImage imageWithContentsOfFile: [path stringByAppendingPathComponent:@"cat.png"]], nil];
+	
+	return [pics objectAtIndex: position];
+}
+
+// returns the save and load URL
++(id)getURL {
+	
+	// read the general settings plist into a dictionary
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
+	NSDictionary *plistData = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
+	
+	return [plistData objectForKey:@"WebURL"];
+}
+
 
 @end

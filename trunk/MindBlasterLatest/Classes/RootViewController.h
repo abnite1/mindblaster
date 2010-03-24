@@ -15,6 +15,8 @@
 #import "HelpScreenController.h"
 #import "CharacterScreenController.h"
 #import "LoadGameScreenController.h"
+#import "GlobalAdmin.h"
+#import "NetworkController.h"
 
 @interface RootViewController : UIViewController {
 	IBOutlet BackgroundAnimation *bgAnimation;
