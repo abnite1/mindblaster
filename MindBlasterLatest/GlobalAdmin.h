@@ -16,6 +16,8 @@
 +(void)initProfile;
 +(BOOL)writeToFile;
 +(BOOL)readFromFile;
++(id) getPic:(int)position;
++(id)getURL;
 //-(NSString)Rename;
 
 @end

@@ -26,7 +26,11 @@
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		77203D851141114000127EC1 /* ship.gif in Resources */ = {isa = PBXBuildFile; fileRef = 77203D841141114000127EC1 /* ship.gif */; };
 		77203E431141272E00127EC1 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 77203E421141272E00127EC1 /* Ship.m */; };
+		773C9B2F115AC23D003A9C5F /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773C9B2E115AC23D003A9C5F /* NetworkController.m */; };
+		773C9B51115AC2A4003A9C5F /* NetworkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C9B50115AC2A4003A9C5F /* NetworkController.xib */; };
 		773CC9321153663A00D8F598 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 773CC9311153663A00D8F598 /* Bullet.m */; };
+		77AFB020115AC80D00123F1C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AFB01F115AC80D00123F1C /* CFNetwork.framework */; };
+		77AFB035115AC8EF00123F1C /* ApplicationSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */; };
 		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
 		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
 		77D33A851148CE4600D066DD /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D33A841148CE4600D066DD /* Topic.m */; };
@@ -85,8 +89,13 @@
 		77203D841141114000127EC1 /* ship.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ship.gif; sourceTree = "<group>"; };
 		77203E411141272E00127EC1 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		77203E421141272E00127EC1 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
+		773C9B2D115AC22E003A9C5F /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
+		773C9B2E115AC23D003A9C5F /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkController.m; path = ../NetworkController.m; sourceTree = "<group>"; };
+		773C9B50115AC2A4003A9C5F /* NetworkController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkController.xib; sourceTree = "<group>"; };
 		773CC9301153663A00D8F598 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		773CC9311153663A00D8F598 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
+		77AFB01F115AC80D00123F1C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = ../../MindBlaster112/MindBlasterLatest/iphoneos3.1.2/System/Library/Frameworks/CFNetwork.framework; sourceTree = SOURCE_ROOT; };
+		77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApplicationSettings.plist; sourceTree = "<group>"; };
 		77B6953411461F940055EFD6 /* Questions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Questions.m; sourceTree = "<group>"; };
 		77B6953511461F940055EFD6 /* Questions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Questions.h; sourceTree = "<group>"; };
 		77B6953611461F940055EFD6 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
@@ -136,6 +145,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				77AFB020115AC80D00123F1C /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +155,8 @@
 		080E96DDFE201D6D7F000001 /* Screen Controller Classes */ = {
 			isa = PBXGroup;
 			children = (
+				773C9B2D115AC22E003A9C5F /* NetworkController.h */,
+				773C9B2E115AC23D003A9C5F /* NetworkController.m */,
 				B4C0FEF01131DDAC00EBC1D9 /* CharacterScreenController.h */,
 				B4C0FEF11131DDAC00EBC1D9 /* CharacterScreenController.m */,
 				B43702291131E25A002A55F5 /* TopicScreenController.h */,
@@ -187,7 +199,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -204,6 +215,28 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				773C9B46115AC288003A9C5F /* XIBs */,
+				773C9B45115AC279003A9C5F /* Property Files */,
+				773C9B44115AC25D003A9C5F /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77AFB01F115AC80D00123F1C /* CFNetwork.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		773C9B44115AC25D003A9C5F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */,
 				07E3F5DB1146DDD5005E5D37 /* boy.png */,
 				07E3F5DC1146DDD5005E5D37 /* cat.png */,
 				07E3F5DD1146DDD5005E5D37 /* dog.png */,
@@ -215,7 +248,24 @@
 				B4C71230113E4E2A00C50561 /* leftwheel.png */,
 				B4C71231113E4E2A00C50561 /* rightwheel.png */,
 				B463F0A3113DE27A0009796E /* asteroid6.png */,
-				07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		773C9B45115AC279003A9C5F /* Property Files */ = {
+			isa = PBXGroup;
+			children = (
+				07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */,
+				8D1107310486CEB800E47090 /* MindBlaster-Info.plist */,
+				77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */,
+			);
+			name = "Property Files";
+			sourceTree = "<group>";
+		};
+		773C9B46115AC288003A9C5F /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				773C9B50115AC2A4003A9C5F /* NetworkController.xib */,
 				B43702B61131EBF4002A55F5 /* GameScreenController.xib */,
 				B4EA94491132074700016680 /* HelpScreenController.xib */,
 				B43702EE1131F201002A55F5 /* LoadGameScreenController.xib */,
@@ -226,19 +276,8 @@
 				B4C0FEF21131DDAC00EBC1D9 /* CharacterScreenController.xib */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
-				8D1107310486CEB800E47090 /* MindBlaster-Info.plist */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
-			);
-			name = Frameworks;
+			name = XIBs;
 			sourceTree = "<group>";
 		};
 		B4B012DF1140810B00E0D5DB /* Game Play Classes */ = {
@@ -339,6 +378,8 @@
 				07E3F5E01146DDD5005E5D37 /* cat.png in Resources */,
 				07E3F5E11146DDD5005E5D37 /* dog.png in Resources */,
 				07E3F5E21146DDD5005E5D37 /* girl.png in Resources */,
+				773C9B51115AC2A4003A9C5F /* NetworkController.xib in Resources */,
+				77AFB035115AC8EF00123F1C /* ApplicationSettings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +411,7 @@
 				075E0B4B115295560062948C /* Score.m in Sources */,
 				773CC9321153663A00D8F598 /* Bullet.m in Sources */,
 				0772316911559422004D023F /* GlobalAdmin.m in Sources */,
+				773C9B2F115AC23D003A9C5F /* NetworkController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +423,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../MindBlaster112/MindBlasterLatest/iphoneos3.1.2/System/Library/Frameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -395,6 +442,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../MindBlaster112/MindBlasterLatest/iphoneos3.1.2/System/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MindBlaster_Prefix.pch;
 				INFOPLIST_FILE = "MindBlaster-Info.plist";
