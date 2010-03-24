@@ -13,5 +13,5 @@
 	int score;
 }
 @property(nonatomic) int score;
-
+-(id)initWithScore:(int)newScore;
 @end

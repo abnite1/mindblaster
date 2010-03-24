@@ -11,4 +11,22 @@
 
 @implementation Score
 @synthesize score;
+
+- (id)initWithScore:(int)newScore {
+	
+    if ( self = [super init] ) {
+		
+		// set the topic
+        score = newScore;
+		
+		//difficulty = DIFFICULTY_EASIEST;
+		
+		// set the operator appropriately
+		//[self initOperator];
+    }
+	
+    return self;
+	
+}
+
 @end
