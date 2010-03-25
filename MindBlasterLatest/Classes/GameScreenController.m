@@ -659,14 +659,14 @@
 	
 	
 	double x,y;
-	double radius = 24;  //radius of rotation wheel
+	double radius = 48;  //radius of rotation wheel
 	double radiusSquared = radius*radius; //radius squared
-	double xcenter = 50; //center of rotation wheel, x coordinate
-	double ycenter = 252; //center of rotation wheel, y coordinate
+	double xcenter = 80; //center of rotation wheel, x coordinate
+	double ycenter = 222; //center of rotation wheel, y coordinate
 	
 	//if location of a touch is in the area of the rotation wheel, update the 
 	//rotation wheel
-	if(location.x > 22 && location.x < 80 && location.y > 226 && location.y < 285)
+	if(location.x > 22 && location.x < 160 && location.y > 146 && location.y < 285)
 	{
 		
 		//code to approximate the closest point on the rotation wheel to the point
