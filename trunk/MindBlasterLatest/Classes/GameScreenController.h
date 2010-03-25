@@ -33,9 +33,14 @@
 	Ship *ship;
 	IBOutlet UIImageView *shipIcon;
 	
+	BOOL gamePaused;
+	
 	// this holds an array of asteroids
 	NSMutableArray *asteroids;
 	
+	//timer variables
+	NSTimer *GamePlayTimer;
+	double GamePlayTimerInterval;
 	
 	//IBOutlet UIImageView *ship;
 	
@@ -147,6 +152,7 @@
 -(IBAction) nextScreen;
 -(IBAction) helpScreen;
 -(IBAction) fireButton;
+-(IBAction) pauseButton;
 -(void) hitCorrectAsteroid:(int)index;
 -(void) hitWrongAsteroid:(int)index;
 -(void) hitBlankAsteroid:(int)index;
