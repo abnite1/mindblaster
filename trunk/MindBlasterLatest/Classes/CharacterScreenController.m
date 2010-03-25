@@ -26,8 +26,8 @@
  The following will save an image to the user profile data.
  */
 - (IBAction) firstCharacterSelected {
-	[(UIAppDelegate.currentUser) setProfilePic:[charOne currentImage]];
-	//NSLog(@"Ponter to picture is: %x \n",[(UIAppDelegate.currentUser) getPic]);
+	
+	[UIAppDelegate.currentUser setProfilePic: PICTURE_BOY];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
@@ -36,7 +36,8 @@
 }
 
 - (IBAction) secondCharacterSelected {
-	[(UIAppDelegate.currentUser) setProfilePic:[charTwo currentImage]];
+	
+	[UIAppDelegate.currentUser setProfilePic: PICTURE_GIRL];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
@@ -45,7 +46,8 @@
 }
 
 - (IBAction) thirdCharacterSelected {
-	[(UIAppDelegate.currentUser) setProfilePic:[charThree currentImage]];
+	
+	[UIAppDelegate.currentUser setProfilePic: PICTURE_DOG];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
@@ -54,7 +56,8 @@
 }
 
 - (IBAction) fourthCharacterSelected {
-	[(UIAppDelegate.currentUser) setProfilePic:[charFour currentImage]];
+	
+	[UIAppDelegate.currentUser setProfilePic: PICTURE_CAT];
 	
     // Navigation logic may go here -- for example, create and push another view controller.
 	UserNameScreenController *userNameView = [[UserNameScreenController alloc] initWithNibName:@"UserNameScreenController" bundle:nil];
@@ -62,7 +65,8 @@
 	[userNameView release];
 }
 
-- (IBAction) backScreen {
+-(IBAction)backScreen {
+	
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
@@ -79,25 +83,12 @@
 
 // animate the space background
 -(void)animateBackground {
+	
 	[background move];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-	/*[super viewDidLoad];
-	//self.title = @"Topic";
-	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
-	
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
-								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
-	[background setSpeedX:0.2 Y:0.2];*/
-	
-	//GlobalAdmin *admin = [GlobalAdmin new];
-	[GlobalAdmin initProfile];
-	//[admin release];
-	
-	
-	
 	
 	[super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];

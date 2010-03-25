@@ -81,7 +81,8 @@
 
 
 // navigate back to the previous screen
-- (IBAction) backScreen {
+-(IBAction) backScreen {
+	
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
@@ -107,9 +108,11 @@
 	// default to easiest
 	[self selectedEasiest];
 	
-	/* HARDCODING OF DIFF"S AND TOPICS */
+	// disable and hide difficulty settings that haven't yet been unlocked.
 	if([[UIAppDelegate.currentUser currentTopic] topic] == [[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
+		
 		switch([[UIAppDelegate.currentUser lastTopicCompleted] difficulty]) {
+				
 			case 1:
 				[easy setEnabled:NO];
 				easy.hidden = YES;
@@ -126,10 +129,6 @@
 
 	} 
 		 
-	//test the topic reversion YES IT WORKS, viewdidload runs again (only if go to game and lose), can't go back from here (viewdidload won't run)
-	/*Topic *temp = [Topic new];
-	[temp setTopic:3];
-	[UIAppDelegate.currentUser setLastTopicCompleted:temp];*/
 	
 	// start space animation
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];

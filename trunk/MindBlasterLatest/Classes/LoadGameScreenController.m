@@ -24,7 +24,7 @@
 -(IBAction) upload {
 	
 	/******* THIS IS JUST FOR TESTING - it creates a userprofile with all categories filled out *********/
-	
+	/*
 	//temporarily this loads userprofile with data, to unlock higher levels.
 	[UIAppDelegate.currentUser setUserName:@"Blanka"];
 	Score *score = [Score new];
@@ -54,6 +54,7 @@
 	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
 	NSLog(@"Score is: %d \n",[[UIAppDelegate.currentUser score] score]);
 	NSLog(@"HighestScore is: %d \n",[UIAppDelegate.currentUser highestScore]);
+	 */
 /*	
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];
@@ -61,7 +62,7 @@
  */
 }
 -(IBAction) download {
-	[GlobalAdmin writeToFile];
+	[GlobalAdmin saveSettings];
 	
    	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
 	[self.navigationController pushViewController:topicView animated:YES];
@@ -76,6 +77,7 @@
 
 // animate the space background
 -(void)animateBackground {
+	
 	[background move];
 }
 

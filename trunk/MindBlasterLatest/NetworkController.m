@@ -32,8 +32,22 @@
 
 // These methods are used by the core transfer code to update the UI.
 
+// navigate back to the root menu
+-(IBAction) backScreen {
+	
+	[self.navigationController popViewControllerAnimated:TRUE];
+}
 
+// display help for the load profile menu
+-(IBAction) helpScreen {
+	
+	// Navigation logic may go here -- for example, create and push another view controller.
+	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
+	[self.navigationController pushViewController:helpView animated:YES];
+	[helpView release];
+}
 
+/*
 - (void)_sendDidStart
 {
     self.statusLabel.text = @"Please wait for transfer to complete.";
@@ -41,19 +55,19 @@
     [self.activityIndicator startAnimating];
    //[[AppDelegate sharedAppDelegate] didStartNetworking];
 }
-
+*/
 - (void)_updateStatus:(NSString *)statusString
 {
-    assert(statusString != nil);
-    self.statusLabel.text = statusString;
+    //assert(statusString != nil);
+   // self.statusLabel.text = statusString;
 }
 
 - (void)_sendDidStopWithStatus:(NSString *)statusString
 {
     if (statusString == nil) {
-        statusString = @"Put succeeded";
+        //statusString = @"Put succeeded";
     }
-    self.statusLabel.text = statusString;
+    //self.statusLabel.text = statusString;
    // self.cancelButton.enabled = NO;
     //[self.activityIndicator stopAnimating];
 	//[[AppDelegate sharedAppDelegate] didStartNetworking];
@@ -388,10 +402,13 @@
 -(IBAction) download {
 
 	// read plist into a dictionary
-	NSString *ftpURL =  [GlobalAdmin getURL];
-	//NSString *urlString = [ftpURL stringByAppendingPathComponent: @"userProfile.plist"];
-	NSString *urlString = [ftpURL stringByAppendingPathComponent: @"TestImage3.png"];
+	NSString *urlString =  [GlobalAdmin getURL];
 	
+	// save path
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString* docDir = [paths objectAtIndex:0];
+	NSString *fileString = [docDir stringByAppendingPathComponent: @"UserProfile.plist"];
+
 	
 	// format the url to contain an ftp://user:pass@url/file.ext format
 	//NSString *urlString = [[NSString alloc] initWithFormat: @"ftp://%@:%@@%@", 
@@ -401,11 +418,11 @@
 
 	NSURL *url = [NSURL URLWithString: urlString];
 	
-	NSMutableDictionary *profile = [NSMutableDictionary dictionaryWithContentsOfURL: url];
-	[profile writeToFile: [GlobalAdmin getPath] atomically: YES];
-	
-	NSData *dataImage = [NSData dataWithContentsOfURL:url];
-	imageView.image=[UIImage imageWithData:dataImage];    
+	NSDictionary *profile = [[NSDictionary alloc] initWithContentsOfURL: url];
+	NSLog(@"%@", fileString);
+
+	[profile writeToFile: fileString atomically: YES];
+	//[self didStartNetworking];
 	
 	//[self.activityIndicator startAnimating];
 	//[[AppDelegate sharedAppDelegate] didStartNetworking];
@@ -416,50 +433,40 @@
 // upload a file
 -(IBAction)upload {
 	
-	// format the url to conform to the proper format for ftp authentication
-	//NSString *urlString = [[NSString alloc] initWithFormat: @"ftp://%@:%@@%@", 
-	//					   self.usernameText.text, self.passwordText.text, self.urlText.text];
+	// get the ftp url from ApplicationSettings.plist
+	NSString *urlString =  [GlobalAdmin getURL];
+
+	// get the relative ~/Documents path and append our renamed property file to it
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString* docDir = [paths objectAtIndex:0];
 	
-	// read plist into a dictionary
-	NSString *ftpURL =  [GlobalAdmin getURL];
+	// temporary, for initial testing.
+	NSString *renamedFile = [[NSString alloc] initWithString: @"UserProfile.plist"];
 	
-	// use this function instead
+	// use THIS function instead once it's implemented
 	//NSString *renamedFile = [GlobalAdmin renameProfile];
 	
-	// temporary
-	NSString *renamedFile = [[NSString alloc] initWithString: @"userProfile.plist"];
-	
-	NSString *urlString = [ftpURL stringByAppendingPathComponent: renamedFile];
+	NSString *fileString = [docDir stringByAppendingPathComponent: renamedFile];
+	NSLog(@"upload file path: %@",fileString);
 	
 	// create the url
 	NSURL *url = [NSURL URLWithString: urlString];
 	
-	// upload from the ~/Documents/ folder 
-	
-	/*NSArray *paths =	NSSearchPathForDirectoriesInDomains(
-						NSDocumentDirectory, 
-						NSUserDomainMask, YES); 
-	NSString* docDir = [paths objectAtIndex:0];
-	NSString *finalPath = [docDir stringByAppendingPathComponent: self.fileText.text];*/
-	
-	
-	
-	assert([[NSFileManager defaultManager] fileExistsAtPath: renamedFile ]);
-	NSLog(@"uploading: %@", [GlobalAdmin  getPath]);
+	// for debug
+	assert([[NSFileManager defaultManager] fileExistsAtPath: fileString ]);
+	NSLog(@"uploading: %@", fileString);
 	NSLog(@"to: %@", urlString);
-	
-	// upload from current folder
-	//NSString *path = [[NSBundle mainBundle] bundlePath];
 	
 	// create an NSData object to store the file
 	//NSData *dataImage = [NSData dataWithContentsOfFile: finalPath];
 	
-	self.statusLabel.text = @"starting upload";
+	self.statusLabel.text = @"Upload Started.";
 	
 	// and upload the file
 	//[dataImage writeToURL:url atomically:YES];
 	
-	self.fileStream = [NSInputStream inputStreamWithFileAtPath: renamedFile];
+	self.fileStream = [NSInputStream inputStreamWithFileAtPath: fileString];
+	
 	[self.fileStream open];
 	CFWriteStreamRef ftpStream = CFWriteStreamCreateWithFTPURL(NULL, (CFURLRef) url);
 	
@@ -474,8 +481,38 @@
 	
 	CFRelease(ftpStream);
 	
-	self.statusLabel.text = @"finished upload";
+	//[self _sendDidStart];
+
+	/*
+	//NSLog(@"here 1");
+	[renamedFile release];
+	[urlString release];
+	//NSLog(@"here 2");
+	[fileString release];
+	[url release];
+	NSLog(@"here 3");
+	[paths release];
+	[docDir release];
+	 */
+	
+	NSLog(@"after releasing strings in upload");
+	
+	//self.statusLabel.text = @"finished upload";
+	[self didStartNetworking];
+	 
 }
+
+// to be implemented
+-(void) didStartNetworking {
+	
+}
+
+
+// to be implemented
+-(void) didStopNetworking {
+	
+}
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -507,7 +544,7 @@
 
 - (void)dealloc
 {
-    [self _stopSendWithStatus:@"Stopped"];
+    //[self _stopSendWithStatus:@"Stopped"];
 	
     [self->_urlText release];
     [self->_usernameText release];

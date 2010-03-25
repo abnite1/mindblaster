@@ -19,24 +19,31 @@
 #import "Topic.h"
 #import "Score.h"
 
+static const int PICTURE_BOY	= 0;
+static const int PICTURE_GIRL	= 1;
+static const int PICTURE_DOG	= 2;
+static const int PICTURE_CAT	= 3;
+
 
 @interface UserProfile : NSObject {
-	NSString *userName;
-	UIImage *profilePic;
-	Score *score;
-	int highestScore;
-	Topic *currentTopic;
-	Topic *lastTopicCompleted;			
-	NSString *email;
+	
+	NSString	*userName;
+	int			profilePic;
+	Score		*score;
+	Score		*highestScore;
+	Topic		*currentTopic;
+	Topic		*lastTopicCompleted;			
+	NSString	*email;
 	
 }
-@property (nonatomic, retain) Topic *currentTopic;
-@property (nonatomic,retain) Topic *lastTopicCompleted;
-@property (nonatomic,retain) NSString *userName;
-@property (nonatomic,retain) NSString *email;
-@property (nonatomic,retain) UIImage *profilePic;
-@property (nonatomic,retain) Score *score;
-@property (nonatomic) int highestScore;
-		   
+@property (nonatomic, retain)	Topic		*currentTopic;
+@property (nonatomic, retain)	Topic		*lastTopicCompleted;
+@property (nonatomic, retain)	NSString	*userName;
+@property (nonatomic, retain)	NSString	*email;
+@property (nonatomic)			int			profilePic;
+@property (nonatomic, retain)	Score		*highestScore;
+@property (nonatomic, retain)	Score		*score;
+
+-(IBAction) checkHighestScore;		   
 
 @end

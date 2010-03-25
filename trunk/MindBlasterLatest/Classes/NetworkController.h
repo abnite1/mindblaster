@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GlobalAdmin.h"
+#import "MindBlasterAppDelegate.h"
+#import "HelpScreenController.h"
 
 enum {
     kSendBufferSize = 32768
@@ -45,6 +47,10 @@ enum {
 //-(IBAction)cancelAction:(id)sender;
 -(IBAction)download;
 -(IBAction)upload;
+-(void)didStartNetworking;
+-(void)didStopNetworking;
+- (IBAction) helpScreen;
+- (IBAction) backScreen;
 
 
 @end

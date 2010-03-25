@@ -13,7 +13,7 @@
 
 @implementation Asteroid
 
-@synthesize asteroidType,asteroidDirection, asteroidIcon, asteroidLabel, asteroidPosition, asteroidSize;
+@synthesize asteroidType,asteroidDirection, asteroidIcon, asteroidLabel, asteroidPosition, asteroidSize, asteroidSpeed;
 
 // constructor with copied icons and labels
 - (id)initWithElements:(UIImageView*)icon :(UILabel*)label {

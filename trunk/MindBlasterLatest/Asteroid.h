@@ -30,22 +30,24 @@ static const int ASTEROID_SIZE_Y = 32;
 @interface Asteroid : NSObject {
 
 
-	int		asteroidType;					// constant types defined at the top of the class
-	CGPoint asteroidDirection;				// direction of the asteroid's movement
-	CGPoint asteroidPosition;				// position of the asteroid
-//	IBOutlet UIImageView *asteroidIcon;		// UIImage of the asteroid
-	UIImageView *asteroidIcon;
-	IBOutlet UILabel *asteroidLabel;		// label correct/incorret answers
-	CGPoint asteroidSize;
+	int					asteroidType;					// constant types defined at the top of the class
+	CGPoint				asteroidDirection;				// direction of the asteroid's movement
+	CGPoint				asteroidPosition;				// position of the asteroid
+//	IBOutlet			UIImageView *asteroidIcon;		// UIImage of the asteroid
+	UIImageView			*asteroidIcon;
+	IBOutlet UILabel	*asteroidLabel;		// label correct/incorret answers
+	CGPoint				asteroidSize;
+	int					asteroidSpeed;
 }
 
-@property (nonatomic) int asteroidType;
-@property (nonatomic) CGPoint asteroidSize;
-@property (nonatomic) CGPoint asteroidPosition;
-@property (nonatomic) CGPoint asteroidDirection;
+@property (nonatomic) int						asteroidType;
+@property (nonatomic) int						asteroidSpeed;
+@property (nonatomic) CGPoint					asteroidSize;
+@property (nonatomic) CGPoint					asteroidPosition;
+@property (nonatomic) CGPoint					asteroidDirection;
 //@property (nonatomic,retain) IBOutlet UIImageView *asteroidIcon;
-@property (nonatomic,retain) UIImageView *asteroidIcon;
-@property (nonatomic,retain) IBOutlet UILabel *asteroidLabel;
+@property (nonatomic,retain) UIImageView		*asteroidIcon;
+@property (nonatomic,retain) IBOutlet UILabel	*asteroidLabel;
 
 -(id) initWithElements:(UIImageView*)icon :(UILabel*)label;
 //-(id) init;

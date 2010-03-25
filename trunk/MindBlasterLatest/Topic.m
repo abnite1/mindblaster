@@ -12,11 +12,10 @@
 @implementation Topic
 
 
-@synthesize difficulty, topic, description, operator;
+@synthesize difficulty, topic, operator;
+@synthesize description;
 
 // initializer that sets a new topic. 
-
-// USE THE DEFINED CONSTANTS IN Topic.h
 - (id)initWithTopic:(int)newTopic {
 	
     if ( self = [super init] ) {
@@ -24,7 +23,11 @@
 		// set the topic
         topic = newTopic;
 		
+		// set difficulty
 		difficulty = DIFFICULTY_EASIEST;
+		
+		// set the description
+		[self initDescription];
 		
 		// set the operator appropriately
 		[self initOperator];
@@ -38,10 +41,23 @@
 -(void) initOperator {
 	
 	// set the operator
-	if (topic == TOPIC_ADDITION) operator = (char*)'+';
-	else if (topic == TOPIC_SUBTRACTION) operator = (char*)'-';
+	if (topic == TOPIC_ADDITION)			operator = (char*)'+';
+	else if (topic == TOPIC_SUBTRACTION)	operator = (char*)'-';
 	else if (topic == TOPIC_MULTIPLICATION) operator = (char*)'X';
-	else if (topic == TOPIC_DIVISION) operator = (char*)'/';
+	else if (topic == TOPIC_DIVISION)		operator = (char*)'/';
+}
+
+// sets the description according to the topic type
+-(void) initDescription {
+	
+	NSString *desc; 
+	// set the operator
+	if (topic == TOPIC_ADDITION)			desc = [[NSString alloc] initWithString: @"Addition."];
+	else if (topic == TOPIC_SUBTRACTION)	desc = [[NSString alloc] initWithString: @"Subtraction."];
+	else if (topic == TOPIC_MULTIPLICATION) desc = [[NSString alloc] initWithString: @"Multiplication."];
+	else if (topic == TOPIC_DIVISION)		desc = [[NSString alloc] initWithString: @"Division."];
+	
+	[desc release];
 }
 
 // switches to the next topic
@@ -55,8 +71,11 @@
 	difficulty = DIFFICULTY_EASIEST;
 	topic++;
 	
-	// also reset the operator
+	// also set the operator to the new topic type
 	[self initOperator];
+	
+	// and the description message
+	[self initDescription];
 	
 	// switch made successfully
 	return YES;

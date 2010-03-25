@@ -16,13 +16,12 @@
 @synthesize currentUser;
 
 
-
-
+// executed when user quit the app
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    //GLOBAL USER PROFILE!
+    
+	// the AppDelegate profile
 	currentUser = [[UserProfile alloc] init];
-	//[currentUser lastTopicCompleted] = [[Topic alloc] init];
-	//[currentUser score] = [[Score alloc] init];
+
 	
     // Override point for customization after app launch    
 	
@@ -32,10 +31,18 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+	
 	// Save userprofile to plist
-	[GlobalAdmin writeToFile];
+	[GlobalAdmin saveSettings];
 }
 
+-(void) didStartNetworking {
+	
+}
+
+-(void) didStopNetworking {
+	
+}
 
 // release memory
 - (void)dealloc {
