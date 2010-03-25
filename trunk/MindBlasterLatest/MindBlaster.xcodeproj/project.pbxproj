@@ -34,6 +34,9 @@
 		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
 		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
 		77D33A851148CE4600D066DD /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D33A841148CE4600D066DD /* Topic.m */; };
+		B40A656D115B0D5400BEFBD8 /* leftwheel3.png in Resources */ = {isa = PBXBuildFile; fileRef = B40A656C115B0D5400BEFBD8 /* leftwheel3.png */; };
+		B40A656F115B0D5F00BEFBD8 /* rightwheel3.png in Resources */ = {isa = PBXBuildFile; fileRef = B40A656E115B0D5F00BEFBD8 /* rightwheel3.png */; };
+		B40A6571115B0D6900BEFBD8 /* greyball3.png in Resources */ = {isa = PBXBuildFile; fileRef = B40A6570115B0D6900BEFBD8 /* greyball3.png */; };
 		B437022C1131E25A002A55F5 /* TopicScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B437022A1131E25A002A55F5 /* TopicScreenController.m */; };
 		B437022D1131E25A002A55F5 /* TopicScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B437022B1131E25A002A55F5 /* TopicScreenController.xib */; };
 		B43702441131E453002A55F5 /* DifficultyScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43702421131E453002A55F5 /* DifficultyScreenController.m */; };
@@ -103,6 +106,9 @@
 		77D33A831148CE4600D066DD /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		77D33A841148CE4600D066DD /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MindBlaster-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MindBlaster-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B40A656C115B0D5400BEFBD8 /* leftwheel3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftwheel3.png; sourceTree = "<group>"; };
+		B40A656E115B0D5F00BEFBD8 /* rightwheel3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightwheel3.png; sourceTree = "<group>"; };
+		B40A6570115B0D6900BEFBD8 /* greyball3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyball3.png; sourceTree = "<group>"; };
 		B43702291131E25A002A55F5 /* TopicScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicScreenController.h; sourceTree = "<group>"; };
 		B437022A1131E25A002A55F5 /* TopicScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicScreenController.m; sourceTree = "<group>"; };
 		B437022B1131E25A002A55F5 /* TopicScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TopicScreenController.xib; path = Classes/TopicScreenController.xib; sourceTree = "<group>"; };
@@ -236,6 +242,9 @@
 		773C9B44115AC25D003A9C5F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B40A6570115B0D6900BEFBD8 /* greyball3.png */,
+				B40A656E115B0D5F00BEFBD8 /* rightwheel3.png */,
+				B40A656C115B0D5400BEFBD8 /* leftwheel3.png */,
 				07BBE0AD113703EC00BAF196 /* Space-Art-Wallpapers-12.jpg */,
 				07E3F5DB1146DDD5005E5D37 /* boy.png */,
 				07E3F5DC1146DDD5005E5D37 /* cat.png */,
@@ -380,6 +389,9 @@
 				07E3F5E21146DDD5005E5D37 /* girl.png in Resources */,
 				773C9B51115AC2A4003A9C5F /* NetworkController.xib in Resources */,
 				77AFB035115AC8EF00123F1C /* ApplicationSettings.plist in Resources */,
+				B40A656D115B0D5400BEFBD8 /* leftwheel3.png in Resources */,
+				B40A656F115B0D5F00BEFBD8 /* rightwheel3.png in Resources */,
+				B40A6571115B0D6900BEFBD8 /* greyball3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
