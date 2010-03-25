@@ -3,6 +3,7 @@
 //  MindBlaster
 //
 //  Created by John Kehler on 3/20/10.
+//  Restructured by Yaniv Haramati on 24/3/10. Added: getURL, getPic
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,8 +15,8 @@
 
 +(NSString *)getPath;
 +(void)initProfile;
-+(BOOL)writeToFile;
-+(BOOL)readFromFile;
++(BOOL)saveSettings;
++(BOOL)loadSettings;
 +(id) getPic:(int)position;
 +(id)getURL;
 //-(NSString)Rename;

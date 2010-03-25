@@ -101,7 +101,7 @@
 	// the scoreboard
 	IBOutlet UILabel *scoreLabel;
 	
-	int score;
+	//int score;
 	int lives;
 	int shield;
 	

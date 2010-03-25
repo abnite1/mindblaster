@@ -13,6 +13,8 @@
 
 #import <Foundation/Foundation.h>
 
+// experimental:
+
 #define _TOPIC_ADDITION 0;
 #define _TOPIC_SUBTRACTION 1;
 #define _TOPIC_MULTIPLICATION 2;
@@ -22,7 +24,7 @@
 #define _DIFFICULTY_HARD 3;
 #define _DIFFICULTY_HARDEST 4;
 
-
+//
 
 static const int TOPIC_ADDITION = 0;
 static const int TOPIC_SUBTRACTION = 1;
@@ -58,5 +60,6 @@ static const int MAX_TOPICS = 3;
 -(id)initWithTopic:(int)newTopic;
 -(BOOL) nextTopic;
 -(void) initOperator;
+-(void) initDescription;
 
 @end

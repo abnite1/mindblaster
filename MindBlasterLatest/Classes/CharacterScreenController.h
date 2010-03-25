@@ -41,6 +41,6 @@
 - (IBAction) fourthCharacterSelected;
 - (IBAction) backScreen;
 - (IBAction) helpScreen;
-//-(void)animateBackground;
+-(void)animateBackground;
 
 @end

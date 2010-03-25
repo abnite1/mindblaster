@@ -9,19 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "BackgroundAnimation.h"
 #import "HelpScreenController.h"
+#import "Topic.h"
 
 @interface UserNameScreenController : UIViewController {
 	IBOutlet UITextField *name;
+	IBOutlet UITextField *email;
 	IBOutlet BackgroundAnimation *background;
 	
 
 }
 
-//TEST
-//@property(nonatomic, retain) IBOutlet UIButton *temp;
+
 @property (nonatomic,retain) IBOutlet UITextField *name;
+@property (nonatomic,retain) IBOutlet UITextField *email;
+
 - (IBAction) makeKeyboardGoAway;
-//- (void) initUserProfileSettings;
 - (IBAction) nextScreen;
 - (IBAction) backScreen;
 - (IBAction) helpScreen;

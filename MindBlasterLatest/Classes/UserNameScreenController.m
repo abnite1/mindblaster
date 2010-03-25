@@ -8,11 +8,11 @@
 //
 
 #import "UserNameScreenController.h"
-#import "Topic.h"
 
 
 @implementation UserNameScreenController
-@synthesize name;
+
+@synthesize name,email;
 
 
 // hide the keyboard after name is entered
@@ -22,12 +22,14 @@
 
 // show the text field after the keyboard is gone
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	
 	[textField resignFirstResponder];
 	return YES;
 }
 
 // navigate to the help screen
 -(IBAction) helpScreen {
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
@@ -37,10 +39,9 @@
 //navigate to topic selection
 -(IBAction) nextScreen {
 
-
-	//[self initUserProfileSettings];
-	//then obviously set the name to what theychose.
+	// set the AppDelegate user name
 	[UIAppDelegate.currentUser setUserName:[name text]];
+	[UIAppDelegate.currentUser setEmail: [email text]];
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
@@ -48,27 +49,19 @@
 	[topicView release];
 }
 
-// initializes the default topic to ADDITION
-//THIS IS NOW HANDLED AT CHARCTER SCREEN CONTROLLER, by calling the GlobalAdmin function "initProfile"
-/*
--(void) initUserProfileSettings {
-	//NSLog(@"Checking: The name was chosen as: %@ \n",[name text]);
-	[(UIAppDelegate.currentUser) setUserName:[name text]];
-	//NSLog(@"The current name is set to: %@ \n", [UIAppDelegate.currentUser getName]);
-	
-	// set the last topic completed to the first choice
-	[UIAppDelegate.currentUser setLastTopicCompleted:[[Topic alloc] initWithTopic: TOPIC_ADDITION]];
-}*/
 
 - (IBAction) backScreen {
+	
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
+        
+		// Custom initialization
     }
     return self;
 }
@@ -77,12 +70,17 @@
 
 // animate the space background
 -(void)animateBackground {
+	
 	[background move];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	// initialize the edit field
+	name.text = nil;
+	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self

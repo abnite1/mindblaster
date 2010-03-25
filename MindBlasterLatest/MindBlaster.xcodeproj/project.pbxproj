@@ -34,6 +34,7 @@
 		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
 		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
 		77D33A851148CE4600D066DD /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D33A841148CE4600D066DD /* Topic.m */; };
+		77DE5F5E115B3091007922D6 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77DE5F5D115B3091007922D6 /* UserProfile.plist */; };
 		B40A656D115B0D5400BEFBD8 /* leftwheel3.png in Resources */ = {isa = PBXBuildFile; fileRef = B40A656C115B0D5400BEFBD8 /* leftwheel3.png */; };
 		B40A656F115B0D5F00BEFBD8 /* rightwheel3.png in Resources */ = {isa = PBXBuildFile; fileRef = B40A656E115B0D5F00BEFBD8 /* rightwheel3.png */; };
 		B40A6571115B0D6900BEFBD8 /* greyball3.png in Resources */ = {isa = PBXBuildFile; fileRef = B40A6570115B0D6900BEFBD8 /* greyball3.png */; };
@@ -105,6 +106,7 @@
 		77B6953711461F940055EFD6 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		77D33A831148CE4600D066DD /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		77D33A841148CE4600D066DD /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
+		77DE5F5D115B3091007922D6 /* UserProfile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserProfile.plist; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MindBlaster-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MindBlaster-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B40A656C115B0D5400BEFBD8 /* leftwheel3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftwheel3.png; sourceTree = "<group>"; };
 		B40A656E115B0D5F00BEFBD8 /* rightwheel3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightwheel3.png; sourceTree = "<group>"; };
@@ -115,8 +117,8 @@
 		B43702411131E453002A55F5 /* DifficultyScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifficultyScreenController.h; sourceTree = "<group>"; };
 		B43702421131E453002A55F5 /* DifficultyScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DifficultyScreenController.m; sourceTree = "<group>"; };
 		B43702431131E453002A55F5 /* DifficultyScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DifficultyScreenController.xib; path = Classes/DifficultyScreenController.xib; sourceTree = "<group>"; };
-		B43702B41131EBF4002A55F5 /* GameScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScreenController.h; path = Classes/GameScreenController.h; sourceTree = "<group>"; };
-		B43702B51131EBF4002A55F5 /* GameScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScreenController.m; path = Classes/GameScreenController.m; sourceTree = "<group>"; };
+		B43702B41131EBF4002A55F5 /* GameScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScreenController.h; sourceTree = "<group>"; };
+		B43702B51131EBF4002A55F5 /* GameScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScreenController.m; sourceTree = "<group>"; };
 		B43702B61131EBF4002A55F5 /* GameScreenController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GameScreenController.xib; path = Classes/GameScreenController.xib; sourceTree = "<group>"; };
 		B43702E01131F094002A55F5 /* GameOverScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScreenController.h; sourceTree = "<group>"; };
 		B43702E11131F094002A55F5 /* GameOverScreenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScreenController.m; sourceTree = "<group>"; };
@@ -161,6 +163,8 @@
 		080E96DDFE201D6D7F000001 /* Screen Controller Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B43702B41131EBF4002A55F5 /* GameScreenController.h */,
+				B43702B51131EBF4002A55F5 /* GameScreenController.m */,
 				773C9B2D115AC22E003A9C5F /* NetworkController.h */,
 				773C9B2E115AC23D003A9C5F /* NetworkController.m */,
 				B4C0FEF01131DDAC00EBC1D9 /* CharacterScreenController.h */,
@@ -264,6 +268,7 @@
 		773C9B45115AC279003A9C5F /* Property Files */ = {
 			isa = PBXGroup;
 			children = (
+				77DE5F5D115B3091007922D6 /* UserProfile.plist */,
 				07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */,
 				8D1107310486CEB800E47090 /* MindBlaster-Info.plist */,
 				77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */,
@@ -292,8 +297,6 @@
 		B4B012DF1140810B00E0D5DB /* Game Play Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B43702B41131EBF4002A55F5 /* GameScreenController.h */,
-				B43702B51131EBF4002A55F5 /* GameScreenController.m */,
 				77203E411141272E00127EC1 /* Ship.h */,
 				77203E421141272E00127EC1 /* Ship.m */,
 				072972C11146DB3C004ED361 /* UserProfile.h */,
@@ -392,6 +395,7 @@
 				B40A656D115B0D5400BEFBD8 /* leftwheel3.png in Resources */,
 				B40A656F115B0D5F00BEFBD8 /* rightwheel3.png in Resources */,
 				B40A6571115B0D6900BEFBD8 /* greyball3.png in Resources */,
+				77DE5F5E115B3091007922D6 /* UserProfile.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

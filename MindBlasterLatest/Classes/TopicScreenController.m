@@ -17,6 +17,7 @@
 @synthesize division;
 
 -(IBAction) helpScreen {
+	
 	// navigate to the help screen
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
@@ -25,61 +26,87 @@
 
 // navigate back to the previous screen
 - (IBAction) backScreen {
+	
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
 
 // addition selected
 -(IBAction) firstTopicSelected {
-	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_ADDITION]];	// possible memory leak
-
+	
+	// create a new topic
+	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_ADDITION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Addition."];
-	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
+	[topic setDescription: msg];
+	
+	// set an appropriate UI label
 	[label setText:msg];
+	
+	// update the AppDelegate profile
+	[UIAppDelegate.currentUser setCurrentTopic: topic];
+
 	[msg release];
-	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'+'];
+	[topic release];
 }
 
 // subtraction selected
 -(IBAction) secondTopicSelected {
-	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_SUBTRACTION]];	// possible memory leak
-
+	
+	// create a new topic
+	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_SUBTRACTION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Subtraction."];
-	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
+	[topic setDescription: msg];
+	
+	// set an appropriate UI label
 	[label setText:msg];
+	
+	// update the AppDelegate profile
+	[UIAppDelegate.currentUser setCurrentTopic: topic];
+	
 	[msg release];
-	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'-'];
+	[topic release];
 }
 
 // multiplication selected
 -(IBAction) thirdTopicSelected {
-	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_MULTIPLICATION]];		// possible memory leak
-	
+
+	// create a new topic
+	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_MULTIPLICATION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Multiplication."];
-	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
+	[topic setDescription: msg];
+	
+	// set an appropriate UI label
 	[label setText:msg];
+	
+	// update the AppDelegate profile
+	[UIAppDelegate.currentUser setCurrentTopic: topic];
+	
 	[msg release];
-	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'X'];
+	[topic release];
 }
 
 // division selected
 -(IBAction) fourthTopicSelected {
-	[UIAppDelegate.currentUser setCurrentTopic:[[Topic alloc] initWithTopic:TOPIC_DIVISION]];		// possible memory leak
-	
+
+	// create a new topic
+	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_DIVISION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Division."];
-	[UIAppDelegate.currentUser.currentTopic setDescription:msg];
+	[topic setDescription: msg];
+	
+	// set an appropriate UI label
 	[label setText:msg];
+	
+	// update the AppDelegate profile
+	[UIAppDelegate.currentUser setCurrentTopic: topic];
+	
 	[msg release];
-	[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'/'];
+	[topic release];
 }
 
 // navigate to difficulty selection
--(IBAction) nextScreen {
-	//DEBUGGING
-	//NSLog(@"The topic now set to %d \n",[UIAppDelegate.currentUser getStage]);
+-(IBAction) nextScreen {	
 	
-	
-	// Navigation logic may go here -- for example, create and push another view controller.
+	// navigate to difficulty selection view
 	DifficultyScreenController *difficultyView = [[DifficultyScreenController alloc] initWithNibName:@"DifficultyScreenController" bundle:nil];
 	[self.navigationController pushViewController:difficultyView animated:YES];
 	[difficultyView release];
@@ -103,20 +130,22 @@
 // default to the first topic selection, start the sapce background animation
 - (void)viewDidLoad {
 	
+	// default to the first topic
+	[self firstTopicSelected];
 	
-	
+	// for testing, show selected topic properties:
 	NSLog(@"Current Username is: %@ \n",[UIAppDelegate.currentUser userName]);
 	NSLog(@"Current email is: %@ \n",[UIAppDelegate.currentUser email]);
+	NSLog(@"LasttopicDiff is: %d \n",[[UIAppDelegate.currentUser currentTopic] difficulty]);
+	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser currentTopic] topic]);
+	NSLog(@"LasttopicDescr is: %@ \n",[[UIAppDelegate.currentUser currentTopic] description]);
 	NSLog(@"LasttopicDiff is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] difficulty]);
 	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
 	NSLog(@"LasttopicDescr is: %@ \n",[[UIAppDelegate.currentUser lastTopicCompleted] description]);
-	//NSLog(@"LasttopicOperator is: %s \n",[[UIAppDelegate.currentUser lastTopicCompleted] operator]);
 	NSLog(@"Score is: %d \n",[[UIAppDelegate.currentUser score] score]);
-	NSLog(@"HighestScore is: %d \n",[UIAppDelegate.currentUser highestScore]);
+	NSLog(@"HighestScore is: %d \n",[[UIAppDelegate.currentUser highestScore] score]);
 	
-	// default to the first topic
-	[self firstTopicSelected];
-	//NSLog(@"nothging\n");
+
 	//block and hide any locked topics
 	//NSLog(@"Last Topic Completed is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
 	//purposely don't do break so excecute all rest as well

@@ -6,7 +6,7 @@
 //  Restructured by yaniv haramati on 12/03/10
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //  
-//  steve's test
+
 
 #import "UserProfile.h"
 
@@ -18,10 +18,10 @@
 -(IBAction) checkHighestScore {
 	
 	// if the current score is higher than highestScore
-	if ([score score] > highestScore) {
+	if ([score score] > [highestScore score]) {
 		
 		// update the highest score
-		highestScore = [score score];
+		[highestScore setScore: [score score]];
 		
 	}
 }

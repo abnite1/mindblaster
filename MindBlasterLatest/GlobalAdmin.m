@@ -11,137 +11,186 @@
 
 @implementation GlobalAdmin
 
-+(NSString *)getPath
-{
+// returns the absolute path of the UserProfile.plist
+// from the relative Document directory
++(NSString *)getPath {
+	
+	// get the relative ~/Documents path and append our property file name to it
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *path = [NSString stringWithFormat:@"%@%@",[paths objectAtIndex:0],@"/userProfile.plist"];
-	NSLog(@"The path is: %@ \n",path);
+	NSString* docDir = [paths objectAtIndex:0];
+	NSString *path = [docDir stringByAppendingPathComponent:@"UserProfile.plist"];
+	
+	//NSLog(@"The path is: %@ \n",path);
 	return path;
 }
 
-+(void)initProfile
-{
+// initialize AppDelegate profile to default settings
++(void)initProfile {
+	
+	// initialize user name
 	[UIAppDelegate.currentUser setUserName:@"blank"];
+	
+	// initialize email
 	[UIAppDelegate.currentUser setEmail:@"blank"]; 
-	[UIAppDelegate.currentUser setHighestScore:0];
-	[UIAppDelegate.currentUser setScore:[[Score alloc] initWithScore:0]];
-	Topic *temp = [Topic new];
-	[temp setDifficulty:DIFFICULTY_EASIEST];
-	[temp setTopic:TOPIC_ADDITION];
-	[temp setDescription:@"blank"];
-	[UIAppDelegate.currentUser setLastTopicCompleted:temp];
-	NSLog(@"Profile initialized\n");
+	
+	// initialize current score
+	Score *zero = [[Score alloc] initWithScore: 0];
+	[UIAppDelegate.currentUser setScore: zero];
+	
+	// initialize highest score
+	[UIAppDelegate.currentUser setHighestScore: zero];
+	
+	[zero release];
+	
+	// set the current topic (difficulty is set to EASIEST with this init function)
+	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_ADDITION];
+	[topic initOperator];
+	[topic initDescription];
+
+	// set the current and lastCompleted topics to their base value
+	[UIAppDelegate.currentUser setCurrentTopic: topic];
+	[UIAppDelegate.currentUser setLastTopicCompleted: topic];
+	
+	[topic release];
+	
+	NSLog(@"AppDelegate profile initialized.");
+	
+	if (! [self saveSettings]) NSLog(@"Failed to save settings after initializing AppDelegate profile.");
+	else NSLog(@"Profile initialized and saved to plist");
 }
 
-+(BOOL)writeToFile
-{
-	NSMutableDictionary * prefs;
-    prefs = [[NSMutableDictionary alloc] init];
+// save AppDelegate settings to property list
++(BOOL)saveSettings {
 	
-	//IS THERE A PROFILE TO WRITE??
+	// set up mutable dictionary to write to
+	NSString *path = [self getPath];
+	NSMutableDictionary *prefs = [[NSMutableDictionary alloc] init];
+	
+	
+	// check if the AppDelegate profile is set before attempting to save it to plist
 	if([UIAppDelegate.currentUser userName] == NULL && [[UIAppDelegate.currentUser score] score] == 0)
 	{
-		NSLog(@"There is not valid profile to save.\n");
+		NSLog(@"There is not a valid AppDelegate profile to save.\n");
 		return NO;
 	}
 	
-    [prefs setObject:[UIAppDelegate.currentUser userName] forKey:@"userName"];
-	//last topic complete
-	NSNumber *lastTopicCompletedDiff = [NSNumber numberWithInt:[[UIAppDelegate.currentUser lastTopicCompleted] difficulty]];
-	NSNumber *LastTopicCompletedTopic = [NSNumber numberWithInt:[[UIAppDelegate.currentUser lastTopicCompleted] topic]];
-	[prefs setObject:lastTopicCompletedDiff forKey:@"lastTopicCompletedDiff"];
-	[prefs setObject:LastTopicCompletedTopic forKey:@"lastTopicCompletedTopic"];
-	[prefs setObject:[[UIAppDelegate.currentUser lastTopicCompleted] description] forKey:@"lastTopicCompletedDescription"];
+	// save the user name
+    [prefs setObject: [UIAppDelegate.currentUser userName] forKey: @"UserName"];
 	
-	//score
-	NSNumber *score = [NSNumber numberWithInt:[[UIAppDelegate.currentUser score] score]];
-	[prefs setObject:score forKey:@"score"];
-	NSNumber *highestScore = [NSNumber numberWithInt:[UIAppDelegate.currentUser highestScore]];
-	[prefs setObject:highestScore forKey:@"highestScore"];
-	[prefs setObject:[UIAppDelegate.currentUser email] forKey:@"email"];
+	// save the profile email
+	[prefs setObject: [UIAppDelegate.currentUser email] forKey: @"Email"];
 	
-	//profilepicture:
-/*	if([UIAppDelegate.currentUser profilePic] != NULL)
-	{//profile pic is causing it to fail to write (even when NOT null)
-		NSData *profilePicData = UIImagePNGRepresentation([UIAppDelegate.currentUser profilePic]);
-		[prefs setObject:profilePicData forKey:@"profilePic"];
-		[profilePicData release];
-		//[prefs setObject:[UIAppDelegate.currentUser profilePic] forKey:@"profilePic"];
-	}else
-		NSLog(@"there is no profile pic associated with this account.\n");
-	*/
+	// save the user profile pic
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser profilePic]]
+				  forKey: @"Picture"];
 	
+	// save the score
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.score score]] 
+				  forKey: @"Score"];
 	
-	//WRITE TO plist
-	NSString *path = [self getPath];
-	NSLog(@"Writetofile path is: %@ \n",path);
-    if([prefs writeToFile:[path
-						   stringByExpandingTildeInPath] atomically: TRUE] == YES)
-	{
-		NSLog(@"Plist written\n");
-		[prefs release];
-		//[path release];  ****** I KNOW ITS MESSED UP BUT I DID TRIAL AND ERROR SEVERAL TIMES, if i release path, it crashes ...???? WHY
-		return YES;
-	}else{
-		NSLog(@"ERROR Plist not written\n");
-	  // [path release];
-		[prefs release];
+	// save the current score as highest score if it's greater than the one in the plist profile
+	int score = [UIAppDelegate.currentUser.score score];
+	int highestScore = [[prefs objectForKey: @"HighestScore"] intValue];
+	if (score > highestScore) {
+		
+		[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.highestScore score]] 
+					forKey: @"HighestScore"];
 	}
-	return NO;
 	
+	// save the current topic and the current topic difficulty
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.currentTopic topic]] 
+				  forKey: @"CurrentTopic"];
+	
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.currentTopic difficulty]] 
+				  forKey: @"CurrentTopicDifficulty"];
+	
+	// save the lastCompletedTopic (highest topic completed) and difficulty
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.lastTopicCompleted topic]] 
+				  forKey: @"HighestTopic"];
+	
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.lastTopicCompleted difficulty]] 
+				  forKey: @"HighestTopicDifficulty"];
+	
+	
+	// for debug
+	NSLog(@"Writetofile path is: %@ \n", path);
+	
+	// write the dictionary values to the .plist file
+    if( ! [prefs writeToFile: path atomically: YES]) {
+		
+		NSLog(@"ERROR while trying to write profile to .plist\n");
+		return NO;
+	}
+	
+	// successfully written to file
+	return YES;
 }
 
-+(BOOL)readFromFile
-{
-	//READ IT BACK TO PROFILE
-	NSDictionary *prefs2;
+// read a profile from .plist and return YES.
+// @return NO if it doesn't exist.
++(BOOL)loadSettings {
+
+	// get te ~/Documents/ path
 	NSString *path = [self getPath];
-	//CHECKING IF FILE EXISTS: this works (doesn't crash)
-	if([[NSFileManager defaultManager] fileExistsAtPath:[path stringByExpandingTildeInPath]] == NO)
-	{
+	
+	// if userProfile.plist doesn't exist in the ~/Documents/ directory
+	if (! [[NSFileManager defaultManager] fileExistsAtPath: path]) {
 		NSLog(@"No profile exists\n");
-		//[paths release];
-		//[path release];
 		return NO;
 	}else
 		NSLog(@"The profile exists\n");
 	
-	prefs2 = [NSDictionary dictionaryWithContentsOfFile:[path stringByExpandingTildeInPath]];
+	// read the plist into a dictionary
+	NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile: path];
 
-	if (prefs2) {
-		[UIAppDelegate.currentUser setUserName: [[NSString alloc] initWithString:[prefs2 objectForKey:@"userName"]]];
+	// if we can access the profile
+	// load all its properties to the UIAppDelegate
+	if (prefs) {
 		
-		NSNumber *lastTopicCompletedDiff = [prefs2 objectForKey:@"lastTopicCompletedDiff"];
-		NSNumber *lastTopicCompletedTopic = [prefs2 objectForKey:@"lastTopicCompletedTopic"];	
-		[[UIAppDelegate.currentUser lastTopicCompleted] setDescription:[prefs2 objectForKey:@"lastTopicCompletedDescription"]];
-		//READ THE OPERATOR AND DESCRIPTIONS
-		Topic *lastTopic = [Topic new];
-		[lastTopic setDifficulty:[lastTopicCompletedDiff intValue]];
-		[lastTopic setTopic:[lastTopicCompletedTopic intValue]];
-		[UIAppDelegate.currentUser setLastTopicCompleted:lastTopic];
-
-		/*[UIAppDelegate.currentUser setLastTopicCompleted:[[Topic alloc] initWithTopic:[[prefs2 objectForKey:@"lastTopicCompletedTopic"] intValue]]];	// possible memory leak
-		NSString *msg = [[NSString alloc] initWithFormat:[prefs2 objectForKey:@"lastTopicCompletedDescription"]];
-		[UIAppDelegate.currentUser.lastTopicCompleted setDescription:msg];
-		//[label setText:msg];
-		[msg release];*/
-		//[UIAppDelegate.currentUser.currentTopic setOperator:(char*)'+'];
-
-		//MUST READ PROFILE PICTURE
-		//UIImage *profilePic = [UIImage new];
-		//[profilePic initWithData:[prefs2 objectForKey:@"profilePic"]];
-		//[UIAppDelegate.currentUser setProfilePic:profilePic];
-		//[profilePic release];
+		// load the user name
+		[UIAppDelegate.currentUser setUserName: [prefs objectForKey: @"UserName"]];
 		
-		//score
-		Score *score = [Score new];
-		[score setScore: [[prefs2 objectForKey:@"score"] intValue]];
-		[UIAppDelegate.currentUser setScore:score];
-		[UIAppDelegate.currentUser setHighestScore:[[prefs2 objectForKey:@"highestScore"] intValue]];
-		[UIAppDelegate.currentUser setEmail:[[NSString alloc] initWithString:[prefs2 objectForKey:@"email"]]];
+		// load email
+		[UIAppDelegate.currentUser setEmail: [prefs objectForKey: @"Email"]];
+		
+		// load profile pic
+		[UIAppDelegate.currentUser setProfilePic: [[prefs objectForKey: @"Picture"] intValue]];
+		
+		// load the current score 
+		Score *scoreCurrent = [[Score alloc] initWithScore: [[prefs objectForKey: @"Score"] intValue]];
+		[UIAppDelegate.currentUser setScore: scoreCurrent];
+		
+		// load the highest score
+		Score *scoreHighest = [[Score alloc] initWithScore:  [[prefs objectForKey: @"HighestScore"] intValue]];
+		[UIAppDelegate.currentUser setHighestScore: scoreHighest];
+		
+		[scoreCurrent release];
+		[scoreHighest release];
+		
+		// load the current topic
+		int top = [[prefs objectForKey: @"CurrentTopic"] intValue];
+		int diff = [[prefs objectForKey: @"CurrentTopicDifficulty"] intValue];
+		Topic *topic = [[Topic alloc] initWithTopic: top];
+		[topic setDifficulty: diff];
+		[UIAppDelegate.currentUser setCurrentTopic: topic];
+		
+		// load the highest topic completed	
+		int topInt = [[prefs objectForKey: @"HighestTopic"] intValue];
+		int diffInt = [[prefs objectForKey: @"HighestTopicDifficulty"] intValue];
+		[topic setTopic: topInt];
+		[topic setDifficulty: diffInt];
+		[UIAppDelegate.currentUser setLastTopicCompleted: topic];
+		
+		[topic release];
+		
+		// all settings successfully loaded to AppDelegate
 		return YES;
-    } else {
-		NSLog(@"ERROR with the plist\n");
+   }
+	
+	// if we can't read the profile plist, return with error.
+	else {
+		
+		NSLog(@"ERROR couldn't read UserProfile.plist \n");
 		return NO;
 	}	
 }
@@ -166,7 +215,11 @@
 	// read the general settings plist into a dictionary
 	NSString *path = [[NSBundle mainBundle] bundlePath];
 	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
-	NSDictionary *plistData = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
+	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
+
+	[path release];
+	[finalPath release];
+	NSLog(@"after releasing strings in getURL");
 	
 	return [plistData objectForKey:@"WebURL"];
 }

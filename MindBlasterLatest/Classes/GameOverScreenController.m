@@ -20,9 +20,10 @@
 @implementation GameOverScreenController
 
 //new game with same settings as the game that just finished - simply navigates BACK one to gamescreen
-// this should also reset the scoreboard in the phase II
 -(IBAction) tryAgain {
+	
 	[self.navigationController popViewControllerAnimated:TRUE];	
+	
 }
 
 
@@ -64,15 +65,16 @@
 	[background move];
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+// when we're at gameover, save progress to .plist then reset the score.
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
 	
-	//save profile to plist UNCOMMENT THIS ONCE gamescreen proplerly updates the userprofile with score andlasttopiccomplete.
-	//[GlobalAdmin writeToFile];
+	// reset score
+	[UIAppDelegate.currentUser.score setScore: 0];
+	
 	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
-	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];
@@ -81,11 +83,13 @@
 
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	
     // return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void)didReceiveMemoryWarning {
+	
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 	
@@ -99,6 +103,7 @@
 
 
 - (void)dealloc {
+	
     [super dealloc];
 }
 

@@ -26,9 +26,15 @@
 }
 
 /*
+ *  user chose "new game"
  *	navigate to the next screen, which is character selection
+ *  also initialize the profile to default settings
  */
 - (IBAction) nextScreen {
+	
+	// initialize profile
+	[GlobalAdmin initProfile];
+	
     // Navigation logic may go here -- for example, create and push another view controller.
 	CharacterScreenController *characterView = [[CharacterScreenController alloc] initWithNibName:@"CharacterScreenController" bundle:nil];
 	[self.navigationController pushViewController:characterView animated:YES];
@@ -44,6 +50,9 @@
 	NetworkController *netView = [[NetworkController alloc] initWithNibName:@"NetworkController" bundle:nil];
 	[self.navigationController pushViewController:netView animated:YES];
 	[netView release];
+	
+	
+	// old loadgame controller phased out while we integrate the network controller
 	/*
     // Navigation logic may go here -- for example, create and push another view controller.
 	LoadGameScreenController *loadGameView = [[LoadGameScreenController alloc] initWithNibName:@"LoadGameScreenController" bundle:nil];
@@ -52,24 +61,22 @@
 	 */
 }
 
-// continute to topic selection with the current profile
+// continue to topic selection with the current profile
 - (IBAction) continueSelected {
 
-	if([GlobalAdmin readFromFile] == YES)
-	{
-		// Navigation logic may go here -- for example, create and push another view controller.
-		TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
-		[self.navigationController pushViewController:topicView animated:YES];
-		[topicView release];
-	}else
-		NSLog(@"Unable to load plist profile\n");
+	if(! [GlobalAdmin loadSettings]) NSLog(@"Unable to load plist profile\n");
+	
+	// Navigation logic may go here -- for example, create and push another view controller.
+	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
+	[self.navigationController pushViewController:topicView animated:YES];
+	[topicView release];
+
 }
 
 /*
  * perform these actions when view first loads:
  * animate the background space image
 */
-
 - (void)viewDidLoad {
 	
 	///Check if profile exists, if so, fine
@@ -81,12 +88,12 @@
 	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
 								   selector:@selector(moveBackground) userInfo:nil repeats:YES];
 	[bgAnimation setSpeedX:0.2 Y:0.2];
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
 }
 
 // selector function for the background animation
 -(void)moveBackground {
+	
 	[bgAnimation move];
 }
 

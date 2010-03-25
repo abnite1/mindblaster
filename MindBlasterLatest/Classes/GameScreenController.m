@@ -29,23 +29,21 @@
 
 
 // animate the space background
--(void)animateBackground
-{
+-(void)animateBackground {
 	[background move];
 }
 
 
--(void)setGameTimer;
-{
+// switches between play mode and pause
+-(void)setGameTimer; {
 
-	
-	if(gamePaused == FALSE)
-	{
+	if(gamePaused == FALSE) {
+		
 		GamePlayTimer = [NSTimer scheduledTimerWithTimeInterval:GamePlayTimerInterval target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
 		gamePaused = TRUE;
 	}
-	else
-	{
+	else {
+		
 		[GamePlayTimer invalidate];
 		gamePaused = FALSE;
 	}
@@ -133,17 +131,23 @@
 //	[self initializeBulletPosition];
 	
 
-	//load the profile pic!
-	[profilePic setImage:[UIAppDelegate.currentUser profilePic] forState:0];
+	//set the profile pic!
+	int picIndex = [UIAppDelegate.currentUser profilePic];
+	[profilePic setImage: [GlobalAdmin getPic: picIndex] forState:0];
 	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
 
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
 									   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.09 Y:0.09];
 		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 		// self.navigationItem.rightBarButtonItem = self.editButtonItem
 	//[background move];
+	
+	// create game objects
+	ship = [[Ship alloc] init];				// create the ship object
+	[ship setIcon: shipIcon];				// connect the ship icon to the Ship object so it can be rotated
+	[ship setPos: CGPointMake(shipIcon.center.x , shipIcon.center.y)];
 	
 	
 	// create game objects
@@ -154,11 +158,12 @@
 	// controls movement of bullets and asteroids.
 	[self setGameTimer];
 	
-	[self setQuestion];						// set the initial question
-	NSLog(@"after question");
+	// set the initial question
+	[self setQuestion];						
+
 	
 	// set the score initially to 0
-	score = 0;  
+	[UIAppDelegate.currentUser.score setScore: 0];
 	
 	//values used to describe the direction the ship is facing, derived from the rotation wheel
 	shipDirectionX = 0;  
@@ -394,7 +399,7 @@
 	
 	
 	/*
-	 *	check for asteroid x asteroid collision and collision with the ship
+	 *	check for asteroid-asteroid collision and collision with the ship
 	 */
 	// for every asteroid i
 	for (int i = 0; i < 10; i++) {
@@ -492,6 +497,7 @@
 
 // handles the asteroid collision scenarios
 -(void) asteroidCollision: (int) asteroidIndex {
+	
 	// if we hit the right asteroid
 	if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
 	{
@@ -517,6 +523,7 @@
 -(void) hitCorrectAsteroid: (int) index {
 	
 	NSLog(@"hit correct asteroid.");
+	int score = [UIAppDelegate.currentUser.score score];
 	
 	// update the scoreboard 
 	score = score + CORRECT_ANSWER_REWARD;
@@ -526,6 +533,8 @@
 	
 	// update the location of the asteroid to a random point on the screen
 	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	
+	[UIAppDelegate.currentUser.score setScore: score];
 	
 	// check if gameover
 	[self checkScore];
@@ -538,6 +547,7 @@
 -(void) hitWrongAsteroid:(int)index {
 	
 	NSLog(@"hit incorrect asteroid.");
+	int score = [UIAppDelegate.currentUser.score score];
 	
 	// decrement score by 2 and update the scoreboard
 	score = score - INCORRECT_ANSWER_PENALTY;
@@ -548,6 +558,8 @@
 	// update the location of the asteroid to a random point on the screen
 	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
+	[UIAppDelegate.currentUser.score setScore: score];
+	
 	// check if game is over
 	[self checkScore];
 	
@@ -557,7 +569,10 @@
 
 // hit a blank asteroid
 -(void) hitBlankAsteroid:(int)index {
+
 	NSLog(@"hit blank asteroid.");
+	
+	int score = [UIAppDelegate.currentUser.score score];
 	
 	// increase score by 1 and update the scoreboard
 	score = score + BLANK_REWARD;
@@ -568,6 +583,8 @@
 	// update the location of the asteroid to a random point on the screen
 	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
+	[UIAppDelegate.currentUser.score setScore: score];
+	
 	// check if game is over
 	[self checkScore];
 }
@@ -577,8 +594,8 @@
 // if it's over the limit of the hardest difficulty then the game is over (win scenario)
 -(void) checkScore {
 	
-	//int diff = [UIAppDelegate.currentUser currentDifficulty];
-	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
+	int diff = [UIAppDelegate.currentUser.currentTopic difficulty];
+	int score = [UIAppDelegate.currentUser.score score];
 	
 	// update the profile's lastTopicCompleted if this one is higher
 	if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
@@ -589,8 +606,10 @@
 	// if score is higher than set for difficulty, then raise the difficulty
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
 
+		// raise difficulty by one
 		[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff + 1];
 		
+				
 		// reset the label
 		[self setDifficultyLabel];
 	}
@@ -600,6 +619,8 @@
 
 		// reset the score
 		score = 0;
+		[UIAppDelegate.currentUser.score setScore: score];
+		
 		[self updateScoreLabel];
 
 		
@@ -623,6 +644,7 @@
 			
 			// reset the score
 			score = 0;
+			[UIAppDelegate.currentUser.score setScore: score];
 			
 			// reset the labels
 			[self setDifficultyLabel];
@@ -639,13 +661,17 @@
 // update the score label to the current score value
 -(void) updateScoreLabel {
 	
-	NSString *inputString = [[NSString alloc] initWithFormat:@"Score: %d", score ];
+	NSString *inputString = [[NSString alloc] initWithFormat:@"Score: %d", [UIAppDelegate.currentUser.score score]];
 	[scoreLabel setText:inputString];
 	[inputString release];
 }
 
 // begin lose scenario
 -(void) loseScenario {
+	
+	// first save settings to plist
+	[GlobalAdmin saveSettings];
+	
 	GameOverScreenController *gameOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
 	[self.navigationController pushViewController:gameOverScreenView animated:YES];
 	[gameOverScreenView release];
@@ -653,6 +679,10 @@
 
 // begin win scenario
 -(void) winScenario {
+	
+	// first save settings to plist
+	[GlobalAdmin saveSettings];
+	
 	GameOverScreenController *gameOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
 	[self.navigationController pushViewController:gameOverScreenView animated:YES];
 	[gameOverScreenView release];
@@ -660,8 +690,13 @@
 
 
 // navigate to the help screen
--(IBAction) helpScreen
-{
+-(IBAction) helpScreen {
+	
+	[self setGameTimer];
+	
+	// first save settings to plist as the player may opt to quit back to the root menu
+	[GlobalAdmin saveSettings];
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
@@ -671,9 +706,11 @@
 }
 
 // navigate to the gameover screen
--(IBAction) nextScreen
-{
-	// Navigation logic may go here -- for example, create and push another view controller.
+-(IBAction) nextScreen {
+	
+	// pause the game if it's running.
+	[self setGameTimer];
+	
 	GameOverScreenController *gamesOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
 	[self.navigationController pushViewController:gamesOverScreenView animated:YES];
 	[gamesOverScreenView release];
@@ -683,8 +720,8 @@
 // update the touch events (rotation wheel)
 -(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event {
 	
-	UITouch *touch = [[event allTouches] anyObject];  //records touch as touch object
-    CGPoint location = [touch locationInView:touch.view]; //records touch's location
+	UITouch *touch = [[event allTouches] anyObject];		//records touch as touch object
+    CGPoint location = [touch locationInView:touch.view];	//records touch's location
     //NSLog(@"X: %f",location.x);
     //NSLog(@"Y: %f",location.y);
 	
