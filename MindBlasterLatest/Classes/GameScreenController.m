@@ -34,10 +34,34 @@
 	[background move];
 }
 
+
+-(void)setGameTimer;
+{
+
+	
+	if(gamePaused == FALSE)
+	{
+		GamePlayTimer = [NSTimer scheduledTimerWithTimeInterval:GamePlayTimerInterval target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+		gamePaused = TRUE;
+	}
+	else
+	{
+		[GamePlayTimer invalidate];
+		gamePaused = FALSE;
+	}
+}
+
+
+
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	NSLog(@"started viewDidLoad");
 		
+	gamePaused = FALSE;
+	GamePlayTimerInterval = 0.02;
+	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
 					 asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,nil];
 	NSLog(@"allocated asteroidIcons");
@@ -128,8 +152,8 @@
 	[ship setPos: CGPointMake(shipIcon.center.x , shipIcon.center.y)];
 	
 	// controls movement of bullets and asteroids.
-	[NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
-
+	[self setGameTimer];
+	
 	[self setQuestion];						// set the initial question
 	NSLog(@"after question");
 	
@@ -145,6 +169,11 @@
 	bulletsFired = 0;
 		
     [super viewDidLoad];
+}
+
+-(IBAction) pauseButton
+{
+		[self setGameTimer];
 }
 
 // sets the initial location of bullets on screen
@@ -636,7 +665,9 @@
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
+	//[self setGameTimer];
 	[helpView release];
+	
 }
 
 // navigate to the gameover screen
