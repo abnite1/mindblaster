@@ -2,7 +2,8 @@
 //  NetworkController.m
 //  MindBlaster
 //
-//  Created by yaniv haramati on 21/03/10.
+//  Created by yaniv haramati on 21/03/10. 
+//	Borrows heavily from the CFnetwork tutorial on the mac dev forum 
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -33,6 +34,7 @@
 @synthesize connection;
 @synthesize statusLabel;
 @synthesize activityIndicator;
+@synthesize webView;
 
 
 #pragma mark * Status management
@@ -42,7 +44,24 @@
 // navigate back to the root menu
 -(IBAction) backScreen {
 	
+	// navigate to the help menu
 	[self.navigationController popViewControllerAnimated:TRUE];
+}
+
+// updates the DB by accessing the update php URL
+-(void) updateDBUpload {
+	
+	NSURL *url = [NSURL URLWithString: [GlobalAdmin getUploadUpdateURL]];
+	NSURLRequest *request = [NSURLRequest requestWithURL: url];
+	[webView loadRequest: request];
+}
+
+// updates the DB by accessing the update php URL with email as parameter
+-(void) updateDBDownload {
+	
+	NSURL *url = [NSURL URLWithString: [GlobalAdmin getDownloadUpdateURL]];
+	NSURLRequest *request = [NSURLRequest requestWithURL: url];
+	[webView loadRequest: request];
 }
 
 // display help for the load profile menu
@@ -197,7 +216,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	
+	[super viewDidLoad];
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	self.activityIndicator.hidden = NO;
     self.statusLabel.text = @"";
@@ -214,6 +235,10 @@
 
 // download a file
 -(IBAction) download {	
+	
+	// run the update script before downloading
+	NSLog(@"updating the download DB script");
+	[self updateDBDownload];
 	
 	// save path
 	NSString *fileString = [[GlobalAdmin getPath] retain];
@@ -315,6 +340,7 @@
 		self.statusLabel.text = @"Upload Complete.";
 		[self.activityIndicator stopAnimating];
 		//self.activityIndicator.hidden = YES;
+		
 	}
 	// we have no profile to upload
 	else {
@@ -324,6 +350,10 @@
 	
 	//[self didStartNetworking];
 	 NSLog(@"end of upload");
+
+	// update the upload script
+	NSLog(@"updating upload script");
+	[self updateDBUpload];
 }
 
 // to be implemented
@@ -338,6 +368,7 @@
 	NSLog(@"inside didStopNetworking");
 	[activityIndicator stopAnimating];
 }
+
 
 
 /*

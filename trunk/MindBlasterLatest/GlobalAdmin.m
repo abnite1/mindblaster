@@ -210,14 +210,41 @@
 }
 
 // returns the save and load URL
-+(id)getURL {
++(NSString*)getURL {
 	
 	// read the general settings plist into a dictionary
 	NSString *path = [[NSBundle mainBundle] bundlePath];
 	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
 	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
 	
-	return [plistData objectForKey:@"WebURL"];
+	return (NSString*)[plistData objectForKey:@"WebURL"];
+}
+
+// returns the DB upload update url
++(NSString*)getUploadUpdateURL {
+	
+	// read the general settings plist into a dictionary
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
+	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile: finalPath];
+	NSString *result = [plistData objectForKey:@"UploadUpdateURL"];
+	NSLog(@"dbUploadUpdateURL: %@", result);
+	return [plistData objectForKey:@"UploadUpdateURL"];
+}
+
+// returns the DB download update url
++(NSString*)getDownloadUpdateURL {
+	
+	// read the general settings plist into a dictionary
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
+	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile: finalPath];
+	
+	NSString *result = [plistData objectForKey:@"DownloadUpdateURL"];
+	//NSLog(@"user email: %@", [UIAppDelegate.currentUser email]);
+	//NSString *result = [tempString stringByAppendingPathComponent: [UIAppDelegate.currentUser email]];
+	NSLog(@"dbDownloadUpdateURL: %@", result);
+	return result;
 }
 
 

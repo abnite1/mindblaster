@@ -18,7 +18,9 @@
 +(BOOL)saveSettings;
 +(BOOL)loadSettings;
 +(id) getPic:(int)position;
-+(id)getURL;
++(NSString*)getURL;
++(NSString*)getUploadUpdateURL;
++(NSString*)getDownloadUpdateURL;
 //-(NSString)Rename;
 
 @end
