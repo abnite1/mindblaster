@@ -217,7 +217,7 @@
 	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
 	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
 	
-	return [[plistData objectForKey:@"WebURL"] autorelease];
+	return [plistData objectForKey:@"WebURL"];
 }
 
 
