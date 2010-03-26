@@ -597,13 +597,19 @@
 	int diff = [UIAppDelegate.currentUser.currentTopic difficulty];
 	int score = [UIAppDelegate.currentUser.score score];
 	
-	// update the profile's lastTopicCompleted if this one is higher
+	// if the current score is higher than highestScore, update the AppDelegate profile.
+	if (score > [UIAppDelegate.currentUser.highestScore score]) {
+		
+		[UIAppDelegate.currentUser setHighestScore: [UIAppDelegate.currentUser score]];
+	}
+	
+	// if current topic is higher than lastTopicCompleted (highest topic achieved yet) then update the AppDelegate profile.
 	if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
 		
 		[UIAppDelegate.currentUser setLastTopicCompleted: UIAppDelegate.currentUser.currentTopic];
 	}
 	
-	// if score is higher than set for difficulty, then raise the difficulty
+	// if score is higher than set limit for difficulty, then raise the difficulty
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
 
 		// raise difficulty by one
@@ -628,7 +634,15 @@
 		[self loseScenario];
 	}
 	
-	// if score is over the max limit, game is over (win)
+	// if the current topic is the highest we've done so far, update the highest difficulty.
+	if ([UIAppDelegate.currentUser.currentTopic topic] == [UIAppDelegate.currentUser.lastTopicCompleted topic] &&
+		diff > [UIAppDelegate.currentUser.lastTopicCompleted difficulty]) {
+		
+		// then update the highestDifficulty in the AppDelegate profile
+		[UIAppDelegate.currentUser.lastTopicCompleted setDifficulty: diff];
+	}
+	
+	// if the score is higher than the set limit for topic
 	if (score > DIFFICULTY_HARDEST * DIFFICULTY_LIMIT) {
 		
 		// if we haven't yet exhaused all our topics, progress to the next topic

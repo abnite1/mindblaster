@@ -285,8 +285,9 @@
 	NSLog(@"Saving to file: %@", fileString);
 
 	[profile writeToFile: fileString atomically: YES];
-	
 	[profile release];
+	
+	self.statusLabel.text = @"Download Complete.";
 	[UIAppDelegate didStartNetworking];
 	
 	NSLog(@"finished download");

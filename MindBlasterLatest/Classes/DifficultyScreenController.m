@@ -79,6 +79,14 @@
 	[msg release];
 }
 
+// default selection is always easiest
+-(void) defaultSelection {
+	
+	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,10]"];
+	[difficultyDescription setText:msg];
+	[msg release];
+}
+
 
 // navigate back to the previous screen
 -(IBAction) backScreen {
@@ -106,7 +114,7 @@
 	[super viewDidLoad];
 	
 	// default to easiest
-	[self selectedEasiest];
+	[self defaultSelection];
 	
 	// disable and hide difficulty settings that haven't yet been unlocked.
 	if([[UIAppDelegate.currentUser currentTopic] topic] == [[UIAppDelegate.currentUser lastTopicCompleted] topic]) {

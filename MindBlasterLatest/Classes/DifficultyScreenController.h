@@ -36,5 +36,6 @@
 -(IBAction) backScreen;
 -(IBAction) helpScreen;
 -(void) animateBackground;
+-(void) defaultSelection;
 
 @end

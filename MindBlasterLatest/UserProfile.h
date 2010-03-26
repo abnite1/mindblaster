@@ -44,6 +44,7 @@ static const int PICTURE_CAT	= 3;
 @property (nonatomic, retain)	Score		*highestScore;
 @property (nonatomic, retain)	Score		*score;
 
--(IBAction) checkHighestScore;		   
+-(IBAction) checkHighestScore;
+-(void) userLog;
 
 @end

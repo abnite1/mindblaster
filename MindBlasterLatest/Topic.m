@@ -49,15 +49,13 @@
 
 // sets the description according to the topic type
 -(void) initDescription {
-	
-	NSString *desc; 
+	 
 	// set the operator
-	if (topic == TOPIC_ADDITION)			desc = [[NSString alloc] initWithString: @"Addition."];
-	else if (topic == TOPIC_SUBTRACTION)	desc = [[NSString alloc] initWithString: @"Subtraction."];
-	else if (topic == TOPIC_MULTIPLICATION) desc = [[NSString alloc] initWithString: @"Multiplication."];
-	else if (topic == TOPIC_DIVISION)		desc = [[NSString alloc] initWithString: @"Division."];
+	if (topic == TOPIC_ADDITION)			description = [[[NSString alloc] initWithString: @"Addition."] autorelease];
+	else if (topic == TOPIC_SUBTRACTION)	description = [[[NSString alloc] initWithString: @"Subtraction."] autorelease];
+	else if (topic == TOPIC_MULTIPLICATION) description = [[[NSString alloc] initWithString: @"Multiplication."] autorelease];
+	else if (topic == TOPIC_DIVISION)		description = [[[NSString alloc] initWithString: @"Division."] autorelease];
 	
-	[desc release];
 }
 
 // switches to the next topic
