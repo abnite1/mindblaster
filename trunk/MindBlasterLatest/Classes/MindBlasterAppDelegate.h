@@ -26,7 +26,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *	navigationController;
 @property (nonatomic, assign) NSInteger							networkingCount;
 
-- (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
+
 - (void)didStartNetworking;
 - (void)didStopNetworking;
 
