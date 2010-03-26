@@ -9,8 +9,13 @@
 #import "MindBlasterAppDelegate.h"
 #import "GlobalAdmin.h"
 
+//@interface MindBlasterAppDelegate ()
+
+//@end
+
 @implementation MindBlasterAppDelegate
 
+@synthesize networkingCount;
 @synthesize window;
 @synthesize navigationController;
 @synthesize currentUser;
@@ -38,10 +43,39 @@
 
 -(void) didStartNetworking {
 	
+	NSLog(@"start of AppDelegate didStartNetworking");
+	self.networkingCount += 1;
+	NSLog(@"end of AppDelegate didStartNetworking");
 }
 
 -(void) didStopNetworking {
 	
+	NSLog(@"start of AppDelegate didStopNetworking");
+	assert(self.networkingCount > 0);
+    self.networkingCount -= 1;
+	
+	NSLog(@"end of AppDelegate didStopNetworking");
+}
+
+- (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix {
+	
+	NSString *  result;
+    CFUUIDRef   uuid;
+    CFStringRef uuidStr;
+    
+    uuid = CFUUIDCreate(NULL);
+    assert(uuid != NULL);
+    
+    uuidStr = CFUUIDCreateString(NULL, uuid);
+    assert(uuidStr != NULL);
+    
+    result = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", prefix, uuidStr]];
+    assert(result != nil);
+    
+    CFRelease(uuidStr);
+    CFRelease(uuid);
+    
+    return result;
 }
 
 // release memory

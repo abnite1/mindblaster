@@ -216,12 +216,8 @@
 	NSString *path = [[NSBundle mainBundle] bundlePath];
 	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
 	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:finalPath];
-
-	[path release];
-	[finalPath release];
-	NSLog(@"after releasing strings in getURL");
 	
-	return [plistData objectForKey:@"WebURL"];
+	return [[plistData objectForKey:@"WebURL"] autorelease];
 }
 
 

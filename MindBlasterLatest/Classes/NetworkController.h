@@ -15,33 +15,52 @@ enum {
     kSendBufferSize = 32768
 };
 
-@interface NetworkController : UIViewController <UITextFieldDelegate> {
+@interface NetworkController : UIViewController {
+	
+//<UITextFieldDelegate> {
 
-    UITextField *               _urlText;
-    UITextField *               _usernameText;
-    UITextField *               _passwordText;
-    UILabel *                   _statusLabel;
-    UIActivityIndicatorView *   _activityIndicator;
-    UIBarButtonItem *           _cancelButton;
+    //UITextField *               _urlText;
+    //UITextField *               _usernameText;
+    //UITextField *               _passwordText;
+   // UIActivityIndicatorView *   _activityIndicator;
+    //UIBarButtonItem *           _cancelButton;
     
-    NSOutputStream *            _networkStream;
-    NSInputStream *             _fileStream;
+	// for upload
+    NSOutputStream *            networkStreamOut;
+    NSInputStream *             fileStreamIn;
     uint8_t                     _buffer[kSendBufferSize];
     size_t                      _bufferOffset;
     size_t                      _bufferLimit;
 	
+	// for download
+	NSInputStream *             networkStreamIn;
+    NSOutputStream *            fileStreamOut;
+	
+	// for connection
+	NSURLConnection *			connection;
+	
 	IBOutlet UIImageView *imageView;
-	IBOutlet UITextField *fileText;
+	IBOutlet UIActivityIndicatorView *	activityIndicator;
+	IBOutlet UILabel *					statusLabel;
+
+//	IBOutlet UITextField *fileText;
 
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *               fileText;
-@property (nonatomic, retain) IBOutlet UITextField *               urlText;
-@property (nonatomic, retain) IBOutlet UITextField *               usernameText;
-@property (nonatomic, retain) IBOutlet UITextField *               passwordText;
-@property (nonatomic, retain) IBOutlet UILabel *                   statusLabel;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *   activityIndicator;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *           cancelButton;
+//@property (nonatomic, retain) IBOutlet UITextField *               fileText;
+//@property (nonatomic, retain) IBOutlet UITextField *               urlText;
+//@property (nonatomic, retain) IBOutlet UITextField *               usernameText;
+//@property (nonatomic, retain) IBOutlet UITextField *               passwordText;
+@property (nonatomic, retain) IBOutlet UILabel *					statusLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *	activityIndicator;
+@property (nonatomic, retain) NSInputStream *						networkStreamIn;
+@property (nonatomic, retain) NSOutputStream *						networkStreamOut;
+@property (nonatomic, retain) NSInputStream *						fileStreamIn;
+@property (nonatomic, retain) NSOutputStream *						fileStreamOut;
+@property (nonatomic, retain) NSURLConnection *						connection;
+
+
+//@property (nonatomic, retain) IBOutlet UIBarButtonItem *           cancelButton;
 
 //-(IBAction)sendAction;
 //-(IBAction)cancelAction:(id)sender;

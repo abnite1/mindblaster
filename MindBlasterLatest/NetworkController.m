@@ -15,17 +15,25 @@
 
 
 @property (nonatomic, readonly) BOOL              isSending;
-@property (nonatomic, retain)   NSOutputStream *  networkStream;
-@property (nonatomic, retain)   NSInputStream *   fileStream;
+//@property (nonatomic, retain)   NSOutputStream *  networkStream;
+//@property (nonatomic, retain)   NSInputStream *   fileStream;
 @property (nonatomic, readonly) uint8_t *         buffer;
 @property (nonatomic, assign)   size_t            bufferOffset;
 @property (nonatomic, assign)   size_t            bufferLimit;
+
 
 @end
 
 @implementation NetworkController
 
-@synthesize fileText;
+//@synthesize fileText;
+//@synthesize connection    = _connection;
+
+@synthesize fileStreamIn, fileStreamOut;
+@synthesize fileStreamIn, fileStreamOut, networkStreamIn, networkStreamOut; 
+@synthesize connection;
+@synthesize statusLabel;
+@synthesize activityIndicator;
 
 
 #pragma mark * Status management
@@ -56,14 +64,16 @@
    //[[AppDelegate sharedAppDelegate] didStartNetworking];
 }
 */
-- (void)_updateStatus:(NSString *)statusString
-{
+- (void)_updateStatus:(NSString *)statusString {
+	
+	NSLog(@"inside _upadateStatus");
     //assert(statusString != nil);
    // self.statusLabel.text = statusString;
 }
 
-- (void)_sendDidStopWithStatus:(NSString *)statusString
-{
+- (void)_sendDidStopWithStatus:(NSString *)statusString {
+	
+	NSLog(@"starting _sendDidStopWithStatus");
     if (statusString == nil) {
         //statusString = @"Put succeeded";
     }
@@ -78,22 +88,23 @@
 
 // This is the code that actually does the networking.
 
-@synthesize networkStream = _networkStream;
-@synthesize fileStream    = _fileStream;
 @synthesize bufferOffset  = _bufferOffset;
 @synthesize bufferLimit   = _bufferLimit;
 
 // Because buffer is declared as an array, you have to use a custom getter.  
 // A synthesised getter doesn't compile.
 
-- (uint8_t *)buffer
-{
+- (uint8_t *)buffer {
+	
+	NSLog(@"inside buffer");
     return self->_buffer;
 }
 
-- (BOOL)isSending
-{
-    return (self.networkStream != nil);
+- (BOOL)isSending {
+	
+	NSLog(@"inside isSending");
+    return (self.networkStreamOut != nil);
+	
 }
 
 /*
@@ -191,15 +202,15 @@
 
 - (void)_stopSendWithStatus:(NSString *)statusString
 {
-    if (self.networkStream != nil) {
-        [self.networkStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        self.networkStream.delegate = nil;
-        [self.networkStream close];
-        self.networkStream = nil;
+    if (self.networkStreamOut != nil) {
+        [self.networkStreamOut removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        self.networkStreamOut.delegate = nil;
+        [self.networkStreamOut close];
+        self.networkStreamOut = nil;
     }
-    if (self.fileStream != nil) {
-        [self.fileStream close];
-        self.fileStream = nil;
+    if (self.fileStreamIn != nil) {
+        [self.fileStreamIn close];
+        self.fileStreamIn = nil;
     }
    // [self _sendDidStopWithStatus:statusString];
 }
@@ -209,7 +220,9 @@
 // network stream.
 {
 #pragma unused(aStream)
-    assert(aStream == self.networkStream);
+	
+	NSLog(@"beginning of stream");
+    //assert(aStream == self.networkStream);
 	
     switch (eventCode) {
         case NSStreamEventOpenCompleted: {
@@ -226,7 +239,7 @@
             if (self.bufferOffset == self.bufferLimit) {
                 NSInteger   bytesRead;
                 
-                bytesRead = [self.fileStream read:self.buffer maxLength:kSendBufferSize];
+                bytesRead = [self.fileStreamIn read:self.buffer maxLength:kSendBufferSize];
                 
                 if (bytesRead == -1) {
                     [self _stopSendWithStatus:@"File read error"];
@@ -242,7 +255,7 @@
             
             if (self.bufferOffset != self.bufferLimit) {
                 NSInteger   bytesWritten;
-                bytesWritten = [self.networkStream write:&self.buffer[self.bufferOffset] maxLength:self.bufferLimit - self.bufferOffset];
+                bytesWritten = [self.networkStreamOut write:&self.buffer[self.bufferOffset] maxLength:self.bufferLimit - self.bufferOffset];
                 assert(bytesWritten != 0);
                 if (bytesWritten == -1) {
                     [self _stopSendWithStatus:@"Network write error"];
@@ -252,15 +265,18 @@
             }
         } break;
         case NSStreamEventErrorOccurred: {
+			NSLog(@"stream event error encountered");
             [self _stopSendWithStatus:@"Stream open error"];
         } break;
         case NSStreamEventEndEncountered: {
+			NSLog(@"stream event end encountered");
             // ignore
         } break;
         default: {
             assert(NO);
         } break;
     }
+	NSLog(@"end of stream");
 }
  
 
@@ -337,23 +353,23 @@
 // A delegate method called by the URL text field when the user taps the Return 
 // key.  We just dismiss the keyboard.
 {
+	/*
 #pragma unused(textField)
    assert( (textField == self.urlText) || (textField == self.usernameText) || 
 		  (textField == self.passwordText) || textField == self.fileText);
 	   
 	[textField resignFirstResponder];
-   
+   */
     return NO;
 }
 
 #pragma mark * View controller boilerplate
 
-@synthesize urlText           = _urlText;
-@synthesize usernameText      = _usernameText;
-@synthesize passwordText      = _passwordText;
-@synthesize statusLabel       = _statusLabel;
-@synthesize activityIndicator = _activityIndicator;
-@synthesize cancelButton      = _cancelButton;
+//@synthesize urlText           = _urlText;
+//@synthesize usernameText      = _usernameText;
+//@synthesize passwordText      = _passwordText;
+
+//@synthesize cancelButton      = _cancelButton;
 
 
 
@@ -384,50 +400,78 @@
     // The setup of usernameText and passwordText deferred to -viewWillAppear: 
     // because those values are shared by multiple tabs.
     
-	self.urlText.text = @"fraser.sfu.ca/leftwheel.png";
+
 	
     self.activityIndicator.hidden = YES;
-    self.statusLabel.text = @"file transfer";
+    self.statusLabel.text = @"";
+	NSLog(@"end of viewDidLoad");
    // self.cancelButton.enabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
-    self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
+    //self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
+    //self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
 }
 
 // download a file
--(IBAction) download {
-
-	// read plist into a dictionary
-	NSString *urlString =  [GlobalAdmin getURL];
+-(IBAction) download {	
 	
 	// save path
+	/*
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString* docDir = [paths objectAtIndex:0];
 	NSString *fileString = [docDir stringByAppendingPathComponent: @"UserProfile.plist"];
-
+	 */
+	NSString *fileString = [[GlobalAdmin getPath]retain];
 	
-	// format the url to contain an ftp://user:pass@url/file.ext format
-	//NSString *urlString = [[NSString alloc] initWithFormat: @"ftp://%@:%@@%@", 
-	//					   self.usernameText.text, self.passwordText.text, self.urlText.text];
+	// first delete the current profile if it exists.
+	if([[NSFileManager defaultManager] fileExistsAtPath: fileString ]) {
+		
+		if ( [[NSFileManager defaultManager] removeItemAtPath: fileString error: nil] )
+			NSLog(@"existing profile deleted.");
+		else
+			NSLog(@"Failed to delete existing profile");
+	}
+	
+/*
+	// set the send-to-file stream
+	self.fileStreamOut = [NSOutputStream outputStreamToFileAtPath: fileString append:NO];
+	[self.fileStreamOut open];
+*/
+	
+	// read plist into a dictionary
+	NSString *urlString =  [[GlobalAdmin getURL] retain];
+	
 	// for debug: 
-	NSLog(@"%@", urlString);
-
-	NSURL *url = [NSURL URLWithString: urlString];
+	NSLog(@"downloading: %@", urlString);
 	
+	NSURL *url = [[NSURL URLWithString: urlString] retain];
+/*
+	NSURLRequest * request = [NSURLRequest requestWithURL: url];
+	assert(request != nil);
+	
+	self.activityIndicator.hidden = NO;
+	[self.activityIndicator startAnimating];
+
+	self.connection = [NSURLConnection connectionWithRequest: request delegate: self];
+	assert(self.connection != nil);
+/*
+	[self.activityIndicator stopAnimating];
+	self.activityIndicator.hidden = YES;
+ */
+
+	//NSDictionary *profile = [[NSDictionary alloc] initWithContentsOfFile: fileString];
 	NSDictionary *profile = [[NSDictionary alloc] initWithContentsOfURL: url];
-	NSLog(@"%@", fileString);
+	NSLog(@"Saving to file: %@", fileString);
 
 	[profile writeToFile: fileString atomically: YES];
-	//[self didStartNetworking];
+		
+	[UIAppDelegate didStartNetworking];
 	
-	//[self.activityIndicator startAnimating];
-	//[[AppDelegate sharedAppDelegate] didStartNetworking];
 	
-
+	NSLog(@"finished download");
 }
 
 // upload a file
@@ -461,27 +505,32 @@
 	//NSData *dataImage = [NSData dataWithContentsOfFile: finalPath];
 	
 	self.statusLabel.text = @"Upload Started.";
+	self.activityIndicator.hidden = NO;
+	[self.activityIndicator startAnimating];
 	
 	// and upload the file
 	//[dataImage writeToURL:url atomically:YES];
 	
-	self.fileStream = [NSInputStream inputStreamWithFileAtPath: fileString];
+	self.fileStreamIn = [NSInputStream inputStreamWithFileAtPath: fileString];
 	
-	[self.fileStream open];
+	[self.fileStreamIn open];
 	CFWriteStreamRef ftpStream = CFWriteStreamCreateWithFTPURL(NULL, (CFURLRef) url);
 	
-	self.networkStream = (NSOutputStream *) ftpStream;
+	self.networkStreamOut = (NSOutputStream *) ftpStream;
 	
-	self.networkStream.delegate = self;
-	[self.networkStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-	[self.networkStream open];
+	self.networkStreamOut.delegate = self;
+	[self.networkStreamOut scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[self.networkStreamOut open];
 	
 	// Have to release ftpStream to balance out the create.  self.networkStream 
 	// has retained this for our persistent use.
 	
 	CFRelease(ftpStream);
+	self.statusLabel.text = @"Upload Complete.";
+	[self.activityIndicator stopAnimating];
+	self.activityIndicator.hidden = YES;
 	
-	//[self _sendDidStart];
+
 
 	/*
 	//NSLog(@"here 1");
@@ -499,18 +548,18 @@
 	
 	//self.statusLabel.text = @"finished upload";
 	[self didStartNetworking];
-	 
+	 NSLog(@"end of upload");
 }
 
 // to be implemented
 -(void) didStartNetworking {
-	
+	NSLog(@"inside didStartNetworking");
 }
 
 
 // to be implemented
 -(void) didStopNetworking {
-	
+	NSLog(@"inside didStopNetworking");
 }
 
 
@@ -525,18 +574,19 @@
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
+	NSLog(@"inside didReceieveMemoryWatning");
 	// Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload
 {
+	NSLog(@"started viewDidUnload");
     [super viewDidUnload];
 	
-    self.urlText = nil;
-    self.usernameText = nil;
-	self.fileText = nil;
-    self.passwordText = nil;
+    //self.urlText = nil;
+    //self.usernameText = nil;
+	//self.fileText = nil;
+   // self.passwordText = nil;
     self.statusLabel = nil;
     self.activityIndicator = nil;
     //self.cancelButton = nil;
@@ -544,16 +594,18 @@
 
 - (void)dealloc
 {
+	NSLog(@"started dealloc");
     //[self _stopSendWithStatus:@"Stopped"];
 	
-    [self->_urlText release];
-    [self->_usernameText release];
-    [self->_passwordText release];
-    [self->_statusLabel release];
-    [self->_activityIndicator release];
+   // [self->_urlText release];
+   // [self->_usernameText release];
+   // [self->_passwordText release];
+   // [self->_statusLabel release];
+   // [self->_activityIndicator release];
 	
     //[self->_cancelButton release];
 	
+	//NSLog(@"end dealloc");
     [super dealloc];
 }
 
