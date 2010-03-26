@@ -133,17 +133,8 @@
 	// default to the first topic
 	[self firstTopicSelected];
 	
-	// for testing, show selected topic properties:
-	NSLog(@"Current Username is: %@ \n",[UIAppDelegate.currentUser userName]);
-	NSLog(@"Current email is: %@ \n",[UIAppDelegate.currentUser email]);
-	NSLog(@"LasttopicDiff is: %d \n",[[UIAppDelegate.currentUser currentTopic] difficulty]);
-	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser currentTopic] topic]);
-	NSLog(@"LasttopicDescr is: %@ \n",[[UIAppDelegate.currentUser currentTopic] description]);
-	NSLog(@"LasttopicDiff is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] difficulty]);
-	NSLog(@"lasttopictopic is: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
-	NSLog(@"LasttopicDescr is: %@ \n",[[UIAppDelegate.currentUser lastTopicCompleted] description]);
-	NSLog(@"Score is: %d \n",[[UIAppDelegate.currentUser score] score]);
-	NSLog(@"HighestScore is: %d \n",[[UIAppDelegate.currentUser highestScore] score]);
+	// display a current profile representation. 
+	[UIAppDelegate.currentUser userLog];
 	
 
 	//block and hide any locked topics
