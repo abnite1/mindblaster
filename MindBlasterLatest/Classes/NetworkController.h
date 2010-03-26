@@ -37,12 +37,13 @@ enum {
 	IBOutlet UIActivityIndicatorView *	activityIndicator;
 	IBOutlet UILabel *					statusLabel;
 
-//	IBOutlet UITextField *fileText;
+	IBOutlet UIWebView *				webView;
 
 }
 
 
 @property (nonatomic, retain) IBOutlet UILabel *					statusLabel;
+@property (nonatomic, retain) IBOutlet UIWebView *					webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *	activityIndicator;
 @property (nonatomic, retain) NSInputStream *						networkStreamIn;
 @property (nonatomic, retain) NSOutputStream *						networkStreamOut;
@@ -59,6 +60,8 @@ enum {
 -(void)didStopNetworking;
 - (IBAction) helpScreen;
 - (IBAction) backScreen;
+-(void)updateDBUpload;
+-(void)updateDBDownload;
 
 
 @end
