@@ -6,11 +6,14 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #include <CFNetwork/CFNetwork.h>
+#include <netinet/in.h>
+#import <UIKit/UIKit.h>
 #import "GlobalAdmin.h"
 #import "MindBlasterAppDelegate.h"
 #import "HelpScreenController.h"
+#import <SystemConfiguration/SCNetworkReachability.h>
+
 
 enum {
     kSendBufferSize = 32768
@@ -38,6 +41,8 @@ enum {
 	IBOutlet UILabel *					statusLabel;
 
 	IBOutlet UIWebView *				webView;
+	IBOutlet UIButton *					uploadButton;
+	IBOutlet UIButton *					downloadButton;
 
 }
 
@@ -50,6 +55,8 @@ enum {
 @property (nonatomic, retain) NSInputStream *						fileStreamIn;
 @property (nonatomic, retain) NSOutputStream *						fileStreamOut;
 @property (nonatomic, retain) NSURLConnection *						connection;
+@property (nonatomic, retain) IBOutlet UIButton *					uploadButton;
+@property (nonatomic, retain) IBOutlet UIButton *					downloadButton;
 
 
 //@property (nonatomic, retain) IBOutlet UIBarButtonItem *           cancelButton;
@@ -62,6 +69,8 @@ enum {
 - (IBAction) backScreen;
 -(void)updateDBUpload;
 -(void)updateDBDownload;
+-(void) failedConnectionResponse;
+- (BOOL) connectedToNetwork;
 
 
 @end

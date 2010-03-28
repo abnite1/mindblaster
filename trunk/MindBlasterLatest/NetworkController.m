@@ -35,6 +35,7 @@
 @synthesize statusLabel;
 @synthesize activityIndicator;
 @synthesize webView;
+@synthesize uploadButton, downloadButton;
 
 
 #pragma mark * Status management
@@ -62,6 +63,44 @@
 	NSURL *url = [NSURL URLWithString: [GlobalAdmin getDownloadUpdateURL]];
 	NSURLRequest *request = [NSURLRequest requestWithURL: url];
 	[webView loadRequest: request];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // return YES for supported orientations
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+// returns YES if network connection found, otherwise NO.
+// function taken from : http://www.iphonedevsdk.com/forum/iphone-sdk-development/7300-test-if-internet-connection-available.html
+// with permission of author.
+- (BOOL) connectedToNetwork {
+    // Create zero addy
+    struct sockaddr_in zeroAddress;
+    bzero(&zeroAddress, sizeof(zeroAddress));
+    zeroAddress.sin_len = sizeof(zeroAddress);
+    zeroAddress.sin_family = AF_INET;
+	
+    // Recover reachability flags
+    SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
+    SCNetworkReachabilityFlags flags;
+	
+    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
+    CFRelease(defaultRouteReachability);
+	
+    if (!didRetrieveFlags)
+    {
+        printf("Error. Could not recover network reachability flags\n");
+        return 0;
+    }
+	
+    BOOL isReachable = flags & kSCNetworkFlagsReachable;
+    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
+	
+    BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
+	
+	return ((isReachable && !needsConnection) || nonWiFi) ? YES : NO;
+	
 }
 
 // display help for the load profile menu
@@ -191,6 +230,7 @@
         } break;
         case NSStreamEventErrorOccurred: {
 			NSLog(@"stream event error encountered");
+			[self failedConnectionResponse];
             [self _stopSendWithStatus:@"Stream open error"];
         } break;
         case NSStreamEventEndEncountered: {
@@ -204,6 +244,13 @@
 	NSLog(@"end of stream");
 }
 
+// update the label if no internet connection is found
+-(void) failedConnectionResponse {
+	
+	[statusLabel setText: @"Couldn't connect..."];
+	
+}
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -214,20 +261,35 @@
 }
 */
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
 	
 	[super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	self.activityIndicator.hidden = NO;
-    self.statusLabel.text = @"";
+	
+	// test for an internet connection
+	// if none was found
+	if (! [self connectedToNetwork]) {
+		
+		NSLog(@"no connection.");
+		[downloadButton setEnabled: NO];
+		[uploadButton setEnabled: NO];
+		self.statusLabel.text = @"No Connection Available.";
+	}
+	else {
+		NSLog(@"connection found.");
+		[downloadButton setEnabled: YES];
+		[uploadButton setEnabled: YES];
+		self.statusLabel.text = @"";
+		
+	}
+    
 	NSLog(@"end of viewDidLoad");
-   // self.cancelButton.enabled = NO;
+
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
     //self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];

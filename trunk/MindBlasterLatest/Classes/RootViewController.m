@@ -13,6 +13,23 @@
 @implementation RootViewController
 
 
+/*
+ * perform these actions when view first loads:
+ * animate the background space image
+ */
+- (void)viewDidLoad {
+	
+	///Check if profile exists, if so, fine
+	//IF not, then hide the "Continue" button.
+	
+    [super viewDidLoad];
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
+	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
+								   selector:@selector(moveBackground) userInfo:nil repeats:YES];
+	[bgAnimation setSpeedX:0.2 Y:0.2];
+	
+}
 
 /*
  *	navigate to the help screen
@@ -73,23 +90,6 @@
 
 }
 
-/*
- * perform these actions when view first loads:
- * animate the background space image
-*/
-- (void)viewDidLoad {
-	
-	///Check if profile exists, if so, fine
-	//IF not, then hide the "Continue" button.
-	
-    [super viewDidLoad];
-	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
-	
-	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
-								   selector:@selector(moveBackground) userInfo:nil repeats:YES];
-	[bgAnimation setSpeedX:0.2 Y:0.2];
-	
-}
 
 // selector function for the background animation
 -(void)moveBackground {

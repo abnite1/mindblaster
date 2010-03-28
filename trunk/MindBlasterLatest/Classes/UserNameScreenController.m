@@ -12,7 +12,7 @@
 
 @implementation UserNameScreenController
 
-@synthesize name,email;
+@synthesize name,email, okButton;
 
 
 // hide the keyboard after name is entered
@@ -34,6 +34,30 @@
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
+}
+
+// user entered name
+-(IBAction) nameEntered {
+	
+	NSLog(@"%@", name.text);
+	// enable OK button if both text fields have been input
+	if (name.text != nil && email.text != nil) {
+		[okButton setEnabled: YES];
+		okButton.hidden = NO;
+		
+	}
+}
+
+// user entered name
+-(IBAction) emailEntered {
+	
+	NSLog(@"%@", email.text);
+	// enable OK button if both text fields have been input
+	if (name.text != nil && email.text != nil) {
+		[okButton setEnabled: YES];
+		okButton.hidden = NO;
+		
+	}
 }
 
 //navigate to topic selection
@@ -80,6 +104,11 @@
 	
 	// initialize the edit field
 	name.text = nil;
+	email.text = nil;
+	
+	// disable the ok button and hide it until username and email are input
+	[okButton setEnabled: NO];
+	okButton.hidden = YES;
 	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
