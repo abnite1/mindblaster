@@ -14,7 +14,7 @@
 
 @synthesize background, profilePic, difficultyLabel;
 
-@synthesize shipIcon, ship;
+@synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
 //@synthesize asteroidIcons;  //this is the vector which will hold all of the above asteroid objects
 
@@ -448,10 +448,12 @@
 	if (shield > 0)  {
 		
 		shield--;
+		[shieldBar setProgress: [shieldBar progress] - 0.33];
 	}
 	else {
 		// if shield is at 0, reset it, and decrease lives.
 		shield = 3;
+		[shieldBar setProgress: 1.0];
 		[self decreaseLives];
 	}
 }

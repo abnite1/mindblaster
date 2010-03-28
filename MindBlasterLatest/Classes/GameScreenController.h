@@ -105,10 +105,14 @@
 	int lives;
 	int shield;
 	
+	// progress bar
+	UIProgressView *shieldBar;
+	
 	int bulletsFired;
 }
 @property (nonatomic,retain) IBOutlet BackgroundAnimation *background;
 @property (nonatomic, retain) IBOutlet UIButton *profilePic;
+@property (nonatomic,retain) IBOutlet UIProgressView *shieldBar;
 
 @property (nonatomic,retain) IBOutlet UIImageView *shipIcon;
 @property (nonatomic,retain) Ship *ship;
