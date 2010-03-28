@@ -39,7 +39,7 @@
 					<object class="IBUIImageView" id="163454617">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-292, -194}, {1455, 810}}</string>
+						<string key="NSFrame">{{-196, -184}, {1455, 810}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -470,7 +470,7 @@
 					<object class="IBUILabel" id="1011176714">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{357, 11}, {74, 21}}</string>
+						<string key="NSFrame">{{357, 10}, {74, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -522,7 +522,7 @@
 					<object class="IBUILabel" id="235836689">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{285, 11}, {60, 21}}</string>
+						<string key="NSFrame">{{285, 9}, {60, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -553,8 +553,18 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="753240411"/>
 					</object>
+					<object class="IBUIProgressView" id="87864639">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">293</int>
+						<string key="NSFrame">{{285, 31}, {60, 9}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<float key="IBUIProgress">1.000000e+00</float>
+					</object>
 				</object>
-				<string key="NSFrameSize">{480, 300}</string>
+				<string key="NSFrameSize">{506, 320}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -840,6 +850,14 @@
 					</object>
 					<int key="connectionID">104</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shieldBar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="87864639"/>
+					</object>
+					<int key="connectionID">106</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -887,10 +905,11 @@
 							<reference ref="809723630"/>
 							<reference ref="93753069"/>
 							<reference ref="586683093"/>
-							<reference ref="235836689"/>
-							<reference ref="1011176714"/>
 							<reference ref="701735979"/>
 							<reference ref="1063946904"/>
+							<reference ref="87864639"/>
+							<reference ref="235836689"/>
+							<reference ref="1011176714"/>
 							<reference ref="163454617"/>
 						</object>
 						<reference key="parent" ref="935461785"/>
@@ -1081,6 +1100,11 @@
 						<reference key="object" ref="1063946904"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">105</int>
+						<reference key="object" ref="87864639"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1093,6 +1117,7 @@
 					<string>1.IBPluginDependency</string>
 					<string>101.IBPluginDependency</string>
 					<string>103.IBPluginDependency</string>
+					<string>105.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
@@ -1132,7 +1157,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameScreenController</string>
 					<string>UIResponder</string>
-					<string>{{140, 232}, {480, 300}}</string>
+					<string>{{72, 404}, {506, 320}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1192,7 +1218,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">104</int>
+			<int key="maxID">106</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1256,6 +1282,7 @@
 							<string>questionLabel</string>
 							<string>rotationBall</string>
 							<string>scoreLabel</string>
+							<string>shieldBar</string>
 							<string>shipIcon</string>
 							<string>solutionLabel0</string>
 							<string>solutionLabel1</string>
@@ -1289,6 +1316,7 @@
 							<string>UILabel</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
+							<string>UIProgressView</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
