@@ -15,6 +15,7 @@
 	IBOutlet UITextField *name;
 	IBOutlet UITextField *email;
 	IBOutlet BackgroundAnimation *background;
+	IBOutlet UIButton *okButton;
 	
 
 }
@@ -22,11 +23,14 @@
 
 @property (nonatomic,retain) IBOutlet UITextField *name;
 @property (nonatomic,retain) IBOutlet UITextField *email;
+@property (nonatomic, retain) IBOutlet UIButton *okButton;
 
 - (IBAction) makeKeyboardGoAway;
 - (IBAction) nextScreen;
 - (IBAction) backScreen;
 - (IBAction) helpScreen;
+- (IBAction) nameEntered;
+- (IBAction) emailEntered;
 
 
 @end

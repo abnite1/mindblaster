@@ -39,8 +39,8 @@
 	NSMutableArray *asteroids;
 	
 	//timer variables
-	NSTimer *GamePlayTimer;
-	double GamePlayTimerInterval;
+	NSTimer *gamePlayTimer;
+	double gamePlayTimerInterval;
 	
 	//IBOutlet UIImageView *ship;
 	
@@ -171,4 +171,8 @@
 -(void) decreaseShield;
 -(void) decreaseLives;
 -(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event;
+-(void) updateLivesTo:(int)newVal;
+-(void) updateShieldTo:(int)newVal;
+-(void) updateScoreTo:(int)newScore;
+-(void) resetValues;
 @end

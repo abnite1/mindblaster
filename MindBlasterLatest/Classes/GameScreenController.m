@@ -39,12 +39,12 @@
 
 	if(gamePaused == FALSE) {
 		
-		GamePlayTimer = [NSTimer scheduledTimerWithTimeInterval:GamePlayTimerInterval target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+		gamePlayTimer = [NSTimer scheduledTimerWithTimeInterval: gamePlayTimerInterval target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
 		gamePaused = TRUE;
 	}
 	else {
 		
-		[GamePlayTimer invalidate];
+		[gamePlayTimer invalidate];
 		gamePaused = FALSE;
 	}
 }
@@ -58,7 +58,7 @@
 	NSLog(@"started viewDidLoad");
 		
 	gamePaused = FALSE;
-	GamePlayTimerInterval = 0.02;
+	gamePlayTimerInterval = 0.05;
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
 					 asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,nil];
@@ -276,9 +276,12 @@
 			
 			// then send it on a random path
 			[[asteroids objectAtIndex: asteroidIndex] 
-			 setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
+			 //setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
+								setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
+														arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
 			[inputString release];
-			//[[asteroids objectAtIndex: asteroidIndex] move];
+			
+			[[asteroids objectAtIndex: asteroidIndex] move]; // this was commented out
 		}
 	}
 
@@ -288,7 +291,8 @@
 		
 		[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:BLANK_ASTEROID];
 		[[asteroids objectAtIndex: asteroidIndex] 
-				setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
+							setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
+													arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
 		[[asteroids objectAtIndex: asteroidIndex] move];
 	}
 	//NSLog(@"end of answer");
@@ -457,10 +461,38 @@
 	if (lives == 0) [self loseScenario];
 	else {
 		lives--;
-		NSString *msg = [[NSString alloc] initWithFormat:@"Lives: %d",lives];
-		[livesLabel setText:msg];
-		[msg release];
+		[self updateLivesTo: lives];
 	}
+}
+
+// update the lives representing UI elements
+-(void) updateLivesTo:(int)newVal {
+	
+	lives = newVal;
+	NSString *msg = [[NSString alloc] initWithFormat:@"Lives: %d",lives];
+	[livesLabel setText:msg];
+	[msg release];
+}
+
+// updates the shield and whatever UI elements represent it
+-(void) updateShieldTo:(int)newVal {
+	
+	shield = newVal;
+}
+
+// updates the score and its UI elements
+-(void) updateScoreTo:(int)newScore {
+	
+	[UIAppDelegate.currentUser.score setScore: newScore];
+	[self updateScoreLabel];
+}
+
+// reset : score = 0, lives = 3, shield = 3
+-(void) resetValues {
+	
+	[self updateLivesTo: 3];
+	[self updateShieldTo: 3];
+	[self updateScoreTo: 0];
 }
 
 // checks if two asteroids collide
@@ -686,9 +718,10 @@
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
-	GameOverScreenController *gameOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
-	[self.navigationController pushViewController:gameOverScreenView animated:YES];
-	[gameOverScreenView release];
+	// reset score, shield and lives
+	[self resetValues];
+	
+	[self nextScreen];
 }
 
 // begin win scenario
@@ -697,9 +730,7 @@
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
-	GameOverScreenController *gameOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
-	[self.navigationController pushViewController:gameOverScreenView animated:YES];
-	[gameOverScreenView release];
+	[self nextScreen];
 }
 
 
@@ -766,18 +797,18 @@
 			location.x = xcenter+radius ;
 		
 		if(location.y >= ycenter)
-			y = sqrt( radiusSquared - (xcenter- location.x )*(xcenter- location.x ) ) + ycenter; 
+			y = sqrt( radiusSquared - pow(xcenter- location.x , 2) ) + ycenter; 
 		else
 		{
-			y = -sqrt( radiusSquared - (xcenter- location.x )*(xcenter- location.x ) ) + ycenter; 
+			y = -sqrt( radiusSquared - pow(xcenter- location.x , 2) ) + ycenter; 
 		}
 		
 		y = (y + location.y) / 2.0;
 		
 		if(location.x >= xcenter)
-			x = sqrt(radiusSquared - (ycenter - y)*(ycenter - y) ) + xcenter;
+			x = sqrt(radiusSquared - pow(ycenter - y,2) ) + xcenter;
 		else
-			x = -sqrt(radiusSquared - (ycenter - y)*(ycenter - y) ) + xcenter;
+			x = -sqrt(radiusSquared - pow(ycenter - y, 2) ) + xcenter;
 		
 		//rotation ball is moved to the approximation of the closest point on the
 		//rotation wheel to the point where to user actually touched the screen

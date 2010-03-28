@@ -25,7 +25,7 @@
 		int x = icon.center.x;
 		int y = icon.center.y;
 		//NSLog(@"inside the asteroid initWIthElements constructor");
-		[self setAsteroidPosition: CGPointMake(x,y)];
+		[self setAsteroidPosition: x : y];
     }
 	
 	//NSLog(@"end of initWIthElements");
