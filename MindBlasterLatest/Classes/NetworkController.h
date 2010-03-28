@@ -15,6 +15,7 @@
 #import <SystemConfiguration/SCNetworkReachability.h>
 
 
+
 enum {
     kSendBufferSize = 32768
 };
@@ -43,6 +44,8 @@ enum {
 	IBOutlet UIWebView *				webView;
 	IBOutlet UIButton *					uploadButton;
 	IBOutlet UIButton *					downloadButton;
+	
+	IBOutlet UITextField *				email;
 
 }
 
@@ -58,6 +61,8 @@ enum {
 @property (nonatomic, retain) IBOutlet UIButton *					uploadButton;
 @property (nonatomic, retain) IBOutlet UIButton *					downloadButton;
 
+@property (nonatomic, retain) IBOutlet UITextField *				email;
+
 
 //@property (nonatomic, retain) IBOutlet UIBarButtonItem *           cancelButton;
 
@@ -71,6 +76,9 @@ enum {
 -(void)updateDBDownload;
 -(void) failedConnectionResponse;
 - (BOOL) connectedToNetwork;
+- (BOOL) getEmailFromHiddenField;
+-(IBAction) downloadRequested;
+
 
 
 @end
