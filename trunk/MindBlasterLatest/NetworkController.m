@@ -33,7 +33,7 @@
 @synthesize fileStreamIn, fileStreamOut, networkStreamIn, networkStreamOut; 
 @synthesize connection;
 @synthesize statusLabel;
-@synthesize activityIndicator;
+@synthesize activityIndicator, email;
 @synthesize webView;
 @synthesize uploadButton, downloadButton;
 
@@ -49,6 +49,13 @@
 	[self.navigationController popViewControllerAnimated:TRUE];
 }
 
+// show the text field after the keyboard is gone
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	
+	[email resignFirstResponder];
+	return YES;
+}
+
 // updates the DB by accessing the update php URL
 -(void) updateDBUpload {
 	
@@ -60,7 +67,12 @@
 // updates the DB by accessing the update php URL with email as parameter
 -(void) updateDBDownload {
 	
-	NSURL *url = [NSURL URLWithString: [GlobalAdmin getDownloadUpdateURL]];
+	// attach the email to the url
+	NSString *urlWithEmail = [[NSString alloc] initWithFormat: @"%@%@", 
+							  [GlobalAdmin getDownloadUpdateURL], email.text];
+	NSLog(@"%@", urlWithEmail);
+	NSURL *url = [NSURL URLWithString: urlWithEmail];
+	[urlWithEmail release];
 	NSURLRequest *request = [NSURLRequest requestWithURL: url];
 	[webView loadRequest: request];
 }
@@ -70,6 +82,43 @@
     // return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
+
+// user pressed the download button
+// get their email before progressing
+-(IBAction) downloadRequested {
+	
+	if ( [self getEmailFromHiddenField]) {
+		
+		[UIAppDelegate.currentUser setEmail: email.text];
+		[statusLabel setText: @""];
+		[email setEnabled: NO];
+		email.hidden = YES;
+		[self download];
+	}
+	else
+		[statusLabel setText: @"Must enter email."];
+}
+
+// prompt the user for an email address
+// or notify them of failure
+- (BOOL) getEmailFromHiddenField {
+
+	NSLog(@"delegate email: %@",[UIAppDelegate.currentUser email]);
+	
+	// return YES if email has been already entered
+	if (email.text != nil) {
+		
+		return YES;
+	}
+	else  {
+		
+		[statusLabel setText: @"Enter your email address."];
+		[email setEnabled: YES];
+		email.hidden = NO;
+		return NO;
+	}
+}
+
 
 // returns YES if network connection found, otherwise NO.
 // function taken from : http://www.iphonedevsdk.com/forum/iphone-sdk-development/7300-test-if-internet-connection-available.html
@@ -264,6 +313,12 @@
 - (void)viewDidLoad {
 	
 	[super viewDidLoad];
+	
+	// initialize email
+	email.text = nil;
+	[email setEnabled: NO];
+	email.hidden = YES;
+	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	self.activityIndicator.hidden = NO;
@@ -297,6 +352,8 @@
 
 // download a file
 -(IBAction) download {	
+		
+	assert (email != nil);
 	
 	// run the update script before downloading
 	NSLog(@"updating the download DB script");
@@ -343,7 +400,7 @@
 	// start UI progress indicators
 	[self.activityIndicator stopAnimating];
 	//self.activityIndicator.hidden = YES;
-	
+
 	NSLog(@"Saving to file: %@", fileString);
 
 	[profile writeToFile: fileString atomically: YES];
@@ -353,6 +410,7 @@
 	[UIAppDelegate didStartNetworking];
 	
 	NSLog(@"finished download");
+	
 }
 
 // upload a file

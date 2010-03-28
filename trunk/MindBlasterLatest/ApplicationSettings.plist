@@ -7,6 +7,6 @@
 	<key>UploadUpdateURL</key>
 	<string>http://mindblaster.byethost16.com/upload.php</string>
 	<key>DownloadUpdateURL</key>
-	<string>http://mindblaster.byethost16.com/download.php?parameter=MyEmail@email.com</string>
+	<string>http://mindblaster.byethost16.com/download.php?parameter=</string>
 </dict>
 </plist>

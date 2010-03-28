@@ -3,7 +3,7 @@
 //  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
-//	modified by yaniv harmati to abide by coding standards
+//	modified by yaniv haramati to abide by coding standards
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
