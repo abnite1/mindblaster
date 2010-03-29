@@ -9,6 +9,8 @@
 
 #import "GameScreenController.h"
 
+#define UNIT_TESTS_EXECUTED  1
+//this preprocessor directive value is used to set whether unit tests will be executed or not
 
 @implementation GameScreenController
 
@@ -35,7 +37,7 @@
 
 
 // switches between play mode and pause
--(void)setGameTimer; {
+-(void)setGameTimer {
 
 	if(gamePaused == FALSE) {
 		
@@ -49,6 +51,40 @@
 	}
 }
 
+-(void)setGameTimerUnitTest{
+	BOOL unitTestPassed = TRUE;
+	if(gamePaused == FALSE) {
+		[self setGameTimer];
+		if(gamePaused == FALSE)
+		{
+			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePaused variable not set");
+			unitTestPassed = FALSE;
+		}
+		if(gamePlayTimer == nil)
+		{
+			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePlayTimer timer not set");
+			unitTestPassed = FALSE;
+		}
+
+	}
+	else {
+		[self setGameTimer];
+		if(gamePaused == TRUE)
+		{
+			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePaused variable not set");
+			unitTestPassed = FALSE;
+		}
+		if(gamePlayTimer != nil)
+		{
+			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePlayTimer timer failed to invalidate ");
+			unitTestPassed = FALSE;
+		}
+	}
+	[self setGameTimer];
+
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; function: setGameTimerUnitTest");
+}
 
 
 
@@ -56,7 +92,16 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	NSLog(@"started viewDidLoad");
-		
+	
+	//unit tests set to 1 in order to run them
+#if (UNIT_TESTS_EXECUTED ==1)
+	[self setGameTimerUnitTest];
+	[self setQuestionUnitTest];
+	[self updateLivesToUnitTest];
+	[self decreaseLivesUnitTest];
+#endif
+	
+	//setGameTimerUnitTest();
 	gamePaused = FALSE;
 	gamePlayTimerInterval = 0.05;
 	
@@ -108,6 +153,11 @@
 		}
 	}
 	
+	
+	//more unit tests:
+	#if (UNIT_TESTS_EXECUTED ==1)
+ 	[self checkCollisionOfUnitTest];
+	#endif
 	// check their position (debug)
 	/*
 	for (int i = 0; i < 10; i++) {
@@ -235,6 +285,22 @@
 	//NSLog(@"Calling setAnswer on self, next function\n");
 	[self setAnswer];
 	//[question release];
+}
+-(void) setQuestionUnitTest {
+	[self setQuestion];
+	BOOL unitTestPassed = TRUE;
+	if(question == nil)
+	{
+		NSLog(@"UNIT TEST FAILED; function: setQuestion; question object not allocated");
+		unitTestPassed = FALSE;
+	}
+	if(question.questionLabelOutletPointer == nil)
+	{
+		NSLog(@"UNIT TEST FAILED; function: setQuestion; questionLabelOutletPointer object not connected to label");
+		unitTestPassed = FALSE;
+	}
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; function: setQuestion");
 }
 
 // sets the answers on the asteroid labels
@@ -458,6 +524,15 @@
 	}
 }
 
+-(void) decreaseShieldUnitTest {
+	int tempShield = shield;
+	[self decreaseShield];
+	if (tempShield == shield)
+		NSLog(@"UNIT TEST FAILED; function: decreaseShield; sheild not changed by decrease");
+	else
+		NSLog(@"UNIT TEST PASSED; fucntion: decreaseShield");
+}
+
 // decrease lives by one and update the livesLabel
 -(void) decreaseLives {
 	if (lives == 0) [self loseScenario];
@@ -465,6 +540,15 @@
 		lives--;
 		[self updateLivesTo: lives];
 	}
+}
+
+-(void) decreaseLivesUnitTest {
+	int tempLives = lives;
+	[self decreaseLives];
+	if(tempLives == lives)
+		NSLog(@"UNIT TEST FAILED; function: decreaseShield; sheild not changed by decrease");
+	else
+		NSLog(@"UNIT TEST PASSED; fucntion: decreaseShield");
 }
 
 // update the lives representing UI elements
@@ -475,13 +559,50 @@
 	[livesLabel setText:msg];
 	[msg release];
 }
+-(void) updateLivesToUnitTest{
 
+	BOOL unitTestPassed = TRUE;
+	[self updateLivesTo:1];
+	if (lives != 1)
+	{
+		NSLog(@"UNIT TEST FAILED; function: updateLivesTo; lives variable not changed properly");
+		unitTestPassed = FALSE;
+	}	
+	[self updateLivesTo:3];
+	if (lives != 3)
+	{
+		NSLog(@"UNIT TEST FAILED; function: updateLivesTo; lives variable not changed properly");
+		unitTestPassed = FALSE;
+	}
+
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; fucntion: updateLivesTo");
+}
 // updates the shield and whatever UI elements represent it
 -(void) updateShieldTo:(int)newVal {
 	
 	shield = newVal;
 }
+-(void) updateShieldToUnitTest{
+	
+	BOOL unitTestPassed = TRUE;
 
+	[self updateShieldTo:1];
+	if (shield != 1)
+	{
+		NSLog(@"UNIT TEST FAILED; function: updateShieldTo; shield variable not changed properly");
+		unitTestPassed = FALSE;
+	}
+	
+	[self updateShieldTo:3];
+	if (shield != 3)
+	{
+		NSLog(@"UNIT TEST FAILED; function: updateShieldTo; shield variable not changed properly");
+		unitTestPassed = FALSE;
+	}
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; fucntion: updateShieldTo");
+}
 // updates the score and its UI elements
 -(void) updateScoreTo:(int)newScore {
 	
@@ -512,6 +633,40 @@
 	return NO;
 }
 	
+-(void) checkCollisionOfUnitTest{
+		
+	BOOL unitTestPassed = TRUE;
+	[[asteroids objectAtIndex: 1] setAsteroidPosition:20 :20];
+	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
+	
+	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == NO)
+	{
+		NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly1");
+		unitTestPassed = FALSE;
+	}
+	
+	[[asteroids objectAtIndex: 1] setAsteroidPosition:20 :100];
+	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
+	
+	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
+	{
+		NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly2");
+		unitTestPassed = FALSE;
+	}
+	
+	[[asteroids objectAtIndex: 1] setAsteroidPosition:100 :20];
+	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
+	
+	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
+	{
+		NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly3");
+		unitTestPassed = FALSE;
+	}
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; function: checkCollisionOf");
+
+}
+
 // handle the case of asteroids colliding with each other
 -(void) handle2AsteroidsColliding: (Asteroid*)as1 with:(Asteroid*)as2 {
 	
@@ -762,8 +917,9 @@
 	[self.navigationController pushViewController:gamesOverScreenView animated:YES];
 	[gamesOverScreenView release];
 }
-
-
+-(void) touchesUpdateUnitTest:(NSSet*)touches :(UIEvent*)event {
+	//[touch 
+}
 // update the touch events (rotation wheel)
 -(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event {
 	
@@ -831,6 +987,8 @@
 - (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
 	
 	[self touchesUpdate:touches : event];
+	
+	//[self touchesUpdateUnitTest:touches : event];
 	
 }
 

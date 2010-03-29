@@ -27,4 +27,5 @@ static const int SHIP_SIZE_Y = 41;
 -(IBAction)rotate:(CGFloat)angle;
 -(IBAction)fire;
 
+
 @end

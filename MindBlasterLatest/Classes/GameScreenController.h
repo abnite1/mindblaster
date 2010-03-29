@@ -179,4 +179,12 @@
 -(void) updateShieldTo:(int)newVal;
 -(void) updateScoreTo:(int)newScore;
 -(void) resetValues;
+
+//unit tests
+-(void)setGameTimerUnitTest;
+-(void) setQuestionUnitTest;
+-(void) updateLivesToUnitTest;
+-(void) decreaseLivesUnitTest; 
+-(void) checkCollisionOfUnitTest;
+
 @end
