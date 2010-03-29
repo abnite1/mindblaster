@@ -95,6 +95,7 @@
 		
 		[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.highestScore score]] 
 					forKey: @"HighestScore"];
+		[UIAppDelegate.currentUser.highestScore setScore: score];
 	}
 	
 	// save the current topic and the current topic difficulty

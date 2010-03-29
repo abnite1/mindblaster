@@ -24,6 +24,9 @@
 #import "HelpScreenController.h"
 #import "MindBlasterAppDelegate.h"
 
+#define UNIT_TESTS_EXECUTED  1
+// this preprocessor directive value is used to set whether unit tests will be executed or not 
+
 @interface GameScreenController : UIViewController 
 {
 	// background space animation
