@@ -41,4 +41,5 @@ static const int BLANK_REWARD = 1;
 
 -(IBAction)generateCorrectAnswer;
 -(IBAction)setQuestion;
+-(IBAction)setQuestionUnitTest;
 @end
