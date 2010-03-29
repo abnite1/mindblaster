@@ -50,7 +50,9 @@ static const int ASTEROID_SIZE_Y = 32;
 @property (nonatomic,retain) IBOutlet UILabel	*asteroidLabel;
 
 -(id) initWithElements:(UIImageView*)icon :(UILabel*)label;
+
 //-(id) init;
+-(void)setAsteroidDirectionUnitTest;
 -(void)setAsteroidDirection:(int)x :(int)y;
 -(void)setAsteroidPosition:(int)x :(int)y;
 -(IBAction)move;
@@ -58,7 +60,9 @@ static const int ASTEROID_SIZE_Y = 32;
 -(void) phaseToOtherSide;
 -(void)dealloc;
 
-
+//unit tests
+- (void)initWithElementsUnitTest:(UIImageView*)icon :(UILabel*)label;
+-(void) moveUnitTest;
 
 @end
 
