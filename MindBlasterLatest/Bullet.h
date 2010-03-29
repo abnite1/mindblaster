@@ -25,4 +25,6 @@
 -(void)setBulletDirection:(int)x :(int)y;
 -(IBAction)move;
 
+//unit tests
+-(void) moveUnitTest;
 @end
