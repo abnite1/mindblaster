@@ -65,9 +65,11 @@
 	[userNameView release];
 }
 
+// go back to the previous screen
 -(IBAction)backScreen {
 	
 	[self.navigationController popViewControllerAnimated:TRUE];
+	
 }
 
 /*
@@ -91,9 +93,12 @@
 - (void)viewDidLoad {
 	
 	[super viewDidLoad];
+	
+	[self.navigationController setTitle: @"characterView"];
+	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];
 	

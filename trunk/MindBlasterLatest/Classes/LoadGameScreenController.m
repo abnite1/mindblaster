@@ -84,6 +84,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	[self.navigationController setTitle: @"loadGameView"];
+	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self

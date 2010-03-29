@@ -91,6 +91,10 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	
+	[super viewDidLoad];
+	
+	[self.navigationController setTitle: @"gameScreenView"];
 	NSLog(@"started viewDidLoad");
 	
 	//unit tests set to 1 in order to run them
@@ -103,7 +107,7 @@
 	
 	//setGameTimerUnitTest();
 	gamePaused = FALSE;
-	gamePlayTimerInterval = 0.05;
+	gamePlayTimerInterval = 0.03;
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
 					 asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,nil];
@@ -123,10 +127,10 @@
 	Asteroid *asteroid;
 	
 	// initialize shield
-	shield = 3;
+	[self updateShieldTo: 3];
 	
 	// initialize lives
-	lives = 3;
+	[self updateLivesTo: 3];
 
 	NSLog(@"allocated asteroids");
 	
@@ -223,7 +227,7 @@
 	//incrementor which denotes the next bullet to be fired, the 0th bullet is fired first
 	bulletsFired = 0;
 		
-    [super viewDidLoad];
+    
 }
 
 -(IBAction) pauseButton
@@ -514,12 +518,11 @@
 	if (shield > 0)  {
 		
 		shield--;
-		[shieldBar setProgress: [shieldBar progress] - 0.33];
+		[self updateShieldTo: shield];
 	}
 	else {
 		// if shield is at 0, reset it, and decrease lives.
-		shield = 3;
-		[shieldBar setProgress: 1.0];
+		[self updateShieldTo: 3];
 		[self decreaseLives];
 	}
 }
@@ -582,6 +585,7 @@
 -(void) updateShieldTo:(int)newVal {
 	
 	shield = newVal;
+	[shieldBar setProgress: 1.0 - (3-shield) * 0.33];
 }
 -(void) updateShieldToUnitTest{
 	
@@ -738,7 +742,7 @@
 	NSLog(@"hit incorrect asteroid.");
 	int score = [UIAppDelegate.currentUser.score score];
 	
-	// decrement score by 2 and update the scoreboard
+	// decrement score by incorrect penalty and update the scoreboard
 	score = score - INCORRECT_ANSWER_PENALTY;
 	NSString *inputString = [[NSString alloc] initWithFormat: @"Score: %d", score ];
 	[scoreLabel setText: inputString];
@@ -894,7 +898,11 @@
 // navigate to the help screen
 -(IBAction) helpScreen {
 	
-	[self setGameTimer];
+	//NSLog(@"gamePaused at switch to helpscreen: %d", gamePaused);
+	if (gamePaused == 1) {
+		NSLog(@"pausing game in help screen");
+		[self setGameTimer];
+	}
 	
 	// first save settings to plist as the player may opt to quit back to the root menu
 	[GlobalAdmin saveSettings];
@@ -910,12 +918,16 @@
 // navigate to the gameover screen
 -(IBAction) nextScreen {
 	
-	// pause the game if it's running.
-	[self setGameTimer];
+	NSLog(@"gamePaused at switch to nextscreen: %d", gamePaused);
+	if (gamePaused == 1) {
+		NSLog(@"pausing game in help screen");
+		[self setGameTimer];
+	}
 	
 	GameOverScreenController *gamesOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
 	[self.navigationController pushViewController:gamesOverScreenView animated:YES];
 	[gamesOverScreenView release];
+	
 }
 -(void) touchesUpdateUnitTest:(NSSet*)touches :(UIEvent*)event {
 	//[touch 

@@ -203,6 +203,10 @@
 				<reference key="IBUIBackgroundColor" ref="371940561"/>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+					<string key="IBUIAccessibilityLabel">rootView</string>
+					<boolean value="YES" key="IBUIIsAccessibilityElement"/>
+				</object>
 			</object>
 			<object class="IBUIImageView" id="935493566">
 				<nil key="NSNextResponder"/>
@@ -329,6 +333,7 @@
 							<reference ref="627932385"/>
 						</object>
 						<reference key="parent" ref="282882509"/>
+						<string key="objectName">rootView</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>

@@ -39,9 +39,15 @@
 // user entered name
 -(IBAction) nameEntered {
 	
-	NSLog(@"%@", name.text);
+	NSLog(@"name: %@", name.text);
+	NSLog(@"email: %@", email.text);
+	
+	NSLog(@"empty string? %d, %d", YES,  [name.text isEqualToString:@""]);
 	// enable OK button if both text fields have been input
-	if (name.text != nil && email.text != nil) {
+	if (name.text != nil && email.text != nil && 
+		! [name.text isEqualToString:@""] && 
+		! [email.text isEqualToString:@""]) {
+		
 		[okButton setEnabled: YES];
 		okButton.hidden = NO;
 		
@@ -51,9 +57,14 @@
 // user entered name
 -(IBAction) emailEntered {
 	
-	NSLog(@"%@", email.text);
+	NSLog(@"name: %@", name.text);
+	NSLog(@"email: %@", email.text);
+	
 	// enable OK button if both text fields have been input
-	if (name.text != nil && email.text != nil) {
+	if (name.text != nil && email.text != nil && 
+		! [name.text isEqualToString:@""] && 
+		! [email.text isEqualToString:@""]) {
+		
 		[okButton setEnabled: YES];
 		okButton.hidden = NO;
 		
@@ -102,6 +113,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	[self.navigationController setTitle: @"usernameView"];
+	
 	// initialize the edit field
 	name.text = nil;
 	email.text = nil;
@@ -112,7 +125,7 @@
 	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];
 	
