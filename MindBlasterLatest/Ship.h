@@ -28,4 +28,5 @@ static const int SHIP_SIZE_Y = 41;
 -(IBAction)fire;
 
 
+-(void)setIconUnitTest:(UIImageView*)icon ;
 @end

@@ -14,6 +14,7 @@
 @synthesize questionLabelOutletPointer, answerLabelOutletPointer, answer;
 
 // set the question
+
 -(IBAction)setQuestion{
 
 	// base range =  (0 - 10), add +10 to max positive range for every added difficulty level.
@@ -77,6 +78,50 @@
 	[numericQuestion release];
 }
 
+-(IBAction)setQuestionUnitTest{
+	int topicType = [UIAppDelegate.currentUser.currentTopic topic];
+	BOOL unitTestPassed =TRUE;
+	int counter =0;
+	int testOperand1, testOperand2;
+	testOperand1 = operand1;
+	testOperand2 = operand2;
+	
+	[self setQuestion];
+	
+	while (testOperand1 == operand1 && testOperand2 == operand2  && counter<50)
+	{
+		[self setQuestion];
+		counter++;
+	}
+	if(testOperand1 == operand1 && testOperand2 == operand2)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Question; function setQuestion; operand1 and operand2 failed to change after 50 resets, warning it is possible this a highly unlikely fluke. Retest.");
+		unitTestPassed = FALSE;
+	}
+	if(operand1+operand2 != answer && topicType == TOPIC_ADDITION)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Question; function setQuestion; answer!= operand1 + operand2 for topicType = TOPIC_ADDITION");
+		unitTestPassed = FALSE;
+	}
+	if(operand1-operand2 != answer && topicType == TOPIC_SUBTRACTION)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Question; function setQuestion; answer!= operand1 + operand2 for topicType = TOPIC_ADDITION");
+		unitTestPassed = FALSE;
+	}
+	if(operand1*operand2 != answer && topicType == TOPIC_MULTIPLICATION)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Question; function setQuestion; answer!= operand1 + operand2 for topicType = TOPIC_ADDITION");
+		unitTestPassed = FALSE;
+	}
+	if(operand1/operand2 != answer && topicType == TOPIC_DIVISION)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Question; function setQuestion; answer!= operand1 + operand2 for topicType = TOPIC_ADDITION");
+		unitTestPassed = FALSE;
+	}
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; class: Question; function setQuestion");
+	
+}
 
 // for debug and testing
 -(IBAction)generateCorrectAnswer {

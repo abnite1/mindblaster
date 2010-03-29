@@ -17,7 +17,26 @@
 	shipIcon = icon;
 }
 
+-(void)setIconUnitTest:(UIImageView*)icon {
+	shipIcon = nil;
+	if (icon == nil)
+		NSLog(@"UNIT TEST FAILED; class: Ship; function: setIcon; unit test passed a nil UIImage for icon");
+	else
+		[self setIcon:icon];
+	
+	if(shipIcon == nil  && icon != nil)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Ship; function: setIcon; shipIcon not set");
+
+	}
+	else
+		NSLog(@"UNIT TEST PASSED; class: Ship; function: setIcon");
+}
+
+//this function is unit tested visually as visual confirmation is needed that the ship icon is rotating
+//the compiler cannot verify this
 -(void) rotate: (CGFloat)angle {
+	
 	shipIcon.transform = CGAffineTransformMakeRotation(angle);
 }
 
@@ -27,6 +46,15 @@
 	//direction += M_PI_4;
 	[self rotateByAngle: direction];
 }
+ 
+ if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
+ {
+ NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly3");
+ unitTestPassed = FALSE;
+ }
+ if(unitTestPassed == TRUE)
+ NSLog(@"UNIT TEST PASSED; function: checkCollisionOf");
+ 
  */
 
 -(IBAction)fire {
