@@ -9,8 +9,7 @@
 
 #import "GameScreenController.h"
 
-#define UNIT_TESTS_EXECUTED  1
-//this preprocessor directive value is used to set whether unit tests will be executed or not
+
 
 @implementation GameScreenController
 
@@ -808,6 +807,9 @@
 		// raise difficulty by one
 		[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff + 1];
 		
+		// and save settings
+		[GlobalAdmin saveSettings];
+		
 				
 		// reset the label
 		[self setDifficultyLabel];
@@ -833,6 +835,9 @@
 		
 		// then update the highestDifficulty in the AppDelegate profile
 		[UIAppDelegate.currentUser.lastTopicCompleted setDifficulty: diff];
+		
+		// save settings
+		[GlobalAdmin saveSettings];
 	}
 	
 	// if the score is higher than the set limit for topic
@@ -848,6 +853,8 @@
 			}
 			else {};	// avoid nested ambiguities.
 			
+			// save settings
+			[GlobalAdmin saveSettings];
 			
 			// reset the score
 			score = 0;
