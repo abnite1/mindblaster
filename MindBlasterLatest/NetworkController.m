@@ -61,7 +61,18 @@
 	
 	NSURL *url = [NSURL URLWithString: [GlobalAdmin getUploadUpdateURL]];
 	NSURLRequest *request = [NSURLRequest requestWithURL: url];
-	[webView loadRequest: request];
+	
+	// make sure connection established
+	NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self startImmediately: YES];
+	if (urlConnection ){
+		NSLog(@"download script invoked.");
+	}
+	else {
+		NSLog(@"download script failed to invoke.");
+	}
+	[urlConnection release];
+	//[webView loadRequest: request];
+	
 }
 
 // updates the DB by accessing the update php URL with email as parameter
@@ -71,10 +82,38 @@
 	NSString *urlWithEmail = [[NSString alloc] initWithFormat: @"%@%@", 
 							  [GlobalAdmin getDownloadUpdateURL], email.text];
 	NSLog(@"%@", urlWithEmail);
+	
 	NSURL *url = [NSURL URLWithString: urlWithEmail];
 	[urlWithEmail release];
 	NSURLRequest *request = [NSURLRequest requestWithURL: url];
-	[webView loadRequest: request];
+	
+	// make sure connection is established and wait for 20 seconds
+	// to allow the server to enact the profile overwrite.
+	NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self startImmediately: YES];
+	if (urlConnection ){
+		NSLog(@"download script invoked.");
+	}
+	else {
+		NSLog(@"download script failed to invoke.");
+	}
+	[urlConnection release];
+	
+}
+
+// delegate method for NSURLConnection
+// activated once the script for either upload or download is finished loading, and download can begin
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	NSLog(@"connection did finish loading");
+	if (connectionType == DOWNLOAD) {
+		
+		NSLog(@"finished loading upload script");
+		[self download];
+	}
+	if (connectionType == UPLOAD) {
+		
+		NSLog(@"finished loading upload script");
+	}
+		
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -93,7 +132,8 @@
 		[statusLabel setText: @""];
 		[email setEnabled: NO];
 		email.hidden = YES;
-		[self download];
+		connectionType = DOWNLOAD;
+		[self updateDBDownload];
 	}
 	else
 		[statusLabel setText: @"Must enter email."];
@@ -103,10 +143,9 @@
 // or notify them of failure
 - (BOOL) getEmailFromHiddenField {
 
-	NSLog(@"delegate email: %@",[UIAppDelegate.currentUser email]);
 	
-	// return YES if email has been already entered
-	if (email.text != nil) {
+	// return YES if email has been already entered with a non empty value
+	if (email.text != nil && ! [email.text isEqualToString:@""]) {
 		
 		return YES;
 	}
@@ -314,14 +353,16 @@
 	
 	[super viewDidLoad];
 	
+	connectionType = -1;
+	
+	[self.navigationController setTitle: @"networkView"];
+	
 	// initialize email
 	email.text = nil;
 	[email setEnabled: NO];
 	email.hidden = YES;
 	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
-	
-	self.activityIndicator.hidden = NO;
 	
 	// test for an internet connection
 	// if none was found
@@ -346,6 +387,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+	//self.activityIndicator.hidden = NO;
     //self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
     //self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
 }
@@ -353,11 +396,13 @@
 // download a file
 -(IBAction) download {	
 		
-	assert (email != nil);
+	assert (email.text != nil && ! [email.text isEqualToString: @""]);
 	
 	// run the update script before downloading
-	NSLog(@"updating the download DB script");
-	[self updateDBDownload];
+	//NSLog(@"updating the download DB script");
+	//NSLog(@"email: %@",[UIAppDelegate.currentUser email]);
+	//[self updateDBDownload];
+
 	
 	// save path
 	NSString *fileString = [[GlobalAdmin getPath] retain];
@@ -392,13 +437,13 @@
 */
 
 	//self.activityIndicator.hidden = NO;
-	[self.activityIndicator startAnimating];
+	//[self.activityIndicator startAnimating];
 	
 	//NSDictionary *profile = [[NSDictionary alloc] initWithContentsOfFile: fileString];
 	NSDictionary *profile = [[NSDictionary alloc] initWithContentsOfURL: url];
 	
 	// start UI progress indicators
-	[self.activityIndicator stopAnimating];
+	//[self.activityIndicator stopAnimating];
 	//self.activityIndicator.hidden = YES;
 
 	NSLog(@"Saving to file: %@", fileString);
@@ -410,11 +455,13 @@
 	[UIAppDelegate didStartNetworking];
 	
 	NSLog(@"finished download");
-	
+	connectionType = -1;
 }
 
 // upload a file
 -(IBAction)upload {
+	
+	connectionType == UPLOAD;
 	
 	// get the ftp url from ApplicationSettings.plist
 	NSString *urlString =  [GlobalAdmin getURL];
@@ -438,7 +485,7 @@
 		// update UI indicators
 		self.statusLabel.text = @"Upload Started.";
 		//self.activityIndicator.hidden = NO;
-		[self.activityIndicator startAnimating];
+		//[self.activityIndicator startAnimating];
 	
 		// set the streams
 		self.fileStreamIn = [NSInputStream inputStreamWithFileAtPath: fileString];
@@ -459,7 +506,7 @@
 		CFRelease(ftpStream);
 		
 		self.statusLabel.text = @"Upload Complete.";
-		[self.activityIndicator stopAnimating];
+		//[self.activityIndicator stopAnimating];
 		//self.activityIndicator.hidden = YES;
 		
 	}
@@ -475,19 +522,21 @@
 	// update the upload script
 	NSLog(@"updating upload script");
 	[self updateDBUpload];
+	
+	connectionType = -1;
 }
 
 // to be implemented
 -(void) didStartNetworking {
 	NSLog(@"inside didStartNetworking");
-	[activityIndicator startAnimating];
+	//[activityIndicator startAnimating];
 }
 
 
 // to be implemented
 -(void) didStopNetworking {
 	NSLog(@"inside didStopNetworking");
-	[activityIndicator stopAnimating];
+	//[activityIndicator stopAnimating];
 }
 
 

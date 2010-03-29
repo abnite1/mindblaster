@@ -130,6 +130,8 @@
 // default to the first topic selection, start the sapce background animation
 - (void)viewDidLoad {
 	
+	[self.navigationController setTitle: @"topicView"];
+	
 	// default to the first topic
 	[self firstTopicSelected];
 	
@@ -171,7 +173,7 @@
 
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];
 	[super viewDidLoad];

@@ -38,8 +38,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIImageView" id="163454617">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-196, -184}, {1455, 810}}</string>
+						<int key="NSvFlags">288</int>
+						<string key="NSFrame">{{-522, -286}, {1455, 810}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -556,7 +556,7 @@
 					<object class="IBUIProgressView" id="87864639">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{285, 31}, {60, 9}}</string>
+						<string key="NSFrame">{{290, 31}, {60, 9}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -564,7 +564,7 @@
 						<float key="IBUIProgress">1.000000e+00</float>
 					</object>
 				</object>
-				<string key="NSFrameSize">{506, 320}</string>
+				<string key="NSFrameSize">{484, 301}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -907,10 +907,10 @@
 							<reference ref="586683093"/>
 							<reference ref="701735979"/>
 							<reference ref="1063946904"/>
-							<reference ref="87864639"/>
 							<reference ref="235836689"/>
 							<reference ref="1011176714"/>
 							<reference ref="163454617"/>
+							<reference ref="87864639"/>
 						</object>
 						<reference key="parent" ref="935461785"/>
 					</object>
@@ -1157,7 +1157,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameScreenController</string>
 					<string>UIResponder</string>
-					<string>{{72, 404}, {506, 320}}</string>
+					<string>{{185, 351}, {484, 301}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1218,7 +1218,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">106</int>
+			<int key="maxID">108</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

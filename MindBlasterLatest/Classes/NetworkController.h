@@ -14,6 +14,9 @@
 #import "HelpScreenController.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
 
+static const int DOWNLOAD = 0;
+static const int UPLOAD = 1;
+
 
 
 enum {
@@ -46,6 +49,7 @@ enum {
 	IBOutlet UIButton *					downloadButton;
 	
 	IBOutlet UITextField *				email;
+	int									connectionType;
 
 }
 

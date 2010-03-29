@@ -70,12 +70,14 @@
 	
     [super viewDidLoad];
 	
+	[self.navigationController setTitle: @"gameOverView"];
+	
 	// reset score
 	[UIAppDelegate.currentUser.score setScore: 0];
 	
 	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
-	[NSTimer scheduledTimerWithTimeInterval:0.001 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];
 }

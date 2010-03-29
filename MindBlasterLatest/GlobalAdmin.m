@@ -91,7 +91,7 @@
 	// save the current score as highest score if it's greater than the one in the plist profile
 	int score = [UIAppDelegate.currentUser.score score];
 	int highestScore = [[prefs objectForKey: @"HighestScore"] intValue];
-	if (score > highestScore) {
+	if (score >= highestScore) {
 		
 		[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.highestScore score]] 
 					forKey: @"HighestScore"];

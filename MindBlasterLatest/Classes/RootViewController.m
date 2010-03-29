@@ -19,13 +19,14 @@
  */
 - (void)viewDidLoad {
 	
+	[self.navigationController setTitle: @"rootView"];
 	///Check if profile exists, if so, fine
 	//IF not, then hide the "Continue" button.
 	
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(moveBackground) userInfo:nil repeats:YES];
 	[bgAnimation setSpeedX:0.2 Y:0.2];
 	
