@@ -56,12 +56,12 @@
 		[self setGameTimer];
 		if(gamePaused == FALSE)
 		{
-			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePaused variable not set");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePaused variable not set");
 			unitTestPassed = FALSE;
 		}
 		if(gamePlayTimer == nil)
 		{
-			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePlayTimer timer not set");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePlayTimer timer not set");
 			unitTestPassed = FALSE;
 		}
 
@@ -70,19 +70,19 @@
 		[self setGameTimer];
 		if(gamePaused == TRUE)
 		{
-			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePaused variable not set");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePaused variable not set");
 			unitTestPassed = FALSE;
 		}
 		if(gamePlayTimer != nil)
 		{
-			NSLog(@"UNIT TEST FAILED; function: setGameTimerUnitTest; gamePlayTimer timer failed to invalidate ");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePlayTimer timer failed to invalidate ");
 			unitTestPassed = FALSE;
 		}
 	}
 	[self setGameTimer];
 
 	if(unitTestPassed == TRUE)
-		NSLog(@"UNIT TEST PASSED; function: setGameTimerUnitTest");
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: setGameTimerUnitTest");
 }
 
 
@@ -96,13 +96,13 @@
 	[self.navigationController setTitle: @"gameScreenView"];
 	NSLog(@"started viewDidLoad");
 	
-	//unit tests set to 1 in order to run them
-#if (UNIT_TESTS_EXECUTED ==1)
-	[self setGameTimerUnitTest];
-	[self setQuestionUnitTest];
-	[self updateLivesToUnitTest];
-	[self decreaseLivesUnitTest];
-#endif
+	#if (UNIT_TESTS_EXECUTED ==1)
+		[self setGameTimerUnitTest];
+		[self setQuestionUnitTest];
+		[self updateLivesToUnitTest];
+		[self decreaseLivesUnitTest];
+		[self checkCollisionOfUnitTest];
+	#endif
 	
 	//setGameTimerUnitTest();
 	gamePaused = FALSE;
@@ -157,10 +157,7 @@
 	}
 	
 	
-	//more unit tests:
-	#if (UNIT_TESTS_EXECUTED ==1)
- 	[self checkCollisionOfUnitTest];
-	#endif
+
 	// check their position (debug)
 	/*
 	for (int i = 0; i < 10; i++) {
@@ -226,6 +223,20 @@
 	//incrementor which denotes the next bullet to be fired, the 0th bullet is fired first
 	bulletsFired = 0;
 		
+	//automated unit testing
+	#if (UNIT_TESTS_EXECUTED ==1)
+
+		[self setQuestionUnitTest];
+		[self updateLivesToUnitTest];
+		[self decreaseLivesUnitTest];
+		[self checkCollisionOfUnitTest];
+		[question setQuestionUnitTest];
+		[ship setIconUnitTest:shipIcon];
+		[ [Asteroid alloc] initWithElementsUnitTest:  [asteroidIcons objectAtIndex: 1]:   [solutionLabels objectAtIndex: 1]];
+		[ [Asteroid alloc] setAsteroidDirectionUnitTest];
+		[ [Asteroid alloc] moveUnitTest];
+		[ [Bullet alloc] moveUnitTest];
+	#endif
     
 }
 
@@ -294,16 +305,16 @@
 	BOOL unitTestPassed = TRUE;
 	if(question == nil)
 	{
-		NSLog(@"UNIT TEST FAILED; function: setQuestion; question object not allocated");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setQuestion; question object not allocated");
 		unitTestPassed = FALSE;
 	}
 	if(question.questionLabelOutletPointer == nil)
 	{
-		NSLog(@"UNIT TEST FAILED; function: setQuestion; questionLabelOutletPointer object not connected to label");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setQuestion; questionLabelOutletPointer object not connected to label");
 		unitTestPassed = FALSE;
 	}
 	if(unitTestPassed == TRUE)
-		NSLog(@"UNIT TEST PASSED; function: setQuestion");
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: setQuestion");
 }
 
 // sets the answers on the asteroid labels
@@ -509,6 +520,42 @@
 	
 }
 
+
+-(void) checkCollisionOfUnitTest{
+	
+	BOOL unitTestPassed = TRUE;
+	[[asteroids objectAtIndex: 1] setAsteroidPosition:20 :20];
+	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
+	
+	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == NO)
+	{
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: checkCollisionOf; collision not detected properly1");
+		unitTestPassed = FALSE;
+	}
+	
+	[[asteroids objectAtIndex: 1] setAsteroidPosition:20 :100];
+	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
+	
+	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
+	{
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: checkCollisionOf; collision not detected properly2");
+		unitTestPassed = FALSE;
+	}
+	
+	[[asteroids objectAtIndex: 1] setAsteroidPosition:100 :20];
+	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
+	
+	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
+	{
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: checkCollisionOf; collision not detected properly3");
+		unitTestPassed = FALSE;
+	}
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: checkCollisionOf");
+	
+}
+
+
 // reduce the shield of the ship by a third of its power
 // and check if lives are lost
 -(void) decreaseShield {
@@ -548,9 +595,9 @@
 	int tempLives = lives;
 	[self decreaseLives];
 	if(tempLives == lives)
-		NSLog(@"UNIT TEST FAILED; function: decreaseShield; sheild not changed by decrease");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: decreaseShield; sheild not changed by decrease");
 	else
-		NSLog(@"UNIT TEST PASSED; fucntion: decreaseShield");
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: decreaseShield");
 }
 
 // update the lives representing UI elements
@@ -567,18 +614,18 @@
 	[self updateLivesTo:1];
 	if (lives != 1)
 	{
-		NSLog(@"UNIT TEST FAILED; function: updateLivesTo; lives variable not changed properly");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: updateLivesTo; lives variable not changed properly");
 		unitTestPassed = FALSE;
 	}	
 	[self updateLivesTo:3];
 	if (lives != 3)
 	{
-		NSLog(@"UNIT TEST FAILED; function: updateLivesTo; lives variable not changed properly");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: updateLivesTo; lives variable not changed properly");
 		unitTestPassed = FALSE;
 	}
 
 	if(unitTestPassed == TRUE)
-		NSLog(@"UNIT TEST PASSED; fucntion: updateLivesTo");
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: updateLivesTo");
 }
 // updates the shield and whatever UI elements represent it
 -(void) updateShieldTo:(int)newVal {
@@ -593,18 +640,18 @@
 	[self updateShieldTo:1];
 	if (shield != 1)
 	{
-		NSLog(@"UNIT TEST FAILED; function: updateShieldTo; shield variable not changed properly");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: updateShieldTo; shield variable not changed properly");
 		unitTestPassed = FALSE;
 	}
 	
 	[self updateShieldTo:3];
 	if (shield != 3)
 	{
-		NSLog(@"UNIT TEST FAILED; function: updateShieldTo; shield variable not changed properly");
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: updateShieldTo; shield variable not changed properly");
 		unitTestPassed = FALSE;
 	}
 	if(unitTestPassed == TRUE)
-		NSLog(@"UNIT TEST PASSED; fucntion: updateShieldTo");
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: updateShieldTo");
 }
 // updates the score and its UI elements
 -(void) updateScoreTo:(int)newScore {
@@ -636,40 +683,6 @@
 	return NO;
 }
 	
--(void) checkCollisionOfUnitTest{
-		
-	BOOL unitTestPassed = TRUE;
-	[[asteroids objectAtIndex: 1] setAsteroidPosition:20 :20];
-	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
-	
-	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == NO)
-	{
-		NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly1");
-		unitTestPassed = FALSE;
-	}
-	
-	[[asteroids objectAtIndex: 1] setAsteroidPosition:20 :100];
-	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
-	
-	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
-	{
-		NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly2");
-		unitTestPassed = FALSE;
-	}
-	
-	[[asteroids objectAtIndex: 1] setAsteroidPosition:100 :20];
-	[[asteroids objectAtIndex: 2] setAsteroidPosition:20 :20];
-	
-	if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
-	{
-		NSLog(@"UNIT TEST FAILED; function: checkCollisionOf; collision not detected properly3");
-		unitTestPassed = FALSE;
-	}
-	if(unitTestPassed == TRUE)
-		NSLog(@"UNIT TEST PASSED; function: checkCollisionOf");
-
-}
-
 // handle the case of asteroids colliding with each other
 -(void) handle2AsteroidsColliding: (Asteroid*)as1 with:(Asteroid*)as2 {
 	
