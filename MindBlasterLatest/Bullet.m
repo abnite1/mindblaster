@@ -47,5 +47,20 @@
 									  bulletPosition.y + bulletDirection.y);
 
 }
+-(void) moveUnitTest {
+	[self move];
+	CGPoint tempBulletPoint = bulletIcon.center ;
 
+	bulletDirection.x = 2;
+	bulletDirection.y = 3;
+	
+	[self move];
+	
+	if( tempBulletPoint.x != (bulletIcon.center.x -2) || tempBulletPoint.x!=(bulletIcon.center.x -3) )
+		NSLog(@"UNIT TEST PASSED; class: Bullet; function move");	
+	else
+		NSLog(@"UNIT TEST FAILED; class: Bullet; function move; bulletIcon did not move correctly " );	
+	
+	
+}
 @end
