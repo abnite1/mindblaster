@@ -32,7 +32,31 @@
     return self;
 	
 }
+- (void)initWithElementsUnitTest:(UIImageView*)icon :(UILabel*)label {
+	
+	asteroidIcon = nil;
+	asteroidLabel = nil;
+	BOOL unitTestPassed = TRUE;
+	if(icon==nil || label == nil)
+		NSLog(@"UNIT TEST FAILED; class: Asteroid; function initWithElements; unit passed a nil UIImageView icon or UIILabel label");
+	else
+	{
+		[self initWithElements:icon :label];
+		if(asteroidIcon ==nil)
+		{
+			NSLog(@"UNIT TEST FAILED; class: Asteroid; function initWithElements; asteroidIcon not set");			
+			unitTestPassed = FALSE;
+		}
+		if(asteroidLabel = nil)
+		{
+			NSLog(@"UNIT TEST FAILED; class: Asteroid; function initWithElements; asteroidLabel not set");			
+			unitTestPassed = FALSE;
+		}	
 
+		if(unitTestPassed == TRUE)
+			NSLog(@"UNIT TEST PASSED; class: Asteroid; function initWithElements");
+	}
+}
 // standard constructor sets the asteroid png and size
 /*
 -(id) init {
@@ -55,7 +79,26 @@
 {
 	asteroidDirection = CGPointMake(x,y);
 }
-
+-(void)setAsteroidDirectionUnitTest{
+	
+	BOOL unitTestPassed =TRUE;
+	
+	[self setAsteroidDirection:4:6];
+	if(asteroidDirection.x != 4 && asteroidDirection.y != 6)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Asteroid; function setAsteroidDirection; asteroidDirection not set correctly");			
+		unitTestPassed = FALSE;
+	}	
+	[self setAsteroidDirection:-2:-5];
+	if(asteroidDirection.x != -2 && asteroidDirection.y != -5)
+	{
+		NSLog(@"UNIT TEST FAILED; class: Asteroid; function setAsteroidDirection; asteroidDirection not set correctly");			
+		unitTestPassed = FALSE;
+	}	
+	
+	if(unitTestPassed == TRUE)
+		NSLog(@"UNIT TEST PASSED; class: Asteroid; function setAsteroidDirection");
+}
 // change position of all asteroid elements to a specified point
 -(void)setAsteroidPosition:(int)x :(int)y;
 {
@@ -96,7 +139,22 @@
 		
 	//NSLog(@"end of move");	
 }
-
+-(void) moveUnitTest {
+	[self move];
+	CGPoint tempAsteroidPoint = asteroidIcon.center ;
+	CGPoint tempLabelCenter = asteroidLabel.center ;
+	asteroidDirection.x = 2;
+	asteroidDirection.y = 3;
+	
+	[self move];
+	
+	if( tempLabelCenter.x != (asteroidLabel.center.x -2) || tempAsteroidPoint.x!=(asteroidIcon.center.x -3) )
+		NSLog(@"UNIT TEST PASSED; class: Asteroid; function move");	
+	else
+		NSLog(@"UNIT TEST FAILED; class: Asteroid; function move; asteroidLabel or asteroidIcon did not move correctly " );	
+		
+	
+}
 // bounce the asteroid off the walls
 -(void) bounceOffBoundaries {
 	
