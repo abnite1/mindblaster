@@ -28,6 +28,7 @@
 - (IBAction) backScreen {
 	
 	[self.navigationController popViewControllerAnimated:TRUE];
+	
 }
 
 

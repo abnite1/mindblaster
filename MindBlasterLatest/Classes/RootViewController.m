@@ -82,12 +82,19 @@
 // continue to topic selection with the current profile
 - (IBAction) continueSelected {
 
-	if(! [GlobalAdmin loadSettings]) NSLog(@"Unable to load plist profile\n");
-	
-	// Navigation logic may go here -- for example, create and push another view controller.
-	TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
-	[self.navigationController pushViewController:topicView animated:YES];
-	[topicView release];
+	if(! [GlobalAdmin loadSettings])  {
+		
+		NSLog(@"Unable to load plist profile\n");
+		//[continueButton setEnabled: NO];
+		
+	}
+	else {
+		
+		// Navigation logic may go here -- for example, create and push another view controller.
+		TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
+		[self.navigationController pushViewController:topicView animated:YES];
+		[topicView release];
+	}	
 
 }
 

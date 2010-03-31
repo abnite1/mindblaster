@@ -20,6 +20,7 @@
 
 @interface RootViewController : UIViewController {
 	IBOutlet BackgroundAnimation *bgAnimation;
+	IBOutlet UIButton *continueButton;
 }
 
 - (IBAction) nextScreen;
