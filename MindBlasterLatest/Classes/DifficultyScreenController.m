@@ -149,6 +149,23 @@
 
 }
 
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewWillAppear:(BOOL)animated {
+	
+    [super viewWillAppear:animated];
+	NSLog(@"difficulty view will appear.");
+}
+
+
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:animated];
+	NSLog(@"difficulty view did appear.");
+	[self.navigationController setTitle: @"difficultyView"];
+	
+}
+
 
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

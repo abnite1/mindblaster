@@ -105,16 +105,22 @@
 	[bgAnimation move];
 }
 
-/*
+// delegate function that runs every time the view returns from "back" of another screen
 - (void)viewWillAppear:(BOOL)animated {
+
     [super viewWillAppear:animated];
+	NSLog(@"root view will appear.");
 }
-*/
-/*
+
+// delegate function that runs every time the view returns from "back" of another screen
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    
+	[super viewDidAppear:animated];
+	NSLog(@"root view did appear.");
+	[self.navigationController setTitle: @"rootView"];
+	
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];

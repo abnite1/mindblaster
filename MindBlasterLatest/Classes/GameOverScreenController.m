@@ -82,6 +82,23 @@
 	[background setSpeedX:0.2 Y:0.2];
 }
 
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewWillAppear:(BOOL)animated {
+	
+    [super viewWillAppear:animated];
+	NSLog(@"gameover view will appear.");
+}
+
+
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:animated];
+	NSLog(@"gameover view did appear.");
+	[self.navigationController setTitle: @"gameOverView"];
+	
+}
+
 
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

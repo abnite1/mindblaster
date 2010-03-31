@@ -59,5 +59,6 @@
 -(void) playBG;
 -(void) playLaser;
 -(void) playAsteroidExplosion;
+-(void) dealloc;
 
 @end

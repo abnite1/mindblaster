@@ -131,6 +131,23 @@
 	
 }
 
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewWillAppear:(BOOL)animated {
+	
+    [super viewWillAppear:animated];
+	NSLog(@"username view will appear.");
+}
+
+
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:animated];
+	NSLog(@"username view did appear.");
+	[self.navigationController setTitle: @"usernameView"];
+	
+}
+
 
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -19,7 +19,7 @@
 @synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
 //@synthesize asteroidIcons;  //this is the vector which will hold all of the above asteroid objects
-
+ 
 @synthesize rotationBall;
 
 @synthesize bullet0, bullet1, bullet2, bullet3, bullet4, bullet5;
@@ -121,10 +121,61 @@
 		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: setGameTimerUnitTest");
 }
 
+// delegate function that runs every time the view returns from "back" of another screen
 - (void)viewWillAppear:(BOOL)animated {
  
 	[super viewWillAppear:animated];
 	
+}
+
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:animated];
+	
+	// if the game is paused when returning to view, unpause.
+	if (gamePaused == FALSE) {
+		
+		NSLog(@"unpausing game in viewdidappear");
+		[self setGameTimer];
+	}
+	
+	// stop the background sound if it's playing
+	// then restart it
+	if ([sound.bgPlayer isPlaying]) {
+		
+		[sound.bgPlayer stop];
+		[self initSound];
+		[sound playBG];
+	}
+
+	
+	NSLog(@"gamescreen view did appear.");
+	[self.navigationController setTitle: @"gameScreenView"];
+	
+}
+
+// delegate for what to do before leaving screen
+-(void) viewWillDisappear:(BOOL)animated {
+	
+	[super viewDidAppear:animated];
+	NSLog(@"inside viewWillDisappear");
+	if ([sound.bgPlayer isPlaying]) {
+		
+		[sound.bgPlayer stop];
+	}
+	[sound release];
+	
+	/*
+	// stop sound if it's playing
+	if ([sound.bgPlayer isPlaying]) {
+		
+		NSLog(@"sound is playing");
+		[sound.bgPlayer stop];
+		// maybe release as well
+		//[sound release];
+	}
+	 */
 }
 
 
@@ -133,7 +184,11 @@
 	
 	[super viewDidLoad];
 	
-	// start background sound
+	// stop the background sound just in case
+	[sound.bgPlayer stop];
+	[sound.laserPlayer stop];
+	[sound.explosionPlayer stop];
+	
 	[self initSound];
 	[sound setBgIsPlaying: YES];
 	[sound playBG];
@@ -1015,13 +1070,19 @@
 // navigate to the help screen
 -(IBAction) helpScreen {
 	
-	// stop sound
-	[sound.bgPlayer stop];
+	// stop sound if it's playing
+	if ([sound.bgPlayer isPlaying])
+		[sound.bgPlayer stop];
 	
 	//NSLog(@"gamePaused at switch to helpscreen: %d", gamePaused);
 	if (gamePaused == 1) {
 		NSLog(@"pausing game in help screen");
 		[self setGameTimer];
+	}
+	
+	// compare score and save to profile if necessary
+	if ([UIAppDelegate.currentUser.score score] > [UIAppDelegate.currentUser.highestScore score]) {
+		[UIAppDelegate.currentUser setHighestScore: [UIAppDelegate.currentUser score]];
 	}
 	
 	// first save settings to plist as the player may opt to quit back to the root menu
