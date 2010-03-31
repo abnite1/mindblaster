@@ -385,12 +385,23 @@
 
 }
 
+// delegate function that runs whenever view appears (when returning from subview, etc.)
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
 	//self.activityIndicator.hidden = NO;
     //self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
     //self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
+}
+
+
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:animated];
+	NSLog(@"network view did appear.");
+	[self.navigationController setTitle: @"networkView"];
+	
 }
 
 // download a file

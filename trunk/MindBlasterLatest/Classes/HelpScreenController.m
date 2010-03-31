@@ -49,6 +49,23 @@
 	
 }
 
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewWillAppear:(BOOL)animated {
+	
+    [super viewWillAppear:animated];
+	NSLog(@"help view will appear.");
+}
+
+
+// delegate function that runs every time the view returns from "back" of another screen
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:animated];
+	NSLog(@"help view did appear.");
+	[self.navigationController setTitle: @"helpView"];
+	
+}
+
 - (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }

@@ -117,6 +117,20 @@
 	[player release];
 }
 
+// dealloc block
+-(void) dealloc {
+	
+	NSLog(@"in sound dealloc");
+	if ([bgPlayer isPlaying])
+		[bgPlayer stop];
+	[bgPlayer release];
+	[laserPlayer release];
+	[explosionPlayer release];
+	
+	[super dealloc];
+	
+}
+
 
 
 @end
