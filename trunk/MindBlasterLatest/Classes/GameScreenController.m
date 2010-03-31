@@ -13,7 +13,7 @@
 
 @implementation GameScreenController
 
-@synthesize background, profilePic, difficultyLabel;
+@synthesize background, profilePic, difficultyLabel, feedbackLabel;
 @synthesize sound;
 
 @synthesize shipIcon, ship, shieldBar;
@@ -37,13 +37,46 @@
 	[background move];
 }
 
+// starts fadein/fadeout animation for feedback label
+-(void) beginFeedbackAnimation {
+	
+	feedbackLabel.hidden = NO;
+	feedbackLabel.alpha = 0;
+	feedbackLabel.transform = CGAffineTransformMakeScale(0.5, 0.5);
+	
+	[UIView beginAnimations:nil context: NULL];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1];
+	[UIView setAnimationRepeatCount: 3];
+	
+
+	feedbackLabel.alpha = 1;
+	feedbackLabel.transform = CGAffineTransformIdentity;
+	[UIView commitAnimations];
+}
+
+// delegate function to take effect at the end of animation
+-(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
+	
+	// if animation got cut off, redo.
+	if (![finished intValue]) {
+		
+		NSLog(@"animation interrupted.");
+	}
+	else {
+		feedbackLabel.hidden = YES;
+	}
+}
+
 
 // switches between play mode and pause
 -(void)setGameTimer {
 
 	if(gamePaused == FALSE) {
 		
-		gamePlayTimer = [NSTimer scheduledTimerWithTimeInterval: gamePlayTimerInterval target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+		gamePlayTimer = [NSTimer scheduledTimerWithTimeInterval: gamePlayTimerInterval 
+														 target: self selector:@selector(onTimer) 
+													   userInfo: nil repeats:YES];
 		gamePaused = TRUE;
 	}
 	else {
@@ -104,6 +137,9 @@
 	[self initSound];
 	[sound setBgIsPlaying: YES];
 	[sound playBG];
+	
+	// initialize feedbackLabel
+	[feedbackLabel setText: @""];
 	
 	
 	[self.navigationController setTitle: @"gameScreenView"];
@@ -677,6 +713,16 @@
 	[self updateScoreLabel];
 }
 
+// updates the feedbackLabel
+-(void) updateFeedbackLabelTo:(NSString*)newText {
+	
+	[feedbackLabel setText: newText];
+
+	
+}
+
+
+
 // reset : score = 0, lives = 3, shield = 3
 -(void) resetValues {
 	
@@ -751,6 +797,11 @@
 	NSLog(@"hit correct asteroid.");
 	int score = [UIAppDelegate.currentUser.score score];
 	
+	// update the feedback label
+	[feedbackLabel setTextColor:[UIColor greenColor]];
+	[self updateFeedbackLabelTo: @"Correct!"];
+	[self beginFeedbackAnimation];
+	
 	// update the scoreboard 
 	score = score + CORRECT_ANSWER_REWARD;
 	NSString *inputString = [[NSString alloc] initWithFormat:@"Score: %d", score ];
@@ -774,6 +825,11 @@
 	
 	NSLog(@"hit incorrect asteroid.");
 	int score = [UIAppDelegate.currentUser.score score];
+	
+	// update the feedback label
+	[feedbackLabel setTextColor:[UIColor redColor]];
+	[self updateFeedbackLabelTo: @"Incorrect!"];
+	[self beginFeedbackAnimation];
 	
 	// decrement score by incorrect penalty and update the scoreboard
 	score = score - INCORRECT_ANSWER_PENALTY;

@@ -92,6 +92,7 @@
 	
 	IBOutlet UILabel *questionLabel; 
 	IBOutlet UILabel *livesLabel;
+	IBOutlet UILabel *feedbackLabel;
 	
 	// the outlets for the 5 labels
 	IBOutlet UILabel *solutionLabel0;
@@ -151,6 +152,7 @@
 
 
 @property(nonatomic,retain) IBOutlet UILabel *questionLabel;
+@property (nonatomic, retain) IBOutlet UILabel *feedbackLabel;
 
 @property(nonatomic,retain) IBOutlet UILabel *solutionLabel0;
 @property(nonatomic,retain) IBOutlet UILabel *solutionLabel1;
@@ -189,6 +191,7 @@
 -(void) updateScoreTo:(int)newScore;
 -(void) resetValues;
 -(void) initSound;
+-(void) beginFeedbackAnimation;
 
 
 //unit tests
