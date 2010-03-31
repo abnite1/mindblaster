@@ -23,8 +23,11 @@
 #import "GameOverScreenController.h"
 #import "HelpScreenController.h"
 #import "MindBlasterAppDelegate.h"
+#import "Sound.h"
 
-#define UNIT_TESTS_EXECUTED  1
+
+
+#define UNIT_TESTS_EXECUTED  FALSE
 // this preprocessor directive value is used to set whether unit tests will be executed or not 
 
 @interface GameScreenController : UIViewController 
@@ -111,9 +114,12 @@
 	// progress bar
 	UIProgressView *shieldBar;
 	
+	Sound *sound;
+	
 	int bulletsFired;
 }
 @property (nonatomic,retain) IBOutlet BackgroundAnimation *background;
+@property (nonatomic, retain) Sound *sound;
 @property (nonatomic, retain) IBOutlet UIButton *profilePic;
 @property (nonatomic,retain) IBOutlet UIProgressView *shieldBar;
 
@@ -182,6 +188,8 @@
 -(void) updateShieldTo:(int)newVal;
 -(void) updateScoreTo:(int)newScore;
 -(void) resetValues;
+-(void) initSound;
+
 
 //unit tests
 -(void)setGameTimerUnitTest;
