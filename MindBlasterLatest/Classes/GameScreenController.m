@@ -14,6 +14,7 @@
 @implementation GameScreenController
 
 @synthesize background, profilePic, difficultyLabel;
+@synthesize sound;
 
 @synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
@@ -31,6 +32,8 @@
 
 // animate the space background
 -(void)animateBackground {
+	
+	// move animation
 	[background move];
 }
 
@@ -85,7 +88,11 @@
 		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: setGameTimerUnitTest");
 }
 
-
+- (void)viewWillAppear:(BOOL)animated {
+ 
+	[super viewWillAppear:animated];
+	
+}
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -93,10 +100,16 @@
 	
 	[super viewDidLoad];
 	
+	// start background sound
+	[self initSound];
+	[sound setBgIsPlaying: YES];
+	[sound playBG];
+	
+	
 	[self.navigationController setTitle: @"gameScreenView"];
 	NSLog(@"started viewDidLoad");
 	
-	#if (UNIT_TESTS_EXECUTED ==1)
+	#if (UNIT_TESTS_EXECUTED == 1)
 		[self setGameTimerUnitTest];
 		[self setQuestionUnitTest];
 		[self updateLivesToUnitTest];
@@ -265,6 +278,10 @@
 // handle bullet animation and interaction with asteroids
 -(IBAction) fireButton{
 	
+	// begin laser sound
+	[self initSound];
+	[sound playLaser];
+	
 	Bullet *tempBullet  = [bullets objectAtIndex:bulletsFired];
 	//assigns element of bullets array to tempBullet to allow manipulation of that element
 	
@@ -406,7 +423,7 @@
  */
 -(void) onTimer {
 	
-	
+		
 	Bullet *tempBullet;
 	
 	
@@ -703,6 +720,10 @@
 // handles the asteroid collision scenarios
 -(void) asteroidCollision: (int) asteroidIndex {
 	
+	// sound an explosion
+	[self initSound];
+	[sound playAsteroidExplosion];
+	
 	// if we hit the right asteroid
 	if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
 	{
@@ -914,9 +935,32 @@
 	[self nextScreen];
 }
 
+// initialize the sound files
+// sound gets released at dealloc
+-(void) initSound {
+	
+	
+	NSArray *bgFile = [BACKGROUND_MUSIC_3 componentsSeparatedByString: @"."];
+	NSArray *laserFile = [LASER_EFFECT_1 componentsSeparatedByString: @"."];
+	NSArray *explosionFile = [ASTEROID_EXPLOSION_1 componentsSeparatedByString: @"."];
+
+	//NSLog(@"%@", [bgFile objectAtIndex: 0]);
+	//NSLog(@"%@", [bgFile objectAtIndex: 1]);
+	
+	sound = [[Sound alloc] initWithSoundFiles: [bgFile objectAtIndex: 0] bgExt: [bgFile objectAtIndex: 1] 
+										laser: [laserFile objectAtIndex: 0] lasterExt: [laserFile objectAtIndex: 1] 
+								shipExplosion: [explosionFile objectAtIndex: 0] shipExplosionExt: [explosionFile objectAtIndex: 1] 
+							asteroidExplosion: [explosionFile objectAtIndex: 0] asteroidExplosionExt: [explosionFile objectAtIndex: 1]];
+	
+}
+
+
 
 // navigate to the help screen
 -(IBAction) helpScreen {
+	
+	// stop sound
+	[sound.bgPlayer stop];
 	
 	//NSLog(@"gamePaused at switch to helpscreen: %d", gamePaused);
 	if (gamePaused == 1) {
@@ -937,6 +981,9 @@
 
 // navigate to the gameover screen
 -(IBAction) nextScreen {
+	
+	// stop sound
+	[sound.bgPlayer stop];
 	
 	NSLog(@"gamePaused at switch to nextscreen: %d", gamePaused);
 	if (gamePaused == 1) {
@@ -1059,6 +1106,7 @@
 - (void)dealloc {
 	[ship release];
 	[question release];
+	[sound release];
     [super dealloc];
 }
 

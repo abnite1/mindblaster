@@ -29,10 +29,17 @@
 		773C9B2F115AC23D003A9C5F /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773C9B2E115AC23D003A9C5F /* NetworkController.m */; };
 		773C9B51115AC2A4003A9C5F /* NetworkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C9B50115AC2A4003A9C5F /* NetworkController.xib */; };
 		773CC9321153663A00D8F598 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 773CC9311153663A00D8F598 /* Bullet.m */; };
+		7750B1D01162A55C007E29A8 /* AsteroidLevel2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7750B1CB1162A55C007E29A8 /* AsteroidLevel2.m4a */; };
+		7750B1D11162A55C007E29A8 /* Explosion1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7750B1CC1162A55C007E29A8 /* Explosion1.caf */; };
+		7750B1D21162A55C007E29A8 /* AsteroidLevel3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7750B1CD1162A55C007E29A8 /* AsteroidLevel3.m4a */; };
+		7750B1D31162A55C007E29A8 /* AsteroidLevel1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7750B1CE1162A55C007E29A8 /* AsteroidLevel1.m4a */; };
+		7750B1D41162A55C007E29A8 /* LaserEffect1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7750B1CF1162A55C007E29A8 /* LaserEffect1.caf */; };
 		77AFB020115AC80D00123F1C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AFB01F115AC80D00123F1C /* CFNetwork.framework */; };
 		77AFB035115AC8EF00123F1C /* ApplicationSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */; };
 		77B6953811461F940055EFD6 /* Questions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953411461F940055EFD6 /* Questions.m */; };
 		77B6953911461F940055EFD6 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B6953611461F940055EFD6 /* Question.m */; };
+		77D0F0551163091D00BB8D5E /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0F0541163091D00BB8D5E /* Sound.m */; };
+		77D0F06B1163091D00BB8D5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D0F06A1163091D00BB8D5E /* AVFoundation.framework */; };
 		77D33A851148CE4600D066DD /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D33A841148CE4600D066DD /* Topic.m */; };
 		77D49043115EC9CB0000625B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D49042115EC9CB0000625B /* SystemConfiguration.framework */; };
 		77DE5F5E115B3091007922D6 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77DE5F5D115B3091007922D6 /* UserProfile.plist */; };
@@ -99,12 +106,20 @@
 		773C9B50115AC2A4003A9C5F /* NetworkController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkController.xib; sourceTree = "<group>"; };
 		773CC9301153663A00D8F598 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		773CC9311153663A00D8F598 /* Bullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
+		7750B1CB1162A55C007E29A8 /* AsteroidLevel2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = AsteroidLevel2.m4a; sourceTree = "<group>"; };
+		7750B1CC1162A55C007E29A8 /* Explosion1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Explosion1.caf; sourceTree = "<group>"; };
+		7750B1CD1162A55C007E29A8 /* AsteroidLevel3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = AsteroidLevel3.m4a; sourceTree = "<group>"; };
+		7750B1CE1162A55C007E29A8 /* AsteroidLevel1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = AsteroidLevel1.m4a; sourceTree = "<group>"; };
+		7750B1CF1162A55C007E29A8 /* LaserEffect1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LaserEffect1.caf; sourceTree = "<group>"; };
 		77AFB01F115AC80D00123F1C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = ../../MindBlaster112/MindBlasterLatest/iphoneos3.1.2/System/Library/Frameworks/CFNetwork.framework; sourceTree = SOURCE_ROOT; };
 		77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApplicationSettings.plist; sourceTree = "<group>"; };
 		77B6953411461F940055EFD6 /* Questions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Questions.m; sourceTree = "<group>"; };
 		77B6953511461F940055EFD6 /* Questions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Questions.h; sourceTree = "<group>"; };
 		77B6953611461F940055EFD6 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		77B6953711461F940055EFD6 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		77D0F0531163091D00BB8D5E /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		77D0F0541163091D00BB8D5E /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
+		77D0F06A1163091D00BB8D5E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = iphoneos3.1.2/System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
 		77D33A831148CE4600D066DD /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		77D33A841148CE4600D066DD /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
 		77D49042115EC9CB0000625B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -157,6 +172,7 @@
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				77AFB020115AC80D00123F1C /* CFNetwork.framework in Frameworks */,
 				77D49043115EC9CB0000625B /* SystemConfiguration.framework in Frameworks */,
+				77D0F06B1163091D00BB8D5E /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +245,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7750B1C91162A537007E29A8 /* Sounds */,
 				773C9B46115AC288003A9C5F /* XIBs */,
 				773C9B45115AC279003A9C5F /* Property Files */,
 				773C9B44115AC25D003A9C5F /* Images */,
@@ -239,6 +256,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77D0F06A1163091D00BB8D5E /* AVFoundation.framework */,
 				77AFB01F115AC80D00123F1C /* CFNetwork.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -298,6 +316,18 @@
 			name = XIBs;
 			sourceTree = "<group>";
 		};
+		7750B1C91162A537007E29A8 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7750B1CB1162A55C007E29A8 /* AsteroidLevel2.m4a */,
+				7750B1CC1162A55C007E29A8 /* Explosion1.caf */,
+				7750B1CD1162A55C007E29A8 /* AsteroidLevel3.m4a */,
+				7750B1CE1162A55C007E29A8 /* AsteroidLevel1.m4a */,
+				7750B1CF1162A55C007E29A8 /* LaserEffect1.caf */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		B4B012DF1140810B00E0D5DB /* Game Play Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +349,8 @@
 				773CC9311153663A00D8F598 /* Bullet.m */,
 				0772316711559422004D023F /* GlobalAdmin.h */,
 				0772316811559422004D023F /* GlobalAdmin.m */,
+				77D0F0531163091D00BB8D5E /* Sound.h */,
+				77D0F0541163091D00BB8D5E /* Sound.m */,
 			);
 			name = "Game Play Classes";
 			sourceTree = "<group>";
@@ -400,6 +432,11 @@
 				B40A656F115B0D5F00BEFBD8 /* rightwheel3.png in Resources */,
 				B40A6571115B0D6900BEFBD8 /* greyball3.png in Resources */,
 				77DE5F5E115B3091007922D6 /* UserProfile.plist in Resources */,
+				7750B1D01162A55C007E29A8 /* AsteroidLevel2.m4a in Resources */,
+				7750B1D11162A55C007E29A8 /* Explosion1.caf in Resources */,
+				7750B1D21162A55C007E29A8 /* AsteroidLevel3.m4a in Resources */,
+				7750B1D31162A55C007E29A8 /* AsteroidLevel1.m4a in Resources */,
+				7750B1D41162A55C007E29A8 /* LaserEffect1.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +469,7 @@
 				773CC9321153663A00D8F598 /* Bullet.m in Sources */,
 				0772316911559422004D023F /* GlobalAdmin.m in Sources */,
 				773C9B2F115AC23D003A9C5F /* NetworkController.m in Sources */,
+				77D0F0551163091D00BB8D5E /* Sound.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
