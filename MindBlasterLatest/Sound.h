@@ -26,7 +26,9 @@
 
 @interface Sound : NSObject <AVAudioPlayerDelegate>{
 
-	NSError *error;
+	NSError *errorBG;
+	NSError *errorLaser;
+	NSError *errorExplosion;
 	NSURL *bgSoundURL;
 	NSURL *laserSoundURL;
 	NSURL *asteroidExplosionSoundURL;
@@ -40,11 +42,14 @@
 	
 }
 
-@property (nonatomic, retain) NSError *error;
+@property (nonatomic, retain) NSError *errorBG;
+@property (nonatomic, retain) NSError *errorLaser;
+@property (nonatomic, retain) NSError *errorExplosion;
 @property (nonatomic, retain) NSURL *bgSoundURL;
 @property (nonatomic, retain) NSURL *laserSoundURL;
 @property (nonatomic, retain)  NSURL *asteroidExplosionSoundURL;
 @property (nonatomic, retain)  NSURL *shipExplosionSoundURL;
+
 @property (nonatomic, retain) AVAudioPlayer *bgPlayer;
 @property (nonatomic, retain) AVAudioPlayer *laserPlayer;
 @property (nonatomic, retain) AVAudioPlayer *explosionPlayer;

@@ -11,9 +11,10 @@
 
 @implementation Sound
 
-@synthesize error, bgSoundURL, laserSoundURL, asteroidExplosionSoundURL, shipExplosionSoundURL;
+@synthesize errorBG, errorLaser, errorExplosion, bgSoundURL, laserSoundURL, asteroidExplosionSoundURL, shipExplosionSoundURL;
 @synthesize bgPlayer, laserPlayer, explosionPlayer;
 @synthesize bgIsPlaying;
+
 
 
 // initialize with a new background sound file
@@ -27,15 +28,19 @@
 		NSLog(@"inside sound init");		
 		bgSoundURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: 
 											  newBackground ofType: newBGExtension]];
+		[bgSoundURL retain];
 		
 		laserSoundURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: 
 												 newLaser ofType: newLaserExtension]];
+		[laserSoundURL retain];
 		
 		asteroidExplosionSoundURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: 
 															 newAsteroidExplosion ofType: newAsteroidExplosionExtension]];
+		[asteroidExplosionSoundURL retain];
 
 		shipExplosionSoundURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: 
 														 newShipExplosion ofType: newShipExplosionExtension]];
+		[shipExplosionSoundURL retain];
 		
 	
     }
@@ -44,12 +49,11 @@
 }
 
 
-
 // play a sound file for background
 -(void) playBG{
 	
 	NSLog(@"inside playBG");
-	bgPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: bgSoundURL error: &error];
+	bgPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: bgSoundURL error: &errorBG];
 	
 	if (!bgPlayer) {
 		
@@ -71,7 +75,9 @@
 -(void) playLaser{
 	
 	NSLog(@"inside playLaser");
-	laserPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: laserSoundURL error: &error];
+	
+	laserPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: laserSoundURL error: &errorLaser];
+	NSLog(@"inside playLaser and after alloc");
 	
 	if (!laserPlayer) {
 		
@@ -88,7 +94,7 @@
 -(void) playAsteroidExplosion {
 	
 	NSLog(@"inside playAsteroidExplosion");
-	explosionPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: asteroidExplosionSoundURL error: &error];
+	explosionPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: asteroidExplosionSoundURL error: &errorExplosion];
 	
 	if (!explosionPlayer) {
 		
@@ -112,21 +118,30 @@
 		
 		NSLog(@"background just finished playing");
 		// restart background
-		[self playBG];
+		//[self playBG];
 	}
 	[player release];
+	player = nil;
+}
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player {
+	
+	NSLog(@"audio player end interrruption for player with url: %@", [player.url path]);
+}
+
+- (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player {
+	
+	NSLog(@"audio player begin interruption for player with url: %@", [player.url path]);
 }
 
 // dealloc block
 -(void) dealloc {
 	
 	NSLog(@"in sound dealloc");
-	if ([bgPlayer isPlaying])
-		[bgPlayer stop];
-	[bgPlayer release];
-	[laserPlayer release];
-	[explosionPlayer release];
-	
+	[bgSoundURL release];
+	[laserSoundURL release];
+	[asteroidExplosionSoundURL release];
+	[shipExplosionSoundURL release];
 	[super dealloc];
 	
 }
