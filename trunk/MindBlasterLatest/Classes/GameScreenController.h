@@ -195,7 +195,7 @@
 
 
 //unit tests
--(void)setGameTimerUnitTest;
+-(void)gamePausedUnitTest;
 -(void) setQuestionUnitTest;
 -(void) updateLivesToUnitTest;
 -(void) decreaseLivesUnitTest; 

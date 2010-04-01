@@ -43,13 +43,13 @@
 	feedbackLabel.hidden = NO;
 	feedbackLabel.alpha = 0;
 	feedbackLabel.transform = CGAffineTransformMakeScale(0.5, 0.5);
+
+	[UIView beginAnimations: nil context: NULL];
 	
-	[UIView beginAnimations:nil context: NULL];
 	[UIView setAnimationDelegate: self];
 	[UIView setAnimationDuration: 1];
 	[UIView setAnimationRepeatCount: 3];
 	
-
 	feedbackLabel.alpha = 1;
 	feedbackLabel.transform = CGAffineTransformIdentity;
 	[UIView commitAnimations];
@@ -62,6 +62,7 @@
 	if (![finished intValue]) {
 		
 		NSLog(@"animation interrupted.");
+		
 	}
 	else {
 		feedbackLabel.hidden = YES;
@@ -70,61 +71,61 @@
 
 
 // switches between play mode and pause
--(void)setGameTimer {
+-(void)pauseGame {
 
-	if(gamePaused == FALSE) {
+	if(gamePaused) {
 		
 		gamePlayTimer = [NSTimer scheduledTimerWithTimeInterval: gamePlayTimerInterval 
 														 target: self selector:@selector(onTimer) 
 													   userInfo: nil repeats:YES];
-		gamePaused = TRUE;
+		gamePaused = NO;
+		NSLog(@"game unpaused");
 	}
 	else {
 		
 		[gamePlayTimer invalidate];
-		gamePaused = FALSE;
+		gamePaused = YES;
+		NSLog(@"game unpaused");
 	}
 }
 
--(void)setGameTimerUnitTest{
+-(void)gamePausedUnitTest{
 	BOOL unitTestPassed = TRUE;
 	if(gamePaused == FALSE) {
-		[self setGameTimer];
+		[self pauseGame];
 		if(gamePaused == FALSE)
 		{
-			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePaused variable not set");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: gamePausedUnitTest; gamePaused variable not set");
 			unitTestPassed = FALSE;
 		}
 		if(gamePlayTimer == nil)
 		{
-			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePlayTimer timer not set");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: gamePausedUnitTest; gamePlayTimer timer not set");
 			unitTestPassed = FALSE;
 		}
 
 	}
 	else {
-		[self setGameTimer];
+		[self pauseGame];
 		if(gamePaused == TRUE)
 		{
-			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePaused variable not set");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: gamePausedUnitTest; gamePaused variable not set");
 			unitTestPassed = FALSE;
 		}
 		if(gamePlayTimer != nil)
 		{
-			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: setGameTimerUnitTest; gamePlayTimer timer failed to invalidate ");
+			NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: gamePausedUnitTest; gamePlayTimer timer failed to invalidate ");
 			unitTestPassed = FALSE;
 		}
 	}
-	[self setGameTimer];
+	[self pauseGame];
 
 	if(unitTestPassed == TRUE)
-		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: setGameTimerUnitTest");
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; function: gamePausedUnitTest");
 }
 
 // delegate function that runs every time the view returns from "back" of another screen
 - (void)viewWillAppear:(BOOL)animated {
- 
-	[super viewWillAppear:animated];
 	
 }
 
@@ -133,25 +134,27 @@
     
 	[super viewDidAppear:animated];
 	
+	NSLog(@"gamescreen view did appear.");
+	
+	// set the screen title
+	[self.navigationController setTitle: @"gameScreenView"];
+	
 	// if the game is paused when returning to view, unpause.
-	if (gamePaused == FALSE) {
+	//if (gamePaused == FALSE) {
+	if (gamePaused) {
 		
 		NSLog(@"unpausing game in viewdidappear");
-		[self setGameTimer];
+		[self pauseGame];
 	}
 	
 	// stop the background sound if it's playing
 	// then restart it
-	if ([sound.bgPlayer isPlaying]) {
+	if (sound == nil || ![sound bgIsPlaying]) {
 		
-		[sound.bgPlayer stop];
 		[self initSound];
 		[sound playBG];
+		[sound setBgIsPlaying: YES];
 	}
-
-	
-	NSLog(@"gamescreen view did appear.");
-	[self.navigationController setTitle: @"gameScreenView"];
 	
 }
 
@@ -160,22 +163,38 @@
 	
 	[super viewDidAppear:animated];
 	NSLog(@"inside viewWillDisappear");
-	if ([sound.bgPlayer isPlaying]) {
+	
+	// if the game isn't paused, pause it.
+	if (!gamePaused) {
+		
+		[self pauseGame];
+	}
+	
+	// stop background sound if it is playing
+	if (sound != nil && [sound.bgPlayer isPlaying]) {
 		
 		[sound.bgPlayer stop];
 	}
+	
 	[sound release];
 	
-	/*
-	// stop sound if it's playing
-	if ([sound.bgPlayer isPlaying]) {
-		
-		NSLog(@"sound is playing");
-		[sound.bgPlayer stop];
-		// maybe release as well
-		//[sound release];
+	NSLog(@"after sound release in view will disappear");
+	sound = nil;
+	
+	// compare score and save to profile if necessary
+	if ([UIAppDelegate.currentUser.score score] > [UIAppDelegate.currentUser.highestScore score]) {
+		NSLog(@"comparing scores");
+		[UIAppDelegate.currentUser setHighestScore: [UIAppDelegate.currentUser score]];
 	}
-	 */
+	
+	// save profile to plist before leaving gamescreen
+	[GlobalAdmin saveSettings];
+}
+
+// another delegate for view lifespan
+-(void) viewDidDisappear:(BOOL)animated {
+	
+	NSLog(@"inside view did disappear");
 }
 
 
@@ -184,32 +203,26 @@
 	
 	[super viewDidLoad];
 	
-	// stop the background sound just in case
-	[sound.bgPlayer stop];
-	[sound.laserPlayer stop];
-	[sound.explosionPlayer stop];
-	
-	[self initSound];
-	[sound setBgIsPlaying: YES];
-	[sound playBG];
-	
+	NSLog(@"started viewDidLoad");
+
 	// initialize feedbackLabel
 	[feedbackLabel setText: @""];
 	
-	
-	[self.navigationController setTitle: @"gameScreenView"];
-	NSLog(@"started viewDidLoad");
-	
+
 	#if (UNIT_TESTS_EXECUTED == 1)
-		[self setGameTimerUnitTest];
+		[self gamePausedUnitTest];
 		[self setQuestionUnitTest];
 		[self updateLivesToUnitTest];
 		[self decreaseLivesUnitTest];
 		[self checkCollisionOfUnitTest];
 	#endif
 	
-	//setGameTimerUnitTest();
+	//gamePausedUnitTest();
+	
+	// the initial setting actually starts the timer
 	gamePaused = FALSE;
+	[self pauseGame];
+	
 	gamePlayTimerInterval = 0.03;
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
@@ -309,8 +322,6 @@
 	[ship setIcon: shipIcon];				// connect the ship icon to the Ship object so it can be rotated
 	[ship setPos: CGPointMake(shipIcon.center.x , shipIcon.center.y)];
 	
-	// controls movement of bullets and asteroids.
-	[self setGameTimer];
 	
 	// set the initial question
 	[self setQuestion];						
@@ -344,9 +355,10 @@
     
 }
 
+// pause the game
 -(IBAction) pauseButton
 {
-		[self setGameTimer];
+		[self pauseGame];
 }
 
 // sets the initial location of bullets on screen
@@ -370,7 +382,6 @@
 -(IBAction) fireButton{
 	
 	// begin laser sound
-	[self initSound];
 	[sound playLaser];
 	
 	Bullet *tempBullet  = [bullets objectAtIndex:bulletsFired];
@@ -822,7 +833,6 @@
 -(void) asteroidCollision: (int) asteroidIndex {
 	
 	// sound an explosion
-	[self initSound];
 	[sound playAsteroidExplosion];
 	
 	// if we hit the right asteroid
@@ -1070,28 +1080,10 @@
 // navigate to the help screen
 -(IBAction) helpScreen {
 	
-	// stop sound if it's playing
-	if ([sound.bgPlayer isPlaying])
-		[sound.bgPlayer stop];
-	
-	//NSLog(@"gamePaused at switch to helpscreen: %d", gamePaused);
-	if (gamePaused == 1) {
-		NSLog(@"pausing game in help screen");
-		[self setGameTimer];
-	}
-	
-	// compare score and save to profile if necessary
-	if ([UIAppDelegate.currentUser.score score] > [UIAppDelegate.currentUser.highestScore score]) {
-		[UIAppDelegate.currentUser setHighestScore: [UIAppDelegate.currentUser score]];
-	}
-	
-	// first save settings to plist as the player may opt to quit back to the root menu
-	[GlobalAdmin saveSettings];
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
-	//[self setGameTimer];
 	[helpView release];
 	
 }
@@ -1099,23 +1091,16 @@
 // navigate to the gameover screen
 -(IBAction) nextScreen {
 	
-	// stop sound
-	[sound.bgPlayer stop];
-	
-	NSLog(@"gamePaused at switch to nextscreen: %d", gamePaused);
-	if (gamePaused == 1) {
-		NSLog(@"pausing game in help screen");
-		[self setGameTimer];
-	}
-	
 	GameOverScreenController *gamesOverScreenView = [[GameOverScreenController alloc] initWithNibName:@"GameOverScreenController" bundle:nil];
 	[self.navigationController pushViewController:gamesOverScreenView animated:YES];
 	[gamesOverScreenView release];
 	
 }
+
 -(void) touchesUpdateUnitTest:(NSSet*)touches :(UIEvent*)event {
 	//[touch 
 }
+
 // update the touch events (rotation wheel)
 -(void) touchesUpdate:(NSSet*)touches :(UIEvent*)event {
 	
@@ -1224,6 +1209,7 @@
 	[ship release];
 	[question release];
 	[sound release];
+	sound = nil;
     [super dealloc];
 }
 
