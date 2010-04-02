@@ -13,6 +13,10 @@
 
 // effects
 #define	LASER_EFFECT_1			@"LaserEffect1.caf"
+#define	LASER_EFFECT_4			@"LaserEffect4.caf"
+
+#define BUTTON_CLICK_1			@"ButtonClick1.caf"
+
 #define ASTEROID_EXPLOSION_1	@"Explosion1.caf"
 #define ASTEROID_EXPLOSION_2	@"Explosion1.caf"
 #define ASTEROID_EXPLOSION_3	@"Explosion1.caf"
@@ -29,14 +33,18 @@
 	NSError *errorBG;
 	NSError *errorLaser;
 	NSError *errorExplosion;
+
+	
 	NSURL *bgSoundURL;
 	NSURL *laserSoundURL;
 	NSURL *asteroidExplosionSoundURL;
 	NSURL *shipExplosionSoundURL;
+
 	
 	AVAudioPlayer *bgPlayer;
 	AVAudioPlayer *laserPlayer;
 	AVAudioPlayer *explosionPlayer;
+
 	
 	BOOL			bgIsPlaying;
 	
@@ -45,14 +53,19 @@
 @property (nonatomic, retain) NSError *errorBG;
 @property (nonatomic, retain) NSError *errorLaser;
 @property (nonatomic, retain) NSError *errorExplosion;
+
+
 @property (nonatomic, retain) NSURL *bgSoundURL;
 @property (nonatomic, retain) NSURL *laserSoundURL;
 @property (nonatomic, retain)  NSURL *asteroidExplosionSoundURL;
 @property (nonatomic, retain)  NSURL *shipExplosionSoundURL;
 
+
 @property (nonatomic, retain) AVAudioPlayer *bgPlayer;
 @property (nonatomic, retain) AVAudioPlayer *laserPlayer;
 @property (nonatomic, retain) AVAudioPlayer *explosionPlayer;
+
+
 @property (nonatomic) BOOL			bgIsPlaying;
 
 -(id)initWithSoundFiles	:(NSString*)newBackground bgExt:(NSString*)newBGExtension 
@@ -66,6 +79,7 @@
 -(void) playBG;
 -(void) playLaser;
 -(void) playAsteroidExplosion;
+
 -(void) dealloc;
 
 @end

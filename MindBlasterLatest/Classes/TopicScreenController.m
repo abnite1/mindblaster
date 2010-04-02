@@ -187,6 +187,12 @@
 	NSLog(@"topic view will appear.");
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	
+	// play button click
+	[MindBlasterAppDelegate playButtonClick];
+}
+
 
 // delegate function that runs every time the view returns from "back" of another screen
 - (void)viewDidAppear:(BOOL)animated {

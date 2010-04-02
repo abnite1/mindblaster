@@ -36,6 +36,7 @@
  *	navigate to the help screen
  */
 -(IBAction) helpScreen {
+
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
@@ -64,6 +65,7 @@
  */
 - (IBAction) loadGame {
 	
+	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	NetworkController *netView = [[NetworkController alloc] initWithNibName:@"NetworkController" bundle:nil];
 	[self.navigationController pushViewController:netView animated:YES];
@@ -82,6 +84,7 @@
 // continue to topic selection with the current profile
 - (IBAction) continueSelected {
 
+	
 	if(! [GlobalAdmin loadSettings])  {
 		
 		NSLog(@"Unable to load plist profile\n");
@@ -121,11 +124,12 @@
 	
 }
 
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
+
+- (void) viewWillDisappear:(BOOL)animated {
+	
+	// play button click
+	[MindBlasterAppDelegate playButtonClick];
 }
-*/
 /*
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];

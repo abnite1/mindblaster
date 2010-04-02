@@ -166,6 +166,12 @@
 	
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	
+	// play button click
+	[MindBlasterAppDelegate playButtonClick];
+}
+
 
 // override to allow orientations other than the default portrait orientation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

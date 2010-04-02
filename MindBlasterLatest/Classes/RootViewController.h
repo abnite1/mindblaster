@@ -17,7 +17,7 @@
 #import "GlobalAdmin.h"
 #import "NetworkController.h"
 
-@interface RootViewController : UIViewController {
+@interface RootViewController : UIViewController  {
 	IBOutlet BackgroundAnimation *bgAnimation;
 	IBOutlet UIButton *continueButton;
 }

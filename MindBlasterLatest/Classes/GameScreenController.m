@@ -1071,7 +1071,7 @@
 	
 	
 	NSArray *bgFile = [BACKGROUND_MUSIC_3 componentsSeparatedByString: @"."];
-	NSArray *laserFile = [LASER_EFFECT_1 componentsSeparatedByString: @"."];
+	NSArray *laserFile = [LASER_EFFECT_4 componentsSeparatedByString: @"."];
 	NSArray *explosionFile = [ASTEROID_EXPLOSION_1 componentsSeparatedByString: @"."];
 	
 	//NSLog(@"%@", [bgFile objectAtIndex: 0]);
@@ -1084,7 +1084,6 @@
 	[sound retain];
 	
 }
-
 
 
 // navigate to the help screen

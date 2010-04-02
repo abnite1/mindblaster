@@ -26,6 +26,7 @@
     
 	// the AppDelegate profile
 	currentUser = [[UserProfile alloc] init];
+	
 
 	
     // Override point for customization after app launch    
@@ -34,12 +35,36 @@
     [window makeKeyAndVisible];
 }
 
+// plays a menu button click
++ (void) playButtonClick {
+	
+	NSArray *buttonFile = [BUTTON_CLICK_1 componentsSeparatedByString: @"."];
+	NSString *buttonFilePath = [[NSBundle mainBundle] pathForResource: [buttonFile objectAtIndex: 0] ofType: [buttonFile objectAtIndex: 1]];
+	NSURL *audioFileURL = [NSURL fileURLWithPath: buttonFilePath];
+	AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: audioFileURL error: nil];
+	NSLog(@"playing button click");
+	
+	[audioPlayer prepareToPlay];
+	[audioPlayer play];
+
+}
+
+// delegate function to take effect when player finishes playing
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+	
+	if (flag) NSLog(@"finished playing successfully.");
+	else NSLog(@"Error while playing.");
+
+	[player release];
+}
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	
 	// Save userprofile to plist
 	[GlobalAdmin saveSettings];
 }
+
 
 -(void) didStartNetworking {
 	
@@ -56,6 +81,7 @@
 	
 	NSLog(@"end of AppDelegate didStopNetworking");
 }
+
 
 // release memory
 - (void)dealloc {
