@@ -11,7 +11,8 @@
 
 @implementation Sound
 
-@synthesize errorBG, errorLaser, errorExplosion, bgSoundURL, laserSoundURL, asteroidExplosionSoundURL, shipExplosionSoundURL;
+@synthesize errorBG, errorLaser, errorExplosion, bgSoundURL;
+@synthesize laserSoundURL, asteroidExplosionSoundURL, shipExplosionSoundURL;
 @synthesize bgPlayer, laserPlayer, explosionPlayer;
 @synthesize bgIsPlaying;
 
@@ -47,6 +48,8 @@
 	
     return self;
 }
+
+
 
 // inits the next bg theme
 -(void) initNextBG:(NSURL*)currentBGURL {
@@ -102,7 +105,6 @@
 	[bgPlayer prepareToPlay];
 	[bgPlayer play];
 	
-	
 }
 
 // play a laser sound
@@ -115,7 +117,7 @@
 	
 	if (!laserPlayer) {
 		
-		NSLog(@"error player laser sound");
+		NSLog(@"error playing laser sound");
 	}
 	
 	[laserPlayer setDelegate: self];
@@ -123,6 +125,9 @@
 	[laserPlayer play];
 	
 }
+
+
+
 
 // play an asteroid explosion
 -(void) playAsteroidExplosion {
@@ -183,7 +188,6 @@
 	[super dealloc];
 	
 }
-
 
 
 @end

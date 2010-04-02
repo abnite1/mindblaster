@@ -13,6 +13,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		7730136111662B72009E16D3 /* ButtonClick1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7730135F11662B72009E16D3 /* ButtonClick1.caf */; };
+		7730136211662B72009E16D3 /* LaserEffect4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7730136011662B72009E16D3 /* LaserEffect4.caf */; };
 		77AFB020115AC80D00123F1C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AFB01F115AC80D00123F1C /* CFNetwork.framework */; };
 		77AFB035115AC8EF00123F1C /* ApplicationSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */; };
 		77D0F06B1163091D00BB8D5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D0F06A1163091D00BB8D5E /* AVFoundation.framework */; };
@@ -77,6 +79,8 @@
 		28A0AAE50D9B0CCF005BE974 /* MindBlaster_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MindBlaster_Prefix.pch; sourceTree = "<group>"; };
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		7730135F11662B72009E16D3 /* ButtonClick1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ButtonClick1.caf; path = Sounds/ButtonClick1.caf; sourceTree = "<group>"; };
+		7730136011662B72009E16D3 /* LaserEffect4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LaserEffect4.caf; path = Sounds/LaserEffect4.caf; sourceTree = "<group>"; };
 		773C9B2D115AC22E003A9C5F /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
 		77AFB01F115AC80D00123F1C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = ../../MindBlaster112/MindBlasterLatest/iphoneos3.1.2/System/Library/Frameworks/CFNetwork.framework; sourceTree = SOURCE_ROOT; };
 		77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApplicationSettings.plist; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 		7750B1C91162A537007E29A8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7730135F11662B72009E16D3 /* ButtonClick1.caf */,
+				7730136011662B72009E16D3 /* LaserEffect4.caf */,
 				77F134DE1166152A005AE813 /* Explosion1.caf */,
 				77F134DF1166152A005AE813 /* AsteroidLevel3.m4a */,
 				77F134E01166152A005AE813 /* AsteroidLevel2.m4a */,
@@ -407,6 +413,8 @@
 				77F13510116615BB005AE813 /* cat.png in Resources */,
 				77F13511116615BB005AE813 /* asteroid6.png in Resources */,
 				77F13512116615BB005AE813 /* bullet2.png in Resources */,
+				7730136111662B72009E16D3 /* ButtonClick1.caf in Resources */,
+				7730136211662B72009E16D3 /* LaserEffect4.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

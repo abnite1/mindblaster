@@ -6,19 +6,22 @@
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 //
 #import "UserProfile.h"
+#import "Sound.h"
 
 //this line and the method of making the profile an attribute of appdelegate
 //was taken from a website by some guy (forgot where) but its not my own.
 #define UIAppDelegate \
 ((MindBlasterAppDelegate *)[UIApplication sharedApplication].delegate)
 
-@interface MindBlasterAppDelegate : NSObject <UIApplicationDelegate> {
+@interface MindBlasterAppDelegate : NSObject <UIApplicationDelegate, AVAudioPlayerDelegate> {
     
     UIWindow *					window;
     UINavigationController *	navigationController;
 	
 	NSInteger					networkingCount;
 	UserProfile *				currentUser;
+	
+
 }
 
 @property (nonatomic, retain) UserProfile *						currentUser;
@@ -27,8 +30,12 @@
 @property (nonatomic, assign) NSInteger							networkingCount;
 
 
+
 - (void)didStartNetworking;
 - (void)didStopNetworking;
++ (void) playButtonClick;
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
+
 
 
 @end

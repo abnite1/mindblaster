@@ -66,6 +66,12 @@
 	
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	
+	// play button click
+	[MindBlasterAppDelegate playButtonClick];
+}
+
 - (IBAction) backScreen {
 	[self.navigationController popViewControllerAnimated:TRUE];
 }

@@ -404,6 +404,12 @@
 	
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	
+	// play button click
+	[MindBlasterAppDelegate playButtonClick];
+}
+
 // download a file
 -(IBAction) download {	
 		
