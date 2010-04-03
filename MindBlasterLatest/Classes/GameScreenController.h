@@ -201,6 +201,7 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 -(void) resetValues;
 -(void) initSound;
 -(void) beginFeedbackAnimation;
+-(void) beginShieldAnimation;
 
 
 //unit tests

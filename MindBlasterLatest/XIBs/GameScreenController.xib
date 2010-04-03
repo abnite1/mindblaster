@@ -83,7 +83,7 @@
 					<object class="IBUIButton" id="202690233">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{412, 176}, {48, 104}}</string>
+						<string key="NSFrame">{{416, 176}, {48, 104}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -103,7 +103,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="753240411"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Firebutton.png</string>
+							<string key="NSResourceName">Firebutton4.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="580873125">
@@ -286,7 +286,7 @@
 					<object class="IBUIImageView" id="182086294">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{180, 269}, {34, 32}}</string>
+						<string key="NSFrame">{{161, 257}, {34, 32}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -296,7 +296,7 @@
 					</object>
 					<object class="IBUIImageView" id="809723630">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{57, 158}, {41, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -568,7 +568,7 @@
 					<object class="IBUIImageView" id="219260193">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 167}, {121, 121}}</string>
+						<string key="NSFrame">{{17, 158}, {121, 121}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -576,7 +576,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">controller_ring.png</string>
+							<string key="NSResourceName">controller ring3.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="504123250">
@@ -590,7 +590,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">ship_shield.png</string>
+							<string key="NSResourceName">ship_shield2.png</string>
 						</object>
 					</object>
 				</object>
@@ -929,7 +929,6 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="202690233"/>
 							<reference ref="487544526"/>
 							<reference ref="989004634"/>
 							<reference ref="894962916"/>
@@ -954,7 +953,6 @@
 							<reference ref="586006801"/>
 							<reference ref="1055382414"/>
 							<reference ref="608680224"/>
-							<reference ref="182086294"/>
 							<reference ref="109073762"/>
 							<reference ref="55847086"/>
 							<reference ref="593760601"/>
@@ -963,9 +961,11 @@
 							<reference ref="163454617"/>
 							<reference ref="87864639"/>
 							<reference ref="309283160"/>
-							<reference ref="219260193"/>
 							<reference ref="809723630"/>
 							<reference ref="993727628"/>
+							<reference ref="182086294"/>
+							<reference ref="202690233"/>
+							<reference ref="219260193"/>
 						</object>
 						<reference key="parent" ref="935461785"/>
 					</object>
