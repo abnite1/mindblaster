@@ -33,6 +33,13 @@
 	bulletDirection = CGPointMake(x,y);
 }
 
+//this function is unit tested visually as visual confirmation is needed that the ship icon is rotating
+//the compiler cannot verify this
+-(void) rotate: (CGFloat)angle {
+	
+	bulletIcon.transform = CGAffineTransformMakeRotation(angle);
+}
+
 // move the bullet in a straight path along its direction vector
 -(IBAction)move {
 	

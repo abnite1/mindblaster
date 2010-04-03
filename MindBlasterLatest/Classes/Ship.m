@@ -15,6 +15,7 @@
 
 -(void)setIcon:(UIImageView*)icon {
 	shipIcon = icon;
+	direction = 0.0f;
 }
 
 -(void)setIconUnitTest:(UIImageView*)icon {
@@ -36,6 +37,8 @@
 //this function is unit tested visually as visual confirmation is needed that the ship icon is rotating
 //the compiler cannot verify this
 -(void) rotate: (CGFloat)angle {
+	
+	direction = angle;
 	
 	shipIcon.transform = CGAffineTransformMakeRotation(angle);
 }

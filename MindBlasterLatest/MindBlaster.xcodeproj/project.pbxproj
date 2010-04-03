@@ -15,6 +15,13 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		7730136111662B72009E16D3 /* ButtonClick1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7730135F11662B72009E16D3 /* ButtonClick1.caf */; };
 		7730136211662B72009E16D3 /* LaserEffect4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7730136011662B72009E16D3 /* LaserEffect4.caf */; };
+		77AE823F1166A87600F9FCFE /* asteroid_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE823D1166A87600F9FCFE /* asteroid_3.png */; };
+		77AE82401166A87600F9FCFE /* asteroid_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE823E1166A87600F9FCFE /* asteroid_2.png */; };
+		77AE82461166AA7600F9FCFE /* asteroid_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE82451166AA7600F9FCFE /* asteroid_4.png */; };
+		77AE82481166AA7D00F9FCFE /* asteroid_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE82471166AA7D00F9FCFE /* asteroid_5.png */; };
+		77AE824A1166AAE600F9FCFE /* laser_pulse_vertical_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE82491166AAE600F9FCFE /* laser_pulse_vertical_small.png */; };
+		77AE824C1166AAED00F9FCFE /* laser_pulse_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE824B1166AAED00F9FCFE /* laser_pulse_vertical.png */; };
+		77AE82511166AC5100F9FCFE /* asteroid_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE82501166AC5100F9FCFE /* asteroid_1.png */; };
 		77AFB020115AC80D00123F1C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AFB01F115AC80D00123F1C /* CFNetwork.framework */; };
 		77AFB035115AC8EF00123F1C /* ApplicationSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */; };
 		77D0F06B1163091D00BB8D5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D0F06A1163091D00BB8D5E /* AVFoundation.framework */; };
@@ -82,6 +89,13 @@
 		7730135F11662B72009E16D3 /* ButtonClick1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ButtonClick1.caf; path = Sounds/ButtonClick1.caf; sourceTree = "<group>"; };
 		7730136011662B72009E16D3 /* LaserEffect4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LaserEffect4.caf; path = Sounds/LaserEffect4.caf; sourceTree = "<group>"; };
 		773C9B2D115AC22E003A9C5F /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
+		77AE823D1166A87600F9FCFE /* asteroid_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_3.png; path = Images/asteroid_3.png; sourceTree = "<group>"; };
+		77AE823E1166A87600F9FCFE /* asteroid_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_2.png; path = Images/asteroid_2.png; sourceTree = "<group>"; };
+		77AE82451166AA7600F9FCFE /* asteroid_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_4.png; path = Images/asteroid_4.png; sourceTree = "<group>"; };
+		77AE82471166AA7D00F9FCFE /* asteroid_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_5.png; path = Images/asteroid_5.png; sourceTree = "<group>"; };
+		77AE82491166AAE600F9FCFE /* laser_pulse_vertical_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = laser_pulse_vertical_small.png; path = Images/laser_pulse_vertical_small.png; sourceTree = "<group>"; };
+		77AE824B1166AAED00F9FCFE /* laser_pulse_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = laser_pulse_vertical.png; path = Images/laser_pulse_vertical.png; sourceTree = "<group>"; };
+		77AE82501166AC5100F9FCFE /* asteroid_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_1.png; path = Images/asteroid_1.png; sourceTree = "<group>"; };
 		77AFB01F115AC80D00123F1C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = ../../MindBlaster112/MindBlasterLatest/iphoneos3.1.2/System/Library/Frameworks/CFNetwork.framework; sourceTree = SOURCE_ROOT; };
 		77AFB034115AC8EF00123F1C /* ApplicationSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApplicationSettings.plist; sourceTree = "<group>"; };
 		77D0F06A1163091D00BB8D5E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = iphoneos3.1.2/System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
@@ -254,7 +268,14 @@
 		773C9B44115AC25D003A9C5F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				77AE82491166AAE600F9FCFE /* laser_pulse_vertical_small.png */,
+				77AE82501166AC5100F9FCFE /* asteroid_1.png */,
+				77AE824B1166AAED00F9FCFE /* laser_pulse_vertical.png */,
+				77AE82451166AA7600F9FCFE /* asteroid_4.png */,
+				77AE82471166AA7D00F9FCFE /* asteroid_5.png */,
 				77F134FD116615BB005AE813 /* boy.png */,
+				77AE823D1166A87600F9FCFE /* asteroid_3.png */,
+				77AE823E1166A87600F9FCFE /* asteroid_2.png */,
 				77F134FE116615BB005AE813 /* ship3.png */,
 				77F134FF116615BB005AE813 /* Space-Art-Wallpapers-12.jpg */,
 				77F13500116615BB005AE813 /* dog.png */,
@@ -415,6 +436,13 @@
 				77F13512116615BB005AE813 /* bullet2.png in Resources */,
 				7730136111662B72009E16D3 /* ButtonClick1.caf in Resources */,
 				7730136211662B72009E16D3 /* LaserEffect4.caf in Resources */,
+				77AE823F1166A87600F9FCFE /* asteroid_3.png in Resources */,
+				77AE82401166A87600F9FCFE /* asteroid_2.png in Resources */,
+				77AE82461166AA7600F9FCFE /* asteroid_4.png in Resources */,
+				77AE82481166AA7D00F9FCFE /* asteroid_5.png in Resources */,
+				77AE824A1166AAE600F9FCFE /* laser_pulse_vertical_small.png in Resources */,
+				77AE824C1166AAED00F9FCFE /* laser_pulse_vertical.png in Resources */,
+				77AE82511166AC5100F9FCFE /* asteroid_1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

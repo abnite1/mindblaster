@@ -3,7 +3,7 @@
 //  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
-//  Modified by Yaniv Haramati on 3/28/10 to respond to each parent individually.
+//  Modified by Yaniv Haramati on 3/28/10 to respond to each parent-screen individually.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 

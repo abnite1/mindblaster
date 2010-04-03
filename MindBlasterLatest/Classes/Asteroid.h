@@ -26,6 +26,9 @@ static const int BLANK_ASTEROID = 2;
 static const int ASTEROID_SIZE_X = 36;
 static const int ASTEROID_SIZE_Y = 32;
 
+// constants
+static const float ROTATION_COEFFICIENT = 0.07;
+
 
 @interface Asteroid : NSObject {
 
@@ -38,6 +41,7 @@ static const int ASTEROID_SIZE_Y = 32;
 	IBOutlet UILabel	*asteroidLabel;		// label correct/incorret answers
 	CGPoint				asteroidSize;
 	int					asteroidSpeed;
+	float				mAngle;
 }
 
 @property (nonatomic) int						asteroidType;
