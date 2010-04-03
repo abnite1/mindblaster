@@ -38,7 +38,8 @@
 	[background move];
 	
 	// rotate the ship shield icon and direction controller
-	rotationController.transform=CGAffineTransformMakeRotation (iconRotationAngle);
+	//rotationController.transform=CGAffineTransformMakeRotation (iconRotationAngle);
+	rotationController.transform=CGAffineTransformMakeRotation ([ship direction]);
 	
 	// scale to 1.3, 1.2, 1.1, or 1.0 of original size
 	shipShield.transform = CGAffineTransformMakeScale(shieldBarMultiplier, shieldBarMultiplier);
@@ -47,7 +48,7 @@
 	
 	// rotates the shield (but currently negates the effect of scaling)
 	// comment this out to allow shield scaling
-	shipShield.transform = CGAffineTransformMakeRotation (iconRotationAngle);
+	//shipShield.transform = CGAffineTransformMakeRotation (iconRotationAngle);
 	
 	
 	// increment angle
@@ -62,6 +63,7 @@
 	feedbackLabel.alpha = 0;
 	feedbackLabel.transform = CGAffineTransformMakeScale(0.5, 0.5);
 	
+	// start animation seq.
 	[UIView beginAnimations: nil context: NULL];
 	
 	[UIView setAnimationDelegate: self];
@@ -70,7 +72,27 @@
 	
 	feedbackLabel.alpha = 1;
 	feedbackLabel.transform = CGAffineTransformIdentity;
+	
+	// end animation
 	[UIView commitAnimations];
+}
+
+// starts the decreased shield animation sequence
+-(void) beginShieldAnimation {
+	
+	shipShield.alpha = 0.0;
+	
+	// start of animation seq.
+	[UIView beginAnimations: nil context: NULL];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 0.7];
+	[UIView setAnimationRepeatCount: 3];
+	
+	shipShield.alpha = 1.0;
+	
+	// end animation
+	[UIView commitAnimations];
+	
 }
 
 // delegate function to take effect at the end of animation
@@ -605,11 +627,16 @@
 			//move the asteroid to just above and to the left of the screen so it can move back into the screen area
 			//as a new asteroid
 			
+			
 			// if bullets collide with ANY of the 10 asteroids
-			if(  ((tempBullet.bulletPosition.x < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x + 30) 
-				  && (tempBullet.bulletPosition.x > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x - 30))
-			   &&((tempBullet.bulletPosition.y < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y + 30) 
-				  && (tempBullet.bulletPosition.y > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y - 30)) ) {		
+			if(  ((tempBullet.bulletPosition.x < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x + 
+				   [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.width) 
+				  && (tempBullet.bulletPosition.x > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x - 
+					  [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.width))
+			   &&((tempBullet.bulletPosition.y < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y + 
+				   [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height) 
+				  && (tempBullet.bulletPosition.y > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y - 
+					  [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height)) ) {		
 				
 				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
 				//NSLog(@"bullet position: %f", tempBullet.center.x);
@@ -657,11 +684,27 @@
 
 // check collision of asteroid with ship
 -(BOOL) checkCollisionOf:(Asteroid*)as withShip:(Ship*)aShip {
+	int shipWidth;
+	int shipHeight;
 	
-	if(  ((as.asteroidPosition.x < ship.pos.x + SHIP_SIZE_X / 2 ) 
-		  && (as.asteroidPosition.x > ship.pos.x - SHIP_SIZE_X	/ 2))
-	   && ((as.asteroidPosition.y < ship.pos.y + SHIP_SIZE_Y / 2) 
-		   && (as.asteroidPosition.y > ship.pos.y - SHIP_SIZE_Y / 2)) ) {
+	// if the shield is not zero, regard the shield's dimensions for collisions
+	if (shield != 0) {
+		
+		shipWidth = shipShield.image.size.width;
+		shipHeight = shipShield.image.size.height;
+	}
+	// otherwise check with the dimensions of the ship itself
+	else{
+		
+		shipWidth = ship.shipIcon.image.size.width;
+		shipHeight = ship.shipIcon.image.size.height;
+	}
+	
+	
+	if(  ((as.asteroidPosition.x < shipShield.center.x + shipWidth / 2 ) 
+		  && (as.asteroidPosition.x > shipShield.center.x - shipWidth / 2))
+	   && ((as.asteroidPosition.y < shipShield.center.y + shipHeight / 2) 
+		   && (as.asteroidPosition.y > shipShield.center.y - shipHeight / 2)) ) {
 		
 		// set the asteroid somewhere off screen
 		[as setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
@@ -719,13 +762,14 @@
 		
 		shield--;
 		[self updateShieldTo: shield];
+		
 	}
 	else {
 		// if shield is at 0, reset it, and decrease lives.
 		[self updateShieldTo: 3];
-		
 		[self decreaseLives];
 	}
+	[self beginShieldAnimation];
 }
 
 -(void) decreaseShieldUnitTest {
@@ -787,7 +831,9 @@
 	
 	shield = newVal;
 	[shieldBar setProgress: 1.0 - (3-shield) * 0.33];
-	shieldBarMultiplier = 1.0 + (newVal / 10.0);
+	shieldBarMultiplier = 1.0 + (shield / 10.0);
+	if (shield == 0) shipShield.hidden = YES;
+	else shipShield.hidden = NO;
 
 }
 -(void) updateShieldToUnitTest{

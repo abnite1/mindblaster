@@ -18,9 +18,9 @@
 		77615F071166E53000C755B8 /* laser_pulse_size1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77615F061166E53000C755B8 /* laser_pulse_size1.png */; };
 		77615F091166E59E00C755B8 /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 77615F081166E59E00C755B8 /* ship.png */; };
 		77615F0B1166E5A900C755B8 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 77615F0A1166E5A900C755B8 /* pause.png */; };
-		77615F0D1166E5B200C755B8 /* Firebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 77615F0C1166E5B200C755B8 /* Firebutton.png */; };
-		77615F0F1166E5B900C755B8 /* controller_ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 77615F0E1166E5B900C755B8 /* controller_ring.png */; };
-		77615F111166E5DA00C755B8 /* ship_shield.png in Resources */ = {isa = PBXBuildFile; fileRef = 77615F101166E5DA00C755B8 /* ship_shield.png */; };
+		777D449911672C1F00CA014A /* ship_shield2.png in Resources */ = {isa = PBXBuildFile; fileRef = 777D449811672C1F00CA014A /* ship_shield2.png */; };
+		777D449C11672D8F00CA014A /* Firebutton4.png in Resources */ = {isa = PBXBuildFile; fileRef = 777D449B11672D8F00CA014A /* Firebutton4.png */; };
+		777D449E11672D9A00CA014A /* controller ring3.png in Resources */ = {isa = PBXBuildFile; fileRef = 777D449D11672D9A00CA014A /* controller ring3.png */; };
 		778E294B11670E590093CF0B /* ButtonClick3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 778E294A11670E590093CF0B /* ButtonClick3.caf */; };
 		77AE823F1166A87600F9FCFE /* asteroid_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE823D1166A87600F9FCFE /* asteroid_3.png */; };
 		77AE82401166A87600F9FCFE /* asteroid_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 77AE823E1166A87600F9FCFE /* asteroid_2.png */; };
@@ -92,9 +92,9 @@
 		77615F061166E53000C755B8 /* laser_pulse_size1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = laser_pulse_size1.png; path = Images/laser_pulse_size1.png; sourceTree = "<group>"; };
 		77615F081166E59E00C755B8 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ship.png; path = Images/ship.png; sourceTree = "<group>"; };
 		77615F0A1166E5A900C755B8 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = Images/pause.png; sourceTree = "<group>"; };
-		77615F0C1166E5B200C755B8 /* Firebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Firebutton.png; path = Images/Firebutton.png; sourceTree = "<group>"; };
-		77615F0E1166E5B900C755B8 /* controller_ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = controller_ring.png; path = Images/controller_ring.png; sourceTree = "<group>"; };
-		77615F101166E5DA00C755B8 /* ship_shield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ship_shield.png; path = Images/ship_shield.png; sourceTree = "<group>"; };
+		777D449811672C1F00CA014A /* ship_shield2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ship_shield2.png; path = Images/ship_shield2.png; sourceTree = "<group>"; };
+		777D449B11672D8F00CA014A /* Firebutton4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Firebutton4.png; path = Images/Firebutton4.png; sourceTree = "<group>"; };
+		777D449D11672D9A00CA014A /* controller ring3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "controller ring3.png"; path = "Images/controller ring3.png"; sourceTree = "<group>"; };
 		778E294A11670E590093CF0B /* ButtonClick3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ButtonClick3.caf; path = Sounds/ButtonClick3.caf; sourceTree = "<group>"; };
 		77AE823D1166A87600F9FCFE /* asteroid_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_3.png; path = Images/asteroid_3.png; sourceTree = "<group>"; };
 		77AE823E1166A87600F9FCFE /* asteroid_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = asteroid_2.png; path = Images/asteroid_2.png; sourceTree = "<group>"; };
@@ -270,12 +270,12 @@
 			children = (
 				77F134FF116615BB005AE813 /* Space-Art-Wallpapers-12.jpg */,
 				77615F0A1166E5A900C755B8 /* pause.png */,
-				77615F0C1166E5B200C755B8 /* Firebutton.png */,
-				77615F0E1166E5B900C755B8 /* controller_ring.png */,
+				777D449B11672D8F00CA014A /* Firebutton4.png */,
+				777D449D11672D9A00CA014A /* controller ring3.png */,
 				77F13502116615BB005AE813 /* greyball3.png */,
 				77615F061166E53000C755B8 /* laser_pulse_size1.png */,
 				77615F081166E59E00C755B8 /* ship.png */,
-				77615F101166E5DA00C755B8 /* ship_shield.png */,
+				777D449811672C1F00CA014A /* ship_shield2.png */,
 				77AE82501166AC5100F9FCFE /* asteroid_1.png */,
 				77AE823E1166A87600F9FCFE /* asteroid_2.png */,
 				77AE823D1166A87600F9FCFE /* asteroid_3.png */,
@@ -303,14 +303,14 @@
 		773C9B46115AC288003A9C5F /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				77F134EB11661540005AE813 /* GameScreenController.xib */,
+				77F134EF11661540005AE813 /* NetworkController.xib */,
 				77F134E811661540005AE813 /* CharacterScreenController.xib */,
 				77F134E911661540005AE813 /* DifficultyScreenController.xib */,
 				77F134EA11661540005AE813 /* HelpScreenController.xib */,
-				77F134EB11661540005AE813 /* GameScreenController.xib */,
 				77F134EC11661540005AE813 /* GameOverScreenController.xib */,
 				77F134ED11661540005AE813 /* TopicScreenController.xib */,
 				77F134EE11661540005AE813 /* UserNameScreenController.xib */,
-				77F134EF11661540005AE813 /* NetworkController.xib */,
 				77F134F011661540005AE813 /* RootViewController.xib */,
 				77F134FA1166155A005AE813 /* MainWindow.xib */,
 			);
@@ -439,10 +439,10 @@
 				77615F071166E53000C755B8 /* laser_pulse_size1.png in Resources */,
 				77615F091166E59E00C755B8 /* ship.png in Resources */,
 				77615F0B1166E5A900C755B8 /* pause.png in Resources */,
-				77615F0D1166E5B200C755B8 /* Firebutton.png in Resources */,
-				77615F0F1166E5B900C755B8 /* controller_ring.png in Resources */,
-				77615F111166E5DA00C755B8 /* ship_shield.png in Resources */,
 				778E294B11670E590093CF0B /* ButtonClick3.caf in Resources */,
+				777D449911672C1F00CA014A /* ship_shield2.png in Resources */,
+				777D449C11672D8F00CA014A /* Firebutton4.png in Resources */,
+				777D449E11672D9A00CA014A /* controller ring3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
