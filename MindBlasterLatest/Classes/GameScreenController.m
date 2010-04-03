@@ -20,7 +20,7 @@
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
 //@synthesize asteroidIcons;  //this is the vector which will hold all of the above asteroid objects
 
-@synthesize rotationBall;
+@synthesize rotationBall, rotationController, shipShield;
 
 @synthesize bullet0, bullet1, bullet2, bullet3, bullet4, bullet5;
 //@synthesize bullets; //this is the vector which will hold all of the above bullet objects
@@ -31,10 +31,28 @@
 
 
 // animate the space background
+// and rotate shield and controller icons
 -(void)animateBackground {
 	
 	// move animation
 	[background move];
+	
+	// rotate the ship shield icon and direction controller
+	rotationController.transform=CGAffineTransformMakeRotation (iconRotationAngle);
+	
+	// scale to 1.3, 1.2, 1.1, or 1.0 of original size
+	shipShield.transform = CGAffineTransformMakeScale(shieldBarMultiplier, shieldBarMultiplier);
+	
+	//NSLog(@"multiplier: %f", shieldBarMultiplier);
+	
+	// rotates the shield (but currently negates the effect of scaling)
+	// comment this out to allow shield scaling
+	shipShield.transform = CGAffineTransformMakeRotation (iconRotationAngle);
+	
+	
+	// increment angle
+	iconRotationAngle += ICON_ROTATION_COEFFICIENT;
+	
 }
 
 // starts fadein/fadeout animation for feedback label
@@ -135,6 +153,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     
 	[super viewDidAppear:animated];
+	
+	iconRotationAngle = 0.0f;
 	
 	NSLog(@"gamescreen view did appear.");
 	
@@ -252,6 +272,11 @@
 	// initialize shield
 	[self updateShieldTo: 3];
 	
+	// initialize size of shield frame to 1.3 of its original size
+	shieldBarMultiplier = 1.3;
+
+	
+	
 	// initialize lives
 	[self updateLivesTo: 3];
 	
@@ -313,9 +338,9 @@
 	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
 	
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
-								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
-	[background setSpeedX:0.2 Y:0.2];
+	[NSTimer scheduledTimerWithTimeInterval: 0.08 target: self
+								   selector:@selector(animateBackground) userInfo: nil repeats: YES];
+	[background setSpeedX: 0.2 Y: 0.2];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem
 	//[background move];
@@ -698,6 +723,7 @@
 	else {
 		// if shield is at 0, reset it, and decrease lives.
 		[self updateShieldTo: 3];
+		
 		[self decreaseLives];
 	}
 }
@@ -761,6 +787,8 @@
 	
 	shield = newVal;
 	[shieldBar setProgress: 1.0 - (3-shield) * 0.33];
+	shieldBarMultiplier = 1.0 + (newVal / 10.0);
+
 }
 -(void) updateShieldToUnitTest{
 	

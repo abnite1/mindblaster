@@ -25,10 +25,12 @@
 #import "MindBlasterAppDelegate.h"
 #import "Sound.h"
 
-
-
-#define UNIT_TESTS_EXECUTED  FALSE
 // this preprocessor directive value is used to set whether unit tests will be executed or not 
+#define UNIT_TESTS_EXECUTED  FALSE
+
+
+// constants
+static const float ICON_ROTATION_COEFFICIENT = 0.07;
 
 @interface GameScreenController : UIViewController 
 {
@@ -38,6 +40,8 @@
 	IBOutlet UILabel *difficultyLabel;
 	Ship *ship;
 	IBOutlet UIImageView *shipIcon;
+	
+	float iconRotationAngle;
 	
 	BOOL gamePaused;
 	
@@ -69,6 +73,9 @@
 	
 	
 	IBOutlet UIImageView *rotationBall;
+	IBOutlet UIImageView *rotationController;
+	IBOutlet UIImageView *shipShield;
+	float shieldBarMultiplier;
 	
 	// initial bullet outlets
 	IBOutlet UIImageView *bullet0;
@@ -142,6 +149,8 @@
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid9;
 
 @property(nonatomic,retain) IBOutlet UIImageView *rotationBall;
+@property(nonatomic,retain) IBOutlet UIImageView *rotationController;
+@property(nonatomic,retain) IBOutlet UIImageView *shipShield;
 
 @property(nonatomic,retain) IBOutlet UIImageView *bullet0;
 @property(nonatomic,retain) IBOutlet UIImageView *bullet1;

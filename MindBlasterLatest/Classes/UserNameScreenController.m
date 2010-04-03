@@ -71,6 +71,13 @@
 	}
 }
 
+// plays an inside click when hitting email or name text edit panes
+-(IBAction) playClick {
+	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+}
+
 //navigate to topic selection
 -(IBAction) nextScreen {
 

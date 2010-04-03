@@ -31,6 +31,7 @@
 - (IBAction) helpScreen;
 - (IBAction) nameEntered;
 - (IBAction) emailEntered;
+-(IBAction) playClick;
 
 
 @end

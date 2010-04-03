@@ -34,6 +34,7 @@
 - (void)didStartNetworking;
 - (void)didStopNetworking;
 + (void) playButtonClick;
++ (void) playInsideClick;
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 
 
