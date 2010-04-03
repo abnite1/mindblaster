@@ -573,6 +573,13 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
+// plays an inside click when hitting email or name text edit panes
+-(IBAction) playClick {
+	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+}
+
 - (void)viewDidUnload
 {
 	NSLog(@"started viewDidUnload");

@@ -49,6 +49,20 @@
 
 }
 
+// plays a menu button click
++ (void) playInsideClick {
+	
+	NSArray *buttonFile = [BUTTON_CLICK_3 componentsSeparatedByString: @"."];
+	NSString *buttonFilePath = [[NSBundle mainBundle] pathForResource: [buttonFile objectAtIndex: 0] ofType: [buttonFile objectAtIndex: 1]];
+	NSURL *audioFileURL = [NSURL fileURLWithPath: buttonFilePath];
+	AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: audioFileURL error: nil];
+	NSLog(@"playing button click");
+	
+	[audioPlayer prepareToPlay];
+	[audioPlayer play];
+	
+}
+
 // delegate function to take effect when player finishes playing
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
 	

@@ -82,6 +82,7 @@ enum {
 - (BOOL) connectedToNetwork;
 - (BOOL) getEmailFromHiddenField;
 -(IBAction) downloadRequested;
+-(IBAction) playClick;
 
 
 

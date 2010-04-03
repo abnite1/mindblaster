@@ -16,6 +16,7 @@
 #define	LASER_EFFECT_4			@"LaserEffect4.caf"
 
 #define BUTTON_CLICK_1			@"ButtonClick1.caf"
+#define BUTTON_CLICK_3			@"ButtonClick3.caf"
 
 #define ASTEROID_EXPLOSION_1	@"Explosion1.caf"
 #define ASTEROID_EXPLOSION_2	@"Explosion1.caf"

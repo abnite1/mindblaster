@@ -37,6 +37,9 @@
 // user selected easiest difficulty
 -(IBAction) selectedEasiest {
 	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+	
 	// set it in the profile
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASIEST];
 	
@@ -47,6 +50,9 @@
 
 // user selected easy difficulty
 -(IBAction) selectedEasy {
+	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
 	
 	// set it in the profile
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_EASY];
@@ -59,6 +65,9 @@
 // user selected hard difficulty
 -(IBAction) selectedHard {
 	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+	
 	// set it in the profile
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARD];
 
@@ -69,6 +78,9 @@
 
 // user selected hardest difficulty
 -(IBAction) selectedHardest {
+	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
 	
 	// set it in the profile
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARDEST];

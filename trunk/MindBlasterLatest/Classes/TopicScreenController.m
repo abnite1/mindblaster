@@ -31,9 +31,30 @@
 	
 }
 
-
 // addition selected
 -(IBAction) firstTopicSelected {
+	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+	
+	// create a new topic
+	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_ADDITION];
+	NSString *msg = [[NSString alloc] initWithFormat:@"Addition."];
+	[topic setDescription: msg];
+	
+	// set an appropriate UI label
+	[label setText:msg];
+	
+	// update the AppDelegate profile
+	[UIAppDelegate.currentUser setCurrentTopic: topic];
+	
+	[msg release];
+	[topic release];
+}
+
+
+// addition selected
+-(void) defaultTopicSelected {
 	
 	// create a new topic
 	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_ADDITION];
@@ -53,6 +74,9 @@
 // subtraction selected
 -(IBAction) secondTopicSelected {
 	
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+	
 	// create a new topic
 	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_SUBTRACTION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Subtraction."];
@@ -71,6 +95,9 @@
 // multiplication selected
 -(IBAction) thirdTopicSelected {
 
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+	
 	// create a new topic
 	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_MULTIPLICATION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Multiplication."];
@@ -89,6 +116,9 @@
 // division selected
 -(IBAction) fourthTopicSelected {
 
+	// play inside click
+	[MindBlasterAppDelegate playInsideClick];
+	
 	// create a new topic
 	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_DIVISION];
 	NSString *msg = [[NSString alloc] initWithFormat:@"Division."];
@@ -134,7 +164,7 @@
 	[self.navigationController setTitle: @"topicView"];
 	
 	// default to the first topic
-	[self firstTopicSelected];
+	[self defaultTopicSelected];
 	
 	// display a current profile representation. 
 	[UIAppDelegate.currentUser userLog];

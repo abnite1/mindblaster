@@ -36,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *division;
 
 -(IBAction) nextScreen;
+-(void) defaultTopicSelected;
 -(IBAction) firstTopicSelected;
 -(IBAction) secondTopicSelected;
 -(IBAction) thirdTopicSelected;
