@@ -313,9 +313,9 @@
 	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
 	
 	
-	[NSTimer scheduledTimerWithTimeInterval:0.01 target:self
+	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
-	[background setSpeedX:0.09 Y:0.09];
+	[background setSpeedX:0.2 Y:0.2];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 	// self.navigationItem.rightBarButtonItem = self.editButtonItem
 	//[background move];
@@ -399,6 +399,9 @@
 	//[tempBullet setBulletDirection: shipDirectionX :shipDirectionY];
 	
 	tempBullet.bulletIcon.hidden = NO;
+	[tempBullet rotate: [ship direction]];
+	NSLog(@"angle: %f", [ship direction]);
+	
 	
 	
 	if(bulletsFired == 5)   //there are only six bullets so once all 6 have been fired start at 0 again
@@ -532,6 +535,7 @@
 	
 	
 	Bullet *tempBullet;
+	//NSLog(@"ship direction: %@", [ship direction]);
 	
 	
 	//updates asteroid movement for each of the 10 asteroids, 0-9
@@ -560,6 +564,7 @@
 		if( tempBullet.bulletPosition.x > 486 ||  tempBullet.bulletPosition.x < -6 
 		   || tempBullet.bulletPosition.y > 320  ||  tempBullet.bulletPosition.y < -6 ) {
 			
+	
 			bulletPos[bulletIndex].x = 0;
 			bulletPos[bulletIndex].y = 0;
 			
@@ -576,7 +581,7 @@
 			//as a new asteroid
 			
 			// if bullets collide with ANY of the 10 asteroids
-			if(  ((tempBullet.bulletPosition.x < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x + 30 ) 
+			if(  ((tempBullet.bulletPosition.x < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x + 30) 
 				  && (tempBullet.bulletPosition.x > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x - 30))
 			   &&((tempBullet.bulletPosition.y < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y + 30) 
 				  && (tempBullet.bulletPosition.y > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y - 30)) ) {		
@@ -1167,7 +1172,8 @@
 		shipDirectionY = (y - ycenter);
 		
 		CGFloat rotationAngle = atan2( shipDirectionY,shipDirectionX) + M_PI_2;
-		[ship rotate: rotationAngle]; 		
+		[ship rotate: rotationAngle];
+		
 	}
 	
 }

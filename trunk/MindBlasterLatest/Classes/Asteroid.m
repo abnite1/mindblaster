@@ -28,6 +28,8 @@
 		[self setAsteroidPosition: x : y];
     }
 	
+	mAngle = 0.0f;
+	
 	//NSLog(@"end of initWIthElements");
     return self;
 	
@@ -134,6 +136,11 @@
 									  asteroidPosition.y + asteroidDirection.y);
 	asteroidLabel.center = CGPointMake(asteroidPosition.x + asteroidDirection.x, 
 									  asteroidPosition.y + asteroidDirection.y);
+	
+	// rotate the icon
+	asteroidIcon.transform=CGAffineTransformMakeRotation (mAngle);
+	mAngle += ROTATION_COEFFICIENT;
+	
 	//[self bounceOffBoundaries];
 	[self phaseToOtherSide];
 		
