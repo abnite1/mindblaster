@@ -38,17 +38,11 @@
 	[background move];
 	
 	// rotate the ship shield icon and direction controller
-	//rotationController.transform=CGAffineTransformMakeRotation (iconRotationAngle);
 	rotationController.transform=CGAffineTransformMakeRotation ([ship direction]);
 	
-	// scale to 1.3, 1.2, 1.1, or 1.0 of original size
-	shipShield.transform = CGAffineTransformMakeScale(shieldBarMultiplier, shieldBarMultiplier);
 	
-	//NSLog(@"multiplier: %f", shieldBarMultiplier);
-	
-	// rotates the shield (but currently negates the effect of scaling)
-	// comment this out to allow shield scaling
-	//shipShield.transform = CGAffineTransformMakeRotation (iconRotationAngle);
+	// rotates the shield
+	shipShield.transform = CGAffineTransformRotate(shipShield.transform, iconRotationAngle);
 	
 	
 	// increment angle
@@ -199,7 +193,7 @@
 		[sound playBG];
 		[sound setBgIsPlaying: YES];
 	}
-	
+
 }
 
 // delegate for what to do before leaving screen
@@ -373,6 +367,9 @@
 	[ship setIcon: shipIcon];				// connect the ship icon to the Ship object so it can be rotated
 	[ship setPos: CGPointMake(shipIcon.center.x , shipIcon.center.y)];
 	
+	
+	// initialize original shield bounds
+	originalShieldBounds = shipShield.transform;
 	
 	// set the initial question
 	[self setQuestion];						
@@ -629,14 +626,16 @@
 			
 			
 			// if bullets collide with ANY of the 10 asteroids
-			if(  ((tempBullet.bulletPosition.x < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x + 
-				   [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.width) 
-				  && (tempBullet.bulletPosition.x > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x - 
-					  [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.width))
-			   &&((tempBullet.bulletPosition.y < [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y + 
-				   [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height) 
-				  && (tempBullet.bulletPosition.y > [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y - 
-					  [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height)) ) {		
+			int asteroidPositionX = [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].x;
+			int asteroidPositionY = [[asteroids objectAtIndex: asteroidIndex] asteroidPosition].y;
+			int asteroidWidth = [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.width;
+			int asteroidHeight = [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height;
+			
+			// check boundaries within 60% of width and height (compensates for timer inconsistencies)
+			if(  (tempBullet.bulletPosition.x < asteroidPositionX + asteroidWidth * 0.6) 
+					&& (tempBullet.bulletPosition.x > asteroidPositionX - asteroidWidth * 0.6) 
+					&& (tempBullet.bulletPosition.y < asteroidPositionY + asteroidHeight * 0.6) 
+					&& (tempBullet.bulletPosition.y > asteroidPositionY - asteroidHeight * 0.6)) {		
 				
 				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
 				//NSLog(@"bullet position: %f", tempBullet.center.x);
@@ -673,7 +672,8 @@
 		for (int j = i + 1; j < 10; j++) {
 			
 			// check for collision with other asteroids
-			[self checkCollisionOf: [asteroids objectAtIndex: i] with : [asteroids objectAtIndex: j]];
+			// not working.
+			//[self checkCollisionOf: [asteroids objectAtIndex: i] with : [asteroids objectAtIndex: j]];
 		}
 		
 		// check for collision with the ship
@@ -687,11 +687,12 @@
 	int shipWidth;
 	int shipHeight;
 	
-	// if the shield is not zero, regard the shield's dimensions for collisions
+	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions
 	if (shield != 0) {
 		
-		shipWidth = shipShield.image.size.width;
-		shipHeight = shipShield.image.size.height;
+		// add the asteroid's width and height so it would collide with the edge rather than the center of the asteroid
+		shipWidth = shipShield.image.size.width + as.asteroidIcon.image.size.width / 2;
+		shipHeight = shipShield.image.size.height + as.asteroidIcon.image.size.height / 2;
 	}
 	// otherwise check with the dimensions of the ship itself
 	else{
@@ -834,6 +835,10 @@
 	shieldBarMultiplier = 1.0 + (shield / 10.0);
 	if (shield == 0) shipShield.hidden = YES;
 	else shipShield.hidden = NO;
+	
+	shipShield.transform =  originalShieldBounds;
+	shipShield.transform = CGAffineTransformMakeScale(shieldBarMultiplier, shieldBarMultiplier);
+	
 
 }
 -(void) updateShieldToUnitTest{
@@ -884,11 +889,17 @@
 // checks if two asteroids collide
 -(BOOL) checkCollisionOf:(Asteroid*)as1 with:(Asteroid*)as2 {
 	
-	if(  ((as1.asteroidPosition.x < as2.asteroidPosition.x + ASTEROID_SIZE_X ) 
-		  && (as1.asteroidPosition.x > as2.asteroidPosition.x - ASTEROID_SIZE_X	))
-	   && ((as1.asteroidPosition.y < as2.asteroidPosition.y + ASTEROID_SIZE_Y) 
-		   && (as1.asteroidPosition.y > as2.asteroidPosition.y - ASTEROID_SIZE_Y)) ) {
-		
+	
+	if(  ((as1.asteroidPosition.x + as1.asteroidIcon.bounds.size.width / 2< 
+		   as2.asteroidPosition.x + as2.asteroidIcon.bounds.size.width / 2 ) 
+		  && (as1.asteroidPosition.x + as1.asteroidIcon.bounds.size.width / 2  > 
+			  as2.asteroidPosition.x - as2.asteroidIcon.bounds.size.width / 2 ))
+	   && ((as1.asteroidPosition.y + as1.asteroidIcon.bounds.size.height / 2 < 
+			as2.asteroidPosition.y + as2.asteroidIcon.bounds.size.height / 2 ) 
+		   && (as1.asteroidPosition.y +as1.asteroidIcon.bounds.size.height / 2 > 
+			   as2.asteroidPosition.y - as2.asteroidIcon.bounds.size.height / 2)) ) {
+	 
+	
 		// if they collide, handle the collision.
 		[self handle2AsteroidsColliding: as1 with : as2];
 		return YES;
@@ -903,12 +914,12 @@
 	//NSLog(@"asteroid x: %f asteroid y: %f", as1.asteroidSize.x , as1.asteroidSize.y);
 	
 	// currently leads to very funky results
-	/*
+	
 	 [as1 setAsteroidDirection: -as1.asteroidDirection.x : as1.asteroidDirection.y];
 	 [as1 setAsteroidDirection: as1.asteroidDirection.x : -as1.asteroidDirection.y];
 	 [as2 setAsteroidDirection: -as2.asteroidDirection.x : as2.asteroidDirection.y];
 	 [as2 setAsteroidDirection: as2.asteroidDirection.x : -as2.asteroidDirection.y];
-	 */
+	
 	
 	
 }
@@ -1010,6 +1021,9 @@
 	NSString *inputString = [[NSString alloc] initWithFormat:@"Score: %d", score ];
 	[scoreLabel setText:inputString];
 	[inputString release];
+	
+	// begin explosion animation
+	[[asteroids objectAtIndex: index] beginExplosionAnimation];
 	
 	// update the location of the asteroid to a random point on the screen
 	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];

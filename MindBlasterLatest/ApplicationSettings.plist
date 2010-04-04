@@ -5,8 +5,8 @@
 	<key>WebURL</key>
 	<string>ftp://b16_5060446:cmpt2753@ftp.byethost16.com/htdocs/app/UserProfile.plist</string>
 	<key>UploadUpdateURL</key>
-	<string>http://mindblaster.byethost16.com/upload.php</string>
+	<string>http://mindblaster.byethost16.com/upload.php?parameter=</string>
 	<key>DownloadUpdateURL</key>
-	<string>http://mindblaster.byethost16.com/download.php?parameter=</string>
+	<string>http://mindblaster.byethost16.com/download.php</string>
 </dict>
 </plist>
