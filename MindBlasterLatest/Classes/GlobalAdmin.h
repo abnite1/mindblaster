@@ -22,6 +22,7 @@
 +(NSString*)getURL;
 +(NSString*)getUploadUpdateURL;
 +(NSString*)getDownloadUpdateURL;
++(NSString*)getUploadFolderCheckURL;
 //-(NSString)Rename;
 
 @end

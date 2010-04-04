@@ -62,7 +62,7 @@ static const float ROTATION_COEFFICIENT = 0.07;
 -(IBAction)move;
 -(void)bounceOffBoundaries;
 -(void) phaseToOtherSide;
--(void) beginExplosionAnimation;
+-(void) beginExplosionAnimation: (CGPoint)location;
 -(void)dealloc;
 
 //unit tests
