@@ -244,6 +244,18 @@
 	return [plistData objectForKey:@"UploadUpdateURL"];
 }
 
+// returns the DB upload update url
++(NSString*)getUploadFolderCheckURL {
+	
+	// read the general settings plist into a dictionary
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
+	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile: finalPath];
+	NSString *result = [plistData objectForKey:@"UploadFolderCheckURL"];
+	NSLog(@"UploadFolderCheckURL: %@", result);
+	return [plistData objectForKey:@"UploadFolderCheckURL"];
+}
+
 // returns the DB download update url
 +(NSString*)getDownloadUpdateURL {
 	

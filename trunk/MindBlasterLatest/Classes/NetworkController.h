@@ -48,7 +48,8 @@ enum {
 	IBOutlet UIButton *					uploadButton;
 	IBOutlet UIButton *					downloadButton;
 	
-	IBOutlet UITextField *				email;
+	IBOutlet UITextField *				emailDown;
+	IBOutlet UITextField *				emailUp;
 	int									connectionType;
 
 }
@@ -65,7 +66,8 @@ enum {
 @property (nonatomic, retain) IBOutlet UIButton *					uploadButton;
 @property (nonatomic, retain) IBOutlet UIButton *					downloadButton;
 
-@property (nonatomic, retain) IBOutlet UITextField *				email;
+@property (nonatomic, retain) IBOutlet UITextField *				emailDown;
+@property (nonatomic, retain) IBOutlet UITextField *				emailUp;
 
 
 //@property (nonatomic, retain) IBOutlet UIBarButtonItem *           cancelButton;
@@ -82,7 +84,11 @@ enum {
 - (BOOL) connectedToNetwork;
 - (BOOL) getEmailFromHiddenField;
 -(IBAction) downloadRequested;
+-(IBAction) uploadRequested;
 -(IBAction) playClick;
+-(id) emailToMD5: (NSString*) email;
+-(BOOL) parseFolderCheckResponse: (NSData*)data;
+
 
 
 

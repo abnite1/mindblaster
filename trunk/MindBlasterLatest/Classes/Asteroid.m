@@ -61,22 +61,9 @@
 	}
 }
 
-// begin an explosion animation
--(void) beginExplosionAnimation {
+// begin an explosion animation at this location
+-(void) beginExplosionAnimation: (CGPoint)location {
 	
-	asteroidIcon.hidden = NO;
-	asteroidLabel.hidden = YES;
-	NSLog(@"inside explosion animation");
-	// start animation seq.
-	[UIView beginAnimations: nil context: NULL];
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 1];
-	[UIView setAnimationRepeatCount: 3];
-	
-	asteroidIcon.alpha = 1.0;
-	
-	// end animation
-	[UIView commitAnimations];
 }
 
 // standard constructor sets the asteroid png and size

@@ -1022,8 +1022,8 @@
 	[scoreLabel setText:inputString];
 	[inputString release];
 	
-	// begin explosion animation
-	[[asteroids objectAtIndex: index] beginExplosionAnimation];
+	// begin explosion animation at current location
+	[[asteroids objectAtIndex: index] beginExplosionAnimation: [[asteroids objectAtIndex: index] asteroidPosition]];
 	
 	// update the location of the asteroid to a random point on the screen
 	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];

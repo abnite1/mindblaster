@@ -33,7 +33,7 @@
 @synthesize fileStreamIn, fileStreamOut, networkStreamIn, networkStreamOut; 
 @synthesize connection;
 @synthesize statusLabel;
-@synthesize activityIndicator, email;
+@synthesize activityIndicator, emailDown, emailUp;
 @synthesize webView;
 @synthesize uploadButton, downloadButton;
 
@@ -52,23 +52,27 @@
 // show the text field after the keyboard is gone
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	
-	[email resignFirstResponder];
+	[emailDown resignFirstResponder];
+	[emailUp resignFirstResponder];
 	return YES;
 }
 
 // updates the DB by accessing the update php URL
 -(void) updateDBUpload {
 	
-	NSURL *url = [NSURL URLWithString: [GlobalAdmin getUploadUpdateURL]];
+	NSString *urlString = [[NSString alloc] initWithFormat: @"%@%@", [GlobalAdmin getUploadUpdateURL], emailUp.text];
+	NSLog(@"upload url: %@", urlString);
+	NSURL *url = [NSURL URLWithString: urlString];
+	[urlString release];
 	NSURLRequest *request = [NSURLRequest requestWithURL: url];
 	
 	// make sure connection established
 	NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self startImmediately: YES];
 	if (urlConnection ){
-		NSLog(@"download script invoked.");
+		NSLog(@"upload script invoked.");
 	}
 	else {
-		NSLog(@"download script failed to invoke.");
+		NSLog(@"upload script failed to invoke.");
 	}
 	[urlConnection release];
 	//[webView loadRequest: request];
@@ -80,7 +84,7 @@
 	
 	// attach the email to the url
 	NSString *urlWithEmail = [[NSString alloc] initWithFormat: @"%@%@", 
-							  [GlobalAdmin getDownloadUpdateURL], email.text];
+							  [GlobalAdmin getDownloadUpdateURL], emailDown.text];
 	NSLog(@"%@", urlWithEmail);
 	
 	NSURL *url = [NSURL URLWithString: urlWithEmail];
@@ -106,8 +110,7 @@
 	NSLog(@"connection did finish loading");
 	if (connectionType == DOWNLOAD) {
 		
-		NSLog(@"finished loading upload script");
-		[self download];
+		NSLog(@"finished loading download update script");
 	}
 	if (connectionType == UPLOAD) {
 		
@@ -126,24 +129,106 @@
 // get their email before progressing
 -(IBAction) downloadRequested {
 	
+	connectionType = DOWNLOAD;
+	
 	if ( [self getEmailFromHiddenField]) {
 		
-		[UIAppDelegate.currentUser setEmail: email.text];
+		[UIAppDelegate.currentUser setEmail: emailDown.text];
 		[statusLabel setText: @""];
-		[email setEnabled: NO];
-		email.hidden = YES;
-		connectionType = DOWNLOAD;
-		[self updateDBDownload];
+		[emailDown setEnabled: NO];
+		emailDown.hidden = YES;
+		
+		[self download];
+		
+		// no longer necessary
+		//[self updateDBDownload];
 	}
 	else
 		[statusLabel setText: @"Must enter email."];
 }
 
+// user pressed the upload button
+// get their email before progressing
+-(IBAction) uploadRequested {
+	
+	connectionType = UPLOAD;
+	
+	if ( [self getEmailFromHiddenField]) {
+		
+		[UIAppDelegate.currentUser setEmail: emailUp.text];
+		[statusLabel setText: @""];
+		[emailUp setEnabled: NO];
+		emailUp.hidden = YES;
+
+		// attach the email as the url parameter
+		NSString *urlWithEmail = [[NSString alloc] initWithFormat: @"%@%@", 
+								  [GlobalAdmin getUploadFolderCheckURL], emailUp.text];
+		NSLog(@"%@", urlWithEmail);
+		
+		NSURL *url = [NSURL URLWithString: urlWithEmail];
+		[urlWithEmail release];
+		NSURLRequest *request = [NSURLRequest requestWithURL: url];
+		
+		// load the url and parse the reponse to see if folder was created so we can write to it.
+		NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self startImmediately: YES];
+		
+		if (urlConnection ){
+			NSLog(@"upload folder check URL connected.");
+		}
+		else {
+			NSLog(@"upload folder check URL failed to connect.");
+		}
+		
+		NSError *fcError;
+		NSURLResponse *fcResponse;
+		
+		// get response
+		NSData *fcData = [NSURLConnection sendSynchronousRequest: request
+						returningResponse: &fcResponse error: &fcError];
+		
+		// response positive => folder created. write to it.
+		if ([self parseFolderCheckResponse: fcData]) {
+			
+			NSLog(@"folder created.");
+			[self upload];
+		}
+		// response negative => folder not created. fail.
+		else {
+			
+			NSLog(@"failed to create folder.");
+			[statusLabel setText: @"Error while uploading, try again."];
+			
+		}
+		
+		// release connection
+		[urlConnection release];
+		
+	}
+	// user didn't enter email.
+	else
+		[statusLabel setText: @"Must enter email."];
+}
+
+// check response of folder check URL
+// returns YES if folder was created, NO otherwise.
+-(BOOL) parseFolderCheckResponse: (NSData*)data {
+
+	// for testing
+	return YES;
+}
+
+
 // prompt the user for an email address
 // or notify them of failure
 - (BOOL) getEmailFromHiddenField {
-
 	
+	UITextField *email;
+	if (connectionType == UPLOAD){
+		email = emailUp;
+	}
+	else {
+		email = emailDown;
+	}
 	// return YES if email has been already entered with a non empty value
 	if (email.text != nil && ! [email.text isEqualToString:@""]) {
 		
@@ -200,15 +285,7 @@
 	[helpView release];
 }
 
-/*
-- (void)_sendDidStart
-{
-    self.statusLabel.text = @"Please wait for transfer to complete.";
-    //self.cancelButton.enabled = YES;
-    [self.activityIndicator startAnimating];
-   //[[AppDelegate sharedAppDelegate] didStartNetworking];
-}
-*/
+
 - (void)_updateStatus:(NSString *)statusString {
 	
 	NSLog(@"inside _upadateStatus");
@@ -358,9 +435,13 @@
 	[self.navigationController setTitle: @"networkView"];
 	
 	// initialize email
-	email.text = nil;
-	[email setEnabled: NO];
-	email.hidden = YES;
+	emailDown.text = nil;
+	[emailDown setEnabled: NO];
+	emailDown.hidden = YES;
+	
+	emailUp.text = nil;
+	[emailUp setEnabled: NO];
+	emailUp.hidden = YES;
 	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
@@ -410,10 +491,20 @@
 	[MindBlasterAppDelegate playButtonClick];
 }
 
+// converts email string to md5 string
+-(id) emailToMD5: (NSString*) email {
+	
+	// for testing
+	return [[[NSString alloc] initWithString: @"28734823"] autorelease];
+}
+
+
 // download a file
 -(IBAction) download {	
 		
-	assert (email.text != nil && ! [email.text isEqualToString: @""]);
+	assert (emailDown.text != nil && ! [emailDown.text isEqualToString: @""]);
+	
+	NSString *md5Email = [self emailToMD5: emailDown.text];
 	
 	// run the update script before downloading
 	//NSLog(@"updating the download DB script");
@@ -422,7 +513,8 @@
 
 	
 	// save path
-	NSString *fileString = [[GlobalAdmin getPath] retain];
+	//NSString *fileString = [[GlobalAdmin getPath] retain];
+	NSString *fileString = [GlobalAdmin getPath];
 	
 	// first delete the current profile if it exists.
 	if([[NSFileManager defaultManager] fileExistsAtPath: fileString ]) {
@@ -439,14 +531,17 @@
 	[self.fileStreamOut open];
 */
 	
+	NSLog(@"md5: %@",[GlobalAdmin getURL]);
+	
 	// read plist into a dictionary
-	NSString *urlString =  [[GlobalAdmin getURL] retain];
+	NSString *urlString = [[NSString alloc] initWithFormat: @"%@%@/UserProfile.plist", [GlobalAdmin getURL],  md5Email];
 	
 	// for debug: 
 	NSLog(@"downloading: %@", urlString);
 	
 	NSURL *url = [[NSURL URLWithString: urlString] retain];
 	assert (url != nil);
+	[urlString release];
 	
 /*	
 	self.connection = [NSURLConnection connectionWithRequest: request delegate: self];
@@ -466,6 +561,7 @@
 	NSLog(@"Saving to file: %@", fileString);
 
 	[profile writeToFile: fileString atomically: YES];
+	[url release];
 	[profile release];
 	
 	self.statusLabel.text = @"Download Complete.";
@@ -480,8 +576,11 @@
 	
 	connectionType == UPLOAD;
 	
+	NSString *md5Email = [self emailToMD5: emailDown.text];
+	
 	// get the ftp url from ApplicationSettings.plist
-	NSString *urlString =  [GlobalAdmin getURL];
+	NSString *urlString = [[NSString alloc] initWithFormat: @"%@%@/UserProfile.plist", [GlobalAdmin getURL],  md5Email];
+	NSLog(@"upload URL path: %@",urlString);
 
 	// get the local file path for the profile
 	NSString *fileString = [GlobalAdmin getPath];
@@ -490,6 +589,7 @@
 	
 	// create the url
 	NSURL *url = [NSURL URLWithString: urlString];
+	[urlString release];
 	
 	// make sure we have a file to upload
 	if ( [[NSFileManager defaultManager] fileExistsAtPath: fileString ] ) 
