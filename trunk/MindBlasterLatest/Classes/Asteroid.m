@@ -34,6 +34,7 @@
     return self;
 	
 }
+
 - (void)initWithElementsUnitTest:(UIImageView*)icon :(UILabel*)label {
 	
 	asteroidIcon = nil;
@@ -59,6 +60,25 @@
 			NSLog(@"UNIT TEST PASSED; class: Asteroid; function initWithElements");
 	}
 }
+
+// begin an explosion animation
+-(void) beginExplosionAnimation {
+	
+	asteroidIcon.hidden = NO;
+	asteroidLabel.hidden = YES;
+	NSLog(@"inside explosion animation");
+	// start animation seq.
+	[UIView beginAnimations: nil context: NULL];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1];
+	[UIView setAnimationRepeatCount: 3];
+	
+	asteroidIcon.alpha = 1.0;
+	
+	// end animation
+	[UIView commitAnimations];
+}
+
 // standard constructor sets the asteroid png and size
 /*
 -(id) init {
@@ -186,31 +206,31 @@
 -(void) phaseToOtherSide {
 	
 	// if it hits the right side of the screen
-	if( asteroidPosition.x  > 480 + ASTEROID_SIZE_X ) {
+	if( asteroidPosition.x  > 470 + asteroidIcon.bounds.size.width ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: -ASTEROID_SIZE_X + 1 : asteroidPosition.y];
+		[self setAsteroidPosition: -asteroidIcon.bounds.size.width + 1 : asteroidPosition.y];
 	}
 	
 	// if it hits the left side of the screen
-	if ( asteroidPosition.x < 0 - ASTEROID_SIZE_X ) {
+	if ( asteroidPosition.x < 0 - asteroidIcon.bounds.size.width ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: 480 + ASTEROID_SIZE_X - 1 : asteroidPosition.y];	
+		[self setAsteroidPosition: 470 + asteroidIcon.bounds.size.width - 1 : asteroidPosition.y];	
 	}
 	
 	// if it hits the upper side of the screen
-	if( asteroidPosition.y  > 320 + ASTEROID_SIZE_Y ) {
+	if( asteroidPosition.y  > 320 + asteroidIcon.bounds.size.height ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: asteroidPosition.x : 0 - ASTEROID_SIZE_Y + 1 ];
+		[self setAsteroidPosition: asteroidPosition.x : 0 - asteroidIcon.bounds.size.height + 1 ];
 	}
 	
 	// if it hits the bottom side of the screen
-	if ( asteroidPosition.y < 0 - ASTEROID_SIZE_Y ) {
+	if ( asteroidPosition.y < 0 - asteroidIcon.bounds.size.height ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: asteroidPosition.x : 320 + ASTEROID_SIZE_Y -1];	
+		[self setAsteroidPosition: asteroidPosition.x : 320 + asteroidIcon.bounds.size.height -1];	
 	}
 }
 

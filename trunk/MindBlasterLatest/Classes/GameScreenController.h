@@ -76,6 +76,7 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	IBOutlet UIImageView *rotationController;
 	IBOutlet UIImageView *shipShield;
 	float shieldBarMultiplier;
+	CGAffineTransform originalShieldBounds;
 	
 	// initial bullet outlets
 	IBOutlet UIImageView *bullet0;
