@@ -431,6 +431,9 @@
 
 // handle bullet animation and interaction with asteroids
 -(IBAction) fireButton{
+	//update stats with #bullets fired
+	[[UIAppDelegate.currentUser stats] setShotsFired:[[UIAppDelegate.currentUser stats] shotsFired] + 1]; //jkehler
+	
 	
 	// begin laser sound
 	[sound playLaser];
@@ -964,6 +967,8 @@
 	
 	NSLog(@"hit correct asteroid.");
 	int score = [UIAppDelegate.currentUser.score score];
+	//update stats
+	[[UIAppDelegate.currentUser stats] setCorrectHits:[[UIAppDelegate.currentUser stats] correctHits] + 1]; //jkehler
 	
 	// update the feedback label
 	[feedbackLabel setTextColor:[UIColor greenColor]];
@@ -993,6 +998,8 @@
 	
 	NSLog(@"hit incorrect asteroid.");
 	int score = [UIAppDelegate.currentUser.score score];
+	//update stats
+	[[UIAppDelegate.currentUser stats] setIncorrectHits:[[UIAppDelegate.currentUser stats] incorrectHits] + 1]; //jkehler
 	
 	// update the feedback label
 	[feedbackLabel setTextColor:[UIColor redColor]];
@@ -1023,6 +1030,8 @@
 	NSLog(@"hit blank asteroid.");
 	
 	int score = [UIAppDelegate.currentUser.score score];
+	//update stats
+	[[UIAppDelegate.currentUser stats] setBlankHits:[[UIAppDelegate.currentUser stats] blankHits] + 1]; //jkehler
 	
 	// increase score by 1 and update the scoreboard
 	score = score + BLANK_REWARD;
@@ -1113,20 +1122,20 @@
 		NSNumber *temp = [NSNumber numberWithDouble:topicTimeCount];
 		
 		if([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_ADDITION){
-			if([UIAppDelegate.currentUser additionTime] < [temp intValue]){
-				[UIAppDelegate.currentUser setAdditionTime:[temp intValue]];
+			if([[UIAppDelegate.currentUser stats] additionTime] < [temp intValue]){
+				[[UIAppDelegate.currentUser stats] setAdditionTime:[temp intValue]];
 			}
 		}else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_SUBTRACTION){
-			if([UIAppDelegate.currentUser subtractionTime] < [temp intValue]){
-				[UIAppDelegate.currentUser setSubtractionTime:[temp intValue]];
+			if([[UIAppDelegate.currentUser stats] subtractionTime]< [temp intValue]){
+				[[UIAppDelegate.currentUser stats] setSubtractionTime:[temp intValue]];
 			}
 		}else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION){
-			if([UIAppDelegate.currentUser multiplicationTime] < [temp intValue]){
-				[UIAppDelegate.currentUser setMultiplicationTime:[temp intValue]];
+			if([[UIAppDelegate.currentUser stats] multiplicationTime] < [temp intValue]){
+				[[UIAppDelegate.currentUser stats] setMultiplicationTime:[temp intValue]];
 			}
 		}else{
-			if([UIAppDelegate.currentUser divisionTime] < [temp intValue]){
-				[UIAppDelegate.currentUser setDivisionTime:[temp intValue]];
+			if([[UIAppDelegate.currentUser stats] divisionTime]< [temp intValue]){
+				[[UIAppDelegate.currentUser stats] setDivisionTime:[temp intValue]];
 			}
 		}
 		topicTimeCount = 0;

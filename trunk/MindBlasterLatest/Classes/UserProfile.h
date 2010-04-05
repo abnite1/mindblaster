@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 #import "Topic.h"
 #import "Score.h"
+#import "Statistics.h"
 
 static const int PICTURE_BOY	= 0;
 static const int PICTURE_GIRL	= 1;
@@ -29,15 +30,12 @@ static const int PICTURE_CAT	= 3;
 	
 	NSString	*userName;
 	int			profilePic;
-	int			additionTime;
-	int			subtractionTime;
-	int			multiplicationTime;
-	int			divisionTime;
 	Score		*score;
 	Score		*highestScore;
 	Topic		*currentTopic;
 	Topic		*lastTopicCompleted;			
 	NSString	*email;
+	Statistics  *stats;
 	
 }
 @property (nonatomic, retain)	Topic		*currentTopic;
@@ -47,10 +45,7 @@ static const int PICTURE_CAT	= 3;
 @property (nonatomic)			int			profilePic;
 @property (nonatomic, retain)	Score		*highestScore;
 @property (nonatomic, retain)	Score		*score;
-@property (nonatomic)			int			additionTime;
-@property (nonatomic)			int			subtractionTime;
-@property (nonatomic)			int			multiplicationTime;
-@property (nonatomic)			int			divisionTime;
+@property (nonatomic, retain)	Statistics  *stats;
 
 -(IBAction) checkHighestScore;
 -(void) userLog;
