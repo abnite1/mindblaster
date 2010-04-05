@@ -232,7 +232,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				77D49042115EC9CB0000625B /* SystemConfiguration.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -260,6 +259,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77D49042115EC9CB0000625B /* SystemConfiguration.framework */,
 				77D0F06A1163091D00BB8D5E /* AVFoundation.framework */,
 				77AFB01F115AC80D00123F1C /* CFNetwork.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,

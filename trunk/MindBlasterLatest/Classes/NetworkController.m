@@ -74,6 +74,7 @@
 	else {
 		NSLog(@"upload script failed to invoke.");
 	}
+	NSLog(@"before urlConnection release in updateDBUpload");
 	[urlConnection release];
 	//[webView loadRequest: request];
 	
@@ -106,7 +107,7 @@
 
 // delegate method for NSURLConnection
 // activated once the script for either upload or download is finished loading, and download can begin
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *)connectionID {
 	NSLog(@"connection did finish loading");
 	if (connectionType == DOWNLOAD) {
 		
@@ -137,7 +138,7 @@
 		[statusLabel setText: @""];
 		[emailDown setEnabled: NO];
 		emailDown.hidden = YES;
-		
+
 		[self download];
 		
 		// no longer necessary
@@ -190,6 +191,7 @@
 		if ([self parseFolderCheckResponse: fcData]) {
 			
 			NSLog(@"folder created.");
+			//[activityIndicator startAnimating];
 			[self upload];
 		}
 		// response negative => folder not created. fail.
@@ -201,6 +203,7 @@
 		}
 		
 		// release connection
+		NSLog(@"before urlConnection release in uploadrequested");
 		[urlConnection release];
 		
 	}
@@ -213,9 +216,27 @@
 // returns YES if folder was created, NO otherwise.
 -(BOOL) parseFolderCheckResponse: (NSData*)data {
 
-	// for testing
-	return YES;
+	NSString *webpageResponse = [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding];
+	if (webpageResponse == nil) return NO;
+	NSLog(@"response: %@", webpageResponse);
+	// if response is empty, return NO
+	
+	
+	// if response contains "folder created." return YES
+	NSRange correctResponse =[[webpageResponse lowercaseString] rangeOfString:[@"yes" lowercaseString]];
+	NSLog(@"before webresponse release");
+	[webpageResponse release];
+	
+	if(correctResponse.location != NSNotFound) {
+		
+		return YES;
+	}
+	else {
+		
+		return NO;
+	}
 }
+
 
 
 // prompt the user for an email address
@@ -232,6 +253,7 @@
 	// return YES if email has been already entered with a non empty value
 	if (email.text != nil && ! [email.text isEqualToString:@""]) {
 		
+
 		return YES;
 	}
 	else  {
@@ -287,21 +309,23 @@
 
 
 - (void)_updateStatus:(NSString *)statusString {
-	
-	NSLog(@"inside _upadateStatus");
+	if (statusString != nil)
+		NSLog(@"inside _upadateStatus with status: %@", statusString);
+	else NSLog(@"update status with nil statusstring");
     //assert(statusString != nil);
    // self.statusLabel.text = statusString;
 }
 
 - (void)_sendDidStopWithStatus:(NSString *)statusString {
 	
-	NSLog(@"starting _sendDidStopWithStatus");
+	
     if (statusString == nil) {
+		NSLog(@"starting _sendDidStopWithStatus: %@", statusString);
         //statusString = @"Put succeeded";
     }
+	else NSLog(@"send did stop with status = nil");
     //self.statusLabel.text = statusString;
    // self.cancelButton.enabled = NO;
-    //[self.activityIndicator stopAnimating];
 	//[[AppDelegate sharedAppDelegate] didStartNetworking];
 }
 
@@ -336,12 +360,17 @@
         self.networkStreamOut.delegate = nil;
         [self.networkStreamOut close];
         self.networkStreamOut = nil;
+		NSLog(@"closing networkStreamOut");
     }
     if (self.fileStreamIn != nil) {
         [self.fileStreamIn close];
         self.fileStreamIn = nil;
+		NSLog(@"closing filestreamin");
     }
-   // [self _sendDidStopWithStatus:statusString];
+	if (statusString != nil) NSLog(@"stop send with status: %@", statusString);
+	
+	// completed upload, update UI.
+	else [self uploadComplete];
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
@@ -350,7 +379,6 @@
 {
 #pragma unused(aStream)
 	
-	NSLog(@"beginning of stream");
     //assert(aStream == self.networkStream);
 	
     switch (eventCode) {
@@ -373,7 +401,7 @@
                 if (bytesRead == -1) {
                     [self _stopSendWithStatus:@"File read error"];
                 } else if (bytesRead == 0) {
-                    [self _stopSendWithStatus:nil];
+                    [self _stopSendWithStatus: nil];
                 } else {
                     self.bufferOffset = 0;
                     self.bufferLimit  = bytesRead;
@@ -406,7 +434,7 @@
             assert(NO);
         } break;
     }
-	NSLog(@"end of stream");
+	
 }
 
 // update the label if no internet connection is found
@@ -491,13 +519,24 @@
 	[MindBlasterAppDelegate playButtonClick];
 }
 
-// converts email string to md5 string
--(id) emailToMD5: (NSString*) email {
-	
-	// for testing
-	return [[[NSString alloc] initWithString: @"28734823"] autorelease];
-}
 
+// converts email string to md5 string
+-(NSString*) emailToMD5: (NSString*) email {
+
+	const char *cStr = [email UTF8String];
+	unsigned char result[CC_MD5_DIGEST_LENGTH];
+	CC_MD5( cStr, [email length], result );
+	NSString *tempString = [[NSString alloc] initWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+							result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7],
+							result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]
+							];
+	NSLog(@"before md5 autorelease");
+	[tempString autorelease];
+	
+	// return in lowercase
+	return [tempString lowercaseString];
+}
+ 
 
 // download a file
 -(IBAction) download {	
@@ -505,6 +544,7 @@
 	assert (emailDown.text != nil && ! [emailDown.text isEqualToString: @""]);
 	
 	NSString *md5Email = [self emailToMD5: emailDown.text];
+	NSLog(@"email: %@ md5: %@", emailDown.text, md5Email);
 	
 	// run the update script before downloading
 	//NSLog(@"updating the download DB script");
@@ -541,6 +581,7 @@
 	
 	NSURL *url = [[NSURL URLWithString: urlString] retain];
 	assert (url != nil);
+	NSLog(@"before urlString release in download");
 	[urlString release];
 	
 /*	
@@ -561,10 +602,13 @@
 	NSLog(@"Saving to file: %@", fileString);
 
 	[profile writeToFile: fileString atomically: YES];
+
 	[url release];
 	[profile release];
 	
 	self.statusLabel.text = @"Download Complete.";
+	activityIndicator.hidden = NO;
+	[activityIndicator stopAnimating];
 	[UIAppDelegate didStartNetworking];
 	
 	NSLog(@"finished download");
@@ -576,7 +620,10 @@
 	
 	connectionType == UPLOAD;
 	
-	NSString *md5Email = [self emailToMD5: emailDown.text];
+	NSString *md5Email = [self emailToMD5: emailUp.text];
+	NSLog(@"email: %@ md5(32): %@", emailUp.text, md5Email);
+
+
 	
 	// get the ftp url from ApplicationSettings.plist
 	NSString *urlString = [[NSString alloc] initWithFormat: @"%@%@/UserProfile.plist", [GlobalAdmin getURL],  md5Email];
@@ -589,6 +636,7 @@
 	
 	// create the url
 	NSURL *url = [NSURL URLWithString: urlString];
+	NSLog(@"before urlString release in upload");
 	[urlString release];
 	
 	// make sure we have a file to upload
@@ -622,10 +670,6 @@
 		// has retained this for our persistent use.
 		CFRelease(ftpStream);
 		
-		self.statusLabel.text = @"Upload Complete.";
-		//[self.activityIndicator stopAnimating];
-		//self.activityIndicator.hidden = YES;
-		
 	}
 	// we have no profile to upload
 	else {
@@ -635,13 +679,26 @@
 	
 	//[self didStartNetworking];
 	 NSLog(@"end of upload");
-
-	// update the upload script
-	NSLog(@"updating upload script");
-	[self updateDBUpload];
 	
 	connectionType = -1;
 }
+
+// stop activity indicator and update the db script
+-(void)uploadComplete {
+	
+	self.statusLabel.text = @"Upload Complete.";
+	
+	NSLog(@"upload complete.");
+	[activityIndicator stopAnimating];
+	//activityIndicator.hidden = YES;
+	
+	// update the upload script
+	NSLog(@"updating upload script");
+	
+	[self updateDBUpload];
+
+}
+ 
 
 // to be implemented
 -(void) didStartNetworking {
@@ -653,7 +710,7 @@
 // to be implemented
 -(void) didStopNetworking {
 	NSLog(@"inside didStopNetworking");
-	//[activityIndicator stopAnimating];
+	
 }
 
 
@@ -676,8 +733,19 @@
 // plays an inside click when hitting email or name text edit panes
 -(IBAction) playClick {
 	
+	NSLog(@"starting indicator");
+	activityIndicator.hidden = NO;
+	[activityIndicator startAnimating];
+	
 	// play inside click
 	[MindBlasterAppDelegate playInsideClick];
+}
+
+// start progress indicator animation
+-(IBAction)startIndicator{
+
+	//activityIndicator.hidden = NO;
+	//[activityIndicator startAnimating];
 }
 
 - (void)viewDidUnload

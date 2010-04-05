@@ -7,8 +7,10 @@
 //
 
 #include <CFNetwork/CFNetwork.h>
+
 #include <netinet/in.h>
 #import <UIKit/UIKit.h>
+#import <CommonCrypto/CommonDigest.h>
 #import "GlobalAdmin.h"
 #import "MindBlasterAppDelegate.h"
 #import "HelpScreenController.h"
@@ -17,6 +19,11 @@
 static const int DOWNLOAD = 0;
 static const int UPLOAD = 1;
 
+@interface NSString (md5)
+
++ (NSString *) md5:(NSString *)str;
+
+@end
 
 
 enum {
@@ -86,8 +93,10 @@ enum {
 -(IBAction) downloadRequested;
 -(IBAction) uploadRequested;
 -(IBAction) playClick;
--(id) emailToMD5: (NSString*) email;
+-(NSString*) emailToMD5: (NSString*) email;
 -(BOOL) parseFolderCheckResponse: (NSData*)data;
+-(IBAction)startIndicator;
+-(void)uploadComplete;
 
 
 

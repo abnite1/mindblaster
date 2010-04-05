@@ -1,18 +1,21 @@
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/main.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/MindBlasterAppDelegate.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/RootViewController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/CharacterScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/UserNameScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/TopicScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/DifficultyScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/GameScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/GameOverScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/LoadGameScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/HelpScreenController.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Ball.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Ship.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Asteroid.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Questions.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Question.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/UserProfile.o
-/Volumes/sverner/untitled folder/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Topic.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/MindBlasterAppDelegate.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/RootViewController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/CharacterScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/UserNameScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/TopicScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/DifficultyScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/GameScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/GameOverScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/HelpScreenController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/BackgroundAnimation.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Sound.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Bullet.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Topic.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Score.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Question.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/UserProfile.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Ship.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/GlobalAdmin.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/Asteroid.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/NetworkController.o
+/Users/yanivharamati/MindBlaster154/MindBlasterLatest/build/MindBlaster.build/Debug-iphonesimulator/MindBlaster.build/Objects-normal/i386/main.o
