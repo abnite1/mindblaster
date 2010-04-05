@@ -42,6 +42,20 @@
 	
 	[zero release];
 	
+	//stats
+	Statistics *stats = [[Statistics alloc] init];
+	[stats setBlankHits:0];
+	[stats setCorrectHits:0];
+	[stats setIncorrectHits:0];
+	[stats setShotsFired:0];
+	[stats setAdditionTime:0];
+	[stats setSubtractionTime:0];
+	[stats setMultiplicationTime:0];
+	[stats setDivisionTime:0];
+	[UIAppDelegate.currentUser setStats:stats];
+	
+	//[stats release]; MEMORY LEAK
+	
 	// set the current topic (difficulty is set to EASIEST with this init function)
 	Topic *topic = [[Topic alloc] initWithTopic: TOPIC_ADDITION];
 	[topic initOperator];
@@ -119,10 +133,14 @@
 			  forKey: @"HighestTopicDifficulty"];
 	
 	//save the times for each topic //jkehler
-	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser additionTime]] forKey:@"AdditionTime"];
-	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser subtractionTime]] forKey:@"SubtractionTime"];
-	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser multiplicationTime]] forKey:@"MultiplicationTime"];
-	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser divisionTime]] forKey:@"DivisionTime"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] additionTime]] forKey:@"AdditionTime"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] subtractionTime]] forKey:@"SubtractionTime"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] multiplicationTime]] forKey:@"MultiplicationTime"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] divisionTime]] forKey:@"DivisionTime"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] correctHits]] forKey:@"CorrectHits"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] incorrectHits]] forKey:@"IncorrectHits"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] blankHits]] forKey:@"BlankHits"];
+	[prefs setObject: [NSNumber numberWithInt: [[UIAppDelegate.currentUser stats] shotsFired]] forKey:@"ShotsFired"];
 	
 	
 	// for debug
@@ -185,14 +203,19 @@
 		[scoreHighest release];
 		
 		//load best topic times
-		int time = [[prefs objectForKey:@"AdditionTime"] intValue];
-		[UIAppDelegate.currentUser setAdditionTime:time];
-		time = [[prefs objectForKey:@"SubtractionTime"] intValue];
-		[UIAppDelegate.currentUser setSubtractionTime:time];
-		time = [[prefs objectForKey:@"MultiplicationTime"] intValue];
-		[UIAppDelegate.currentUser setMultiplicationTime:time];
-		time = [[prefs objectForKey:@"DivisionTime"] intValue];
-		[UIAppDelegate.currentUser setDivisionTime:time];
+		Statistics *stats = [[Statistics alloc] init];
+		[stats setAdditionTime:[[prefs objectForKey:@"AdditionTime"] intValue]];
+		[stats setSubtractionTime:[[prefs objectForKey:@"SubtractionTime"] intValue]];
+		[stats setMultiplicationTime:[[prefs objectForKey:@"MultiplicationTime"] intValue]];
+		[stats setDivisionTime:[[prefs objectForKey:@"DivisionTime"] intValue]];
+		[stats setShotsFired:[[prefs objectForKey:@"ShotsFired"] intValue]];
+		[stats setCorrectHits:[[prefs objectForKey:@"CorrectHits"] intValue]];
+		[stats setIncorrectHits:[[prefs objectForKey:@"IncorrectHits"] intValue]];
+		[stats setBlankHits:[[prefs objectForKey:@"BlankHits"] intValue]];
+		 
+		 [UIAppDelegate.currentUser setStats:stats];
+		 
+		 //[stats release] MEMORY LEAK
 		
 		
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0738BD5B116A81B400654F1B /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0738BD5A116A81B400654F1B /* Statistics.m */; };
 		07BBE0B71137109E00BAF196 /* BackgroundAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */; };
 		1D3623260D0F684500981E51 /* MindBlasterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MindBlasterAppDelegate.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -76,6 +77,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0738BD59116A81B400654F1B /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
+		0738BD5A116A81B400654F1B /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statistics.m; sourceTree = "<group>"; };
 		07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTesting-Info.plist"; sourceTree = "<group>"; };
 		07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundAnimation.h; sourceTree = "<group>"; };
 		07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundAnimation.m; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 				77F134C4116614DE005AE813 /* UserProfile.m */,
 				77F134C7116614DE005AE813 /* Ship.h */,
 				77F134C6116614DE005AE813 /* Ship.m */,
+				0738BD59116A81B400654F1B /* Statistics.h */,
+				0738BD5A116A81B400654F1B /* Statistics.m */,
 			);
 			name = "Game Play Classes";
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				77F134D2116614DE005AE813 /* Asteroid.m in Sources */,
 				77F134D4116614FC005AE813 /* NetworkController.m in Sources */,
 				77F134DD11661515005AE813 /* main.m in Sources */,
+				0738BD5B116A81B400654F1B /* Statistics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
