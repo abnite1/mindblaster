@@ -51,6 +51,9 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	//timer variables
 	NSTimer *gamePlayTimer;
 	double gamePlayTimerInterval;
+	//NSNumber *topicTimeCount;
+	double topicTimeCount;
+	IBOutlet UILabel *topicTimeDisplay;
 	
 	//IBOutlet UIImageView *ship;
 	
@@ -127,6 +130,9 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	
 	int bulletsFired;
 }
+@property (nonatomic) double topicTimeCount;
+@property (nonatomic, retain) IBOutlet UILabel *topicTimeDisplay;
+
 @property (nonatomic,retain) IBOutlet BackgroundAnimation *background;
 @property (nonatomic, retain) Sound *sound;
 @property (nonatomic, retain) IBOutlet UIButton *profilePic;
