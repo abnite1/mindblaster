@@ -20,9 +20,9 @@
 #import "TopicScreenController.h"
 
 @interface HelpScreenController : UIViewController {
-	IBOutlet UILabel *help;
+	IBOutlet UITextView *text;
 }
-@property (nonatomic,retain) IBOutlet UILabel *help;
+@property (nonatomic, retain) IBOutlet UITextView *text;
 
 - (IBAction) backScreen;
 - (IBAction) quit;
