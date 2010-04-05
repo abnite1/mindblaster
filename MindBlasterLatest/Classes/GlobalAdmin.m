@@ -118,6 +118,12 @@
 	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser.lastTopicCompleted difficulty]] 
 			  forKey: @"HighestTopicDifficulty"];
 	
+	//save the times for each topic //jkehler
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser additionTime]] forKey:@"AdditionTime"];
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser subtractionTime]] forKey:@"SubtractionTime"];
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser multiplicationTime]] forKey:@"MultiplicationTime"];
+	[prefs setObject: [NSNumber numberWithInt: [UIAppDelegate.currentUser divisionTime]] forKey:@"DivisionTime"];
+	
 	
 	// for debug
 	NSLog(@"Writetofile path is: %@ \n", path);
@@ -177,6 +183,19 @@
 		
 		[scoreCurrent release];
 		[scoreHighest release];
+		
+		//load best topic times
+		int time = [[prefs objectForKey:@"AdditionTime"] intValue];
+		[UIAppDelegate.currentUser setAdditionTime:time];
+		time = [[prefs objectForKey:@"SubtractionTime"] intValue];
+		[UIAppDelegate.currentUser setSubtractionTime:time];
+		time = [[prefs objectForKey:@"MultiplicationTime"] intValue];
+		[UIAppDelegate.currentUser setMultiplicationTime:time];
+		time = [[prefs objectForKey:@"DivisionTime"] intValue];
+		[UIAppDelegate.currentUser setDivisionTime:time];
+		
+		
+
 		
 		// load the current topic
 		int top = [[prefs objectForKey: @"CurrentTopic"] intValue];

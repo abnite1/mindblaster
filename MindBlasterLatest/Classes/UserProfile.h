@@ -29,6 +29,10 @@ static const int PICTURE_CAT	= 3;
 	
 	NSString	*userName;
 	int			profilePic;
+	int			additionTime;
+	int			subtractionTime;
+	int			multiplicationTime;
+	int			divisionTime;
 	Score		*score;
 	Score		*highestScore;
 	Topic		*currentTopic;
@@ -43,6 +47,10 @@ static const int PICTURE_CAT	= 3;
 @property (nonatomic)			int			profilePic;
 @property (nonatomic, retain)	Score		*highestScore;
 @property (nonatomic, retain)	Score		*score;
+@property (nonatomic)			int			additionTime;
+@property (nonatomic)			int			subtractionTime;
+@property (nonatomic)			int			multiplicationTime;
+@property (nonatomic)			int			divisionTime;
 
 -(IBAction) checkHighestScore;
 -(void) userLog;

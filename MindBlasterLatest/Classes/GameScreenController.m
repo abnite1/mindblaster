@@ -15,6 +15,7 @@
 
 @synthesize background, profilePic, difficultyLabel, feedbackLabel;
 @synthesize sound;
+@synthesize topicTimeCount, topicTimeDisplay;
 
 @synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
@@ -242,6 +243,9 @@
 	
 	[super viewDidLoad];
 	
+	//initialize timecount to 0  //jkehler
+	topicTimeCount = 0;
+	
 	NSLog(@"started viewDidLoad");
 	
 	// initialize feedbackLabel
@@ -352,7 +356,6 @@
 	int picIndex = [UIAppDelegate.currentUser profilePic];
 	[profilePic setImage: [GlobalAdmin getPic: picIndex] forState:0];
 	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
-	
 	
 	[NSTimer scheduledTimerWithTimeInterval: 0.08 target: self
 								   selector:@selector(animateBackground) userInfo: nil repeats: YES];
@@ -576,7 +579,10 @@
  *	it is also where we check for collisions
  */
 -(void) onTimer {
-	
+	//update the time count by adding 'gamePlayTimerInterval' seconds to the current count.  //jkehler
+	topicTimeCount += gamePlayTimerInterval;
+	//write the timer to the screen display;
+	topicTimeDisplay.text = [NSString stringWithFormat:@"%d",(int)topicTimeCount];
 	
 	Bullet *tempBullet;
 	//NSLog(@"ship direction: %@", [ship direction]);
@@ -784,6 +790,8 @@
 
 // decrease lives by one and update the livesLabel
 -(void) decreaseLives {
+	//jkehler
+	
 	if (lives == 0) [self loseScenario];
 	else {
 		lives--;
@@ -1100,9 +1108,33 @@
 	// if the score is higher than the set limit for topic
 	if (score > DIFFICULTY_HARDEST * DIFFICULTY_LIMIT) {
 		
+		//when progress to the next topic, we should save and reset the topicTimeCount (we only save if its better than whats currently stored in the user profile
+		//jkehler
+		NSNumber *temp = [NSNumber numberWithDouble:topicTimeCount];
+		
+		if([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_ADDITION){
+			if([UIAppDelegate.currentUser additionTime] < [temp intValue]){
+				[UIAppDelegate.currentUser setAdditionTime:[temp intValue]];
+			}
+		}else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_SUBTRACTION){
+			if([UIAppDelegate.currentUser subtractionTime] < [temp intValue]){
+				[UIAppDelegate.currentUser setSubtractionTime:[temp intValue]];
+			}
+		}else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION){
+			if([UIAppDelegate.currentUser multiplicationTime] < [temp intValue]){
+				[UIAppDelegate.currentUser setMultiplicationTime:[temp intValue]];
+			}
+		}else{
+			if([UIAppDelegate.currentUser divisionTime] < [temp intValue]){
+				[UIAppDelegate.currentUser setDivisionTime:[temp intValue]];
+			}
+		}
+		topicTimeCount = 0;
+		//[temp release]; MEMORY LEAK
+		
 		// if we haven't yet exhaused all our topics, progress to the next topic
 		if ([UIAppDelegate.currentUser.currentTopic nextTopic]) {
-			
+
 			// update the profile's lastTopicCompleted if this one is higher
 			if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
 				
