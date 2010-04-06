@@ -172,8 +172,12 @@
 // bounce the asteroid off the walls
 -(void) bounceOffBoundaries {
 	
+	// because we're always using the wideview
+	int screenWidth = [[UIScreen mainScreen] bounds].size.height;
+	int screenHeight = [[UIScreen mainScreen] bounds].size.width;
+	
 	// if it hits the side of the screen
-	if( (asteroidIcon.center.x > 480 -asteroidSize.x / 2 && (asteroidDirection.x > 0) )
+	if( (asteroidIcon.center.x > screenWidth -asteroidSize.x / 2 && (asteroidDirection.x > 0) )
 	   || ( asteroidIcon.center.x < (0 +asteroidSize.x / 2)   && (asteroidDirection.x < 0)) )
 	{
 		// invert the x direction
@@ -181,7 +185,7 @@
 	}
 	
 	// if it hits the top or bottom
-	if( (asteroidIcon.center.y > 293 -asteroidSize.y / 2  && asteroidDirection.y > 0)
+	if( (asteroidIcon.center.y > screenHeight -asteroidSize.y / 2  && asteroidDirection.y > 0)
 	   || (  asteroidIcon.center.y < (0 + asteroidSize.y / 2)  && asteroidDirection.y < 0) )
 	{
 		// invert the y direction
@@ -192,8 +196,12 @@
 // asteroids phase to the other side of the screen when they hit the borders
 -(void) phaseToOtherSide {
 	
+	// because we're always using the wide view
+	int screenWidth = [[UIScreen mainScreen] bounds].size.height;
+	int screenHeight = [[UIScreen mainScreen] bounds].size.width;
+	
 	// if it hits the right side of the screen
-	if( asteroidPosition.x  > 470 + asteroidIcon.bounds.size.width ) {
+	if( asteroidPosition.x  > screenWidth + asteroidIcon.bounds.size.width ) {
 		
 		// change the x position to the other side of screen
 		[self setAsteroidPosition: -asteroidIcon.bounds.size.width + 1 : asteroidPosition.y];
@@ -203,11 +211,11 @@
 	if ( asteroidPosition.x < 0 - asteroidIcon.bounds.size.width ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: 470 + asteroidIcon.bounds.size.width - 1 : asteroidPosition.y];	
+		[self setAsteroidPosition: screenWidth + asteroidIcon.bounds.size.width - 1 : asteroidPosition.y];	
 	}
 	
 	// if it hits the upper side of the screen
-	if( asteroidPosition.y  > 320 + asteroidIcon.bounds.size.height ) {
+	if( asteroidPosition.y  > screenHeight + asteroidIcon.bounds.size.height ) {
 		
 		// change the x position to the other side of screen
 		[self setAsteroidPosition: asteroidPosition.x : 0 - asteroidIcon.bounds.size.height + 1 ];
@@ -217,7 +225,7 @@
 	if ( asteroidPosition.y < 0 - asteroidIcon.bounds.size.height ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: asteroidPosition.x : 320 + asteroidIcon.bounds.size.height -1];	
+		[self setAsteroidPosition: asteroidPosition.x : screenHeight + asteroidIcon.bounds.size.height -1];	
 	}
 }
 

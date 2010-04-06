@@ -25,6 +25,7 @@
 #import "MindBlasterAppDelegate.h"
 #import "Sound.h"
 
+
 // this preprocessor directive value is used to set whether unit tests will be executed or not 
 #define UNIT_TESTS_EXECUTED  FALSE
 
@@ -122,6 +123,9 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	//int score;
 	int lives;
 	int shield;
+	
+	// number of asteroids
+	int maxAsteroids;
 	
 	// progress bar
 	UIProgressView *shieldBar;

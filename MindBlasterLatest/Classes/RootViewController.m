@@ -121,6 +121,16 @@
 	[super viewDidAppear:animated];
 	NSLog(@"root view did appear.");
 	[self.navigationController setTitle: @"rootView"];
+	[GlobalAdmin loadSettings];
+	if ([UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser userName] != nil) {
+		NSString * usernameString = [[NSString alloc] initWithFormat: @"Continue [%@]", [UIAppDelegate.currentUser userName]];
+		[continueButton setTitle: usernameString forState: 0];
+		[usernameString release];
+	}
+	else {
+		[continueButton setTitle: @"Continue" forState: 0];
+		continueButton.hidden = YES;
+	}
 	
 }
 

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0738BD5B116A81B400654F1B /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0738BD5A116A81B400654F1B /* Statistics.m */; };
 		07BBE0B71137109E00BAF196 /* BackgroundAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */; };
 		1D3623260D0F684500981E51 /* MindBlasterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MindBlasterAppDelegate.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -35,6 +34,7 @@
 		77D0F06B1163091D00BB8D5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D0F06A1163091D00BB8D5E /* AVFoundation.framework */; };
 		77D49043115EC9CB0000625B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D49042115EC9CB0000625B /* SystemConfiguration.framework */; };
 		77DE5F5E115B3091007922D6 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77DE5F5D115B3091007922D6 /* UserProfile.plist */; };
+		77E4462B116B279C00CDEF9D /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E4462A116B279C00CDEF9D /* Statistics.m */; };
 		77F134CA116614DE005AE813 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F134BA116614DE005AE813 /* Sound.m */; };
 		77F134CB116614DE005AE813 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F134BC116614DE005AE813 /* Bullet.m */; };
 		77F134CC116614DE005AE813 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F134BD116614DE005AE813 /* Topic.m */; };
@@ -77,8 +77,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0738BD59116A81B400654F1B /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
-		0738BD5A116A81B400654F1B /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statistics.m; sourceTree = "<group>"; };
 		07786E21114EDAB00039C9FA /* UnitTesting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTesting-Info.plist"; sourceTree = "<group>"; };
 		07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundAnimation.h; sourceTree = "<group>"; };
 		07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundAnimation.m; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		77D0F06A1163091D00BB8D5E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = iphoneos3.1.2/System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
 		77D49042115EC9CB0000625B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		77DE5F5D115B3091007922D6 /* UserProfile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserProfile.plist; sourceTree = "<group>"; };
+		77E44629116B279C00CDEF9D /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Statistics.h; path = Classes/Statistics.h; sourceTree = "<group>"; };
+		77E4462A116B279C00CDEF9D /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Statistics.m; path = Classes/Statistics.m; sourceTree = "<group>"; };
 		77F134B8116614DE005AE813 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asteroid.h; path = Classes/Asteroid.h; sourceTree = "<group>"; };
 		77F134B9116614DE005AE813 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = Classes/Bullet.h; sourceTree = "<group>"; };
 		77F134BA116614DE005AE813 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sound.m; path = Classes/Sound.m; sourceTree = "<group>"; };
@@ -362,8 +362,8 @@
 				77F134C4116614DE005AE813 /* UserProfile.m */,
 				77F134C7116614DE005AE813 /* Ship.h */,
 				77F134C6116614DE005AE813 /* Ship.m */,
-				0738BD59116A81B400654F1B /* Statistics.h */,
-				0738BD5A116A81B400654F1B /* Statistics.m */,
+				77E44629116B279C00CDEF9D /* Statistics.h */,
+				77E4462A116B279C00CDEF9D /* Statistics.m */,
 			);
 			name = "Game Play Classes";
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 				77F134D2116614DE005AE813 /* Asteroid.m in Sources */,
 				77F134D4116614FC005AE813 /* NetworkController.m in Sources */,
 				77F134DD11661515005AE813 /* main.m in Sources */,
-				0738BD5B116A81B400654F1B /* Statistics.m in Sources */,
+				77E4462B116B279C00CDEF9D /* Statistics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
