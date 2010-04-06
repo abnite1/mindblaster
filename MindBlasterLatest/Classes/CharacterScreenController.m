@@ -119,6 +119,8 @@
 	NSLog(@"charcter view did appear.");
 	[self.navigationController setTitle: @"characterView"];
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

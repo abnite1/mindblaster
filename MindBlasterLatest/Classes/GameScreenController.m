@@ -170,6 +170,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     
 	[super viewDidAppear:animated];
+	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 	iconRotationAngle = 0.0f;
 	
 	NSLog(@"gamescreen view did appear.");

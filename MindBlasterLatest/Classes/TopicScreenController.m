@@ -231,6 +231,8 @@
 	NSLog(@"topic view did appear.");
 	[self.navigationController setTitle: @"topicView"];
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 }
 
 /*

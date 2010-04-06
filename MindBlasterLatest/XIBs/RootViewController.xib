@@ -120,7 +120,7 @@
 					<object class="IBUIButton" id="323730953">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{186, 149}, {101, 37}}</string>
+						<string key="NSFrame">{{185, 148}, {101, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -145,7 +145,7 @@
 					<object class="IBUIButton" id="885148596">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{185, 186}, {106, 37}}</string>
+						<string key="NSFrame">{{185, 181}, {106, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -182,7 +182,7 @@
 					<object class="IBUIButton" id="1055791845">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{186, 111}, {226, 37}}</string>
+						<string key="NSFrame">{{185, 116}, {226, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -190,6 +190,21 @@
 						<reference key="IBUIFont" ref="749358247"/>
 						<string key="IBUITitleShadowOffset">{1, 1}</string>
 						<string key="IBUINormalTitle">Continue</string>
+						<reference key="IBUIHighlightedTitleColor" ref="38790617"/>
+						<reference key="IBUINormalTitleColor" ref="984208107"/>
+						<reference key="IBUINormalTitleShadowColor" ref="234495223"/>
+					</object>
+					<object class="IBUIButton" id="277369420">
+						<reference key="NSNextResponder" ref="855729640"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{185, 217}, {107, 35}}</string>
+						<reference key="NSSuperview" ref="855729640"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIFont" ref="749358247"/>
+						<string key="IBUITitleShadowOffset">{1, 1}</string>
+						<string key="IBUINormalTitle">Stats Online</string>
 						<reference key="IBUIHighlightedTitleColor" ref="38790617"/>
 						<reference key="IBUINormalTitleColor" ref="984208107"/>
 						<reference key="IBUINormalTitleShadowColor" ref="234495223"/>
@@ -295,6 +310,15 @@
 					</object>
 					<int key="connectionID">49</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">webScreen</string>
+						<reference key="source" ref="277369420"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">52</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -333,9 +357,10 @@
 							<reference ref="890084184"/>
 							<reference ref="504022228"/>
 							<reference ref="323730953"/>
+							<reference ref="1055791845"/>
 							<reference ref="885148596"/>
 							<reference ref="627932385"/>
-							<reference ref="1055791845"/>
+							<reference ref="277369420"/>
 						</object>
 						<reference key="parent" ref="282882509"/>
 						<string key="objectName">rootView</string>
@@ -385,6 +410,11 @@
 						<reference key="object" ref="1055791845"/>
 						<reference key="parent" ref="855729640"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">51</int>
+						<reference key="object" ref="277369420"/>
+						<reference key="parent" ref="855729640"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -403,6 +433,7 @@
 					<string>39.CustomClassName</string>
 					<string>39.IBPluginDependency</string>
 					<string>45.IBPluginDependency</string>
+					<string>51.IBPluginDependency</string>
 					<string>6.IBEditorWindowLastContentRect</string>
 					<string>6.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -420,6 +451,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>BackgroundAnimation</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{196, 289}, {480, 320}}</string>
@@ -448,7 +480,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">50</int>
+			<int key="maxID">52</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -472,9 +504,11 @@
 							<string>helpScreen</string>
 							<string>loadGame</string>
 							<string>nextScreen</string>
+							<string>webScreen</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

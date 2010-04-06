@@ -94,11 +94,24 @@
 	else {
 		
 		// Navigation logic may go here -- for example, create and push another view controller.
-		TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle:nil];
-		[self.navigationController pushViewController:topicView animated:YES];
+		TopicScreenController *topicView = [[TopicScreenController alloc] initWithNibName:@"TopicScreenController" bundle: nil];
+		[self.navigationController pushViewController: topicView animated: YES];
 		[topicView release];
 	}	
 
+}
+
+// navigate to web broswer
+- (IBAction) webScreen {
+	
+	// first load user settings from plist
+	[GlobalAdmin loadSettings];
+	
+	// navigate to web browser
+	WebController *webView = [[WebController alloc] initWithNibName:@"WebController" bundle: nil];
+	[self.navigationController pushViewController: webView animated: YES];
+	[webView release];
+	
 }
 
 
@@ -132,6 +145,7 @@
 		continueButton.hidden = YES;
 	}
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
 }
 
 

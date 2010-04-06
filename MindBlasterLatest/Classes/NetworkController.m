@@ -623,11 +623,15 @@
 - (void)viewDidAppear:(BOOL)animated {
     
 	[super viewDidAppear:animated];
+	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
 	NSLog(@"network view did appear.");
 	[self.navigationController setTitle: @"networkView"];
 	
 	// load the current profile
 	[GlobalAdmin loadSettings];
+	
+	
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
