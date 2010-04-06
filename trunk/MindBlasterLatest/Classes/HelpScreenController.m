@@ -75,6 +75,8 @@
 	NSLog(@"help view did appear.");
 	[self.navigationController setTitle: @"helpView"];
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

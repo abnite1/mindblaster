@@ -153,6 +153,8 @@
 	NSLog(@"username view did appear.");
 	[self.navigationController setTitle: @"usernameView"];
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

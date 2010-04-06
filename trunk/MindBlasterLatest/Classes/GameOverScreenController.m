@@ -97,6 +97,8 @@
 	NSLog(@"gameover view did appear.");
 	[self.navigationController setTitle: @"gameOverView"];
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

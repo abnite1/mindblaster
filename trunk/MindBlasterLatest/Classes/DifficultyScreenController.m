@@ -176,6 +176,8 @@
 	NSLog(@"difficulty view did appear.");
 	[self.navigationController setTitle: @"difficultyView"];
 	
+	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
+	
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

@@ -35,6 +35,8 @@
 		77D49043115EC9CB0000625B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D49042115EC9CB0000625B /* SystemConfiguration.framework */; };
 		77DE5F5E115B3091007922D6 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77DE5F5D115B3091007922D6 /* UserProfile.plist */; };
 		77E4462B116B279C00CDEF9D /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E4462A116B279C00CDEF9D /* Statistics.m */; };
+		77E446A0116B34C000CDEF9D /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E4469E116B34C000CDEF9D /* WebController.m */; };
+		77E446A1116B34C000CDEF9D /* WebController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E4469F116B34C000CDEF9D /* WebController.xib */; };
 		77F134CA116614DE005AE813 /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F134BA116614DE005AE813 /* Sound.m */; };
 		77F134CB116614DE005AE813 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F134BC116614DE005AE813 /* Bullet.m */; };
 		77F134CC116614DE005AE813 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F134BD116614DE005AE813 /* Topic.m */; };
@@ -113,6 +115,9 @@
 		77DE5F5D115B3091007922D6 /* UserProfile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserProfile.plist; sourceTree = "<group>"; };
 		77E44629116B279C00CDEF9D /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Statistics.h; path = Classes/Statistics.h; sourceTree = "<group>"; };
 		77E4462A116B279C00CDEF9D /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Statistics.m; path = Classes/Statistics.m; sourceTree = "<group>"; };
+		77E4469D116B34C000CDEF9D /* WebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebController.h; sourceTree = "<group>"; };
+		77E4469E116B34C000CDEF9D /* WebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebController.m; sourceTree = "<group>"; };
+		77E4469F116B34C000CDEF9D /* WebController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WebController.xib; path = Classes/WebController.xib; sourceTree = "<group>"; };
 		77F134B8116614DE005AE813 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Asteroid.h; path = Classes/Asteroid.h; sourceTree = "<group>"; };
 		77F134B9116614DE005AE813 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = Classes/Bullet.h; sourceTree = "<group>"; };
 		77F134BA116614DE005AE813 /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sound.m; path = Classes/Sound.m; sourceTree = "<group>"; };
@@ -213,6 +218,8 @@
 				B4EA94481132074700016680 /* HelpScreenController.m */,
 				07BBE0B51137109E00BAF196 /* BackgroundAnimation.h */,
 				07BBE0B61137109E00BAF196 /* BackgroundAnimation.m */,
+				77E4469D116B34C000CDEF9D /* WebController.h */,
+				77E4469E116B34C000CDEF9D /* WebController.m */,
 			);
 			name = "Screen Controller Classes";
 			path = Classes;
@@ -313,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				77F134EB11661540005AE813 /* GameScreenController.xib */,
+				77E4469F116B34C000CDEF9D /* WebController.xib */,
 				77F134EF11661540005AE813 /* NetworkController.xib */,
 				77F134E811661540005AE813 /* CharacterScreenController.xib */,
 				77F134E911661540005AE813 /* DifficultyScreenController.xib */,
@@ -456,6 +464,7 @@
 				777D449E11672D9A00CA014A /* controller ring3.png in Resources */,
 				7787D61E11689B1200EC2D2D /* explosion.png in Resources */,
 				7787D64311689E3100EC2D2D /* Icon.png in Resources */,
+				77E446A1116B34C000CDEF9D /* WebController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +497,7 @@
 				77F134D4116614FC005AE813 /* NetworkController.m in Sources */,
 				77F134DD11661515005AE813 /* main.m in Sources */,
 				77E4462B116B279C00CDEF9D /* Statistics.m in Sources */,
+				77E446A0116B34C000CDEF9D /* WebController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

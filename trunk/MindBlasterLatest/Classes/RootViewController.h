@@ -17,6 +17,7 @@
 #import "GlobalAdmin.h"
 #import "NetworkController.h"
 #import "MindBlasterAppDelegate.h"
+#import "WebController.h"
 
 @interface RootViewController : UIViewController  {
 	IBOutlet BackgroundAnimation *bgAnimation;
@@ -27,6 +28,7 @@
 - (IBAction) loadGame;
 - (IBAction) helpScreen;
 - (IBAction) continueSelected;
+- (IBAction) webScreen;
 
 
 
