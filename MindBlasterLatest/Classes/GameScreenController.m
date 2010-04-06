@@ -16,6 +16,7 @@
 @synthesize background, profilePic, difficultyLabel, feedbackLabel;
 @synthesize sound;
 @synthesize topicTimeCount, topicTimeDisplay;
+@synthesize animatedExplosion;
 
 @synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
@@ -452,7 +453,7 @@
 	
 	tempBullet.bulletIcon.hidden = NO;
 	[tempBullet rotate: [ship direction]];
-	NSLog(@"angle: %f", [ship direction]);
+	//NSLog(@"angle: %f", [ship direction]);
 	
 	
 	
@@ -937,11 +938,49 @@
 	
 }
 
+// begin explosion animation
+-(void) asteroidExplosionAnimation:(CGPoint)location {
+	/*
+	// define animation images
+	NSMutableArray *myImages = [NSMutableArray arrayWithObjects: 
+						 [UIImage imageNamed:@"expl1.png"], 
+						 [UIImage imageNamed:@"expl2.png"], 
+						 [UIImage imageNamed:@"expl3.png"], 
+						 [UIImage imageNamed:@"expl4.png"], 
+						 [UIImage imageNamed:@"expl5.png"], 
+						 [UIImage imageNamed:@"expl6.png"], 
+						 [UIImage imageNamed:@"expl7.png"], 
+						 [UIImage imageNamed:@"expl8.png"],
+						 [UIImage imageNamed:@"expl9.png"], 
+						 [UIImage imageNamed:@"expl10.png"], 
+						 [UIImage imageNamed:@"expl11.png"], nil];
+	
+	animatedExplosion = [UIImageView alloc];
+	CGRect frame = CGRectMake(location.x, location.y, 40.0, 40.0);
+	[animatedExplosion initWithFrame: frame]; 
+	animatedExplosion.animationImages = myImages; 
+	animatedExplosion.animationDuration = 0.25; // seconds 
+	animatedExplosion.animationRepeatCount = 5; // 0 = loops forever 
+	
+	// start animation
+	NSLog(@"animating explosion");
+	[animatedExplosion startAnimating];
+	
+	// release object
+	[animatedExplosion release]; 
+	 */
+}
+
 // handles the asteroid collision scenarios
 -(void) asteroidCollision: (int) asteroidIndex {
 	
 	// sound an explosion
 	[sound playAsteroidExplosion];
+	
+	// begin explosion animation at current location 
+	
+	//[[asteroids objectAtIndex: asteroidIndex] beginExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
+	[self asteroidExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
 	
 	// if we hit the right asteroid
 	if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
@@ -1040,9 +1079,6 @@
 	NSString *inputString = [[NSString alloc] initWithFormat:@"Score: %d", score ];
 	[scoreLabel setText:inputString];
 	[inputString release];
-	
-	// begin explosion animation at current location
-	[[asteroids objectAtIndex: index] beginExplosionAnimation: [[asteroids objectAtIndex: index] asteroidPosition]];
 	
 	// update the location of the asteroid to a random point on the screen
 	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];

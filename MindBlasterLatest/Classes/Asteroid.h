@@ -38,6 +38,7 @@ static const float ROTATION_COEFFICIENT = 0.07;
 	CGPoint				asteroidPosition;				// position of the asteroid
 //	IBOutlet			UIImageView *asteroidIcon;		// UIImage of the asteroid
 	UIImageView			*asteroidIcon;
+	UIImageView			*animatedExplosion;				// the animation of an explosion when an asteroid gets hit
 	IBOutlet UILabel	*asteroidLabel;		// label correct/incorret answers
 	CGPoint				asteroidSize;
 	int					asteroidSpeed;
@@ -50,7 +51,8 @@ static const float ROTATION_COEFFICIENT = 0.07;
 @property (nonatomic) CGPoint					asteroidPosition;
 @property (nonatomic) CGPoint					asteroidDirection;
 //@property (nonatomic,retain) IBOutlet UIImageView *asteroidIcon;
-@property (nonatomic,retain) UIImageView		*asteroidIcon;
+@property (nonatomic, retain) UIImageView		*asteroidIcon;
+@property (nonatomic, retain) UIImageView		*animatedExplosion;
 @property (nonatomic,retain) IBOutlet UILabel	*asteroidLabel;
 
 -(id) initWithElements:(UIImageView*)icon :(UILabel*)label;

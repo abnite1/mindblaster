@@ -114,6 +114,8 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	IBOutlet UILabel *solutionLabel4;
 	IBOutlet UILabel *solutionLabel5;
 	
+	IBOutlet UIImageView *animatedExplosion;
+	
 	// and one array to bind them
 	NSMutableArray *solutionLabels;
 	
@@ -136,6 +138,8 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 }
 @property (nonatomic) double topicTimeCount;
 @property (nonatomic, retain) IBOutlet UILabel *topicTimeDisplay;
+
+@property (nonatomic, retain) IBOutlet UIImageView *animatedExplosion;
 
 @property (nonatomic,retain) IBOutlet BackgroundAnimation *background;
 @property (nonatomic, retain) Sound *sound;
@@ -213,6 +217,7 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 -(void) initSound;
 -(void) beginFeedbackAnimation;
 -(void) beginShieldAnimation;
+-(void) asteroidExplosionAnimation:(CGPoint)location;
 
 
 //unit tests

@@ -13,7 +13,7 @@
 
 @implementation Asteroid
 
-@synthesize asteroidType,asteroidDirection, asteroidIcon, asteroidLabel, asteroidPosition, asteroidSize, asteroidSpeed;
+@synthesize asteroidType,asteroidDirection, asteroidIcon, asteroidLabel, asteroidPosition, asteroidSize, asteroidSpeed, animatedExplosion;
 
 // constructor with copied icons and labels
 - (id)initWithElements:(UIImageView*)icon :(UILabel*)label {
@@ -63,6 +63,8 @@
 
 // begin an explosion animation at this location
 -(void) beginExplosionAnimation: (CGPoint)location {
+	
+	
 	
 }
 
