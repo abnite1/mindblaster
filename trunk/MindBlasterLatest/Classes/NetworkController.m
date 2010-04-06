@@ -32,10 +32,10 @@
 @synthesize fileStreamIn, fileStreamOut;
 @synthesize fileStreamIn, fileStreamOut, networkStreamIn, networkStreamOut; 
 @synthesize connection;
-@synthesize statusLabel;
+@synthesize statusLabel, titleLabel;
 @synthesize activityIndicator, emailDown, emailUp;
 @synthesize webView;
-@synthesize uploadButton, downloadButton;
+@synthesize uploadButton, downloadButton, backButton, helpButton;
 
 
 #pragma mark * Status management
@@ -126,90 +126,198 @@
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
+// checks if a current profile exists and warns the user that it's about to be lost before continuing.
+-(IBAction) downloadRequestAlert {
+	
+	NSLog(@"download requested");
+	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle: @"Alert!"
+													 message: @"If you continue, your current profile will be lost. \n Do you wish to continue?"
+													delegate: self
+										   cancelButtonTitle: @"Cancel"
+										   otherButtonTitles: @"Continue", nil] autorelease];
+	[self disableButtons];
+	[alert show];
+}
+
+// responds to alert option chosen
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	
+	if (buttonIndex == 0) {
+		
+		NSLog(@"user chose to cancel");
+		[self enableButtons];
+		emailDown.text = @"";
+		emailDown.hidden = YES;
+		statusLabel.text = @"";
+		
+	}
+	if (buttonIndex == 1) {
+		
+		NSLog(@"user chose to continue");
+		[self disableButtons];
+		activityIndicator.hidden = NO;
+		[activityIndicator startAnimating];
+		connectionType = DOWNLOAD;
+		
+		if ( [self getEmailFromHiddenField]) {
+			
+			[UIAppDelegate.currentUser setEmail: emailDown.text];
+			[statusLabel setText: @""];
+			
+			// disable all buttons
+			[self disableButtons];
+			
+			// start processing download
+			[self download];
+			
+			// no longer necessary
+			//[self updateDBDownload];
+		}
+		else
+			[statusLabel setText: @"Must enter email."];
+	}
+}
+
+// disables and hides all buttons
+-(void) disableButtons {
+	
+	titleLabel.hidden = YES;
+	[emailDown setEnabled: NO];
+	emailDown.hidden = YES;
+	[downloadButton setEnabled: NO];
+	downloadButton.hidden = YES;
+	[uploadButton setEnabled: NO];
+	uploadButton.hidden = YES;
+	[backButton setEnabled: NO];
+	backButton.hidden = YES;
+	[helpButton setEnabled: NO];
+	helpButton.hidden = YES;
+}
+
+// enables all buttons and sets them visible
+-(void) enableButtons {
+	
+	titleLabel.hidden = NO;
+	[emailDown setEnabled: YES];
+	emailDown.hidden = NO;
+	[downloadButton setEnabled: YES];
+	downloadButton.hidden = NO;
+	[uploadButton setEnabled: YES];
+	uploadButton.hidden = NO;
+	[backButton setEnabled: YES];
+	backButton.hidden = NO;
+	[helpButton setEnabled: YES];
+	helpButton.hidden = NO;
+}
+
+
 // user pressed the download button
 // get their email before progressing
 -(IBAction) downloadRequested {
 	
-	connectionType = DOWNLOAD;
-	
-	if ( [self getEmailFromHiddenField]) {
+	// if email hasn't been entered yet, or is empty, raise alert.
+	if (emailDown.text == nil || emailDown.text == @""){
 		
-		[UIAppDelegate.currentUser setEmail: emailDown.text];
+		[self downloadRequestAlert];
+	}
+	else {
+		
+		connectionType = DOWNLOAD;
 		[statusLabel setText: @""];
-		[emailDown setEnabled: NO];
-		emailDown.hidden = YES;
-
+		
+		[self disableButtons];
+		if (![activityIndicator isAnimating]) [activityIndicator startAnimating];
+		NSLog(@"starting download 228");
+		
 		[self download];
 		
-		// no longer necessary
-		//[self updateDBDownload];
 	}
-	else
-		[statusLabel setText: @"Must enter email."];
+
 }
 
+
+
 // user pressed the upload button
-// get their email before progressing
+// get their email before progressing, either from profile or from text box.
+-(IBAction) uploadRequestedInitialAction {
+	
+	// if the current email isn't empty or nil
+	if ( [UIAppDelegate.currentUser email] != nil) { 
+		
+		emailUp.hidden = NO;
+		[emailUp setEnabled: YES];
+		emailUp.text = [UIAppDelegate.currentUser email];
+		// start processing
+		[self uploadRequested];
+	}
+
+}
+
+// we have the email, get the rest done.
 -(IBAction) uploadRequested {
 	
-	connectionType = UPLOAD;
-	
-	if ( [self getEmailFromHiddenField]) {
+	// if email hasn't been entered do nothing
+	if (emailUp.text == nil || [emailUp.text isEqual: @""]) {
 		
-		[UIAppDelegate.currentUser setEmail: emailUp.text];
-		[statusLabel setText: @""];
-		[emailUp setEnabled: NO];
-		emailUp.hidden = YES;
+		// do nothing
+	}
+	
+	// otherwise check if folder exists, and if it does, write to it.
+	else {
+	
+		if (![activityIndicator isAnimating]) {
+			
+			activityIndicator.hidden = NO;
+			[activityIndicator startAnimating];
+		}
+		connectionType = UPLOAD;
 
+		
 		// attach the email as the url parameter
 		NSString *urlWithEmail = [[NSString alloc] initWithFormat: @"%@%@", 
-								  [GlobalAdmin getUploadFolderCheckURL], emailUp.text];
+							  [GlobalAdmin getUploadFolderCheckURL], emailUp.text];
 		NSLog(@"%@", urlWithEmail);
-		
+	
 		NSURL *url = [NSURL URLWithString: urlWithEmail];
 		[urlWithEmail release];
 		NSURLRequest *request = [NSURLRequest requestWithURL: url];
-		
+	
 		// load the url and parse the reponse to see if folder was created so we can write to it.
 		NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self startImmediately: YES];
-		
+	
 		if (urlConnection ){
 			NSLog(@"upload folder check URL connected.");
 		}
 		else {
 			NSLog(@"upload folder check URL failed to connect.");
 		}
-		
+	
 		NSError *fcError;
 		NSURLResponse *fcResponse;
-		
+	
 		// get response
 		NSData *fcData = [NSURLConnection sendSynchronousRequest: request
-						returningResponse: &fcResponse error: &fcError];
-		
+											   returningResponse: &fcResponse error: &fcError];
+	
 		// response positive => folder created. write to it.
 		if ([self parseFolderCheckResponse: fcData]) {
-			
+		
 			NSLog(@"folder created.");
 			//[activityIndicator startAnimating];
 			[self upload];
 		}
 		// response negative => folder not created. fail.
 		else {
-			
+		
 			NSLog(@"failed to create folder.");
 			[statusLabel setText: @"Error while uploading, try again."];
-			
-		}
 		
+		}
+	
 		// release connection
 		NSLog(@"before urlConnection release in uploadrequested");
 		[urlConnection release];
-		
 	}
-	// user didn't enter email.
-	else
-		[statusLabel setText: @"Must enter email."];
 }
 
 // check response of folder check URL
@@ -423,6 +531,15 @@
         } break;
         case NSStreamEventErrorOccurred: {
 			NSLog(@"stream event error encountered");
+			// stop in-progress animation
+			[activityIndicator stopAnimating];
+			
+			// enable buttons
+			[downloadButton setEnabled: YES];
+			[uploadButton setEnabled: YES];
+			[helpButton setEnabled: YES];
+			[backButton setEnabled: YES];
+			
 			[self failedConnectionResponse];
             [self _stopSendWithStatus:@"Stream open error"];
         } break;
@@ -496,11 +613,9 @@
 
 // delegate function that runs whenever view appears (when returning from subview, etc.)
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+   
+	[super viewWillAppear:animated];
 	
-	//self.activityIndicator.hidden = NO;
-    //self.usernameText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
-    //self.passwordText.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
 }
 
 
@@ -511,6 +626,8 @@
 	NSLog(@"network view did appear.");
 	[self.navigationController setTitle: @"networkView"];
 	
+	// load the current profile
+	[GlobalAdmin loadSettings];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -609,6 +726,11 @@
 	self.statusLabel.text = @"Download Complete.";
 	activityIndicator.hidden = NO;
 	[activityIndicator stopAnimating];
+	
+	[self enableButtons];
+	emailDown.text = @"";
+	emailDown.hidden = YES;
+	
 	[UIAppDelegate didStartNetworking];
 	
 	NSLog(@"finished download");
@@ -649,6 +771,13 @@
 	
 		// update UI indicators
 		self.statusLabel.text = @"Upload Started.";
+		if (![activityIndicator isAnimating]) {
+			
+			activityIndicator.hidden = NO;
+			[activityIndicator startAnimating];
+		}
+		[self disableButtons];
+		emailUp.hidden = YES;
 		//self.activityIndicator.hidden = NO;
 		//[self.activityIndicator startAnimating];
 	
@@ -687,8 +816,16 @@
 -(void)uploadComplete {
 	
 	self.statusLabel.text = @"Upload Complete.";
+	[self enableButtons];
+	emailUp.hidden = YES;
+	emailDown.hidden = YES;
 	
 	NSLog(@"upload complete.");
+	[backButton setEnabled: YES];
+	[helpButton setEnabled: YES];
+	[downloadButton setEnabled: YES];
+	[uploadButton setEnabled: YES];
+	
 	[activityIndicator stopAnimating];
 	//activityIndicator.hidden = YES;
 	
@@ -732,10 +869,18 @@
 
 // plays an inside click when hitting email or name text edit panes
 -(IBAction) playClick {
+
+	//NSLog(@"starting indicator");
 	
-	NSLog(@"starting indicator");
-	activityIndicator.hidden = NO;
-	[activityIndicator startAnimating];
+	//activityIndicator.hidden = NO;
+	//[activityIndicator startAnimating];
+	
+	// disable buttons while processing request
+	[downloadButton setEnabled: NO];
+	[uploadButton setEnabled: NO];
+	[backButton setEnabled: NO];
+	[helpButton setEnabled: NO];
+
 	
 	// play inside click
 	[MindBlasterAppDelegate playInsideClick];

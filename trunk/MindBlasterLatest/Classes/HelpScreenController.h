@@ -21,8 +21,10 @@
 
 @interface HelpScreenController : UIViewController {
 	IBOutlet UITextView *text;
+	IBOutlet UILabel *titleLabel;
 }
 @property (nonatomic, retain) IBOutlet UITextView *text;
+@property (nonatomic, retain) IBOutlet UILabel * titleLabel;
 
 - (IBAction) backScreen;
 - (IBAction) quit;

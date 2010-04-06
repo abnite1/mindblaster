@@ -16,6 +16,7 @@
 #import "CharacterScreenController.h"
 #import "GlobalAdmin.h"
 #import "NetworkController.h"
+#import "MindBlasterAppDelegate.h"
 
 @interface RootViewController : UIViewController  {
 	IBOutlet BackgroundAnimation *bgAnimation;

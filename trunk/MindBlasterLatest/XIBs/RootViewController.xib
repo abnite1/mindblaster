@@ -58,7 +58,7 @@
 					<object class="IBUIImageView" id="627932385">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-221, -248}, {1380, 702}}</string>
+						<string key="NSFrame">{{-260, -249}, {1380, 702}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -124,7 +124,6 @@
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<object class="NSFont" key="IBUIFont" id="749358247">
 							<string key="NSName">Helvetica-Bold</string>
@@ -150,7 +149,6 @@
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="749358247"/>
 						<string key="IBUITitleShadowOffset">{1, 1}</string>
@@ -184,11 +182,10 @@
 					<object class="IBUIButton" id="1055791845">
 						<reference key="NSNextResponder" ref="855729640"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{195, 111}, {85, 37}}</string>
+						<string key="NSFrame">{{186, 111}, {226, 37}}</string>
 						<reference key="NSSuperview" ref="855729640"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="749358247"/>
 						<string key="IBUITitleShadowOffset">{1, 1}</string>
@@ -337,8 +334,8 @@
 							<reference ref="504022228"/>
 							<reference ref="323730953"/>
 							<reference ref="885148596"/>
-							<reference ref="1055791845"/>
 							<reference ref="627932385"/>
+							<reference ref="1055791845"/>
 						</object>
 						<reference key="parent" ref="282882509"/>
 						<string key="objectName">rootView</string>
@@ -451,7 +448,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -513,7 +510,7 @@
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.LastKnownRelativeProjectPath">MindBlaster.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../MindBlaster.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.1</string>
 	</data>

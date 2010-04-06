@@ -170,7 +170,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     
 	[super viewDidAppear:animated];
-	
 	iconRotationAngle = 0.0f;
 	
 	NSLog(@"gamescreen view did appear.");
@@ -268,10 +267,10 @@
 	
 	gamePlayTimerInterval = 0.03;
 	
+	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
 					 asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,nil];
 	[asteroidIcons retain];
-	NSLog(@"allocated asteroidIcons");
 	
 	solutionLabels  = [[NSMutableArray alloc] initWithObjects: solutionLabel0, solutionLabel1, solutionLabel2, 
 					   solutionLabel3, solutionLabel4, solutionLabel5, nil];
@@ -293,9 +292,10 @@
 	[self updateShieldTo: 3];
 	
 	// initialize size of shield frame to 1.3 of its original size
+	// because we want the shield to lose .1 of its size on each hit and multiplication is safer than division.
+	// so we start at 1.3 and go down to the original size (that being * 1.0).
 	shieldBarMultiplier = 1.3;
 
-	
 	
 	// initialize lives
 	[self updateLivesTo: 3];
@@ -320,13 +320,12 @@
 			NSLog(@"allocating non labled asteroids");
 			asteroid = [[Asteroid alloc] init];
 			[asteroid setAsteroidIcon: [asteroidIcons objectAtIndex: i]];
-			[asteroid setAsteroidSize: CGPointMake(ASTEROID_SIZE_X,ASTEROID_SIZE_Y)];
+			[asteroid setAsteroidSize: CGPointMake([[asteroidIcons objectAtIndex: i] bounds].size.width,
+												   [[asteroidIcons objectAtIndex: i] bounds].size.height)];
 			[asteroids addObject: asteroid];
 			[asteroid release];
 		}
 	}
-	
-	
 	
 	// check their position (debug)
 	/*
@@ -710,13 +709,13 @@
 		shipHeight = ship.shipIcon.image.size.height;
 	}
 	
-	
+	// asteroid did collide with the ship
 	if(  ((as.asteroidPosition.x < shipShield.center.x + shipWidth / 2 ) 
 		  && (as.asteroidPosition.x > shipShield.center.x - shipWidth / 2))
 	   && ((as.asteroidPosition.y < shipShield.center.y + shipHeight / 2) 
 		   && (as.asteroidPosition.y > shipShield.center.y - shipHeight / 2)) ) {
 		
-		// set the asteroid somewhere off screen
+		// so set the asteroid somewhere off screen
 		[as setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
 		
 		// decrease the shield by a third of its power

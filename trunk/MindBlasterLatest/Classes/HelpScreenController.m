@@ -3,7 +3,8 @@
 //  MindBlaster
 //
 //  Created by Steven Verner on 2/21/10.
-//  Modified by Yaniv Haramati on 3/28/10 to respond to each parent-screen individually.
+//  Modified by Yaniv Haramati on 3/28/10 to respond to each screen individually with a respondToScreenname function.
+//  Help scripts added by John Kehler.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -11,7 +12,7 @@
 
 
 @implementation HelpScreenController
-@synthesize text;
+@synthesize text, titleLabel;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -25,27 +26,35 @@
 	NSString *parent = [self.navigationController title];
 	
 	if ([parent isEqualToString: @"rootView"]) {
+		[titleLabel setText: @"Main Menu"];
 		[self respondToRoot];
 	}
 	else if ([parent isEqualToString: @"topicView"]) {
+		[titleLabel setText: @"Topic Selection Menu"];
 		[self respondToTopic];
 	}
 	else if ([parent isEqualToString: @"characterView"]) {
+		[titleLabel setText: @"Character Selection Menu"];
 		[self respondToCharacter];
 	}
 	else if ([parent isEqualToString: @"difficultyView"]) {
+		[titleLabel setText: @"Difficulty Selection Menu"];
 		[self respondToDifficulty];
 	}
 	else if ([parent isEqualToString: @"usernameView"]) {
+		[titleLabel setText: @"User Name Selection Menu"];
 		[self respondToUsername];
 	}
 	else if ([parent isEqualToString: @"networkView"]) {
+		[titleLabel setText: @"Load/Save Game Menu"];
 		[self respondToNetwork];
 	}
 	else if ([parent isEqualToString: @"gameScreenView"]) {
+		[titleLabel setText: @"Game Screen"];
 		[self respondToGameScreen];
 	}
 	else if ([parent isEqualToString: @"gameOverView"]) {
+		[titleLabel setText: @"Gameover Menu"];
 		[self respondToGameOver];
 	}
 	
@@ -116,80 +125,82 @@
 // change label to respond to parent
 -(void) respondToRoot {
  
-	[text setText: @"INTRO SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 	 
-					 "New Game -	Create a new account and start a new game\n\n"
+					 "[Continue] (with existing profile).\n\n"
 	 
-					 "Load Game -	Load existing account and game"];
+					 "[New Game] -	Create a new profile and start a new game.\n\n"
+	 
+					 "[Load Game] -	Load or a save your profile online."];
 }
 
 // change label to respond to parent
 -(void) respondToTopic {
-	[text setText: @"TOPIC SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 	 
-					"Touch the symbol of the topic you want to practice here:\n\n"
+					"Choose a topic by touching any of the available options then press OK to continue.\n\n"
 	 
-					"+		- addition\n"
-					"-		- subtrction\n"
-					"x		- multiplication\n"
-					"/		- division\n\n"
+					"[+]		Addition\n"
+					"[-]		Subtrction\n"
+					"[x]		Multiplication\n"
+					"[/]		Division\n\n"
 	 
-					"OK - Play the topic you chose\n"
-					"BACK - Go back and choose another name/email"];
+					"[OK] - Continue to the next menu.\n"
+					"[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToCharacter {
-	[text setText: @"CHARACTER SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 	 
-					"Touch the character you wish to be\n\n"
+					"Select your profile character by touching any of the available pictures.\n\n"
 	 
-					"BACK - Go back to the intro screen"];
+					"[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToDifficulty {
-	[text setText: @"DIFFICULTY SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 					
-					"Touch the button of the difficulty you will play\n\n"
+					"Select a difficulty by touching any of the available options then press OK to continue. \n\n"
 					
-					"EASIEST	- the questions only have numbers between 0 and 10\n\n"
+					"[EASIEST]	- Operand range between 0 and 10.\n\n"
 	 
-					"EASY		- the questions only have numbers between 0 and 20\n\n"
+					"[EASY]		- Operand range between 0 and 20.\n\n"
 	 
-					"HARD		- the questions only have numbers between 0 and 30\n\n"
+					"[HARD]		- Operand range between 0 and 30.\n\n"
 	 
-					"HARDEST	- the questions only have numbers between 0 and 40\n\n"
+					"[HARDEST]	- Operand range between 0 and 40.\n\n"
 	 
-					"OK - Play the difficulty you chose\n"
-					"BACK - Go back and change you topic you chose"];
+					"[OK] - Continue to the next menu.\n"
+					"[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToUsername {
-	[text setText: @"USERNAME SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 					
-					"Touch the empty boxes to type in your name and email address\n\n"
+					"Touch the empty text boxes to enter your profile name and email then press OK to continue.\n\n"
 	 
-					"OK - continue and use the name and email you typed in\n\n"
-	 
-					"BACK - Go back and choose another profile picture"];
+					"[OK] - Continue to the next menu.\n"
+					
+					"[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToNetwork {
-	[text setText: @"LOADGAME SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 	 
-	 			"UPLOAD		- Save your progress to the website (to keep it safe, or to download it to your friends iPhone)\n\n"
+	 			"[UPLOAD]		- Save your progress to the website.\n\n"
 	 
-	 "DOWNLOAD	- Get your profile from the website (NOTE: the current profile on this iPhone will be lost)\n\n"
+				"[DOWNLOAD]	- Get your profile from the website. \n\n"
 	 
-	 "BACK - Go back to the intro screen"];
+				"[BACK] - Return to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToGameScreen {
-	[text setText: @"GAMESCREEN HELP\n\n"
+	[text setText: @"\n\n"
 	 
 					"----- SCREEN LAYOUT -----\n\n"
 	 
@@ -221,11 +232,11 @@
 
 // change label to respond to parent
 -(void) respondToGameOver {
-	[text setText: @"GAMEOVER SCREEN HELP\n\n"
+	[text setText: @"\n\n"
 	
-					"TRY AGAIN		- play the game again from the last topic and difficulty you achieved\n"
-					"CHANGE TOPIC	- go to the topic screen and choose another topic to play\n"
-					"MAIN MENU		- go back to the intro screen"];
+					"[TRY AGAIN]		- Returns to the game, just where you left off with full lives and shield.\n"
+					"[CHANGE TOPIC]	- Go to the topic selection menu and choose another topic.\n"
+					"[MAIN MENU]		- Go back to the main menu"];
 }
 
 

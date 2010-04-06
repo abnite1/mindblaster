@@ -30,7 +30,7 @@ enum {
     kSendBufferSize = 32768
 };
 
-@interface NetworkController : UIViewController {
+@interface NetworkController : UIViewController <UIAlertViewDelegate>{
 
     
 	// for upload	
@@ -54,7 +54,10 @@ enum {
 	IBOutlet UIWebView *				webView;
 	IBOutlet UIButton *					uploadButton;
 	IBOutlet UIButton *					downloadButton;
+	IBOutlet UIButton *					backButton;
+	IBOutlet UIButton *					helpButton;
 	
+	IBOutlet UILabel *					titleLabel;
 	IBOutlet UITextField *				emailDown;
 	IBOutlet UITextField *				emailUp;
 	int									connectionType;
@@ -63,6 +66,7 @@ enum {
 
 
 @property (nonatomic, retain) IBOutlet UILabel *					statusLabel;
+@property (nonatomic, retain) IBOutlet UILabel *					titleLabel;
 @property (nonatomic, retain) IBOutlet UIWebView *					webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *	activityIndicator;
 @property (nonatomic, retain) NSInputStream *						networkStreamIn;
@@ -70,9 +74,15 @@ enum {
 @property (nonatomic, retain) NSInputStream *						fileStreamIn;
 @property (nonatomic, retain) NSOutputStream *						fileStreamOut;
 @property (nonatomic, retain) NSURLConnection *						connection;
+
+
+// buttons
 @property (nonatomic, retain) IBOutlet UIButton *					uploadButton;
 @property (nonatomic, retain) IBOutlet UIButton *					downloadButton;
+@property (nonatomic, retain) IBOutlet UIButton *					backButton;
+@property (nonatomic, retain) IBOutlet UIButton *					helpButton;
 
+// text fields
 @property (nonatomic, retain) IBOutlet UITextField *				emailDown;
 @property (nonatomic, retain) IBOutlet UITextField *				emailUp;
 
@@ -91,12 +101,16 @@ enum {
 - (BOOL) connectedToNetwork;
 - (BOOL) getEmailFromHiddenField;
 -(IBAction) downloadRequested;
+-(IBAction) uploadRequestedInitialAction;
 -(IBAction) uploadRequested;
 -(IBAction) playClick;
 -(NSString*) emailToMD5: (NSString*) email;
 -(BOOL) parseFolderCheckResponse: (NSData*)data;
 -(IBAction)startIndicator;
 -(void)uploadComplete;
+-(IBAction) downloadRequestAlert;
+-(void) disableButtons;
+-(void) enableButtons;
 
 
 
