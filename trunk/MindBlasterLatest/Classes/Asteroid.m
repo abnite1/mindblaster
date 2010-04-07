@@ -202,32 +202,32 @@
 	int screenWidth = [[UIScreen mainScreen] bounds].size.height;
 	int screenHeight = [[UIScreen mainScreen] bounds].size.width;
 	
-	// if it hits the right side of the screen
-	if( asteroidPosition.x  > screenWidth + asteroidIcon.bounds.size.width ) {
+	// if it hits the right side of the screen //jkehler
+	if( asteroidPosition.x  > screenWidth /*+ asteroidIcon.bounds.size.width*/ ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: -asteroidIcon.bounds.size.width + 1 : asteroidPosition.y];
+		[self setAsteroidPosition: /*-asteroidIcon.bounds.size.width +*/ 1 : asteroidPosition.y];
 	}
 	
 	// if it hits the left side of the screen
-	if ( asteroidPosition.x < 0 - asteroidIcon.bounds.size.width ) {
+	if ( asteroidPosition.x < 0 /*- asteroidIcon.bounds.size.width*/ ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: screenWidth + asteroidIcon.bounds.size.width - 1 : asteroidPosition.y];	
+		[self setAsteroidPosition: screenWidth /*+ asteroidIcon.bounds.size.width - 1*/ : asteroidPosition.y];	
 	}
 	
 	// if it hits the upper side of the screen
-	if( asteroidPosition.y  > screenHeight + asteroidIcon.bounds.size.height ) {
+	if( asteroidPosition.y  > screenHeight /*+ asteroidIcon.bounds.size.height*/ ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: asteroidPosition.x : 0 - asteroidIcon.bounds.size.height + 1 ];
+		[self setAsteroidPosition: asteroidPosition.x : 0 /*- asteroidIcon.bounds.size.height + 1*/ ];
 	}
 	
 	// if it hits the bottom side of the screen
-	if ( asteroidPosition.y < 0 - asteroidIcon.bounds.size.height ) {
+	if ( asteroidPosition.y < 0 /*- asteroidIcon.bounds.size.height*/ ) {
 		
 		// change the x position to the other side of screen
-		[self setAsteroidPosition: asteroidPosition.x : screenHeight + asteroidIcon.bounds.size.height -1];	
+		[self setAsteroidPosition: asteroidPosition.x : screenHeight /*+ asteroidIcon.bounds.size.height -1*/];	
 	}
 }
 

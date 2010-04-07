@@ -143,6 +143,8 @@
 	else {
 		[continueButton setTitle: @"Continue" forState: 0];
 		continueButton.hidden = YES;
+		//we should also implement a basic user profile, so it won't crash if we try and upload now.
+		[GlobalAdmin initProfile];
 	}
 	
 	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
