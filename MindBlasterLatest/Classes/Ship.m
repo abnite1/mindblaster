@@ -16,6 +16,9 @@
 -(void)setIcon:(UIImageView*)icon {
 	shipIcon = icon;
 	direction = 0.0f;
+	pos.x = icon.center.x;
+	pos.y = icon.center.y;
+
 }
 
 -(void)setIconUnitTest:(UIImageView*)icon {
@@ -23,7 +26,7 @@
 	if (icon == nil)
 		NSLog(@"UNIT TEST FAILED; class: Ship; function: setIcon; unit test passed a nil UIImage for icon");
 	else
-		[self setIcon:icon];
+		[self setIcon: icon];
 	
 	if(shipIcon == nil  && icon != nil)
 	{

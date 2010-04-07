@@ -86,10 +86,11 @@
 
 
 // change asteroid direction
--(void)setAsteroidDirection:(int)x :(int)y;
-{
+-(void)setAsteroidDirection:(int)x :(int)y {
+	
 	asteroidDirection = CGPointMake(x,y);
 }
+
 -(void)setAsteroidDirectionUnitTest{
 	
 	BOOL unitTestPassed =TRUE;
@@ -110,9 +111,9 @@
 	if(unitTestPassed == TRUE)
 		NSLog(@"UNIT TEST PASSED; class: Asteroid; function setAsteroidDirection");
 }
+
 // change position of all asteroid elements to a specified point
--(void)setAsteroidPosition:(int)x :(int)y;
-{
+-(void)setAsteroidPosition:(int)x :(int)y {
 	CGPoint newPosition = CGPointMake(x,y);
 	
 	// set position

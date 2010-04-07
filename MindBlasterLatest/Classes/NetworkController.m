@@ -229,6 +229,7 @@
 		if (![activityIndicator isAnimating]) [activityIndicator startAnimating];
 		NSLog(@"starting download 228");
 		
+		
 		[self download];
 		
 	}
@@ -242,13 +243,16 @@
 -(IBAction) uploadRequestedInitialAction {
 	
 	// if the current email isn't empty or nil
-	if ( [UIAppDelegate.currentUser email] != nil) { 
+	if ( [UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser email] != nil) { 
 		
 		emailUp.hidden = NO;
 		[emailUp setEnabled: YES];
 		emailUp.text = [UIAppDelegate.currentUser email];
 		// start processing
 		[self uploadRequested];
+	}
+	else {
+		statusLabel.text = @"There is no profile to upload.";
 	}
 
 }
@@ -880,10 +884,10 @@
 	//[activityIndicator startAnimating];
 	
 	// disable buttons while processing request
-	[downloadButton setEnabled: NO];
-	[uploadButton setEnabled: NO];
-	[backButton setEnabled: NO];
-	[helpButton setEnabled: NO];
+	//[downloadButton setEnabled: NO];
+	//[uploadButton setEnabled: NO];
+	//[backButton setEnabled: NO];
+	//[helpButton setEnabled: NO];
 
 	
 	// play inside click

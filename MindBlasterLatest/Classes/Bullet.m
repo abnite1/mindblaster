@@ -55,6 +55,7 @@
 
 }
 -(void) moveUnitTest {
+	
 	[self move];
 	CGPoint tempBulletPoint = bulletIcon.center ;
 
