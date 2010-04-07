@@ -785,6 +785,14 @@
 	[self beginShieldAnimation];
 }
 
+// increase the shield by a third of its power, if it is full, do nothing.
+-(void) increaseShield {
+	
+	if (shield != 3) {
+		[self updateShieldTo: shield + 1];
+	}
+}
+
 -(void) decreaseShieldUnitTest {
 	int tempShield = shield;
 	[self decreaseShield];
@@ -796,13 +804,19 @@
 
 // decrease lives by one and update the livesLabel
 -(void) decreaseLives {
-	//jkehler
 	
 	if (lives == 0) [self loseScenario];
 	else {
 		lives--;
 		[self updateLivesTo: lives];
 	}
+}
+
+// increase lives by one and update livesLabel
+-(void) increaseLives {
+	
+	lives++;
+	[self updateLivesTo: lives];
 }
 
 -(void) decreaseLivesUnitTest {
@@ -1007,6 +1021,8 @@
 -(void) hitCorrectAsteroid: (int) index {
 	
 	NSLog(@"hit correct asteroid.");
+	
+	[self increaseShield];
 	int score = [UIAppDelegate.currentUser.score score];
 	//update stats
 	[[UIAppDelegate.currentUser stats] setCorrectHits:[[UIAppDelegate.currentUser stats] correctHits] + 1]; //jkehler
@@ -1155,33 +1171,44 @@
 	// if the score is higher than the set limit for topic
 	if (score > DIFFICULTY_HARDEST * DIFFICULTY_LIMIT) {
 		
-		//when progress to the next topic, we should save and reset the topicTimeCount (we only save if its better than whats currently stored in the user profile
+		// when progressing to the next topic, we should save and reset the topicTimeCount 
+		// (we only save if its better than whats currently stored in the user profile
 		//jkehler
-		NSNumber *temp = [NSNumber numberWithDouble:topicTimeCount];
+		NSNumber *temp = [NSNumber numberWithDouble: topicTimeCount];
 		
-		if([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_ADDITION){
-			if([[UIAppDelegate.currentUser stats] additionTime] < [temp intValue]){
-				[[UIAppDelegate.currentUser stats] setAdditionTime:[temp intValue]];
-			}
-		}else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_SUBTRACTION){
-			if([[UIAppDelegate.currentUser stats] subtractionTime]< [temp intValue]){
-				[[UIAppDelegate.currentUser stats] setSubtractionTime:[temp intValue]];
-			}
-		}else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION){
-			if([[UIAppDelegate.currentUser stats] multiplicationTime] < [temp intValue]){
-				[[UIAppDelegate.currentUser stats] setMultiplicationTime:[temp intValue]];
-			}
-		}else{
-			if([[UIAppDelegate.currentUser stats] divisionTime]< [temp intValue]){
-				[[UIAppDelegate.currentUser stats] setDivisionTime:[temp intValue]];
-			}
+		if([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_ADDITION &&
+		   [[UIAppDelegate.currentUser stats] additionTime] < [temp intValue]) {
+			
+			[[UIAppDelegate.currentUser stats] setAdditionTime: [temp intValue]];
 		}
+		
+		else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_SUBTRACTION &&
+				  [[UIAppDelegate.currentUser stats] subtractionTime] < [temp intValue]) {
+				
+			[[UIAppDelegate.currentUser stats] setSubtractionTime: [temp intValue]];
+		}
+	
+		else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION &&
+				  [[UIAppDelegate.currentUser stats] multiplicationTime] < [temp intValue]) {
+				
+			[[UIAppDelegate.currentUser stats] setMultiplicationTime: [temp intValue]];
+		}
+			
+		else if([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION &&
+				 [[UIAppDelegate.currentUser stats] divisionTime]< [temp intValue]) {
+			
+				[[UIAppDelegate.currentUser stats] setDivisionTime:[temp intValue]];
+		}
+
 		topicTimeCount = 0;
-		//[temp release]; MEMORY LEAK
+
 		
 		// if we haven't yet exhaused all our topics, progress to the next topic
 		if ([UIAppDelegate.currentUser.currentTopic nextTopic]) {
 
+			// increase lives by 1
+			[self increaseLives];
+			
 			// update the profile's lastTopicCompleted if this one is higher
 			if (UIAppDelegate.currentUser.currentTopic.topic > UIAppDelegate.currentUser.lastTopicCompleted.topic) {
 				
