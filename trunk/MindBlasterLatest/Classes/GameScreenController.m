@@ -92,7 +92,6 @@
 }
 
 // delegate function to take effect at the end of animation
-
 -(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
 	
 	// if animation got cut off, redo.
@@ -182,7 +181,6 @@
 	[self.navigationController setTitle: @"gameScreenView"];
 	
 	// if the game is paused when returning to view, unpause.
-	//if (gamePaused == FALSE) {
 	if (gamePaused) {
 		
 		NSLog(@"unpausing game in viewdidappear");
@@ -213,7 +211,7 @@
 	}
 	
 	// stop background sound if it is playing
-	NSLog(@"about to check if sound is playing");
+	//NSLog(@"about to check if sound is playing");
 	if (sound != nil && [sound.bgPlayer isPlaying]) {
 		
 		[sound.bgPlayer stop];
@@ -226,7 +224,7 @@
 	
 	// compare score and save to profile if necessary
 	if ([UIAppDelegate.currentUser.score score] > [UIAppDelegate.currentUser.highestScore score]) {
-		NSLog(@"comparing scores");
+		//NSLog(@"comparing scores");
 		[UIAppDelegate.currentUser setHighestScore: [UIAppDelegate.currentUser score]];
 	}
 	
@@ -269,7 +267,7 @@
 	gamePaused = FALSE;
 	[self pauseGame];
 	
-	gamePlayTimerInterval = 0.09;//jkehler used to be 0.03
+	gamePlayTimerInterval = 0.03;//jkehler used to be 0.03
 	
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
@@ -351,16 +349,13 @@
 		
 	}
 	
-	// reset the position of the bullets to be offscreen
-	//	[self initializeBulletPosition];
-	
 	
 	//set the profile pic!
 	int picIndex = [UIAppDelegate.currentUser profilePic];
 	[profilePic setImage: [GlobalAdmin getPic: picIndex] forState:0];
-	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
+
 	
-	[NSTimer scheduledTimerWithTimeInterval: 0.08 target: self//changed 0.01 from 0.08
+	[NSTimer scheduledTimerWithTimeInterval: 0.01 target: self//changed 0.01 from 0.08
 								   selector:@selector(animateBackground) userInfo: nil repeats: YES];
 	[background setSpeedX: 0.2 Y: 0.2];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -435,14 +430,14 @@
 // handle bullet animation and interaction with asteroids
 -(IBAction) fireButton{
 	//update stats with #bullets fired
-	[[UIAppDelegate.currentUser stats] setShotsFired:[[UIAppDelegate.currentUser stats] shotsFired] + 1]; //jkehler
+	[[UIAppDelegate.currentUser stats] setShotsFired: [[UIAppDelegate.currentUser stats] shotsFired] + 1]; //jkehler
 	
 	
 	// begin laser sound
 	[sound playLaser];
 	
-	Bullet *tempBullet  = [bullets objectAtIndex:bulletsFired];
 	//assigns element of bullets array to tempBullet to allow manipulation of that element
+	Bullet *tempBullet  = [bullets objectAtIndex: bulletsFired];
 	
 	//sets the bullet being fired's movement vector to the vector defined by the direction in which the ship is pointing
 	bulletPos[bulletsFired] = CGPointMake(shipDirectionX,shipDirectionY); 
@@ -521,7 +516,7 @@
 	{
 		if (asteroidIndex != randomCorrectAsteroid) {
 			
-			// set wrong answer equal to some random value of + [1-7] from the correct answer
+			// set wrong answer equal to some random value of +- [1-7] from the correct answer
 			
 			// that isn't the correct answer
 			int wrongAnswer = 0;
@@ -615,16 +610,21 @@
 									 : (tempBullet.bulletPosition.y + bulletPos[bulletIndex].y)];
 		
 		
-		
 		// hide the bullet if it's offscreen
-		if( tempBullet.bulletPosition.x > 486 ||  tempBullet.bulletPosition.x < -6 
-		   || tempBullet.bulletPosition.y > 320  ||  tempBullet.bulletPosition.y < -6 ) {
+		// x > height because Apple is retarded and in a wideview, height is still referred to as what is now width
+		// we hide the bullets offscreen at -200,700 so check that the bullet is within boundaries.
+		if( tempBullet.bulletPosition.x > [[UIScreen mainScreen] bounds].size.height  ||  
+		   tempBullet.bulletPosition.x  < 0 &&  tempBullet.bulletPosition.x > -200 || 
+		   tempBullet.bulletPosition.y > [[UIScreen mainScreen] bounds].size.width && tempBullet.bulletPosition.y < 700 ||  
+		   tempBullet.bulletPosition.y  <  0 ) {
 			
-	
+			
+			NSLog(@"bullet out of bounds at x: %f y: %f", tempBullet.bulletIcon.center.x, tempBullet.bulletIcon.center.y);
+			NSLog(@"screen width: %f\nscreen height: %f", [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 			bulletPos[bulletIndex].x = 0;
 			bulletPos[bulletIndex].y = 0;
 			
-			[tempBullet setBulletPosition: 0 : 500];
+			[tempBullet setBulletPosition: -200 : 700];
 			tempBullet.bulletIcon.hidden = YES;
 		}
 		
@@ -1225,6 +1225,15 @@
 	// reset score, shield and lives
 	[self resetValues];
 	
+	// show lose alert
+	UIAlertView *loseAlert = [[[UIAlertView alloc] initWithTitle: @" ): "
+														message: @"Them asteroids is quick."
+													   delegate: self
+											  cancelButtonTitle: nil
+											  otherButtonTitles: @"OK", nil] autorelease];
+	
+	[loseAlert show];
+	
 	[self nextScreen];
 }
 
@@ -1234,7 +1243,20 @@
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
-	[self nextScreen];
+	
+	// show win alert
+	UIAlertView *winAlert = [[[UIAlertView alloc] initWithTitle: @"CONGRATULATIONS !!!!"
+													 message: @"You've won the game."
+													delegate: self
+										   cancelButtonTitle: nil
+										   otherButtonTitles: @"OK", nil] autorelease];
+
+	[winAlert show];
+	
+	//[self nextScreen];
+	
+	// go directly to main menu from here
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 // initialize the sound files
@@ -1339,8 +1361,7 @@
 		shipDirectionY = (y - ycenter);
 		
 		CGFloat rotationAngle = atan2( shipDirectionY,shipDirectionX) + M_PI_2;
-		[ship rotate: rotationAngle];
-		
+		[ship rotate: rotationAngle];		
 	}
 	
 }

@@ -138,13 +138,15 @@
 	if ([UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser userName] != nil) {
 		NSString * usernameString = [[NSString alloc] initWithFormat: @"Continue [%@]", [UIAppDelegate.currentUser userName]];
 		[continueButton setTitle: usernameString forState: 0];
+		[continueButton setEnabled: YES];
+		continueButton.hidden = NO;
 		[usernameString release];
 	}
 	else {
 		[continueButton setTitle: @"Continue" forState: 0];
 		continueButton.hidden = YES;
-		//we should also implement a basic user profile, so it won't crash if we try and upload now.
-		[GlobalAdmin initProfile];
+		[continueButton setEnabled: NO];
+
 	}
 	
 	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
