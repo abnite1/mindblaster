@@ -218,6 +218,8 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 -(void) beginFeedbackAnimation;
 -(void) beginShieldAnimation;
 -(void) asteroidExplosionAnimation:(CGPoint)location;
+-(void) increaseShield;
+-(void) increaseLives;
 
 
 //unit tests

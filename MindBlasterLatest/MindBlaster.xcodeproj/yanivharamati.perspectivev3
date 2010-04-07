@@ -280,14 +280,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>52</integer>
-									<integer>50</integer>
-									<integer>48</integer>
+									<integer>24</integer>
+									<integer>22</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 433}, {319, 606}}</string>
+							<string>{{0, 0}, {319, 606}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -336,7 +335,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>77E491AF116C8D6F00E629BF</string>
+										<string>7713A4D6116C9A8D002F3603</string>
 										<key>history</key>
 										<array>
 											<string>77203E581141290800127EC1</string>
@@ -372,7 +371,6 @@
 											<string>77DF0A381169CA9E00BD7C64</string>
 											<string>77E44603116B254700CDEF9D</string>
 											<string>77E4464A116B28F700CDEF9D</string>
-											<string>77E4464B116B28F700CDEF9D</string>
 											<string>77E4464C116B28F700CDEF9D</string>
 											<string>77E44669116B2DE900CDEF9D</string>
 											<string>77E446D1116B396E00CDEF9D</string>
@@ -384,7 +382,6 @@
 											<string>77E44708116B3DEA00CDEF9D</string>
 											<string>77B45BF1116B4593008864A8</string>
 											<string>77B45BF3116B4593008864A8</string>
-											<string>77B45C15116B4902008864A8</string>
 											<string>77E490B3116C6F2600E629BF</string>
 											<string>77E490B5116C6F2600E629BF</string>
 											<string>77E490B6116C6F2600E629BF</string>
@@ -395,7 +392,10 @@
 											<string>77E49101116C71A700E629BF</string>
 											<string>77E49127116C75B000E629BF</string>
 											<string>77E49133116C762E00E629BF</string>
-											<string>77E491A0116C8AF100E629BF</string>
+											<string>7713A4CC116C9A2F002F3603</string>
+											<string>7713A4CD116C9A2F002F3603</string>
+											<string>7713A4CE116C9A2F002F3603</string>
+											<string>7713A4CF116C9A2F002F3603</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -455,35 +455,14 @@
 											<string>77E446B5116B390800CDEF9D</string>
 											<string>77E446B6116B390800CDEF9D</string>
 											<string>77B45BF7116B4593008864A8</string>
-											<string>77E490BD116C6F2600E629BF</string>
-											<string>77E490BE116C6F2600E629BF</string>
-											<string>77E490BF116C6F2600E629BF</string>
-											<string>77E490C0116C6F2600E629BF</string>
-											<string>77E490C1116C6F2600E629BF</string>
-											<string>77E490C2116C6F2600E629BF</string>
-											<string>77E490C3116C6F2600E629BF</string>
-											<string>77E490C4116C6F2600E629BF</string>
-											<string>77E490C5116C6F2600E629BF</string>
 											<string>77E490C6116C6F2600E629BF</string>
-											<string>77E490C7116C6F2600E629BF</string>
-											<string>77E490C8116C6F2600E629BF</string>
-											<string>77E490C9116C6F2600E629BF</string>
-											<string>77E490CA116C6F2600E629BF</string>
-											<string>77E490CB116C6F2600E629BF</string>
-											<string>77E490CC116C6F2600E629BF</string>
-											<string>77E490CD116C6F2600E629BF</string>
-											<string>77E490CE116C6F2600E629BF</string>
-											<string>77E490CF116C6F2600E629BF</string>
-											<string>77E490D0116C6F2600E629BF</string>
-											<string>77E490D1116C6F2600E629BF</string>
-											<string>77E490E0116C6F7B00E629BF</string>
-											<string>77E490E1116C6F7B00E629BF</string>
-											<string>77E490EB116C6FFD00E629BF</string>
-											<string>77E490F5116C70E500E629BF</string>
-											<string>77E49103116C71A700E629BF</string>
-											<string>77E4912A116C75B000E629BF</string>
-											<string>77E4912B116C75B000E629BF</string>
-											<string>77E49135116C762E00E629BF</string>
+											<string>7713A4C6116C9350002F3603</string>
+											<string>7713A4C7116C9350002F3603</string>
+											<string>7713A4D0116C9A2F002F3603</string>
+											<string>7713A4D1116C9A2F002F3603</string>
+											<string>7713A4D2116C9A2F002F3603</string>
+											<string>7713A4D3116C9A2F002F3603</string>
+											<string>7713A4D4116C9A2F002F3603</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -627,11 +606,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>77E490D4116C6F2800E629BF</string>
+				<string>7713A4B9116C9275002F3603</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>77E490D5116C6F2800E629BF</string>
+				<string>7713A4BA116C9275002F3603</string>
 				<string>77203D691141106A00127EC1</string>
-				<string>77E490D6116C6F2800E629BF</string>
+				<string>7713A4BB116C9275002F3603</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -778,14 +757,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>77E490D7116C6F2800E629BF</string>
+				<string>7713A4BC116C9275002F3603</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>77E490D8116C6F2800E629BF</string>
-				<string>77E490D9116C6F2800E629BF</string>
-				<string>77E490DA116C6F2800E629BF</string>
-				<string>77E490DB116C6F2800E629BF</string>
-				<string>77203D691141106A00127EC1</string>
+				<string>7713A4BD116C9275002F3603</string>
+				<string>7713A4BE116C9275002F3603</string>
+				<string>7713A4BF116C9275002F3603</string>
+				<string>7713A4C0116C9275002F3603</string>
+				<string>7713A4C1116C9275002F3603</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -815,9 +794,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>77E49114116C72AF00E629BF</string>
-		<string>77E49115116C72AF00E629BF</string>
-		<string>/Users/yanivharamati/MindBlaster163/MindBlasterLatest/MindBlaster.xcodeproj</string>
+		<string>/Users/yanivharamati/MindBlaster164/MindBlasterLatest/MindBlaster.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>-2 111 1280 665 0 0 1280 778 </string>
