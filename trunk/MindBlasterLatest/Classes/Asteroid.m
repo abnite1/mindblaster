@@ -86,7 +86,8 @@
 
 
 // change asteroid direction
--(void)setAsteroidDirection:(int)x :(int)y {
+//-(void)setAsteroidDirection:(int)x :(int)y {
+-(void)setAsteroidDirection:(float)x : (float)y {
 	
 	asteroidDirection = CGPointMake(x,y);
 }
@@ -126,8 +127,12 @@
 	[asteroidIcon setCenter: newPosition];
 	
 	//sets the initial movement vectors
-	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 )
-		[self setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
+	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 ){
+		//HERE IS WHERE WE will change from hardcoded vectors to non.
+		//[self setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
+		//[self setAsteroidDirection:((arc4random()%ASTEROID_SPEED_FACTOR)/5):((arc4random()%ASTEROID_SPEED_FACTOR)/5)];
+		[self setAsteroidDirection:(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR + 0.2):(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR) + 0.2];
+	}
 		
 }
 
