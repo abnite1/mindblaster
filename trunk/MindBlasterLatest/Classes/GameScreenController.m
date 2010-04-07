@@ -269,15 +269,15 @@
 	gamePaused = FALSE;
 	[self pauseGame];
 	
-	gamePlayTimerInterval = 0.03;
+	gamePlayTimerInterval = 0.09;//jkehler used to be 0.03
 	
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
-					 asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,nil];
+					 asteroid4,/* asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,*/nil];//jkehler
 	[asteroidIcons retain];
 	
 	solutionLabels  = [[NSMutableArray alloc] initWithObjects: solutionLabel0, solutionLabel1, solutionLabel2, 
-					   solutionLabel3, solutionLabel4, solutionLabel5, nil];
+					   solutionLabel3/*, solutionLabel4, solutionLabel5*/, nil];//jkehler
 	[solutionLabels retain];
 	
 	asteroids = [[NSMutableArray alloc] init];
@@ -308,9 +308,9 @@
 	
 	// for all 6 correct/incorrect solution asteroids in the array, attach an image andd a label
 	
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {
 		
-		if (i < 6) {
+		if (i < 4) {
 			
 			// for the first 6 asteroids attach an image and a label
 			asteroid = [[Asteroid alloc] initWithElements: [asteroidIcons objectAtIndex: i]: 
@@ -360,7 +360,7 @@
 	[profilePic setImage: [GlobalAdmin getPic: picIndex] forState:0];
 	//[temp setImage:[(UIAppDelegate.currentUser) getPic] forState:0];
 	
-	[NSTimer scheduledTimerWithTimeInterval: 0.08 target: self
+	[NSTimer scheduledTimerWithTimeInterval: 0.08 target: self//changed 0.01 from 0.08
 								   selector:@selector(animateBackground) userInfo: nil repeats: YES];
 	[background setSpeedX: 0.2 Y: 0.2];
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -505,7 +505,7 @@
 	
 	// determine the correct_answer asteroid randomly and set its value and type
 	// because we have 6 labeled asteroids
-	int randomCorrectAsteroid = arc4random() % 6;	 // from 0 to 5
+	int randomCorrectAsteroid = arc4random() % 4;	 // from 0 to 3 //jkehler
 	NSString *inputString = [[NSString alloc] initWithFormat:@"%d",(int)[question answer]];
 	[[[asteroids objectAtIndex: randomCorrectAsteroid] asteroidLabel] setText: inputString];
 	
@@ -517,7 +517,7 @@
 	//NSLog(@"inside setAnswer and random correct asteroid index is : %d", randomCorrectAsteroid);
 	
 	// sort through the incorrect_answer asteroids and set their value and type and direction
-	for(int asteroidIndex = 0; asteroidIndex < 6; asteroidIndex++)
+	for(int asteroidIndex = 0; asteroidIndex < 4; asteroidIndex++)//jkehler
 	{
 		if (asteroidIndex != randomCorrectAsteroid) {
 			
@@ -547,7 +547,7 @@
 	
 	
 	// set the blank type on a random path
-	for (int asteroidIndex = 6; asteroidIndex < 10; asteroidIndex++) {
+	for (int asteroidIndex = 4; asteroidIndex < 5; asteroidIndex++) {//jkehler
 		
 		[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:BLANK_ASTEROID];
 		[[asteroids objectAtIndex: asteroidIndex] 
@@ -595,7 +595,7 @@
 	
 	
 	//updates asteroid movement for each of the 10 asteroids, 0-9
-	for(int asteroidIndex = 0; asteroidIndex < 10; asteroidIndex++)
+	for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)//jkehler
 	{
 		
 		[[asteroids objectAtIndex: asteroidIndex] move];
@@ -629,7 +629,7 @@
 		}
 		
 		//for every asteroid (10 asteroids) check for collision 
-		for( int asteroidIndex = 0; asteroidIndex < 10; asteroidIndex++)
+		for( int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)//jkehler
 		{
 			
 			//if there is a collision then destroy both asteroid and bullet, hide the bullet and move it off screen and
@@ -678,10 +678,10 @@
 	 *	check for asteroid-asteroid collision and collision with the ship
 	 */
 	// for every asteroid i
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {//jkehler
 		
 		// and for every asteroid j > i
-		for (int j = i + 1; j < 10; j++) {
+		for (int j = i + 1; j < 5; j++) {//jkehler
 			
 			// check for collision with other asteroids
 			// not working.
