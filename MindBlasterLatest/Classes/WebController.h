@@ -13,9 +13,11 @@
 
 	//CGRect webFrame;
 	//IBOutlet UIWebView *webView;
-	
+	IBOutlet UIButton *back;
 }
+@property (nonatomic, retain) IBOutlet UIButton *back;
 
 -(void) showWebView;
+-(IBAction)backScreen;
 
 @end

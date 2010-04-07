@@ -28,6 +28,8 @@ static const int ASTEROID_SIZE_Y = 32;
 
 // constants
 static const float ROTATION_COEFFICIENT = 0.07;
+static const int ASTEROID_SPEED_FACTOR = 12; //formula is: (random()%30)/SPEED_FACTOR, so 30/speedfactor is approx what you'll get.
+											//this still might need some work, don't set it more than 13 then alot end up at 0.
 
 
 @interface Asteroid : NSObject {
@@ -59,7 +61,7 @@ static const float ROTATION_COEFFICIENT = 0.07;
 
 //-(id) init;
 -(void)setAsteroidDirectionUnitTest;
--(void)setAsteroidDirection:(int)x :(int)y;
+-(void)setAsteroidDirection:(float)x :(float)y;
 -(void)setAsteroidPosition:(int)x :(int)y;
 -(IBAction)move;
 -(void)bounceOffBoundaries;
