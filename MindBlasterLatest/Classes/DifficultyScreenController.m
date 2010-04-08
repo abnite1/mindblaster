@@ -137,13 +137,13 @@
 				
 			case 1:
 				[easy setEnabled:NO];
-				easy.hidden = YES;
+				easy.alpha = 0.5;	//makes difficulty options faded (user must beat previous difficulty first
 			case 2:
 				[hard setEnabled:NO];
-				hard.hidden = YES;
+				hard.alpha = 0.5;	//makes difficulty options faded (user must beat previous difficulty first
 			case 3:
 				[hardest setEnabled:NO];
-				hardest.hidden = YES;
+				hardest.alpha = 0.5;	//makes difficulty options faded (user must beat previous difficulty first
 			
 			default:
 				break;

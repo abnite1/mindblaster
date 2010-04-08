@@ -178,14 +178,14 @@
 		
 		case 0:		// addition
 			[subtraction setEnabled: NO];
-			subtraction.alpha = 0.5;
+			subtraction.alpha = 0.5;	//makes topics faded (user must beat previous topic first)
 			
 		case 1:		// subtraction
 			[multiplication setEnabled:NO];
-			multiplication.alpha = 0.5;
+			multiplication.alpha = 0.5;	 //makes topics faded (user must beat previous topic first)
 			
 		case 2:		// multiplication
-			[division setEnabled:NO];
+			[division setEnabled:NO];  //makes topics faded (user must beat previous topic first)
 			division.alpha = 0.5;
 			
 		default:
