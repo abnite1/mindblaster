@@ -28,8 +28,7 @@ static const int ASTEROID_SIZE_Y = 32;
 
 // constants
 static const float ROTATION_COEFFICIENT = 0.07;
-static const int ASTEROID_SPEED_FACTOR = 12; //formula is: (random()%30)/SPEED_FACTOR, so 30/speedfactor is approx what you'll get.
-											//this still might need some work, don't set it more than 13 then alot end up at 0.
+static const int ASTEROID_SPEED_FACTOR = 3; //range approx 2-5, less than 2 and all the vectors will be 45deg, more than 5 and too fast.
 
 
 @interface Asteroid : NSObject {

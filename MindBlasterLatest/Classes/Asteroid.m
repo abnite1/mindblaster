@@ -22,10 +22,24 @@
 		
         asteroidIcon = icon;
 		asteroidLabel = label;
-		int x = icon.center.x;
-		int y = icon.center.y;
+		//int x = icon.center.x;
+		//int y = icon.center.y;
+		//randomize the starting locations. //jkehler
+			int x=460/2;
+			int y=320/2;
+			while(x > 100 && x < 360){
+				x=arc4random()%460;
+			}
+			while(y > 100 && y < 220){
+				y=arc4random()%320;
+			}
+			//[[asteroids objectAtIndex:index] setAsteroidPosition:xloc: yloc];
+			//[[asteroids objectAtIndex:i] setAsteroidPosition:x:y];//reset all the asteroid positions.
+			[self setAsteroidPosition: x : y];
+		
+		
 		//NSLog(@"inside the asteroid initWIthElements constructor");
-		[self setAsteroidPosition: x : y];
+	//	[self setAsteroidPosition: x : y];
     }
 	
 	mAngle = 0.0f;
@@ -128,10 +142,26 @@
 	
 	//sets the initial movement vectors
 	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 ){
-		//HERE IS WHERE WE will change from hardcoded vectors to non.
-		//[self setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
-		//[self setAsteroidDirection:((arc4random()%ASTEROID_SPEED_FACTOR)/5):((arc4random()%ASTEROID_SPEED_FACTOR)/5)];
-		[self setAsteroidDirection:(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR + 0.2):(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR) + 0.2];
+		//Desired range is -3,-2,-1,1,2,3 never 0
+		int xdir=0;
+		int ydir=0;
+		while(xdir == 0){
+			xdir = arc4random()%ASTEROID_SPEED_FACTOR;
+			if(arc4random()%3 < 2)//50% of the time will swap direction
+				xdir*=-1;
+		}
+		while(ydir == 0 || ydir == xdir){ //second condition to reduce number of 45deg angles, too many of those head straight for ship.
+			ydir = arc4random()%ASTEROID_SPEED_FACTOR;
+			if(arc4random()%2 < 2)//50% of the time will swap direction
+				ydir*=-1;
+		}
+		NSLog(@"x: %f, y: %f\n",xdir, ydir);
+		[self setAsteroidDirection:xdir :ydir];
+	//	NSLog(@"x: %f, y: %f\n",((float)(arc4random() %30 )) / 10  -1, ((float)(arc4random() %30 )) / 10  -1);
+		//[self setAsteroidDirection:(((float)(arc4random() %30 )) / 10  -1) :(((float)(arc4random() % 30)) / 10 -1)];
+		//[self setAsteroidDirection:((float)(arc4random()%30))/6 - 4
+		//[self setAsteroidDirection:((arc4random()%(ASTEROID_SPEED_FACTOR*2))/(arc4random()%(ASTEROID_SPEED_FACTOR))):((arc4random()%(ASTEROID_SPEED_FACTOR*2))/(arc4random()%ASTEROID_SPEED_FACTOR))];
+		//[self setAsteroidDirection:(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR + 0.2):(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR) + 0.2];
 	}
 		
 }
