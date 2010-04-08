@@ -711,6 +711,7 @@
 -(BOOL) checkCollisionOf:(Asteroid*)as withShip:(Ship*)aShip {
 	int shipWidth;
 	int shipHeight;
+	int randomizeAsteroidRestart = rand()%4;
 	
 	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions //jkehler
 	/*if (shield != 0) {
@@ -736,8 +737,13 @@
 	   && ((as.asteroidPosition.y < shipShield.center.y + shipHeight / 2) 
 		   && (as.asteroidPosition.y > shipShield.center.y - shipHeight / 2)) ) {
 		
-		// so set the asteroid somewhere off screen
-		[as setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
+		// so set the asteroid somewhere off screen, either along the bottom of the screen (first if) 
+		//or along the left side of the screen (second if)
+		if(randomizeAsteroidRestart == 0 )
+			[as setAsteroidPosition: -20 + rand()%490 : 320];  
+		else 
+			[as setAsteroidPosition: -20  : rand()%310 + 10 ];
+
 		
 		// decrease the shield by a third of its power ONLY if the asteroid was a blank! //jkehler
 		//if([as asteroidType] == BLANK_ASTEROID){
@@ -1113,9 +1119,6 @@
 	
 	// check if game is over
 	[self checkScore];
-	
-	// set the next question
-	[self setQuestion];
 }
 
 // hit a blank asteroid
