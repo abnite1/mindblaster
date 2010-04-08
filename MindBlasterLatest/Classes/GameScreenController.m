@@ -387,6 +387,9 @@
 	//incrementor which denotes the next bullet to be fired, the 0th bullet is fired first
 	bulletsFired = 0;
 	
+	if(gameStarted != TRUE)
+		gameStarted = FALSE;
+	
 	//automated unit testing
 #if (UNIT_TESTS_EXECUTED ==1)
 	
@@ -566,6 +569,16 @@
 	if (diff == 2) diffMsg = @"Easy";
 	if (diff == 3) diffMsg = @"Hard";
 	if (diff == 4) diffMsg = @"Hardest";
+	
+		
+	if(gameStarted == TRUE)
+	{
+		[feedbackLabel setTextColor:[UIColor yellowColor]];
+		[self updateFeedbackLabelTo: @"You passed a level!"];
+		[self beginFeedbackAnimation];
+	}
+	gameStarted = 1;
+	NSLog(@"!!!!!!!!gameStarted =  %d", gameStarted);
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Difficulty: %@", diffMsg];
 	[difficultyLabel setText:msg];
@@ -809,6 +822,9 @@
 	else {
 		lives--;
 		[self updateLivesTo: lives];
+		[feedbackLabel setTextColor:[UIColor redColor]];
+		[self updateFeedbackLabelTo: @"Death really hurts!"];
+		[self beginFeedbackAnimation];
 	}
 }
 
@@ -1251,6 +1267,11 @@
 	
 	// reset score, shield and lives
 	[self resetValues];
+	
+	//play you loose warning
+	[feedbackLabel setTextColor:[UIColor redColor]];
+	[self updateFeedbackLabelTo: @"Game Over!"];
+	[self beginFeedbackAnimation];
 	
 	// show lose alert
 	UIAlertView *loseAlert = [[[UIAlertView alloc] initWithTitle: @" ): "

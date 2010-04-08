@@ -135,6 +135,7 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	Sound *sound;
 	
 	int bulletsFired;
+	BOOL gameStarted;
 }
 @property (nonatomic) double topicTimeCount;
 @property (nonatomic, retain) IBOutlet UILabel *topicTimeDisplay;

@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">784</int>
-		<string key="IBDocument.SystemVersion">9L30</string>
+		<string key="IBDocument.SystemVersion">9L31a</string>
 		<string key="IBDocument.InterfaceBuilderVersion">680</string>
 		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
@@ -459,7 +459,7 @@
 					<object class="IBUILabel" id="1042794342">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{204, 211}, {106, 35}}</string>
+						<string key="NSFrame">{{143, 211}, {265, 69}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -477,6 +477,7 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">2.100000e+01</float>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIImageView" id="219260193">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -825,7 +826,6 @@
 							<reference ref="109073762"/>
 							<reference ref="55847086"/>
 							<reference ref="593760601"/>
-							<reference ref="1042794342"/>
 							<reference ref="504123250"/>
 							<reference ref="87864639"/>
 							<reference ref="99079399"/>
@@ -838,8 +838,9 @@
 							<reference ref="654328187"/>
 							<reference ref="809723630"/>
 							<reference ref="219260193"/>
-							<reference ref="163454617"/>
 							<reference ref="202690233"/>
+							<reference ref="163454617"/>
+							<reference ref="1042794342"/>
 						</object>
 						<reference key="parent" ref="935461785"/>
 					</object>
