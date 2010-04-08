@@ -178,15 +178,15 @@
 		
 		case 0:		// addition
 			[subtraction setEnabled: NO];
-			subtraction.hidden = YES;
+			subtraction.alpha = 0.5;
 			
 		case 1:		// subtraction
 			[multiplication setEnabled:NO];
-			multiplication.hidden = YES;
+			multiplication.alpha = 0.5;
 			
 		case 2:		// multiplication
 			[division setEnabled:NO];
-			division.hidden = YES;
+			division.alpha = 0.5;
 			
 		default:
 			break;
