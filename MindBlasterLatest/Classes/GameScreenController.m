@@ -84,7 +84,7 @@
 	[UIView setAnimationDuration: 0.7];
 	[UIView setAnimationRepeatCount: 3];
 	
-	shipShield.alpha = 1.0;
+	shipShield.alpha = shieldPower;
 	
 	// end animation
 	[UIView commitAnimations];
@@ -249,6 +249,9 @@
 	
 	NSLog(@"started viewDidLoad");
 	
+	//shieldPower initialized at 1 or full power
+	shieldPower = 1;
+	
 	// initialize feedbackLabel
 	[feedbackLabel setText: @""];
 	
@@ -304,13 +307,13 @@
 	
 	NSLog(@"allocated asteroids");
 	
-	// for all 6 correct/incorrect solution asteroids in the array, attach an image andd a label
+	// for all 6 correct/incorrect solution asteroids in the array, attach an image and a label
 	
 	for (int i = 0; i < 5; i++) {
 		
 		if (i < 4) {
 			
-			// for the first 6 asteroids attach an image and a label
+			// for the first 3 asteroids attach an image and a label
 			asteroid = [[Asteroid alloc] initWithElements: [asteroidIcons objectAtIndex: i]: 
 						[solutionLabels objectAtIndex: i]];
 			[asteroids addObject: asteroid];
@@ -478,6 +481,7 @@
 	[self setAnswer];
 	//[question release];
 }
+
 -(void) setQuestionUnitTest {
 	[self setQuestion];
 	BOOL unitTestPassed = TRUE;
@@ -501,6 +505,14 @@
 	// define the solution set of labels on asteroids
 	//NSLog(@"starting setAnswer");	
 	
+	//temporarily records the wrong answers being printed on the incorrect solution asteroids
+	int wrongAnswers[5];
+	int finalWrongAnswer;
+	int i;
+	for(i=0; i<5; i++)
+		wrongAnswers[0] = [question answer];
+	
+	
 	// determine the correct_answer asteroid randomly and set its value and type
 	// because we have 6 labeled asteroids
 	int randomCorrectAsteroid = arc4random() % 4;	 // from 0 to 3 //jkehler
@@ -520,13 +532,18 @@
 		if (asteroidIndex != randomCorrectAsteroid) {
 			
 			// set wrong answer equal to some random value of +- [1-7] from the correct answer
-			
-			// that isn't the correct answer
-			int wrongAnswer = 0;
+			//and keep setting the wrong answer until it is different from the correct answer
+			//and from the other wrong answers
 			do {
-				wrongAnswer = [question answer] + (arc4random() % 8 * pow(-1, (int)(arc4random() % 8)));
-			} while (wrongAnswer == [question answer]);
-			NSString *inputString = [[NSString alloc] initWithFormat:@"%d",wrongAnswer];
+				finalWrongAnswer = [question answer] + (arc4random() % 8 * pow(-1, (int)(arc4random() % 8)));
+			} while (finalWrongAnswer == [question answer]  || finalWrongAnswer == wrongAnswers[0]
+					 || finalWrongAnswer == wrongAnswers[1] || finalWrongAnswer == wrongAnswers[2]
+					 || finalWrongAnswer == wrongAnswers[3] || finalWrongAnswer == wrongAnswers[4] );
+			wrongAnswers[asteroidIndex] = finalWrongAnswer;
+			
+
+			
+			NSString *inputString = [[NSString alloc] initWithFormat:@"%d",finalWrongAnswer];
 			[[[asteroids objectAtIndex: asteroidIndex] asteroidLabel] setText: inputString];
 			
 			// and set the incorrect type
@@ -799,11 +816,14 @@
 	if (shield > 0)  {
 		
 		shield--;
+		shieldPower -= 0.33333;
+		
 		[self updateShieldTo: shield];
 		
 	}
 	else {
 		// if shield is at 0, reset it, and decrease lives.
+		shieldPower = 1.0;
 		[self updateShieldTo: 3];
 		[self decreaseLives];
 	}
@@ -1049,6 +1069,10 @@
 -(void) hitCorrectAsteroid: (int) index {
 	
 	NSLog(@"hit correct asteroid.");
+	
+	if(shieldPower < 1)
+		shieldPower += 0.33333;
+	shipShield.alpha = shieldPower;
 	
 	[self increaseShield];
 	int score = [UIAppDelegate.currentUser.score score];

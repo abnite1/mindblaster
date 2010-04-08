@@ -125,6 +125,7 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 	//int score;
 	int lives;
 	int shield;
+	float shieldPower;
 	
 	// number of asteroids
 	int maxAsteroids;
