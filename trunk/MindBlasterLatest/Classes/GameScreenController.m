@@ -267,7 +267,7 @@
 	gamePaused = FALSE;
 	[self pauseGame];
 	
-	gamePlayTimerInterval = 0.03;//jkehler used to be 0.03
+	gamePlayTimerInterval = 0.05;//keep it here no lower! problems with asteroid speed, no higher looks choppy
 	
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
@@ -712,8 +712,8 @@
 	int shipWidth;
 	int shipHeight;
 	
-	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions
-	if (shield != 0) {
+	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions //jkehler
+	/*if (shield != 0) {
 		
 		// add the asteroid's width and height so it would collide with the edge rather than the center of the asteroid
 		shipWidth = shipShield.image.size.width + as.asteroidIcon.image.size.width / 2;
@@ -724,7 +724,11 @@
 		
 		shipWidth = ship.shipIcon.image.size.width;
 		shipHeight = ship.shipIcon.image.size.height;
-	}
+	}*/
+	//jkehler commented out above and wrote below, changing so it always uses ships dimensions, shield is too large a target.
+	shipWidth = shipShield.image.size.width + as.asteroidIcon.image.size.width / 2;
+	shipHeight = shipShield.image.size.height + as.asteroidIcon.image.size.height / 2;
+	
 	
 	// asteroid did collide with the ship
 	if(  ((as.asteroidPosition.x < shipShield.center.x + shipWidth / 2 ) 
@@ -735,8 +739,10 @@
 		// so set the asteroid somewhere off screen
 		[as setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
 		
-		// decrease the shield by a third of its power
-		[self decreaseShield];
+		// decrease the shield by a third of its power ONLY if the asteroid was a blank! //jkehler
+		//if([as asteroidType] == BLANK_ASTEROID){
+			[self decreaseShield];
+		//}
 		
 	}
 	return NO;
@@ -1055,7 +1061,22 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	//jkehler following code is to prevent spawns too close to ship
+
+	int i=0;
+	for(i=0;i<5;i++){
+		int xloc=460/2;
+		int yloc=320/2;
+		while(xloc > 100 && xloc < 360){
+			xloc=arc4random()%460;
+		}
+		while(yloc > 100 && yloc < 220){
+			yloc=arc4random()%320;
+		}
+		//[[asteroids objectAtIndex:index] setAsteroidPosition:xloc: yloc];
+		[[asteroids objectAtIndex:i] setAsteroidPosition:xloc:yloc];//reset all the asteroid positions.
+	}
+	//[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	[UIAppDelegate.currentUser.score setScore: score];
 	
