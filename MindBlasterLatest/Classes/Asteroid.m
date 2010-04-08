@@ -9,7 +9,7 @@
 //
 
 #import "Asteroid.h"
-
+#import "MindBlasterAppDelegate.h"
 
 @implementation Asteroid
 
@@ -142,19 +142,36 @@
 	
 	//sets the initial movement vectors
 	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 ){
-		//Desired range is -3,-2,-1,1,2,3 never 0
 		int xdir=0;
 		int ydir=0;
-		while(xdir == 0){
+		/*while(xdir == 0){
 			xdir = arc4random()%ASTEROID_SPEED_FACTOR;
 			if(arc4random()%3 < 2)//50% of the time will swap direction
 				xdir*=-1;
-		}
-		while(ydir == 0 || ydir == xdir){ //second condition to reduce number of 45deg angles, too many of those head straight for ship.
+		}*/
+		
+		//set a random xdirection between -5 and 5 not including 0.
+		xdir = arc4random()%3 + 1;
+		if(arc4random()%3<2)//50% chance to reverse direction.
+			xdir*=-1;
+		
+	/*	while(ydir == 0 || ydir == xdir){ //second condition to reduce number of 45deg angles, too many of those head straight for ship.
 			ydir = arc4random()%ASTEROID_SPEED_FACTOR;
 			if(arc4random()%2 < 2)//50% of the time will swap direction
 				ydir*=-1;
+		}*/
+		ydir = arc4random()%3 + 1;
+		if(arc4random()%3<2)
+			ydir*=-1;
+		
+		//BONUS SPEED OPTION AFTER YOU WIN, keep laying at increasing speed.
+		if(UIAppDelegate.bonusSpeedGameEnable > 0){
+				//speed up asteroids.
+			ydir*=UIAppDelegate.bonusSpeedGameEnable;
+			xdir*=UIAppDelegate.bonusSpeedGameEnable;
+			[UIAppDelegate setBonusSpeedGameEnable:UIAppDelegate.bonusSpeedGameEnable + 1];
 		}
+		
 		NSLog(@"x: %f, y: %f\n",xdir, ydir);
 		[self setAsteroidDirection:xdir :ydir];
 	//	NSLog(@"x: %f, y: %f\n",((float)(arc4random() %30 )) / 10  -1, ((float)(arc4random() %30 )) / 10  -1);

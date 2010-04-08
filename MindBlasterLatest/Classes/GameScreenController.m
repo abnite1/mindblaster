@@ -64,7 +64,7 @@
 	
 	[UIView setAnimationDelegate: self];
 	[UIView setAnimationDuration: 1];
-	[UIView setAnimationRepeatCount: 3];
+	[UIView setAnimationRepeatCount: 1];
 	
 	feedbackLabel.alpha = 1;
 	feedbackLabel.transform = CGAffineTransformIdentity;
@@ -82,7 +82,7 @@
 	[UIView beginAnimations: nil context: NULL];
 	[UIView setAnimationDelegate: self];
 	[UIView setAnimationDuration: 0.7];
-	[UIView setAnimationRepeatCount: 3];
+	[UIView setAnimationRepeatCount: 1];
 	
 	shipShield.alpha = shieldPower;
 	
@@ -174,8 +174,9 @@
 	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
 	
 	iconRotationAngle = 0.0f;
+	asteroidSpeedCounter = 0;//jkehler
 	
-	NSLog(@"gamescreen view did appear.");
+//	NSLog(@"gamescreen view did appear.");
 	
 	// set the screen title
 	[self.navigationController setTitle: @"gameScreenView"];
@@ -183,7 +184,7 @@
 	// if the game is paused when returning to view, unpause.
 	if (gamePaused) {
 		
-		NSLog(@"unpausing game in viewdidappear");
+		//NSLog(@"unpausing game in viewdidappear");
 		[self pauseGame];
 	}
 	
@@ -219,7 +220,7 @@
 	
 	[sound release];
 	
-	NSLog(@"after sound release in view will disappear");
+	//NSLog(@"after sound release in view will disappear");
 	sound = nil;
 	
 	// compare score and save to profile if necessary
@@ -235,7 +236,7 @@
 // another delegate for view lifespan
 -(void) viewDidDisappear:(BOOL)animated {
 	
-	NSLog(@"inside view did disappear");
+	//NSLog(@"inside view did disappear");
 }
 
 
@@ -246,8 +247,9 @@
 	
 	//initialize timecount to 0  //jkehler
 	topicTimeCount = 0;
+	UIAppDelegate.bonusSpeedGameEnable=0;
 	
-	NSLog(@"started viewDidLoad");
+	//NSLog(@"started viewDidLoad");
 	
 	//shieldPower initialized at 1 or full power
 	shieldPower = 1;
@@ -270,7 +272,7 @@
 	gamePaused = FALSE;
 	[self pauseGame];
 	
-	gamePlayTimerInterval = 0.05;//keep it here no lower! problems with asteroid speed, no higher looks choppy
+	gamePlayTimerInterval = 0.03;//jkehler
 	
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
@@ -500,22 +502,24 @@
 }
 
 // sets the answers on the asteroid labels
+//jkehler edited this to simplyify 
 -(void)setAnswer {
 	
 	// define the solution set of labels on asteroids
 	//NSLog(@"starting setAnswer");	
 	
+	//what is this for???? //jkehler
 	//temporarily records the wrong answers being printed on the incorrect solution asteroids
-	int wrongAnswers[5];
+	//int wrongAnswers[5];
 	int finalWrongAnswer;
-	int i;
+		/*int i;
 	for(i=0; i<5; i++)
 		wrongAnswers[0] = [question answer];
-	
+	*/
 	
 	// determine the correct_answer asteroid randomly and set its value and type
-	// because we have 6 labeled asteroids
-	int randomCorrectAsteroid = arc4random() % 4;	 // from 0 to 3 //jkehler
+	// because we have 4 labeled asteroids
+	int randomCorrectAsteroid = arc4random() % 3;	 // from 0 to 3 //jkehler
 	NSString *inputString = [[NSString alloc] initWithFormat:@"%d",(int)[question answer]];
 	[[[asteroids objectAtIndex: randomCorrectAsteroid] asteroidLabel] setText: inputString];
 	
@@ -534,14 +538,21 @@
 			// set wrong answer equal to some random value of +- [1-7] from the correct answer
 			//and keep setting the wrong answer until it is different from the correct answer
 			//and from the other wrong answers
-			do {
+			/*do {
 				finalWrongAnswer = [question answer] + (arc4random() % 8 * pow(-1, (int)(arc4random() % 8)));
 			} while (finalWrongAnswer == [question answer]  || finalWrongAnswer == wrongAnswers[0]
 					 || finalWrongAnswer == wrongAnswers[1] || finalWrongAnswer == wrongAnswers[2]
 					 || finalWrongAnswer == wrongAnswers[3] || finalWrongAnswer == wrongAnswers[4] );
-			wrongAnswers[asteroidIndex] = finalWrongAnswer;
+			wrongAnswers[asteroidIndex] = finalWrongAnswer;*/
 			
-
+			int offsetValue;//jkehler got rid of while loop (its not a big deal if some are repeats (not worth the checking)
+			offsetValue=arc4random()%INCORRECT_ANSWER_PROXIMITY+1;//so its never zero
+			if(arc4random()%3<2)
+				offsetValue*=-1;
+			if((finalWrongAnswer = ([question answer] + offsetValue)) < 0){ //don't want negative values
+				finalWrongAnswer*=-1; //change it back.
+			}
+			//finalWrongAnswer = [question answer] + offsetValue;
 			
 			NSString *inputString = [[NSString alloc] initWithFormat:@"%d",finalWrongAnswer];
 			[[[asteroids objectAtIndex: asteroidIndex] asteroidLabel] setText: inputString];
@@ -549,34 +560,37 @@
 			// and set the incorrect type
 			[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:INCORRECT_ASTEROID];
 			
+			//jkehler removing this caused no problems, it seems it was unecessary (since move and assinging random velocities is handled elsewhere.
 			// then send it on a random path
-			[[asteroids objectAtIndex: asteroidIndex] 
+			//[[asteroids objectAtIndex: asteroidIndex] 
 			 //setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
-			 setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
-			 arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
+			// setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
+			// arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
 			[inputString release];
 			
-			[[asteroids objectAtIndex: asteroidIndex] move]; 
+			//[[asteroids objectAtIndex: asteroidIndex] move]; 
 		}
 	}
 	
-	
+	[[asteroids objectAtIndex: 4] setAsteroidType:BLANK_ASTEROID];
+	//jkehler ALSO uncessesary
 	// set the blank type on a random path
-	for (int asteroidIndex = 4; asteroidIndex < 5; asteroidIndex++) {//jkehler
+/*	for (int asteroidIndex = 4; asteroidIndex < 5; asteroidIndex++) {//jkehler
 		
 		[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:BLANK_ASTEROID];
 		[[asteroids objectAtIndex: asteroidIndex] 
 		 setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
 		 arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
 		[[asteroids objectAtIndex: asteroidIndex] move];
-	}
+	}*/
 	//NSLog(@"end of answer");
 }
 
 // updates the difficulty label to the current difficulty in the user profile
 -(IBAction) setDifficultyLabel {
 	//NSLog(@"start setDifficultyLabel");
-	[[UIAppDelegate.currentUser currentTopic] setDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
+	//what the crap does this lline below do? setitto itself????? //jkehler
+	//[[UIAppDelegate.currentUser currentTopic] setDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
 	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
 	
 	//int diff = [UIAppDelegate.currentUser currentDifficulty];
@@ -595,7 +609,7 @@
 		[self beginFeedbackAnimation];
 	}
 	gameStarted = 1;
-	NSLog(@"!!!!!!!!gameStarted =  %d", gameStarted);
+	//NSLog(@"!!!!!!!!gameStarted =  %d", gameStarted);
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Difficulty: %@", diffMsg];
 	[difficultyLabel setText:msg];
@@ -615,21 +629,27 @@
 	//write the timer to the screen display;
 	topicTimeDisplay.text = [NSString stringWithFormat:@"%d",(int)topicTimeCount];
 	
-	Bullet *tempBullet;
+
 	//NSLog(@"ship direction: %@", [ship direction]);
 	
 	
 	//updates asteroid movement for each of the 10 asteroids, 0-9
-	for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)//jkehler
-	{
+	//update every ASTEROID_SPEED_FACTOR times that onTimer is called //jkehler
+	if(asteroidSpeedCounter==ASTEROID_SPEED_FACTOR){
 		
-		[[asteroids objectAtIndex: asteroidIndex] move];
+		asteroidSpeedCounter=0;//reset it to startcounting again.
+		for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)
+		{
+			[[asteroids objectAtIndex: asteroidIndex] move];
+		}
 		
+	}else{
+		asteroidSpeedCounter++;
 	}
-	
 	
 	//updates the bullet movement for each of the 6 bullets and checks for collisions with asteroids 
 	//in which case both bullet and asteroid are destroyed
+	Bullet *tempBullet;
 	for(int bulletIndex = 0; bulletIndex < 6; bulletIndex++)
 	{
 		
@@ -649,8 +669,8 @@
 		   tempBullet.bulletPosition.y  <  0 ) {
 			
 			
-			NSLog(@"bullet out of bounds at x: %f y: %f", tempBullet.bulletIcon.center.x, tempBullet.bulletIcon.center.y);
-			NSLog(@"screen width: %f\nscreen height: %f", [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+		//	NSLog(@"bullet out of bounds at x: %f y: %f", tempBullet.bulletIcon.center.x, tempBullet.bulletIcon.center.y);
+		//	NSLog(@"screen width: %f\nscreen height: %f", [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 			bulletPos[bulletIndex].x = 0;
 			bulletPos[bulletIndex].y = 0;
 			
@@ -709,14 +729,14 @@
 	 */
 	// for every asteroid i
 	for (int i = 0; i < 5; i++) {//jkehler
-		
+		/*
 		// and for every asteroid j > i
 		for (int j = i + 1; j < 5; j++) {//jkehler
 			
 			// check for collision with other asteroids
 			// not working.
 			//[self checkCollisionOf: [asteroids objectAtIndex: i] with : [asteroids objectAtIndex: j]];
-		}
+		}*/
 		
 		// check for collision with the ship
 		[self checkCollisionOf: [asteroids objectAtIndex: i] withShip: ship];
@@ -728,7 +748,7 @@
 -(BOOL) checkCollisionOf:(Asteroid*)as withShip:(Ship*)aShip {
 	int shipWidth;
 	int shipHeight;
-	int randomizeAsteroidRestart = rand()%4;
+	//int randomizeAsteroidRestart = rand()%4;
 	
 	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions //jkehler
 	/*if (shield != 0) {
@@ -756,11 +776,26 @@
 		
 		// so set the asteroid somewhere off screen, either along the bottom of the screen (first if) 
 		//or along the left side of the screen (second if)
-		if(randomizeAsteroidRestart == 0 )
+	/*	if(randomizeAsteroidRestart == 0 )
 			[as setAsteroidPosition: -20 + rand()%490 : 320];  
 		else 
 			[as setAsteroidPosition: -20  : rand()%310 + 10 ];
-
+*/
+		
+		//jkehler why not just call setASteroidPosition because we hsould alsochange its vector.
+		//first set the position somewhere outside the screen.
+		int xpos,ypos;
+		//either -20 or 320
+		if(rand()%3<2){
+			xpos=-20;
+		}else
+			xpos=320;
+		if(rand()%3<2){
+			ypos=-20;
+		}else
+			ypos=490;
+		//now changed vector as well
+		[as setAsteroidPosition:xpos:ypos];
 		
 		// decrease the shield by a third of its power ONLY if the asteroid was a blank! //jkehler
 		//if([as asteroidType] == BLANK_ASTEROID){
@@ -855,7 +890,8 @@
 		lives--;
 		[self updateLivesTo: lives];
 		[feedbackLabel setTextColor:[UIColor redColor]];
-		[self updateFeedbackLabelTo: @"Death really hurts!"];
+		//jkehler i dont' think we need anything but an animation here.
+		//[self updateFeedbackLabelTo: @"Death really hurts!"];
 		[self beginFeedbackAnimation];
 	}
 }
@@ -868,12 +904,12 @@
 }
 
 -(void) decreaseLivesUnitTest {
-	int tempLives = lives;
+	//int tempLives = lives;
 	[self decreaseLives];
-	if(tempLives == lives)
-		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: decreaseShield; sheild not changed by decrease");
-	else
-		NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: decreaseShield");
+	//if(tempLives == lives)
+	//	NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: decreaseShield; sheild not changed by decrease");
+	//else
+	//	NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: decreaseShield");
 }
 
 // update the lives representing UI elements
@@ -1093,8 +1129,22 @@
 	// update the location of the asteroid to a random point on the screen
 	//jkehler following code is to prevent spawns too close to ship
 
-	int i=0;
-	for(i=0;i<5;i++){
+	//int i=0;
+	int xloc,yloc;
+	for(int i=0;i<5;i++){ //we want them to spawn outside range of ship x: outside 50-410,y outside 50-270
+		//either %50 or 410+%50
+		if(arc4random()%3<2){
+			xloc = arc4random()%50;
+		}else
+			xloc = 410+arc4random()%50;
+		
+		if(arc4random()%3<2){
+			yloc = arc4random()%50;
+		}else
+			yloc = 270 + arc4random()%50;
+		
+		//(Max - Min) * random(0 to 1) + Min = random(Min to Max)
+		/*
 		int xloc=460/2;
 		int yloc=320/2;
 		while(xloc > 100 && xloc < 360){
@@ -1102,7 +1152,7 @@
 		}
 		while(yloc > 100 && yloc < 220){
 			yloc=arc4random()%320;
-		}
+		}*/
 		//[[asteroids objectAtIndex:index] setAsteroidPosition:xloc: yloc];
 		[[asteroids objectAtIndex:i] setAsteroidPosition:xloc:yloc];//reset all the asteroid positions.
 	}
@@ -1137,7 +1187,21 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	//should be OFF the screen!
+	int xpos,ypos;
+	//either -20 or 320
+	if(rand()%3<2){
+		xpos=-20;
+	}else
+		xpos=320;
+	if(rand()%3<2){
+		ypos=-20;
+	}else
+		ypos=490;
+	//now changed vector as well
+	//[as setAsteroidPosition:xpos:ypos];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: xpos : ypos];
+	//[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	[UIAppDelegate.currentUser.score setScore: score];
 	
@@ -1161,7 +1225,20 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	int xpos,ypos;
+	//either -20 or 320
+	if(rand()%3<2){
+		xpos=-20;
+	}else
+		xpos=320;
+	if(rand()%3<2){
+		ypos=-20;
+	}else
+		ypos=490;
+	//now changed vector as well
+	//[as setAsteroidPosition:xpos:ypos];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: xpos : ypos];
+	//[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	[UIAppDelegate.currentUser.score setScore: score];
 	
@@ -1172,7 +1249,7 @@
 // raise the difficulty if the user reached the limit and as long as it's not already on hardest
 // if it's lower than 0 then the game is over (lose scenario)
 // if it's over the limit of the hardest difficulty then the game is over (win scenario)
--(void) checkScore {
+-(void) checkScore {//jkehler settings are saved once at the end of the function now
 	
 	int diff = [UIAppDelegate.currentUser.currentTopic difficulty];
 	int score = [UIAppDelegate.currentUser.score score];
@@ -1180,7 +1257,7 @@
 	// if the current score is higher than highestScore, update the AppDelegate profile.
 	if (score > [UIAppDelegate.currentUser.highestScore score]) {
 		
-		NSLog(@"saving highest score : %d", score);
+		//NSLog(@"saving highest score : %d", score);
 		[UIAppDelegate.currentUser.highestScore setScore: score];
 	}
 	
@@ -1190,17 +1267,19 @@
 		[UIAppDelegate.currentUser setLastTopicCompleted: UIAppDelegate.currentUser.currentTopic];
 		
 		// and save settings
-		[GlobalAdmin saveSettings];
+		//[GlobalAdmin saveSettings];
 	}
 	
+	//jkehler isn't this handled by the asteroid destrcution function ????
 	// if score is higher than set limit for difficulty, then raise the difficulty
+
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
 		
 		// raise difficulty by one
 		[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff + 1];
-		
+		//also update
 		// and save settings
-		[GlobalAdmin saveSettings];
+		//[GlobalAdmin saveSettings];
 		
 		
 		// reset the label
@@ -1229,7 +1308,7 @@
 		[UIAppDelegate.currentUser.lastTopicCompleted setDifficulty: diff];
 		
 		// save settings
-		[GlobalAdmin saveSettings];
+		//[GlobalAdmin saveSettings];
 	}
 	
 	// if the score is higher than the set limit for topic
@@ -1281,7 +1360,7 @@
 			else {};	// avoid nested ambiguities.
 			
 			// save settings
-			[GlobalAdmin saveSettings];
+			//[GlobalAdmin saveSettings];
 			
 			// reset the score
 			score = 0;
@@ -1297,6 +1376,7 @@
 			[self winScenario];
 		}
 	}
+	[GlobalAdmin saveSettings];
 }
 
 // update the score label to the current score value
@@ -1317,13 +1397,13 @@
 	[self resetValues];
 	
 	//play you loose warning
-	[feedbackLabel setTextColor:[UIColor redColor]];
-	[self updateFeedbackLabelTo: @"Game Over!"];
+	//[feedbackLabel setTextColor:[UIColor redColor]];
+	//[self updateFeedbackLabelTo: @"Game Over!"];
 	[self beginFeedbackAnimation];
 	
 	// show lose alert
 	UIAlertView *loseAlert = [[[UIAlertView alloc] initWithTitle: @" ): "
-														message: @"Them asteroids is quick."
+														message: @"Don't give up!"
 													   delegate: self
 											  cancelButtonTitle: nil
 											  otherButtonTitles: @"OK", nil] autorelease];
@@ -1336,6 +1416,8 @@
 // begin win scenario
 -(void) winScenario {
 	
+	//unlock last topic diff (couldn't figureu out where to put this in checkScore so putting it here.
+	[[UIAppDelegate.currentUser lastTopicCompleted] setDifficulty: DIFFICULTY_HARDEST];
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
@@ -1352,7 +1434,11 @@
 	//[self nextScreen];
 	
 	// go directly to main menu from here
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	//add option to keep playing?
+	if(ENABLE_BONUS_SPEED_GAME == 1){
+		UIAppDelegate.bonusSpeedGameEnable=1;
+	}else
+		[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 // initialize the sound files
