@@ -32,9 +32,14 @@
 
 // constants
 static const float ICON_ROTATION_COEFFICIENT = 0.07;
+static const int ASTEROID_SPEED_FACTOR = 1;
+static const int INCORRECT_ANSWER_PROXIMITY = 10;
+static const int ENABLE_BONUS_SPEED_GAME = 0;
 
 @interface GameScreenController : UIViewController 
 {
+	int asteroidSpeedCounter;
+	//int bonusSpeedGameEnable;
 	// background space animation
 	IBOutlet BackgroundAnimation *background;
 	IBOutlet UIButton *profilePic;
@@ -222,7 +227,7 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 -(void) asteroidExplosionAnimation:(CGPoint)location;
 -(void) increaseShield;
 -(void) increaseLives;
-
+-(void) updateFeedbackLabelTo:(NSString*)newText;
 
 //unit tests
 -(void)gamePausedUnitTest;

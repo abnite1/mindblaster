@@ -28,7 +28,7 @@ static const int ASTEROID_SIZE_Y = 32;
 
 // constants
 static const float ROTATION_COEFFICIENT = 0.07;
-static const int ASTEROID_SPEED_FACTOR = 3; //range approx 2-5, less than 2 and all the vectors will be 45deg, more than 5 and too fast.
+//static const int ASTEROID_SPEED_FACTOR = 3; //range approx 2-5, less than 2 and all the vectors will be 45deg, more than 5 and too fast.
 
 
 @interface Asteroid : NSObject {

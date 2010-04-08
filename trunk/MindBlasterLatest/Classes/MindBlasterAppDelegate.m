@@ -19,6 +19,7 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize currentUser;
+@synthesize bonusSpeedGameEnable;
 
 
 // executed when user quit the app
