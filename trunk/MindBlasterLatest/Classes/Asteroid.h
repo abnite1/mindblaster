@@ -43,6 +43,7 @@ static const int ASTEROID_SPEED_FACTOR = 3; //range approx 2-5, less than 2 and 
 	IBOutlet UILabel	*asteroidLabel;		// label correct/incorret answers
 	CGPoint				asteroidSize;
 	int					asteroidSpeed;
+	int					asteroidSolution;
 	float				mAngle;
 }
 
