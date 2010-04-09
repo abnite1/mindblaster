@@ -18,6 +18,7 @@
 @synthesize topicTimeCount, topicTimeDisplay;
 @synthesize animatedExplosion;
 
+@synthesize explosion;
 @synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
 //@synthesize asteroidIcons;  //this is the vector which will hold all of the above asteroid objects
@@ -51,7 +52,7 @@
 	iconRotationAngle += ICON_ROTATION_COEFFICIENT;
 	
 }
-
+/*
 // starts fadein/fadeout animation for feedback label
 -(void) beginFeedbackAnimation {
 	
@@ -72,7 +73,35 @@
 	// end animation
 	[UIView commitAnimations];
 }
+*/
 
+//animnates warnings such as Correct and Incorrect from the onTimer function
+-(void) animateWarning{
+	if(warningAnimationCounter == -1)
+		return;
+	else if(warningAnimationCounter  == WARNING_ANIMATION_DURATION)
+	{
+		feedbackLabel.hidden = NO;
+		feedbackLabel.alpha = 0.5;
+		feedbackLabel.transform = CGAffineTransformMakeScale(0.5, 0.5);
+		warningAnimationCounter--;
+	}
+	else if(warningAnimationCounter >0)
+	{
+		feedbackLabel.alpha = 1-warningAnimationCounter/WARNING_ANIMATION_DURATION/2;
+		//gradually increases warning's alpha (opacity) as the animation progresses
+		feedbackLabel.transform = CGAffineTransformMakeScale(1-warningAnimationCounter/WARNING_ANIMATION_DURATION/2, 
+															 1- warningAnimationCounter/WARNING_ANIMATION_DURATION/2);
+		//gradually increases warning's size as the animation progresses
+		warningAnimationCounter--;
+	}
+	else
+	{
+		warningAnimationCounter = -1;
+		feedbackLabel.hidden = YES;
+	}
+}
+/*
 // starts the decreased shield animation sequence
 -(void) beginShieldAnimation {
 	
@@ -90,7 +119,74 @@
 	[UIView commitAnimations];
 	
 }
+*/
 
+//animates the shield when the shield is hit by an asteroid
+-(void) animateShield 
+{
+
+	if(shieldAnimationCounter == -1)
+		return;
+	else if(shieldAnimationCounter  ==SHIELD_ANIMATION_DURATION)
+	{
+		shipShield.alpha = 0.0;
+		shieldAnimationCounter--;
+	}
+	else if(shieldAnimationCounter >0)
+	{
+		shipShield.alpha = shieldPower*(1-warningAnimationCounter/WARNING_ANIMATION_DURATION);  
+		//gradually increases shields alpha (opacity) as the animation progresses
+		shieldAnimationCounter--;
+	}
+	else
+	{
+		shieldAnimationCounter = -1;
+		shipShield.alpha =shieldPower;
+	}
+
+}
+
+-(void) animateExplosion
+{
+	float numberOfGameTicksPerImage = EXPLOSION_ANIMATION_DURATION/11.0 ;
+	float gameTicksOnThisImage;
+	int explosionImageCounter ;
+
+	if(explosionAnimationCounter == -1)
+		return;
+	else if(explosionAnimationCounter  ==EXPLOSION_ANIMATION_DURATION)
+	{
+		
+		explosionImageCounter = 0;
+		explosion.image = [explosions objectAtIndex:explosionImageCounter];
+		explosion.hidden = NO;
+		gameTicksOnThisImage = numberOfGameTicksPerImage;
+		NSLog(@"!!!!!!!FIRST = %f >0 %f < 11", explosionAnimationCounter, explosionImageCounter );
+		explosionAnimationCounter--;
+	}
+	else if( explosionAnimationCounter > 0 && gameTicksOnThisImage <0 )
+	{
+		NSLog(@"!!!!!!!HERE = %f", explosionAnimationCounter);
+
+		explosionImageCounter++;
+		explosion.image = [explosions objectAtIndex:explosionImageCounter];
+		gameTicksOnThisImage = numberOfGameTicksPerImage;
+		explosionAnimationCounter--;
+	}
+	else if( explosionAnimationCounter > 0.0 )
+	{
+		NSLog(@"!!!!!!!gameTicksOnThisImage = %f", gameTicksOnThisImage);
+		gameTicksOnThisImage = gameTicksOnThisImage - 1.0;
+		NSLog(@"!!!!!!!gameTicksOnThisImage = %f", gameTicksOnThisImage);
+	}
+	else
+	{
+		NSLog(@"!!!!!!!LAST = %f", explosionAnimationCounter);
+
+		explosionAnimationCounter = -1;
+		explosion.hidden = YES;
+	}
+}
 // delegate function to take effect at the end of animation
 -(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
 	
@@ -245,6 +341,10 @@
 	
 	[super viewDidLoad];
 	
+	//explosion.image = @"expl1.png";
+	
+	//explosion.image =image1;
+	
 	//initialize timecount to 0  //jkehler
 	topicTimeCount = 0;
 	UIAppDelegate.bonusSpeedGameEnable=0;
@@ -272,7 +372,7 @@
 	gamePaused = FALSE;
 	[self pauseGame];
 	
-	gamePlayTimerInterval = 0.03;//jkehler
+	gamePlayTimerInterval = 0.06; //sverner     //0.03;//jkehler
 	
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
@@ -287,6 +387,19 @@
 	[asteroids retain];
 	bullets = [[NSMutableArray alloc] init];
 	[bullets retain];
+	explosions = [[NSMutableArray alloc] init];
+	[explosions retain];
+	
+
+	//declare the explosion images and save them in the explosions array for use in the explosion animation
+	NSString *explosionName ;
+	for(int i = 1; i<= 11; i++)
+	{  
+		explosionName = [[NSString alloc] initWithFormat:@"expl%d", i];
+		[explosions addObject: [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:  explosionName ofType:@"png"] ]];
+	}
+	
+	//[explosions addObject: [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:  explosionName ofType:@"png"] ]];
 	
 	NSLog(@"allocated solutionLabels");
 	// set the gamescreen label for the selected difficulty
@@ -606,7 +719,8 @@
 	{
 		[feedbackLabel setTextColor:[UIColor yellowColor]];
 		[self updateFeedbackLabelTo: @"You passed a level!"];
-		[self beginFeedbackAnimation];
+		//[self beginFeedbackAnimation];
+		warningAnimationCounter = WARNING_ANIMATION_DURATION;
 	}
 	gameStarted = 1;
 	//NSLog(@"!!!!!!!!gameStarted =  %d", gameStarted);
@@ -635,17 +749,21 @@
 	
 	//updates asteroid movement for each of the 10 asteroids, 0-9
 	//update every ASTEROID_SPEED_FACTOR times that onTimer is called //jkehler
-	if(asteroidSpeedCounter==ASTEROID_SPEED_FACTOR){
+	//if(asteroidSpeedCounter==ASTEROID_SPEED_FACTOR){
 		
+	[self animateWarning];
+	[self animateShield];
+	[self animateExplosion];
+	
 		asteroidSpeedCounter=0;//reset it to startcounting again.
 		for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)
 		{
 			[[asteroids objectAtIndex: asteroidIndex] move];
 		}
 		
-	}else{
-		asteroidSpeedCounter++;
-	}
+	//}else{
+	//	asteroidSpeedCounter++;
+	//}
 	
 	//updates the bullet movement for each of the 6 bullets and checks for collisions with asteroids 
 	//in which case both bullet and asteroid are destroyed
@@ -776,11 +894,11 @@
 		
 		// so set the asteroid somewhere off screen, either along the bottom of the screen (first if) 
 		//or along the left side of the screen (second if)
-	/*	if(randomizeAsteroidRestart == 0 )
+		/*	if(randomizeAsteroidRestart == 0 )
 			[as setAsteroidPosition: -20 + rand()%490 : 320];  
 		else 
 			[as setAsteroidPosition: -20  : rand()%310 + 10 ];
-*/
+		*/
 		
 		//jkehler why not just call setASteroidPosition because we hsould alsochange its vector.
 		//first set the position somewhere outside the screen.
@@ -801,6 +919,8 @@
 		//if([as asteroidType] == BLANK_ASTEROID){
 			[self decreaseShield];
 		//}
+		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+
 		
 	}
 	return NO;
@@ -862,7 +982,8 @@
 		[self updateShieldTo: 3];
 		[self decreaseLives];
 	}
-	[self beginShieldAnimation];
+	//[self beginShieldAnimation];
+	shieldAnimationCounter = SHIELD_ANIMATION_DURATION;
 }
 
 // increase the shield by a third of its power, if it is full, do nothing.
@@ -891,8 +1012,10 @@
 		[self updateLivesTo: lives];
 		[feedbackLabel setTextColor:[UIColor redColor]];
 		//jkehler i dont' think we need anything but an animation here.
-		//[self updateFeedbackLabelTo: @"Death really hurts!"];
-		[self beginFeedbackAnimation];
+		[self updateFeedbackLabelTo: @"Death really hurts!"];
+		//[self beginFeedbackAnimation];
+		warningAnimationCounter = WARNING_ANIMATION_DURATION;
+		//beginFeedbackAnimation = WARNING_ANIMATION_DURATION;
 	}
 }
 
@@ -1118,7 +1241,8 @@
 	// update the feedback label
 	[feedbackLabel setTextColor:[UIColor greenColor]];
 	[self updateFeedbackLabelTo: @"Correct!"];
-	[self beginFeedbackAnimation];
+//	[self beginFeedbackAnimation];
+	warningAnimationCounter = WARNING_ANIMATION_DURATION;
 	
 	// update the scoreboard 
 	score = score + CORRECT_ANSWER_REWARD;
@@ -1178,7 +1302,8 @@
 	// update the feedback label
 	[feedbackLabel setTextColor:[UIColor redColor]];
 	[self updateFeedbackLabelTo: @"Incorrect!"];
-	[self beginFeedbackAnimation];
+	//[self beginFeedbackAnimation];
+	warningAnimationCounter= WARNING_ANIMATION_DURATION;
 	
 	// decrement score by incorrect penalty and update the scoreboard
 	score = score - INCORRECT_ANSWER_PENALTY;
@@ -1398,8 +1523,9 @@
 	
 	//play you loose warning
 	//[feedbackLabel setTextColor:[UIColor redColor]];
-	//[self updateFeedbackLabelTo: @"Game Over!"];
-	[self beginFeedbackAnimation];
+	[self updateFeedbackLabelTo: @"Game Over!"];
+	//[self beginFeedbackAnimation];
+	warningAnimationCounter = WARNING_ANIMATION_DURATION;
 	
 	// show lose alert
 	UIAlertView *loseAlert = [[[UIAlertView alloc] initWithTitle: @" ): "
