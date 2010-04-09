@@ -35,6 +35,9 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 static const int ASTEROID_SPEED_FACTOR = 1;
 static const int INCORRECT_ANSWER_PROXIMITY = 10;
 static const int ENABLE_BONUS_SPEED_GAME = 0;
+static const float WARNING_ANIMATION_DURATION = 8;
+static const float SHIELD_ANIMATION_DURATION = 60;
+static const float EXPLOSION_ANIMATION_DURATION = 400;
 
 @interface GameScreenController : UIViewController 
 {
@@ -53,6 +56,7 @@ static const int ENABLE_BONUS_SPEED_GAME = 0;
 	
 	// this holds an array of asteroids
 	NSMutableArray *asteroids;
+	NSMutableArray *explosions;
 	
 	//timer variables
 	NSTimer *gamePlayTimer;
@@ -76,6 +80,11 @@ static const int ENABLE_BONUS_SPEED_GAME = 0;
 	IBOutlet UIImageView *asteroid7;
 	IBOutlet UIImageView *asteroid8;
 	IBOutlet UIImageView *asteroid9;
+	IBOutlet UIImageView *explosion;
+	
+	//UIImage *image1 = [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"expl1" ofType:@"png"]];
+
+	
 	
 	// and one array to rule them all and in the darkness bind them
 	NSMutableArray *asteroidIcons;
@@ -142,6 +151,10 @@ static const int ENABLE_BONUS_SPEED_GAME = 0;
 	
 	int bulletsFired;
 	BOOL gameStarted;
+	float warningAnimationCounter;
+	float shieldAnimationCounter;
+	float explosionAnimationCounter;
+
 }
 @property (nonatomic) double topicTimeCount;
 @property (nonatomic, retain) IBOutlet UILabel *topicTimeDisplay;
@@ -158,6 +171,7 @@ static const int ENABLE_BONUS_SPEED_GAME = 0;
 @property (nonatomic,retain) Question *question;
 @property (nonatomic,retain) IBOutlet UILabel *difficultyLabel;
 
+@property(nonatomic,retain) IBOutlet UIImageView *explosion;
 
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid0;
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid1;
@@ -222,12 +236,19 @@ static const int ENABLE_BONUS_SPEED_GAME = 0;
 -(void) updateScoreTo:(int)newScore;
 -(void) resetValues;
 -(void) initSound;
--(void) beginFeedbackAnimation;
--(void) beginShieldAnimation;
+
+//-(void) beginFeedbackAnimation;/
+//-(void) beginShieldAnimation;
+-(void)animateShield;
+-(void) animateWarning;
+-(void) animateExplosion;
+
 -(void) asteroidExplosionAnimation:(CGPoint)location;
 -(void) increaseShield;
 -(void) increaseLives;
 -(void) updateFeedbackLabelTo:(NSString*)newText;
+
+
 
 //unit tests
 -(void)gamePausedUnitTest;
