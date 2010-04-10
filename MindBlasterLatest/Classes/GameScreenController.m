@@ -751,7 +751,10 @@
 	[self animateExplosion: shipDestroyed];
 	
 	if(gameOverCounter == 0)     //game is over, initiate loose scenario
+	{
+		gameOverCounter = -1;
 		[self loseScenario];
+	}
 	else if(gameOverCounter >0)   //game is over, allow to run for final animations
 		gameOverCounter--;
 	else						//game is not over so ship should not be hidden
@@ -1647,6 +1650,8 @@
 	
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
+	if(gamePaused == FALSE)  //pause game while entering the help screen
+		[self pauseGame];
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
