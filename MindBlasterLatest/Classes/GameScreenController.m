@@ -547,6 +547,10 @@
 // handle bullet animation and interaction with asteroids
 -(IBAction) fireButton{
 	//update stats with #bullets fired
+	
+	if(gamePaused)  //player cannot fire if the game is paused, the function returns without firing
+		return;
+	
 	[[UIAppDelegate.currentUser stats] setShotsFired: [[UIAppDelegate.currentUser stats] shotsFired] + 1]; //jkehler
 	
 	
@@ -818,10 +822,10 @@
 			int asteroidHeight = [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height;
 			
 			// check boundaries within 60% of width and height (compensates for timer inconsistencies)
-			if(  (tempBullet.bulletPosition.x < asteroidPositionX + asteroidWidth * 0.6) 
-					&& (tempBullet.bulletPosition.x > asteroidPositionX - asteroidWidth * 0.6) 
-					&& (tempBullet.bulletPosition.y < asteroidPositionY + asteroidHeight * 0.6) 
-					&& (tempBullet.bulletPosition.y > asteroidPositionY - asteroidHeight * 0.6)) {		
+			if(  (tempBullet.bulletPosition.x < asteroidPositionX + asteroidWidth * 0.7) 
+					&& (tempBullet.bulletPosition.x > asteroidPositionX - asteroidWidth * 0.7) 
+					&& (tempBullet.bulletPosition.y < asteroidPositionY + asteroidHeight * 0.7) 
+					&& (tempBullet.bulletPosition.y > asteroidPositionY - asteroidHeight * 0.7)) {		
 				
 				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
 				//NSLog(@"bullet position: %f", tempBullet.center.x);
@@ -1676,10 +1680,7 @@
 	
 	UITouch *touch = [[event allTouches] anyObject];		//records touch as touch object
     CGPoint location = [touch locationInView:touch.view];	//records touch's location
-    //NSLog(@"X: %f",location.x);
-    //NSLog(@"Y: %f",location.y);
-	
-	
+
 	double x,y;
 	double radius = 48;  //radius of rotation wheel
 	double radiusSquared = radius*radius; //radius squared
@@ -1737,7 +1738,8 @@
  */
 - (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
 	
-	[self touchesUpdate:touches : event];
+	if(gamePaused == FALSE)  //only execute touch actions, such as rotation if the game is unpaused
+		[self touchesUpdate:touches : event];
 	
 	//[self touchesUpdateUnitTest:touches : event];
 	
@@ -1751,8 +1753,8 @@
 /*This function is called when a finger is dragged on the screen */
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 { 
-	[self touchesUpdate:touches : event];
-	
+	if(gamePaused == FALSE)   //only execute touch actions, such as rotation if the game is unpaused
+		[self touchesUpdate:touches : event];
 }
 
 // override to allow orientations other than the default portrait orientation

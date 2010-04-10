@@ -223,12 +223,12 @@
 	 
 					"You should shoot the asteroid that has the answer to the QUESTION shown in the bottom middle.\n"
 					"If you get hit by asteroids, you will lose shield power.  When you have no shields getting hit by an asteroid will make you lose the game.\n"
-					"If you shoot blank asteroids you get XX points.\n"
-					"If you shoot the correct asteroid you get XX points\n"
-					"If you shoot the wrong asteroid you lose XX points and if you have less than 0 points you lose the game\n\n"
+					"If you shoot blank asteroids you get 1 points.\n"
+					"If you shoot the correct asteroid you get 10 points\n"
+					"If you shoot the wrong asteroid you lose 5 points and if you have less than 0 points you lose the game\n\n"
 					
-					"For every XX points you will go to the next difficulty.\n"
-					"For every XX points you will go to the next topic.\n"
+					"For every 100 points you will go to the next difficulty.\n"
+					"For every 400 points you will go to the next topic.\n"
 					];
 }
 
