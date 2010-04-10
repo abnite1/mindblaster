@@ -35,9 +35,9 @@ static const float ICON_ROTATION_COEFFICIENT = 0.07;
 static const int ASTEROID_SPEED_FACTOR = 1;
 static const int INCORRECT_ANSWER_PROXIMITY = 10;
 static const int ENABLE_BONUS_SPEED_GAME = 0;
-static const float WARNING_ANIMATION_DURATION = 8;
-static const float SHIELD_ANIMATION_DURATION = 60;
-static const float EXPLOSION_ANIMATION_DURATION = 400;
+static const float WARNING_ANIMATION_DURATION = 16;
+static const float SHIELD_ANIMATION_DURATION = 120;
+static const float EXPLOSION_ANIMATION_DURATION = 11;
 
 @interface GameScreenController : UIViewController 
 {
@@ -154,7 +154,10 @@ static const float EXPLOSION_ANIMATION_DURATION = 400;
 	float warningAnimationCounter;
 	float shieldAnimationCounter;
 	float explosionAnimationCounter;
-
+	float gameTicksLeftForExplosionImage;
+	int explosionImageCounter;
+	BOOL shipDestroyed;
+	int gameOverCounter;
 }
 @property (nonatomic) double topicTimeCount;
 @property (nonatomic, retain) IBOutlet UILabel *topicTimeDisplay;
@@ -241,7 +244,7 @@ static const float EXPLOSION_ANIMATION_DURATION = 400;
 //-(void) beginShieldAnimation;
 -(void)animateShield;
 -(void) animateWarning;
--(void) animateExplosion;
+-(void) animateExplosion: (BOOL)shipExploding;
 
 -(void) asteroidExplosionAnimation:(CGPoint)location;
 -(void) increaseShield;

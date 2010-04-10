@@ -146,12 +146,13 @@
 
 }
 
--(void) animateExplosion
-{
+-(void) animateExplosion: (BOOL)shipExploding{
+	
 	float numberOfGameTicksPerImage = EXPLOSION_ANIMATION_DURATION/11.0 ;
-	float gameTicksOnThisImage;
-	int explosionImageCounter ;
-
+	if(shipExploding == TRUE)
+		explosion.transform = CGAffineTransformMakeScale(5, 5);
+	else
+		explosion.transform = CGAffineTransformMakeScale(2, 2);
 	if(explosionAnimationCounter == -1)
 		return;
 	else if(explosionAnimationCounter  ==EXPLOSION_ANIMATION_DURATION)
@@ -160,29 +161,24 @@
 		explosionImageCounter = 0;
 		explosion.image = [explosions objectAtIndex:explosionImageCounter];
 		explosion.hidden = NO;
-		gameTicksOnThisImage = numberOfGameTicksPerImage;
-		NSLog(@"!!!!!!!FIRST = %f >0 %f < 11", explosionAnimationCounter, explosionImageCounter );
+		gameTicksLeftForExplosionImage = numberOfGameTicksPerImage;
 		explosionAnimationCounter--;
-	}
-	else if( explosionAnimationCounter > 0 && gameTicksOnThisImage <0 )
-	{
-		NSLog(@"!!!!!!!HERE = %f", explosionAnimationCounter);
 
+	}
+	else if( explosionAnimationCounter > 0.0 && gameTicksLeftForExplosionImage <=0.0 )
+	{
 		explosionImageCounter++;
 		explosion.image = [explosions objectAtIndex:explosionImageCounter];
-		gameTicksOnThisImage = numberOfGameTicksPerImage;
+		gameTicksLeftForExplosionImage = numberOfGameTicksPerImage;
 		explosionAnimationCounter--;
 	}
 	else if( explosionAnimationCounter > 0.0 )
 	{
-		NSLog(@"!!!!!!!gameTicksOnThisImage = %f", gameTicksOnThisImage);
-		gameTicksOnThisImage = gameTicksOnThisImage - 1.0;
-		NSLog(@"!!!!!!!gameTicksOnThisImage = %f", gameTicksOnThisImage);
+		gameTicksLeftForExplosionImage = gameTicksLeftForExplosionImage - 1.0;
 	}
 	else
 	{
-		NSLog(@"!!!!!!!LAST = %f", explosionAnimationCounter);
-
+		shipDestroyed = FALSE;
 		explosionAnimationCounter = -1;
 		explosion.hidden = YES;
 	}
@@ -341,9 +337,6 @@
 	
 	[super viewDidLoad];
 	
-	//explosion.image = @"expl1.png";
-	
-	//explosion.image =image1;
 	
 	//initialize timecount to 0  //jkehler
 	topicTimeCount = 0;
@@ -374,6 +367,9 @@
 	
 	gamePlayTimerInterval = 0.06; //sverner     //0.03;//jkehler
 	
+	shipDestroyed = FALSE;  //initialize the shipDestroyed variable used by the animateExplosion Funtion
+	
+	gameOverCounter = -1;  //initialize the gameOverCounter variable used to animate the game over warning and explosoin
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
 					 asteroid4,/* asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,*/nil];//jkehler
@@ -723,7 +719,6 @@
 		warningAnimationCounter = WARNING_ANIMATION_DURATION;
 	}
 	gameStarted = 1;
-	//NSLog(@"!!!!!!!!gameStarted =  %d", gameStarted);
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Difficulty: %@", diffMsg];
 	[difficultyLabel setText:msg];
@@ -753,13 +748,21 @@
 		
 	[self animateWarning];
 	[self animateShield];
-	[self animateExplosion];
+	[self animateExplosion: shipDestroyed];
 	
-		asteroidSpeedCounter=0;//reset it to startcounting again.
-		for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)
-		{
-			[[asteroids objectAtIndex: asteroidIndex] move];
-		}
+	if(gameOverCounter == 0)     //game is over, initiate loose scenario
+		[self loseScenario];
+	else if(gameOverCounter >0)   //game is over, allow to run for final animations
+		gameOverCounter--;
+	else						//game is not over so ship should not be hidden
+		shipIcon.hidden = NO;
+		
+	
+	asteroidSpeedCounter=0;//reset it to startcounting again.
+	for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)
+	{
+		[[asteroids objectAtIndex: asteroidIndex] move];
+	}
 		
 	//}else{
 	//	asteroidSpeedCounter++;
@@ -820,11 +823,18 @@
 				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
 				//NSLog(@"bullet position: %f", tempBullet.center.x);
 				
+				//set explosion to the position of the asteroid  //sverner
+				explosion.center =  [[asteroids objectAtIndex: asteroidIndex] asteroidPosition];
+				
 				// destroy asteroid and bullet by hiding them off screen
 				[[asteroids objectAtIndex: asteroidIndex] setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
 				[tempBullet setBulletPosition: 0 :500];
 				tempBullet.bulletIcon.hidden = YES;
 				bulletPos[bulletIndex] = CGPointMake(0,0);
+				
+				//start explosion  //sverner
+				explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+
 				
 			}
 			
@@ -919,9 +929,6 @@
 		//if([as asteroidType] == BLANK_ASTEROID){
 			[self decreaseShield];
 		//}
-		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
-
-		
 	}
 	return NO;
 	
@@ -1006,7 +1013,14 @@
 // decrease lives by one and update the livesLabel
 -(void) decreaseLives {
 	
-	if (lives == 0) [self loseScenario];
+	if (lives == 0) 
+	{
+		shipDestroyed = TRUE;
+		shipIcon.hidden = YES;
+		gameOverCounter = WARNING_ANIMATION_DURATION; 
+		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+		//[self loseScenario];
+	}
 	else {
 		lives--;
 		[self updateLivesTo: lives];
@@ -1014,8 +1028,19 @@
 		//jkehler i dont' think we need anything but an animation here.
 		[self updateFeedbackLabelTo: @"Death really hurts!"];
 		//[self beginFeedbackAnimation];
+		
 		warningAnimationCounter = WARNING_ANIMATION_DURATION;
-		//beginFeedbackAnimation = WARNING_ANIMATION_DURATION;
+		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+		explosion.center = shipIcon.center;
+		shipIcon.hidden = YES;
+		NSLog(@"Ship is destroyed since the player has lost a life.");
+		shipDestroyed = TRUE;
+		//for(int i = 0; i<EXPLOSION_ANIMATION_DURATION; i++)
+		//{
+		//	[self animateExplosion: TRUE];
+
+		//}
+
 	}
 }
 
@@ -1199,9 +1224,10 @@
 	[sound playAsteroidExplosion];
 	
 	// begin explosion animation at current location 
-	
 	//[[asteroids objectAtIndex: asteroidIndex] beginExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
-	[self asteroidExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
+	//[self asteroidExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
+		
+	explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
 	
 	// if we hit the right asteroid
 	if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
@@ -1222,6 +1248,8 @@
 	{
 		[self hitBlankAsteroid: asteroidIndex];
 	}
+	
+
 }
 
 // what to do when a bullet collides with the correct_answer asteroid
@@ -1289,6 +1317,7 @@
 	
 	// reset question and asteroid labels
 	[self setQuestion];
+	
 }
 
 // hit wrong asteroid
@@ -1422,7 +1451,11 @@
 		
 		
 		// initiate lose scenario
-		[self loseScenario];
+		shipDestroyed = TRUE;
+		shipIcon.hidden = YES;
+		gameOverCounter = WARNING_ANIMATION_DURATION; 
+		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+		//[self loseScenario];
 	}
 	
 	// if the current topic is the highest we've done so far, update the highest difficulty.
@@ -1515,6 +1548,25 @@
 // begin lose scenario
 -(void) loseScenario {
 	
+	//ship explodes animation and game over warning
+	[self updateFeedbackLabelTo: @"Game Over!"];
+	warningAnimationCounter = WARNING_ANIMATION_DURATION;
+	explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+	explosion.center = shipIcon.center;
+	shipIcon.hidden = YES;
+	NSLog(@"Ship explodes for game over.");
+	for(int i = 0; i<EXPLOSION_ANIMATION_DURATION; i++)
+	{
+		[self animateExplosion: TRUE ];
+		[self animateWarning];
+		
+	}
+	for(int i=EXPLOSION_ANIMATION_DURATION; i<WARNING_ANIMATION_DURATION; i++)
+	{
+		[self animateWarning];
+		usleep(100000);
+	}
+	
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
@@ -1535,6 +1587,8 @@
 											  otherButtonTitles: @"OK", nil] autorelease];
 	
 	[loseAlert show];
+	
+
 	
 	[self nextScreen];
 }
