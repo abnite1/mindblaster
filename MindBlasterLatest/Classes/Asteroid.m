@@ -284,6 +284,11 @@
 	}
 }
 
+-(CGPoint)returnAsteroidCenter
+{
+	return asteroidIcon.center;
+}
+
 // deallocate objects
 
 -(void) dealloc {

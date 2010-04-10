@@ -72,6 +72,7 @@ static const float ROTATION_COEFFICIENT = 0.07;
 //unit tests
 - (void)initWithElementsUnitTest:(UIImageView*)icon :(UILabel*)label;
 -(void) moveUnitTest;
+-(CGPoint)returnAsteroidCenter;
 
 @end
 
