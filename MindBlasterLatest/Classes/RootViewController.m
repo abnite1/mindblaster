@@ -104,6 +104,9 @@
 // navigate to web broswer
 - (IBAction) webScreen {
 	
+	self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil] autorelease];
+	[self.navigationController setNavigationBarHidden:FALSE animated: NO ];
+	
 	// first load user settings from plist
 	[GlobalAdmin loadSettings];
 	
@@ -113,6 +116,8 @@
 	[webView release];
 	
 }
+
+
 
 
 // selector function for the background animation
@@ -148,7 +153,7 @@
 		[continueButton setEnabled: NO];
 
 	}
-	
+	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
 }
 
