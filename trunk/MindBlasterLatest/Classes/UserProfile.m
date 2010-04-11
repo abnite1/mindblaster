@@ -12,7 +12,7 @@
 
 @implementation UserProfile
 @synthesize currentTopic, lastTopicCompleted, 
-			userName, profilePic, score, highestScore, email, stats;
+userName, profilePic, score, highestScore, email, stats;
 
 // updates the highestScore if the player has surpassed it
 -(IBAction) checkHighestScore {

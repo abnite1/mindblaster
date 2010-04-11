@@ -9,7 +9,7 @@
 //
 
 #import "Asteroid.h"
-#import "MindBlasterAppDelegate.h"
+
 
 @implementation Asteroid
 
@@ -22,24 +22,10 @@
 		
         asteroidIcon = icon;
 		asteroidLabel = label;
-		//int x = icon.center.x;
-		//int y = icon.center.y;
-		//randomize the starting locations. //jkehler
-			int x=460/2;
-			int y=320/2;
-			while(x > 100 && x < 360){
-				x=arc4random()%460;
-			}
-			while(y > 100 && y < 220){
-				y=arc4random()%320;
-			}
-			//[[asteroids objectAtIndex:index] setAsteroidPosition:xloc: yloc];
-			//[[asteroids objectAtIndex:i] setAsteroidPosition:x:y];//reset all the asteroid positions.
-			[self setAsteroidPosition: x : y];
-		
-		
+		int x = icon.center.x;
+		int y = icon.center.y;
 		//NSLog(@"inside the asteroid initWIthElements constructor");
-	//	[self setAsteroidPosition: x : y];
+		[self setAsteroidPosition: x : y];
     }
 	
 	mAngle = 0.0f;
@@ -69,7 +55,7 @@
 			NSLog(@"UNIT TEST FAILED; class: Asteroid; function initWithElements; asteroidLabel not set");			
 			unitTestPassed = FALSE;
 		}	
-
+		
 		if(unitTestPassed == TRUE)
 			NSLog(@"UNIT TEST PASSED; class: Asteroid; function initWithElements");
 	}
@@ -84,24 +70,23 @@
 
 // standard constructor sets the asteroid png and size
 /*
--(id) init {
-	
-	if ( self = [super init] ) {
-		
-		//asteroidIcon = [[UIImageView alloc] initWithImage: @"asteroid6.png"];
-		//asteroidLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 1.0, 1.0)];
-		//[self setAsteroidPosition: CGPointMake(450 - random() % 300, 250 - random() % 100)];
-		//[self move];
-		
-	}
-	return self;
-}
+ -(id) init {
+ 
+ if ( self = [super init] ) {
+ 
+ //asteroidIcon = [[UIImageView alloc] initWithImage: @"asteroid6.png"];
+ //asteroidLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 1.0, 1.0)];
+ //[self setAsteroidPosition: CGPointMake(450 - random() % 300, 250 - random() % 100)];
+ //[self move];
+ 
+ }
+ return self;
+ }
  */
 
 
 // change asteroid direction
-//-(void)setAsteroidDirection:(int)x :(int)y {
--(void)setAsteroidDirection:(float)x : (float)y {
+-(void)setAsteroidDirection:(int)x :(int)y {
 	
 	asteroidDirection = CGPointMake(x,y);
 }
@@ -141,46 +126,9 @@
 	[asteroidIcon setCenter: newPosition];
 	
 	//sets the initial movement vectors
-	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 ){
-		int xdir=0;
-		int ydir=0;
-		/*while(xdir == 0){
-			xdir = arc4random()%ASTEROID_SPEED_FACTOR;
-			if(arc4random()%3 < 2)//50% of the time will swap direction
-				xdir*=-1;
-		}*/
-		
-		//set a random xdirection between -5 and 5 not including 0.
-		xdir = arc4random()%3 + 1;
-		if(arc4random()%3<2)//50% chance to reverse direction.
-			xdir*=-1;
-		
-	/*	while(ydir == 0 || ydir == xdir){ //second condition to reduce number of 45deg angles, too many of those head straight for ship.
-			ydir = arc4random()%ASTEROID_SPEED_FACTOR;
-			if(arc4random()%2 < 2)//50% of the time will swap direction
-				ydir*=-1;
-		}*/
-		ydir = arc4random()%3 + 1;
-		if(arc4random()%3<2)
-			ydir*=-1;
-		
-		//BONUS SPEED OPTION AFTER YOU WIN, keep laying at increasing speed.
-		if(UIAppDelegate.bonusSpeedGameEnable > 0){
-				//speed up asteroids.
-			ydir*=UIAppDelegate.bonusSpeedGameEnable;
-			xdir*=UIAppDelegate.bonusSpeedGameEnable;
-			[UIAppDelegate setBonusSpeedGameEnable:UIAppDelegate.bonusSpeedGameEnable + 1];
-		}
-		
-		NSLog(@"x: %f, y: %f\n",xdir, ydir);
-		[self setAsteroidDirection:xdir :ydir];
-	//	NSLog(@"x: %f, y: %f\n",((float)(arc4random() %30 )) / 10  -1, ((float)(arc4random() %30 )) / 10  -1);
-		//[self setAsteroidDirection:(((float)(arc4random() %30 )) / 10  -1) :(((float)(arc4random() % 30)) / 10 -1)];
-		//[self setAsteroidDirection:((float)(arc4random()%30))/6 - 4
-		//[self setAsteroidDirection:((arc4random()%(ASTEROID_SPEED_FACTOR*2))/(arc4random()%(ASTEROID_SPEED_FACTOR))):((arc4random()%(ASTEROID_SPEED_FACTOR*2))/(arc4random()%ASTEROID_SPEED_FACTOR))];
-		//[self setAsteroidDirection:(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR + 0.2):(((float)(arc4random()%30))/ASTEROID_SPEED_FACTOR) + 0.2];
-	}
-		
+	if ( asteroidDirection.x == 0 || asteroidDirection.y == 0 )
+		[self setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
+	
 }
 
 // moves the asteroid along its direction vector
@@ -189,15 +137,15 @@
 	
 	// define the new target point
 	CGPoint newPosition = CGPointMake(asteroidPosition.x + asteroidDirection.x, 
-										  asteroidPosition.y + asteroidDirection.y);
-		
+									  asteroidPosition.y + asteroidDirection.y);
+	
 	// move the icon and the label
 	[self setAsteroidPosition: newPosition.x :newPosition.y];
-		
+	
 	asteroidIcon.center = CGPointMake(asteroidPosition.x + asteroidDirection.x, 
 									  asteroidPosition.y + asteroidDirection.y);
 	asteroidLabel.center = CGPointMake(asteroidPosition.x + asteroidDirection.x, 
-									  asteroidPosition.y + asteroidDirection.y);
+									   asteroidPosition.y + asteroidDirection.y);
 	
 	// rotate the icon
 	asteroidIcon.transform=CGAffineTransformMakeRotation (mAngle);
@@ -205,7 +153,7 @@
 	
 	//[self bounceOffBoundaries];
 	[self phaseToOtherSide];
-		
+	
 	//NSLog(@"end of move");	
 }
 -(void) moveUnitTest {
@@ -221,7 +169,7 @@
 		NSLog(@"UNIT TEST PASSED; class: Asteroid; function move");	
 	else
 		NSLog(@"UNIT TEST FAILED; class: Asteroid; function move; asteroidLabel or asteroidIcon did not move correctly " );	
-		
+	
 	
 }
 // bounce the asteroid off the walls
@@ -282,11 +230,6 @@
 		// change the x position to the other side of screen
 		[self setAsteroidPosition: asteroidPosition.x : screenHeight /*+ asteroidIcon.bounds.size.height -1*/];	
 	}
-}
-
--(CGPoint)returnAsteroidCenter
-{
-	return asteroidIcon.center;
 }
 
 // deallocate objects

@@ -18,7 +18,7 @@
 	direction = 0.0f;
 	pos.x = icon.center.x;
 	pos.y = icon.center.y;
-
+	
 }
 
 -(void)setIconUnitTest:(UIImageView*)icon {
@@ -31,7 +31,7 @@
 	if(shipIcon == nil  && icon != nil)
 	{
 		NSLog(@"UNIT TEST FAILED; class: Ship; function: setIcon; shipIcon not set");
-
+		
 	}
 	else
 		NSLog(@"UNIT TEST PASSED; class: Ship; function: setIcon");
@@ -47,11 +47,11 @@
 }
 
 /*
--(IBAction)rotate {
-	
-	//direction += M_PI_4;
-	[self rotateByAngle: direction];
-}
+ -(IBAction)rotate {
+ 
+ //direction += M_PI_4;
+ [self rotateByAngle: direction];
+ }
  
  if([self checkCollisionOf: [asteroids objectAtIndex: 1] with : [asteroids objectAtIndex: 2]] == YES)
  {
@@ -68,34 +68,34 @@
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView {
+ }
+ */
 
 /*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
+ // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ - (void)viewDidLoad {
+ [super viewDidLoad];
+ }
+ */
 
 /*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

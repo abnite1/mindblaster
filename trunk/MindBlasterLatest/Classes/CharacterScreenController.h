@@ -22,7 +22,7 @@
 #import "MindBlasterAppDelegate.h"
 
 @interface CharacterScreenController : UIViewController {
-
+	
     IBOutlet UIButton *charOne;
 	IBOutlet UIButton *charTwo;
 	IBOutlet UIButton *charThree;

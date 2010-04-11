@@ -17,7 +17,7 @@
 	IBOutlet BackgroundAnimation *background;
 	IBOutlet UIButton *okButton;
 	
-
+	
 }
 
 

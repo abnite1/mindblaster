@@ -95,22 +95,22 @@
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 
 /*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -126,119 +126,119 @@
 
 // change label to respond to parent
 -(void) respondToRoot {
- 
+	
 	[text setText: @"\n\n"
 	 
-					 "[Continue] (with existing profile).\n\n"
+	 "[Continue] (with existing profile).\n\n"
 	 
-					 "[New Game] -	Create a new profile and start a new game.\n\n"
+	 "[New Game] -	Create a new profile and start a new game.\n\n"
 	 
-					 "[Load Game] -	Load or a save your profile online."];
+	 "[Load Game] -	Load or a save your profile online."];
 }
 
 // change label to respond to parent
 -(void) respondToTopic {
 	[text setText: @"\n\n"
 	 
-					"Choose a topic by touching any of the available options then press OK to continue.\n\n"
+	 "Choose a topic by touching any of the available options then press OK to continue.\n\n"
 	 
-					"[+]		Addition\n"
-					"[-]		Subtrction\n"
-					"[x]		Multiplication\n"
-					"[/]		Division\n\n"
+	 "[+]		Addition\n"
+	 "[-]		Subtrction\n"
+	 "[x]		Multiplication\n"
+	 "[/]		Division\n\n"
 	 
-					"[OK] - Continue to the next menu.\n"
-					"[BACK] - Go back to the previous menu."];
+	 "[OK] - Continue to the next menu.\n"
+	 "[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToCharacter {
 	[text setText: @"\n\n"
 	 
-					"Select your profile character by touching any of the available pictures.\n\n"
+	 "Select your profile character by touching any of the available pictures.\n\n"
 	 
-					"[BACK] - Go back to the previous menu."];
+	 "[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToDifficulty {
 	[text setText: @"\n\n"
-					
-					"Select a difficulty by touching any of the available options then press OK to continue. \n\n"
-					
-					"[EASIEST]	- Operand range between 0 and 10.\n\n"
 	 
-					"[EASY]		- Operand range between 0 and 20.\n\n"
+	 "Select a difficulty by touching any of the available options then press OK to continue. \n\n"
 	 
-					"[HARD]		- Operand range between 0 and 30.\n\n"
+	 "[EASIEST]	- Operand range between 0 and 10.\n\n"
 	 
-					"[HARDEST]	- Operand range between 0 and 40.\n\n"
+	 "[EASY]		- Operand range between 0 and 20.\n\n"
 	 
-					"[OK] - Continue to the next menu.\n"
-					"[BACK] - Go back to the previous menu."];
+	 "[HARD]		- Operand range between 0 and 30.\n\n"
+	 
+	 "[HARDEST]	- Operand range between 0 and 40.\n\n"
+	 
+	 "[OK] - Continue to the next menu.\n"
+	 "[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToUsername {
 	[text setText: @"\n\n"
-					
-					"Touch the empty text boxes to enter your profile name and email then press OK to continue.\n\n"
 	 
-					"[OK] - Continue to the next menu.\n"
-					
-					"[BACK] - Go back to the previous menu."];
+	 "Touch the empty text boxes to enter your profile name and email then press OK to continue.\n\n"
+	 
+	 "[OK] - Continue to the next menu.\n"
+	 
+	 "[BACK] - Go back to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToNetwork {
 	[text setText: @"\n\n"
 	 
-	 			"[UPLOAD]		- Save your progress to the website.\n\n"
+	 "[UPLOAD]		- Save your progress to the website.\n\n"
 	 
-				"[DOWNLOAD]	- Get your profile from the website. \n\n"
+	 "[DOWNLOAD]	- Get your profile from the website. \n\n"
 	 
-				"[BACK] - Return to the previous menu."];
+	 "[BACK] - Return to the previous menu."];
 }
 
 // change label to respond to parent
 -(void) respondToGameScreen {
 	[text setText: @"\n\n"
 	 
-					"----- SCREEN LAYOUT -----\n\n"
+	 "----- SCREEN LAYOUT -----\n\n"
 	 
-					"The top of the screen (from left to right) shows your CHARACTER PICTURE, CURRENT DIFFICULTY, PAUSE BUTTON, LIVES REMAINING and YOUR SCORE.  Below your LIVES"
-					"REMAINING is your SHIELD BAR which shows how much shields you have on your current life\n\n"
+	 "The top of the screen (from left to right) shows your CHARACTER PICTURE, CURRENT DIFFICULTY, PAUSE BUTTON, LIVES REMAINING and YOUR SCORE.  Below your LIVES"
+	 "REMAINING is your SHIELD BAR which shows how much shields you have on your current life\n\n"
 	 
-					"In the center of your screen is your SHIP\n\n"
+	 "In the center of your screen is your SHIP\n\n"
 	 
-					"The left side is the ROTATION WHEEL, which rotates your ship\n\n"
+	 "The left side is the ROTATION WHEEL, which rotates your ship\n\n"
 	 
-					"The right side is the FIRE BUTTON, which fires your ships lasers\n\n"
+	 "The right side is the FIRE BUTTON, which fires your ships lasers\n\n"
 	 
-					"The bottom center is the QUESTION you have to answer and under that is how much time you've spent on the current topic.\n\n"
+	 "The bottom center is the QUESTION you have to answer and under that is how much time you've spent on the current topic.\n\n"
 	 
-					"The top right is the help button, which you obviously know or you wouldn't be reading this\n\n"
-	
-					"----- HOW TO PLAY -----\n\n"
+	 "The top right is the help button, which you obviously know or you wouldn't be reading this\n\n"
 	 
-					"You should shoot the asteroid that has the answer to the QUESTION shown in the bottom middle.\n"
-					"If you get hit by asteroids, you will lose shield power.  When you have no shields getting hit by an asteroid will make you lose the game.\n"
-					"If you shoot blank asteroids you get 1 points.\n"
-					"If you shoot the correct asteroid you get 10 points\n"
-					"If you shoot the wrong asteroid you lose 5 points and if you have less than 0 points you lose the game\n\n"
-					
-					"For every 100 points you will go to the next difficulty.\n"
-					"For every 400 points you will go to the next topic.\n"
-					];
+	 "----- HOW TO PLAY -----\n\n"
+	 
+	 "You should shoot the asteroid that has the answer to the QUESTION shown in the bottom middle.\n"
+	 "If you get hit by asteroids, you will lose shield power.  When you have no shields getting hit by an asteroid will make you lose the game.\n"
+	 "If you shoot blank asteroids you get XX points.\n"
+	 "If you shoot the correct asteroid you get XX points\n"
+	 "If you shoot the wrong asteroid you lose XX points and if you have less than 0 points you lose the game\n\n"
+	 
+	 "For every XX points you will go to the next difficulty.\n"
+	 "For every XX points you will go to the next topic.\n"
+	 ];
 }
 
 // change label to respond to parent
 -(void) respondToGameOver {
 	[text setText: @"\n\n"
-	
-					"[TRY AGAIN]		- Returns to the game, just where you left off with full lives and shield.\n"
-					"[CHANGE TOPIC]	- Go to the topic selection menu and choose another topic.\n"
-					"[MAIN MENU]		- Go back to the main menu"];
+	 
+	 "[TRY AGAIN]		- Returns to the game, just where you left off with full lives and shield.\n"
+	 "[CHANGE TOPIC]	- Go to the topic selection menu and choose another topic.\n"
+	 "[MAIN MENU]		- Go back to the main menu"];
 }
 
 

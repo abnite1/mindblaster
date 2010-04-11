@@ -31,7 +31,7 @@ enum {
 };
 
 @interface NetworkController : UIViewController <UIAlertViewDelegate>{
-
+	
     
 	// for upload	
     NSOutputStream *					networkStreamOut;
@@ -50,7 +50,7 @@ enum {
 	IBOutlet UIImageView *				imageView;
 	IBOutlet UIActivityIndicatorView *	activityIndicator;
 	IBOutlet UILabel *					statusLabel;
-
+	
 	IBOutlet UIWebView *				webView;
 	IBOutlet UIButton *					uploadButton;
 	IBOutlet UIButton *					downloadButton;
@@ -61,7 +61,7 @@ enum {
 	IBOutlet UITextField *				emailDown;
 	IBOutlet UITextField *				emailUp;
 	int									connectionType;
-
+	
 }
 
 

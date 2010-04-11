@@ -19,7 +19,7 @@
 - (id)initWithTopic:(int)newTopic {
 	
     if ( self = [super init] ) {
-
+		
 		// set the topic
         topic = newTopic;
 		
@@ -49,7 +49,7 @@
 
 // sets the description according to the topic type
 -(void) initDescription {
-	 
+	
 	// set the operator
 	if (topic == TOPIC_ADDITION)			description = [[[NSString alloc] initWithString: @"Addition."] autorelease];
 	else if (topic == TOPIC_SUBTRACTION)	description = [[[NSString alloc] initWithString: @"Subtraction."] autorelease];
@@ -64,7 +64,7 @@
 	
 	if (topic == MAX_TOPICS)
 		return NO;
-
+	
 	// otherwise increment topic type and reset difficulty
 	difficulty = DIFFICULTY_EASIEST;
 	topic++;

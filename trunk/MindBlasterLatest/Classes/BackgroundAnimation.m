@@ -22,8 +22,8 @@
 - (void)move {
 	self.center=CGPointMake(self.center.x + mXSpeed, self.center.y + mYSpeed);
 	if (!CGRectContainsRect(self.superview.frame, self.frame))
-
-	self.transform=CGAffineTransformMakeRotation (mAngle);
+		
+		self.transform=CGAffineTransformMakeRotation (mAngle);
 	mAngle+=0.001;   
 }
 @end

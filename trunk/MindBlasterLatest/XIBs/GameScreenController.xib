@@ -123,21 +123,6 @@
 							<string key="NSResourceName">asteroid_2.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="85446330">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{164, 92}, {34, 32}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">expl8.png</string>
-						</object>
-					</object>
 					<object class="IBUIImageView" id="93753069">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
@@ -500,7 +485,7 @@
 					<object class="IBUILabel" id="1042794342">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{143, 211}, {265, 69}}</string>
+						<string key="NSFrame">{{204, 211}, {106, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -519,7 +504,6 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">2.100000e+01</float>
-						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIImageView" id="219260193">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -566,6 +550,21 @@
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
 						<int key="IBUITextAlignment">1</int>
+					</object>
+					<object class="IBUIImageView" id="852327120">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{134, 54}, {33, 32}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">expl1.png</string>
+						</object>
 					</object>
 				</object>
 				<string key="NSFrameSize">{484, 302}</string>
@@ -843,9 +842,9 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">explosion</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="85446330"/>
+						<reference key="destination" ref="852327120"/>
 					</object>
-					<int key="connectionID">120</int>
+					<int key="connectionID">122</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -880,6 +879,7 @@
 							<reference ref="109073762"/>
 							<reference ref="55847086"/>
 							<reference ref="593760601"/>
+							<reference ref="1042794342"/>
 							<reference ref="504123250"/>
 							<reference ref="87864639"/>
 							<reference ref="99079399"/>
@@ -893,9 +893,8 @@
 							<reference ref="809723630"/>
 							<reference ref="219260193"/>
 							<reference ref="202690233"/>
+							<reference ref="852327120"/>
 							<reference ref="163454617"/>
-							<reference ref="1042794342"/>
-							<reference ref="85446330"/>
 						</object>
 						<reference key="parent" ref="935461785"/>
 					</object>
@@ -1067,7 +1066,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">119</int>
-						<reference key="object" ref="85446330"/>
+						<reference key="object" ref="852327120"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -1118,7 +1117,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameScreenController</string>
 					<string>UIResponder</string>
-					<string>{{398, 113}, {484, 302}}</string>
+					<string>{{250, 261}, {484, 302}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1175,7 +1174,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">120</int>
+			<int key="maxID">122</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

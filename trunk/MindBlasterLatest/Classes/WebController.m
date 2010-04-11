@@ -10,29 +10,23 @@
 
 
 @implementation WebController
-@synthesize back;
 
-- (IBAction) backScreen {
-	
-	[self.navigationController popViewControllerAnimated:TRUE];
-}
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-	
-    [super viewDidLoad];
-}
-
+/*
+ // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ - (void)viewDidLoad {
+ [super viewDidLoad];
+ }
+ */
 
 
 // Override to allow orientations other than the default portrait orientation.
@@ -50,7 +44,6 @@
 }
 
 - (void)viewDidUnload {
-	
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
@@ -65,9 +58,6 @@
 	
 	[self showWebView];
 	
-	//set back button ontop BUT ITS NOT WORKING.
-	//[[back superview] bringSubviewToFront:back]; 
-
 }
 
 -(void) showWebView {
@@ -81,7 +71,7 @@
 	// get the user email if a profile exists and an email has been entered
 	NSString * email;
 	if ([UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser email] != nil) {
-	
+		
 		email = [[NSString alloc] initWithString: [UIAppDelegate.currentUser email]];
 	}
 	else {
@@ -110,12 +100,12 @@
 
 // navigate to the previous page
 -(IBAction) goBack:(id)sender {
-
+	
 	NSLog(@"webview url: %@", [webView.request.URL path]);
 	
 	// if there's no connection or if it's the homepage go back to root menu
 	if (![GlobalAdmin connectedToNetwork] || [[webView.request.URL path] isEqual: @"/showuser.php"]) {
-
+		
 		NSLog(@"home page");
 		// navigate to the help menu
 		[self.navigationController popViewControllerAnimated:TRUE];

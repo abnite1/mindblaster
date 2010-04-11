@@ -7,7 +7,7 @@
 
 /*
  *	first application view, displays the moving space animation and allows the user to load a game or starta new one.
-*/
+ */
 
 
 #import <UIKit/UIKit.h>

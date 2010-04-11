@@ -19,7 +19,6 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize currentUser;
-@synthesize bonusSpeedGameEnable;
 
 
 // executed when user quit the app
@@ -28,7 +27,7 @@
 	// the AppDelegate profile
 	currentUser = [[UserProfile alloc] init];
 	
-
+	
 	
     // Override point for customization after app launch    
 	
@@ -47,7 +46,7 @@
 	
 	[audioPlayer prepareToPlay];
 	[audioPlayer play];
-
+	
 }
 
 // plays a menu button click
@@ -69,7 +68,7 @@
 	
 	if (flag) NSLog(@"finished playing successfully.");
 	else NSLog(@"Error while playing.");
-
+	
 	[player release];
 }
 

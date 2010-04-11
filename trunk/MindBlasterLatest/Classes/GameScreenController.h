@@ -31,18 +31,14 @@
 
 
 // constants
-static const float ICON_ROTATION_COEFFICIENT = 0.07;
-static const int ASTEROID_SPEED_FACTOR = 1;
-static const int INCORRECT_ANSWER_PROXIMITY = 10;
-static const int ENABLE_BONUS_SPEED_GAME = 0;
-static const float WARNING_ANIMATION_DURATION = 16;
-static const float SHIELD_ANIMATION_DURATION = 120;
+static const float ICON_ROTATION_COEFFICIENT	= 0.07;
+
+static const float WARNING_ANIMATION_DURATION	= 16;
+static const float SHIELD_ANIMATION_DURATION	= 120;
 static const float EXPLOSION_ANIMATION_DURATION = 11;
 
 @interface GameScreenController : UIViewController 
 {
-	int asteroidSpeedCounter;
-	//int bonusSpeedGameEnable;
 	// background space animation
 	IBOutlet BackgroundAnimation *background;
 	IBOutlet UIButton *profilePic;
@@ -56,16 +52,14 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 	
 	// this holds an array of asteroids
 	NSMutableArray *asteroids;
-	NSMutableArray *explosions;
 	
 	//timer variables
 	NSTimer *gamePlayTimer;
 	double gamePlayTimerInterval;
-	//NSNumber *topicTimeCount;
+	
 	double topicTimeCount;
 	IBOutlet UILabel *topicTimeDisplay;
 	
-	//IBOutlet UIImageView *ship;
 	
 	// the initial image outlets, because we don't yet know how to create images without connecting
 	// them through interface builder
@@ -80,11 +74,8 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 	IBOutlet UIImageView *asteroid7;
 	IBOutlet UIImageView *asteroid8;
 	IBOutlet UIImageView *asteroid9;
+	
 	IBOutlet UIImageView *explosion;
-	
-	//UIImage *image1 = [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"expl1" ofType:@"png"]];
-
-	
 	
 	// and one array to rule them all and in the darkness bind them
 	NSMutableArray *asteroidIcons;
@@ -107,13 +98,13 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 	// one array to bind the bullet icons
 	NSMutableArray *bulletIcons;
 	NSMutableArray *bullets;
-
+	
 	CGPoint bulletPos[6];
 	
 	// this should go in teh Ship class
 	double shipDirectionX;
 	double shipDirectionY;
-
+	
 	Question *question;
 	
 	IBOutlet UILabel *questionLabel; 
@@ -128,10 +119,10 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 	IBOutlet UILabel *solutionLabel4;
 	IBOutlet UILabel *solutionLabel5;
 	
-	IBOutlet UIImageView *animatedExplosion;
 	
 	// and one array to bind them
 	NSMutableArray *solutionLabels;
+	NSMutableArray *explosions;
 	
 	// the scoreboard
 	IBOutlet UILabel *scoreLabel;
@@ -139,7 +130,6 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 	//int score;
 	int lives;
 	int shield;
-	float shieldPower;
 	
 	// number of asteroids
 	int maxAsteroids;
@@ -157,12 +147,15 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 	float gameTicksLeftForExplosionImage;
 	int explosionImageCounter;
 	BOOL shipDestroyed;
-	int gameOverCounter;
+	int gameOverCounter;	
+	float shieldPower;
 }
+
+@property(nonatomic,retain) IBOutlet UIImageView *explosion;
 @property (nonatomic) double topicTimeCount;
 @property (nonatomic, retain) IBOutlet UILabel *topicTimeDisplay;
 
-@property (nonatomic, retain) IBOutlet UIImageView *animatedExplosion;
+//@property (nonatomic, retain) IBOutlet UIImageView *animatedExplosion;
 
 @property (nonatomic,retain) IBOutlet BackgroundAnimation *background;
 @property (nonatomic, retain) Sound *sound;
@@ -174,7 +167,6 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 @property (nonatomic,retain) Question *question;
 @property (nonatomic,retain) IBOutlet UILabel *difficultyLabel;
 
-@property(nonatomic,retain) IBOutlet UIImageView *explosion;
 
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid0;
 @property(nonatomic,retain) IBOutlet UIImageView *asteroid1;
@@ -221,7 +213,6 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 -(void) hitBlankAsteroid:(int)index;
 -(IBAction) setDifficultyLabel;
 -(void) setAnswer;
-//-(void) initializeBulletPosition;
 -(void) animateBackground;
 -(void) loseScenario;
 -(void) winScenario;
@@ -237,21 +228,18 @@ static const float EXPLOSION_ANIMATION_DURATION = 11;
 -(void) updateLivesTo:(int)newVal;
 -(void) updateShieldTo:(int)newVal;
 -(void) updateScoreTo:(int)newScore;
+-(void) updateFeedbackLabelTo:(NSString*)newText;
 -(void) resetValues;
 -(void) initSound;
-
-//-(void) beginFeedbackAnimation;/
-//-(void) beginShieldAnimation;
--(void)animateShield;
--(void) animateWarning;
--(void) animateExplosion: (BOOL)shipExploding;
-
--(void) asteroidExplosionAnimation:(CGPoint)location;
+-(void) beginFeedbackAnimation;
+-(void) beginShieldAnimation;
+//-(void) asteroidExplosionAnimation:(CGPoint)location;
 -(void) increaseShield;
 -(void) increaseLives;
--(void) updateFeedbackLabelTo:(NSString*)newText;
 
-
+-(void) animateExplosion: (BOOL)shipExploding;
+-(void) animateShield;
+-(void) animateWarning;
 
 //unit tests
 -(void)gamePausedUnitTest;
