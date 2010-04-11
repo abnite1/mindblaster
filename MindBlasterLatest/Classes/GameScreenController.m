@@ -16,9 +16,8 @@
 @synthesize background, profilePic, difficultyLabel, feedbackLabel;
 @synthesize sound;
 @synthesize topicTimeCount, topicTimeDisplay;
-@synthesize animatedExplosion;
-
 @synthesize explosion;
+
 @synthesize shipIcon, ship, shieldBar;
 @synthesize asteroid0, asteroid1, asteroid2, asteroid3, asteroid4, asteroid5, asteroid6, asteroid7, asteroid8, asteroid9;
 //@synthesize asteroidIcons;  //this is the vector which will hold all of the above asteroid objects
@@ -32,50 +31,6 @@
 @synthesize solutionLabel0,solutionLabel1,solutionLabel2,solutionLabel3,solutionLabel4,solutionLabel5;
 //@synthesize solutionLabels; //this is the vector which will hold all of the above solution objects
 
-
-// animate the space background
-// and rotate shield and controller icons
--(void)animateBackground {
-	
-	// move animation
-	[background move];
-	
-	// rotate the ship shield icon and direction controller
-	rotationController.transform=CGAffineTransformMakeRotation ([ship direction]);
-	
-	
-	// rotates the shield
-	shipShield.transform = CGAffineTransformRotate(shipShield.transform, iconRotationAngle);
-	
-	
-	// increment angle
-	iconRotationAngle += ICON_ROTATION_COEFFICIENT;
-	
-}
-/*
-// starts fadein/fadeout animation for feedback label
--(void) beginFeedbackAnimation {
-	
-	feedbackLabel.hidden = NO;
-	feedbackLabel.alpha = 0;
-	feedbackLabel.transform = CGAffineTransformMakeScale(0.5, 0.5);
-	
-	// start animation seq.
-	[UIView beginAnimations: nil context: NULL];
-	
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 1];
-	[UIView setAnimationRepeatCount: 1];
-	
-	feedbackLabel.alpha = 1;
-	feedbackLabel.transform = CGAffineTransformIdentity;
-	
-	// end animation
-	[UIView commitAnimations];
-}
-*/
-
-//animnates warnings such as Correct and Incorrect from the onTimer function
 -(void) animateWarning{
 	if(warningAnimationCounter == -1)
 		return;
@@ -101,30 +56,9 @@
 		feedbackLabel.hidden = YES;
 	}
 }
-/*
-// starts the decreased shield animation sequence
--(void) beginShieldAnimation {
-	
-	shipShield.alpha = 0.0;
-	
-	// start of animation seq.
-	[UIView beginAnimations: nil context: NULL];
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 0.7];
-	[UIView setAnimationRepeatCount: 1];
-	
-	shipShield.alpha = shieldPower;
-	
-	// end animation
-	[UIView commitAnimations];
-	
-}
-*/
-
-//animates the shield when the shield is hit by an asteroid
 -(void) animateShield 
 {
-
+	
 	if(shieldAnimationCounter == -1)
 		return;
 	else if(shieldAnimationCounter  ==SHIELD_ANIMATION_DURATION)
@@ -143,30 +77,36 @@
 		shieldAnimationCounter = -1;
 		shipShield.alpha =shieldPower;
 	}
-
+	
 }
 
 -(void) animateExplosion: (BOOL)shipExploding{
 	
 	float numberOfGameTicksPerImage = EXPLOSION_ANIMATION_DURATION/11.0 ;
-	if(shipExploding == TRUE)
+	
+	if(shipExploding == TRUE)  //ship explosion is bigger
 		explosion.transform = CGAffineTransformMakeScale(5, 5);
-	else
+	else   //asteroid explosion is smaller
 		explosion.transform = CGAffineTransformMakeScale(2, 2);
+	
 	if(explosionAnimationCounter == -1)
 		return;
 	else if(explosionAnimationCounter  ==EXPLOSION_ANIMATION_DURATION)
 	{
+		if(shipExploding == TRUE)  //explosion sound when ship is destroyed
+			[sound playAsteroidExplosion];
 		
 		explosionImageCounter = 0;
 		explosion.image = [explosions objectAtIndex:explosionImageCounter];
 		explosion.hidden = NO;
 		gameTicksLeftForExplosionImage = numberOfGameTicksPerImage;
 		explosionAnimationCounter--;
-
+		
+		
 	}
 	else if( explosionAnimationCounter > 0.0 && gameTicksLeftForExplosionImage <=0.0 )
 	{
+		
 		explosionImageCounter++;
 		explosion.image = [explosions objectAtIndex:explosionImageCounter];
 		gameTicksLeftForExplosionImage = numberOfGameTicksPerImage;
@@ -183,6 +123,67 @@
 		explosion.hidden = YES;
 	}
 }
+
+
+// animate the space background
+// and rotate shield and controller icons
+-(void)animateBackground {
+	
+	// move animation
+	[background move];
+	
+	// rotate the ship shield icon and direction controller
+	rotationController.transform=CGAffineTransformMakeRotation ([ship direction]);
+	
+	
+	// rotates the shield
+	shipShield.transform = CGAffineTransformRotate(shipShield.transform, iconRotationAngle);
+	
+	
+	// increment angle
+	iconRotationAngle += ICON_ROTATION_COEFFICIENT;
+	
+}
+
+// starts fadein/fadeout animation for feedback label
+-(void) beginFeedbackAnimation {
+	
+	feedbackLabel.hidden = NO;
+	feedbackLabel.alpha = 0;
+	feedbackLabel.transform = CGAffineTransformMakeScale(0.5, 0.5);
+	
+	// start animation seq.
+	[UIView beginAnimations: nil context: NULL];
+	
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1];
+	[UIView setAnimationRepeatCount: 1];
+	
+	feedbackLabel.alpha = 1;
+	feedbackLabel.transform = CGAffineTransformIdentity;
+	
+	// end animation
+	[UIView commitAnimations];
+}
+
+// starts the decreased shield animation sequence
+-(void) beginShieldAnimation {
+	
+	shipShield.alpha = 0.0;
+	
+	// start of animation seq.
+	[UIView beginAnimations: nil context: NULL];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 0.7];
+	[UIView setAnimationRepeatCount: 2];
+	
+	shipShield.alpha = 1.0;
+	
+	// end animation
+	[UIView commitAnimations];
+	
+}
+
 // delegate function to take effect at the end of animation
 -(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
 	
@@ -266,9 +267,9 @@
 	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
 	
 	iconRotationAngle = 0.0f;
-	asteroidSpeedCounter = 0;//jkehler
+	//	animatedExplosion.hidden = YES;
 	
-//	NSLog(@"gamescreen view did appear.");
+	NSLog(@"gamescreen view did appear.");
 	
 	// set the screen title
 	[self.navigationController setTitle: @"gameScreenView"];
@@ -276,7 +277,7 @@
 	// if the game is paused when returning to view, unpause.
 	if (gamePaused) {
 		
-		//NSLog(@"unpausing game in viewdidappear");
+		NSLog(@"unpausing game in viewdidappear");
 		[self pauseGame];
 	}
 	
@@ -288,7 +289,7 @@
 		[sound playBG];
 		[sound setBgIsPlaying: YES];
 	}
-
+	
 }
 
 // delegate for what to do before leaving screen
@@ -312,7 +313,7 @@
 	
 	[sound release];
 	
-	//NSLog(@"after sound release in view will disappear");
+	NSLog(@"after sound release in view will disappear");
 	sound = nil;
 	
 	// compare score and save to profile if necessary
@@ -328,7 +329,7 @@
 // another delegate for view lifespan
 -(void) viewDidDisappear:(BOOL)animated {
 	
-	//NSLog(@"inside view did disappear");
+	NSLog(@"inside view did disappear");
 }
 
 
@@ -337,15 +338,10 @@
 	
 	[super viewDidLoad];
 	
-	
 	//initialize timecount to 0  //jkehler
 	topicTimeCount = 0;
-	UIAppDelegate.bonusSpeedGameEnable=0;
 	
-	//NSLog(@"started viewDidLoad");
-	
-	//shieldPower initialized at 1 or full power
-	shieldPower = 1;
+	NSLog(@"started viewDidLoad");
 	
 	// initialize feedbackLabel
 	[feedbackLabel setText: @""];
@@ -359,17 +355,25 @@
 	[self checkCollisionOfUnitTest];
 #endif
 	
-	//gamePausedUnitTest();
+	//shieldPower initialized at 1 or full power
+	shieldPower = 1;
 	
 	// the initial setting actually starts the timer
 	gamePaused = FALSE;
 	[self pauseGame];
 	
-	gamePlayTimerInterval = 0.06; //sverner     //0.03;//jkehler
+	gamePlayTimerInterval = 0.03;
 	
 	shipDestroyed = FALSE;  //initialize the shipDestroyed variable used by the animateExplosion Funtion
 	
 	gameOverCounter = -1;  //initialize the gameOverCounter variable used to animate the game over warning and explosoin
+	
+	NSString *explosionName2 ;
+	for(int i = 1; i<= 11; i++)
+	{  
+		explosionName2 = [[NSString alloc] initWithFormat:@"expl%d", i];
+		[explosions addObject: [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:  explosionName2 ofType:@"png"] ]];
+	}
 	
 	asteroidIcons = [[NSMutableArray alloc] initWithObjects: asteroid0, asteroid1, asteroid2, asteroid3,
 					 asteroid4,/* asteroid5, asteroid6, asteroid7, asteroid8, asteroid9,*/nil];//jkehler
@@ -381,23 +385,22 @@
 	
 	asteroids = [[NSMutableArray alloc] init];
 	[asteroids retain];
+	
 	bullets = [[NSMutableArray alloc] init];
 	[bullets retain];
+	
 	explosions = [[NSMutableArray alloc] init];
 	[explosions retain];
 	
-
-	//declare the explosion images and save them in the explosions array for use in the explosion animation
-	NSString *explosionName ;
+	NSString *explosionName3;
 	for(int i = 1; i<= 11; i++)
 	{  
-		explosionName = [[NSString alloc] initWithFormat:@"expl%d", i];
-		[explosions addObject: [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:  explosionName ofType:@"png"] ]];
+		explosionName3 = [[NSString alloc] initWithFormat:@"expl%d", i];
+		[explosions addObject: [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:  explosionName3 ofType:@"png"] ]];
+		[explosionName3 release];
 	}
 	
-	//[explosions addObject: [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:  explosionName ofType:@"png"] ]];
-	
-	NSLog(@"allocated solutionLabels");
+	//NSLog(@"allocated solutionLabels");
 	// set the gamescreen label for the selected difficulty
 	[self setDifficultyLabel];
 	
@@ -411,20 +414,20 @@
 	// because we want the shield to lose .1 of its size on each hit and multiplication is safer than division.
 	// so we start at 1.3 and go down to the original size (that being * 1.0).
 	shieldBarMultiplier = 1.3;
-
+	
 	
 	// initialize lives
 	[self updateLivesTo: 3];
 	
-	NSLog(@"allocated asteroids");
+	//NSLog(@"allocated asteroids");
 	
-	// for all 6 correct/incorrect solution asteroids in the array, attach an image and a label
+	// for all 6 correct/incorrect solution asteroids in the array, attach an image andd a label
 	
 	for (int i = 0; i < 5; i++) {
 		
 		if (i < 4) {
 			
-			// for the first 3 asteroids attach an image and a label
+			// for the first 6 asteroids attach an image and a label
 			asteroid = [[Asteroid alloc] initWithElements: [asteroidIcons objectAtIndex: i]: 
 						[solutionLabels objectAtIndex: i]];
 			[asteroids addObject: asteroid];
@@ -467,7 +470,7 @@
 	//set the profile pic!
 	int picIndex = [UIAppDelegate.currentUser profilePic];
 	[profilePic setImage: [GlobalAdmin getPic: picIndex] forState:0];
-
+	
 	
 	[NSTimer scheduledTimerWithTimeInterval: 0.01 target: self//changed 0.01 from 0.08
 								   selector:@selector(animateBackground) userInfo: nil repeats: YES];
@@ -500,9 +503,6 @@
 	
 	//incrementor which denotes the next bullet to be fired, the 0th bullet is fired first
 	bulletsFired = 0;
-	
-	if(gameStarted != TRUE)
-		gameStarted = FALSE;
 	
 	//automated unit testing
 #if (UNIT_TESTS_EXECUTED ==1)
@@ -547,10 +547,6 @@
 // handle bullet animation and interaction with asteroids
 -(IBAction) fireButton{
 	//update stats with #bullets fired
-	
-	if(gamePaused)  //player cannot fire if the game is paused, the function returns without firing
-		return;
-	
 	[[UIAppDelegate.currentUser stats] setShotsFired: [[UIAppDelegate.currentUser stats] shotsFired] + 1]; //jkehler
 	
 	
@@ -596,7 +592,6 @@
 	[self setAnswer];
 	//[question release];
 }
-
 -(void) setQuestionUnitTest {
 	[self setQuestion];
 	BOOL unitTestPassed = TRUE;
@@ -615,30 +610,20 @@
 }
 
 // sets the answers on the asteroid labels
-//jkehler edited this to simplyify 
 -(void)setAnswer {
 	
 	// define the solution set of labels on asteroids
 	//NSLog(@"starting setAnswer");	
 	
-	//what is this for???? //jkehler
-	//temporarily records the wrong answers being printed on the incorrect solution asteroids
-	//int wrongAnswers[5];
-	int finalWrongAnswer;
-		/*int i;
-	for(i=0; i<5; i++)
-		wrongAnswers[0] = [question answer];
-	*/
-	
 	// determine the correct_answer asteroid randomly and set its value and type
-	// because we have 4 labeled asteroids
-	int randomCorrectAsteroid = arc4random() % 3;	 // from 0 to 3 //jkehler
+	// because we have 6 labeled asteroids
+	int randomCorrectAsteroid = arc4random() % 4;	 // from 0 to 3 //jkehler
 	NSString *inputString = [[NSString alloc] initWithFormat:@"%d",(int)[question answer]];
 	[[[asteroids objectAtIndex: randomCorrectAsteroid] asteroidLabel] setText: inputString];
 	
 	
 	// set asteroid type
-	[[asteroids objectAtIndex: randomCorrectAsteroid] setAsteroidType:CORRECT_ASTEROID];
+	[[asteroids objectAtIndex: randomCorrectAsteroid] setAsteroidType: CORRECT_ASTEROID];
 	[inputString release];
 	
 	//NSLog(@"inside setAnswer and random correct asteroid index is : %d", randomCorrectAsteroid);
@@ -649,61 +634,45 @@
 		if (asteroidIndex != randomCorrectAsteroid) {
 			
 			// set wrong answer equal to some random value of +- [1-7] from the correct answer
-			//and keep setting the wrong answer until it is different from the correct answer
-			//and from the other wrong answers
-			/*do {
-				finalWrongAnswer = [question answer] + (arc4random() % 8 * pow(-1, (int)(arc4random() % 8)));
-			} while (finalWrongAnswer == [question answer]  || finalWrongAnswer == wrongAnswers[0]
-					 || finalWrongAnswer == wrongAnswers[1] || finalWrongAnswer == wrongAnswers[2]
-					 || finalWrongAnswer == wrongAnswers[3] || finalWrongAnswer == wrongAnswers[4] );
-			wrongAnswers[asteroidIndex] = finalWrongAnswer;*/
-			
-			int offsetValue;//jkehler got rid of while loop (its not a big deal if some are repeats (not worth the checking)
-			offsetValue=arc4random()%INCORRECT_ANSWER_PROXIMITY+1;//so its never zero
-			if(arc4random()%3<2)
-				offsetValue*=-1;
-			if((finalWrongAnswer = ([question answer] + offsetValue)) < 0){ //don't want negative values
-				finalWrongAnswer*=-1; //change it back.
-			}
-			//finalWrongAnswer = [question answer] + offsetValue;
-			
-			NSString *inputString = [[NSString alloc] initWithFormat:@"%d",finalWrongAnswer];
+			// that isn't the correct answer
+			int wrongAnswer = 0;
+			do {
+				wrongAnswer = [question answer] + (1 + arc4random() % 6 * pow(-1, (int)(arc4random() % 8)));
+			} while (wrongAnswer == [question answer]);
+			NSString *inputString = [[NSString alloc] initWithFormat:@"%d",wrongAnswer];
 			[[[asteroids objectAtIndex: asteroidIndex] asteroidLabel] setText: inputString];
 			
 			// and set the incorrect type
 			[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:INCORRECT_ASTEROID];
 			
-			//jkehler removing this caused no problems, it seems it was unecessary (since move and assinging random velocities is handled elsewhere.
 			// then send it on a random path
-			//[[asteroids objectAtIndex: asteroidIndex] 
+			[[asteroids objectAtIndex: asteroidIndex] 
 			 //setAsteroidDirection:((arc4random() %30 ) / 5  -3) :((arc4random() % 30) / 5 -3)];
-			// setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
-			// arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
+			 setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
+			 arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
 			[inputString release];
 			
-			//[[asteroids objectAtIndex: asteroidIndex] move]; 
+			[[asteroids objectAtIndex: asteroidIndex] move]; 
 		}
 	}
 	
-	[[asteroids objectAtIndex: 4] setAsteroidType:BLANK_ASTEROID];
-	//jkehler ALSO uncessesary
+	
 	// set the blank type on a random path
-/*	for (int asteroidIndex = 4; asteroidIndex < 5; asteroidIndex++) {//jkehler
+	for (int asteroidIndex = 4; asteroidIndex < 5; asteroidIndex++) {//jkehler
 		
 		[[asteroids objectAtIndex: asteroidIndex] setAsteroidType:BLANK_ASTEROID];
 		[[asteroids objectAtIndex: asteroidIndex] 
 		 setAsteroidDirection:	arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty]) : 
 		 arc4random() % ([UIAppDelegate.currentUser.currentTopic difficulty])];
 		[[asteroids objectAtIndex: asteroidIndex] move];
-	}*/
+	}
 	//NSLog(@"end of answer");
 }
 
 // updates the difficulty label to the current difficulty in the user profile
 -(IBAction) setDifficultyLabel {
 	//NSLog(@"start setDifficultyLabel");
-	//what the crap does this lline below do? setitto itself????? //jkehler
-	//[[UIAppDelegate.currentUser currentTopic] setDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
+	[[UIAppDelegate.currentUser currentTopic] setDifficulty: UIAppDelegate.currentUser.currentTopic.difficulty];
 	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
 	
 	//int diff = [UIAppDelegate.currentUser currentDifficulty];
@@ -713,16 +682,6 @@
 	if (diff == 2) diffMsg = @"Easy";
 	if (diff == 3) diffMsg = @"Hard";
 	if (diff == 4) diffMsg = @"Hardest";
-	
-		
-	if(gameStarted == TRUE)
-	{
-		[feedbackLabel setTextColor:[UIColor yellowColor]];
-		[self updateFeedbackLabelTo: @"You passed a level!"];
-		//[self beginFeedbackAnimation];
-		warningAnimationCounter = WARNING_ANIMATION_DURATION;
-	}
-	gameStarted = 1;
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Difficulty: %@", diffMsg];
 	[difficultyLabel setText:msg];
@@ -737,19 +696,7 @@
  *	it is also where we check for collisions
  */
 -(void) onTimer {
-	//update the time count by adding 'gamePlayTimerInterval' seconds to the current count.  //jkehler
-	topicTimeCount += gamePlayTimerInterval;
-	//write the timer to the screen display;
-	topicTimeDisplay.text = [NSString stringWithFormat:@"%d",(int)topicTimeCount];
 	
-
-	//NSLog(@"ship direction: %@", [ship direction]);
-	
-	
-	//updates asteroid movement for each of the 10 asteroids, 0-9
-	//update every ASTEROID_SPEED_FACTOR times that onTimer is called //jkehler
-	//if(asteroidSpeedCounter==ASTEROID_SPEED_FACTOR){
-		
 	[self animateWarning];
 	[self animateShield];
 	[self animateExplosion: shipDestroyed];
@@ -763,21 +710,29 @@
 		gameOverCounter--;
 	else						//game is not over so ship should not be hidden
 		shipIcon.hidden = NO;
-		
 	
-	asteroidSpeedCounter=0;//reset it to startcounting again.
-	for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)
+	
+	
+	//update the time count by adding 'gamePlayTimerInterval' seconds to the current count.  //jkehler
+	topicTimeCount += gamePlayTimerInterval;
+	//write the timer to the screen display;
+	topicTimeDisplay.text = [NSString stringWithFormat:@"%d",(int)topicTimeCount];
+	
+	Bullet *tempBullet;
+	//NSLog(@"ship direction: %@", [ship direction]);
+	
+	
+	//updates asteroid movement for each of the 10 asteroids, 0-9
+	for(int asteroidIndex = 0; asteroidIndex < 5; asteroidIndex++)//jkehler
 	{
-		[[asteroids objectAtIndex: asteroidIndex] move];
-	}
 		
-	//}else{
-	//	asteroidSpeedCounter++;
-	//}
+		[[asteroids objectAtIndex: asteroidIndex] move];
+		
+	}
+	
 	
 	//updates the bullet movement for each of the 6 bullets and checks for collisions with asteroids 
 	//in which case both bullet and asteroid are destroyed
-	Bullet *tempBullet;
 	for(int bulletIndex = 0; bulletIndex < 6; bulletIndex++)
 	{
 		
@@ -797,8 +752,8 @@
 		   tempBullet.bulletPosition.y  <  0 ) {
 			
 			
-		//	NSLog(@"bullet out of bounds at x: %f y: %f", tempBullet.bulletIcon.center.x, tempBullet.bulletIcon.center.y);
-		//	NSLog(@"screen width: %f\nscreen height: %f", [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+			//NSLog(@"bullet out of bounds at x: %f y: %f", tempBullet.bulletIcon.center.x, tempBullet.bulletIcon.center.y);
+			//NSLog(@"screen width: %f\nscreen height: %f", [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 			bulletPos[bulletIndex].x = 0;
 			bulletPos[bulletIndex].y = 0;
 			
@@ -822,16 +777,17 @@
 			int asteroidHeight = [[asteroids objectAtIndex: asteroidIndex] asteroidIcon].image.size.height;
 			
 			// check boundaries within 60% of width and height (compensates for timer inconsistencies)
-			if(  (tempBullet.bulletPosition.x < asteroidPositionX + asteroidWidth * 0.7) 
-					&& (tempBullet.bulletPosition.x > asteroidPositionX - asteroidWidth * 0.7) 
-					&& (tempBullet.bulletPosition.y < asteroidPositionY + asteroidHeight * 0.7) 
-					&& (tempBullet.bulletPosition.y > asteroidPositionY - asteroidHeight * 0.7)) {		
-				
-				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
-				//NSLog(@"bullet position: %f", tempBullet.center.x);
+			if(  (tempBullet.bulletPosition.x < asteroidPositionX + asteroidWidth * 0.6) 
+			   && (tempBullet.bulletPosition.x > asteroidPositionX - asteroidWidth * 0.6) 
+			   && (tempBullet.bulletPosition.y < asteroidPositionY + asteroidHeight * 0.6) 
+			   && (tempBullet.bulletPosition.y > asteroidPositionY - asteroidHeight * 0.6)) {		
 				
 				//set explosion to the position of the asteroid  //sverner
 				explosion.center =  [[asteroids objectAtIndex: asteroidIndex] asteroidPosition];
+				
+				
+				//NSLog(@"asteroid position: %f",[[asteroids objectAtIndex:asteroidIndex]asteroidIcon].center.x);
+				//NSLog(@"bullet position: %f", tempBullet.center.x);
 				
 				// destroy asteroid and bullet by hiding them off screen
 				[[asteroids objectAtIndex: asteroidIndex] setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
@@ -839,9 +795,7 @@
 				tempBullet.bulletIcon.hidden = YES;
 				bulletPos[bulletIndex] = CGPointMake(0,0);
 				
-				//start explosion  //sverner
 				explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
-
 				
 			}
 			
@@ -864,14 +818,14 @@
 	 */
 	// for every asteroid i
 	for (int i = 0; i < 5; i++) {//jkehler
-		/*
+		
 		// and for every asteroid j > i
 		for (int j = i + 1; j < 5; j++) {//jkehler
 			
 			// check for collision with other asteroids
 			// not working.
 			//[self checkCollisionOf: [asteroids objectAtIndex: i] with : [asteroids objectAtIndex: j]];
-		}*/
+		}
 		
 		// check for collision with the ship
 		[self checkCollisionOf: [asteroids objectAtIndex: i] withShip: ship];
@@ -883,10 +837,9 @@
 -(BOOL) checkCollisionOf:(Asteroid*)as withShip:(Ship*)aShip {
 	int shipWidth;
 	int shipHeight;
-	//int randomizeAsteroidRestart = rand()%4;
 	
-	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions //jkehler
-	/*if (shield != 0) {
+	// if the shield is not zero, regard the shield's dimensions instead of the ship's for collisions
+	if (shield != 0) {
 		
 		// add the asteroid's width and height so it would collide with the edge rather than the center of the asteroid
 		shipWidth = shipShield.image.size.width + as.asteroidIcon.image.size.width / 2;
@@ -897,11 +850,7 @@
 		
 		shipWidth = ship.shipIcon.image.size.width;
 		shipHeight = ship.shipIcon.image.size.height;
-	}*/
-	//jkehler commented out above and wrote below, changing so it always uses ships dimensions, shield is too large a target.
-	shipWidth = shipShield.image.size.width + as.asteroidIcon.image.size.width / 2;
-	shipHeight = shipShield.image.size.height + as.asteroidIcon.image.size.height / 2;
-	
+	}
 	
 	// asteroid did collide with the ship
 	if(  ((as.asteroidPosition.x < shipShield.center.x + shipWidth / 2 ) 
@@ -909,33 +858,12 @@
 	   && ((as.asteroidPosition.y < shipShield.center.y + shipHeight / 2) 
 		   && (as.asteroidPosition.y > shipShield.center.y - shipHeight / 2)) ) {
 		
-		// so set the asteroid somewhere off screen, either along the bottom of the screen (first if) 
-		//or along the left side of the screen (second if)
-		/*	if(randomizeAsteroidRestart == 0 )
-			[as setAsteroidPosition: -20 + rand()%490 : 320];  
-		else 
-			[as setAsteroidPosition: -20  : rand()%310 + 10 ];
-		*/
+		// so set the asteroid somewhere off screen
+		[as setAsteroidPosition: -10 - (arc4random() % 4) : -10 - (arc4random() % 4)];
 		
-		//jkehler why not just call setASteroidPosition because we hsould alsochange its vector.
-		//first set the position somewhere outside the screen.
-		int xpos,ypos;
-		//either -20 or 320
-		if(rand()%3<2){
-			xpos=-20;
-		}else
-			xpos=320;
-		if(rand()%3<2){
-			ypos=-20;
-		}else
-			ypos=490;
-		//now changed vector as well
-		[as setAsteroidPosition:xpos:ypos];
+		// decrease the shield by a third of its power
+		[self decreaseShield];
 		
-		// decrease the shield by a third of its power ONLY if the asteroid was a blank! //jkehler
-		//if([as asteroidType] == BLANK_ASTEROID){
-			[self decreaseShield];
-		//}
 	}
 	return NO;
 	
@@ -985,14 +913,11 @@
 	if (shield > 0)  {
 		
 		shield--;
-		shieldPower -= 0.33333;
-		
 		[self updateShieldTo: shield];
 		
 	}
 	else {
 		// if shield is at 0, reset it, and decrease lives.
-		shieldPower = 1.0;
 		[self updateShieldTo: 3];
 		[self decreaseLives];
 	}
@@ -1024,7 +949,10 @@
 	{
 		shipDestroyed = TRUE;
 		shipIcon.hidden = YES;
+		shipShield.hidden = YES;  
+		[self updateFeedbackLabelTo: @"Game Over"];
 		gameOverCounter = WARNING_ANIMATION_DURATION; 
+		warningAnimationCounter = WARNING_ANIMATION_DURATION;
 		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
 		//[self loseScenario];
 	}
@@ -1033,21 +961,22 @@
 		[self updateLivesTo: lives];
 		[feedbackLabel setTextColor:[UIColor redColor]];
 		//jkehler i dont' think we need anything but an animation here.
-		[self updateFeedbackLabelTo: @"Death really hurts!"];
+		
+		NSString *tempLabel = [[NSString alloc] initWithFormat:@"%d trys left!",
+							   lives+1 ];
+		if(lives == 0)
+			tempLabel = [[NSString alloc] initWithFormat:@"1 try left!" ];
+		
+		[self updateFeedbackLabelTo: tempLabel];
 		//[self beginFeedbackAnimation];
 		
 		warningAnimationCounter = WARNING_ANIMATION_DURATION;
 		explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
 		explosion.center = shipIcon.center;
 		shipIcon.hidden = YES;
+		shipShield.hidden = YES;
 		NSLog(@"Ship is destroyed since the player has lost a life.");
 		shipDestroyed = TRUE;
-		//for(int i = 0; i<EXPLOSION_ANIMATION_DURATION; i++)
-		//{
-		//	[self animateExplosion: TRUE];
-
-		//}
-
 	}
 }
 
@@ -1059,12 +988,12 @@
 }
 
 -(void) decreaseLivesUnitTest {
-	//int tempLives = lives;
+	int tempLives = lives;
 	[self decreaseLives];
-	//if(tempLives == lives)
-	//	NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: decreaseShield; sheild not changed by decrease");
-	//else
-	//	NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: decreaseShield");
+	if(tempLives == lives)
+		NSLog(@"UNIT TEST FAILED; class: GameScreenController; function: decreaseShield; sheild not changed by decrease");
+	else
+		NSLog(@"UNIT TEST PASSED; class: GameScreenController; fucntion: decreaseShield");
 }
 
 // update the lives representing UI elements
@@ -1106,7 +1035,7 @@
 	shipShield.transform =  originalShieldBounds;
 	shipShield.transform = CGAffineTransformMakeScale(shieldBarMultiplier, shieldBarMultiplier);
 	
-
+	
 }
 -(void) updateShieldToUnitTest{
 	
@@ -1165,8 +1094,8 @@
 			as2.asteroidPosition.y + as2.asteroidIcon.bounds.size.height / 2 ) 
 		   && (as1.asteroidPosition.y +as1.asteroidIcon.bounds.size.height / 2 > 
 			   as2.asteroidPosition.y - as2.asteroidIcon.bounds.size.height / 2)) ) {
-	 
-	
+		
+		
 		// if they collide, handle the collision.
 		[self handle2AsteroidsColliding: as1 with : as2];
 		return YES;
@@ -1182,47 +1111,57 @@
 	
 	// currently leads to very funky results
 	
-	 [as1 setAsteroidDirection: -as1.asteroidDirection.x : as1.asteroidDirection.y];
-	 [as1 setAsteroidDirection: as1.asteroidDirection.x : -as1.asteroidDirection.y];
-	 [as2 setAsteroidDirection: -as2.asteroidDirection.x : as2.asteroidDirection.y];
-	 [as2 setAsteroidDirection: as2.asteroidDirection.x : -as2.asteroidDirection.y];
+	[as1 setAsteroidDirection: -as1.asteroidDirection.x : as1.asteroidDirection.y];
+	[as1 setAsteroidDirection: as1.asteroidDirection.x : -as1.asteroidDirection.y];
+	[as2 setAsteroidDirection: -as2.asteroidDirection.x : as2.asteroidDirection.y];
+	[as2 setAsteroidDirection: as2.asteroidDirection.x : -as2.asteroidDirection.y];
 	
 	
 	
 }
 
 // begin explosion animation
--(void) asteroidExplosionAnimation:(CGPoint)location {
-	/*
-	// define animation images
-	NSMutableArray *myImages = [NSMutableArray arrayWithObjects: 
-						 [UIImage imageNamed:@"expl1.png"], 
-						 [UIImage imageNamed:@"expl2.png"], 
-						 [UIImage imageNamed:@"expl3.png"], 
-						 [UIImage imageNamed:@"expl4.png"], 
-						 [UIImage imageNamed:@"expl5.png"], 
-						 [UIImage imageNamed:@"expl6.png"], 
-						 [UIImage imageNamed:@"expl7.png"], 
-						 [UIImage imageNamed:@"expl8.png"],
-						 [UIImage imageNamed:@"expl9.png"], 
-						 [UIImage imageNamed:@"expl10.png"], 
-						 [UIImage imageNamed:@"expl11.png"], nil];
-	
-	animatedExplosion = [UIImageView alloc];
-	CGRect frame = CGRectMake(location.x, location.y, 40.0, 40.0);
-	[animatedExplosion initWithFrame: frame]; 
-	animatedExplosion.animationImages = myImages; 
-	animatedExplosion.animationDuration = 0.25; // seconds 
-	animatedExplosion.animationRepeatCount = 5; // 0 = loops forever 
-	
-	// start animation
-	NSLog(@"animating explosion");
-	[animatedExplosion startAnimating];
-	
-	// release object
-	[animatedExplosion release]; 
-	 */
-}
+// doesn't work.
+/*
+ -(void) asteroidExplosionAnimation:(CGPoint)location {
+ 
+ float numberOfGameTicksPerImage = EXPLOSION_ANIMATION_DURATION / 11.0 ;
+ //animatedExplosion.center = location;
+ 
+ //if(shipExploding == TRUE)
+ //	explosion.transform = CGAffineTransformMakeScale(5, 5);
+ //else
+ animatedExplosion.transform = CGAffineTransformMakeScale(2, 2);
+ if(explosionAnimationCounter == -1)
+ return;
+ else if(explosionAnimationCounter  == EXPLOSION_ANIMATION_DURATION)
+ {
+ 
+ explosionImageCounter = 0;
+ animatedExplosion.image = [explosions objectAtIndex: explosionImageCounter];
+ animatedExplosion.hidden = NO;
+ gameTicksLeftForExplosionImage = numberOfGameTicksPerImage;
+ explosionAnimationCounter--;
+ 
+ }
+ else if( explosionAnimationCounter > 0.0 && gameTicksLeftForExplosionImage <=0.0 )
+ {
+ explosionImageCounter++;
+ animatedExplosion.image = [explosions objectAtIndex:explosionImageCounter];
+ gameTicksLeftForExplosionImage = numberOfGameTicksPerImage;
+ explosionAnimationCounter--;
+ }
+ else if( explosionAnimationCounter > 0.0 )
+ {
+ gameTicksLeftForExplosionImage = gameTicksLeftForExplosionImage - 1.0;
+ }
+ else
+ {
+ explosionAnimationCounter = -1;
+ animatedExplosion.hidden = YES;
+ }	 
+ }
+ */
 
 // handles the asteroid collision scenarios
 -(void) asteroidCollision: (int) asteroidIndex {
@@ -1230,11 +1169,16 @@
 	// sound an explosion
 	[sound playAsteroidExplosion];
 	
-	// begin explosion animation at current location 
-	//[[asteroids objectAtIndex: asteroidIndex] beginExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
-	//[self asteroidExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
-		
 	explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+	
+	// begin explosion animation at current location 
+	
+	//[[asteroids objectAtIndex: asteroidIndex] beginExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
+	// doesn't work
+	/*
+	 explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
+	 [self asteroidExplosionAnimation: [[asteroids objectAtIndex: asteroidIndex] asteroidPosition]];
+	 */
 	
 	// if we hit the right asteroid
 	if([[asteroids objectAtIndex: asteroidIndex] asteroidType] == CORRECT_ASTEROID) 
@@ -1255,18 +1199,12 @@
 	{
 		[self hitBlankAsteroid: asteroidIndex];
 	}
-	
-
 }
 
 // what to do when a bullet collides with the correct_answer asteroid
 -(void) hitCorrectAsteroid: (int) index {
 	
 	NSLog(@"hit correct asteroid.");
-	
-	if(shieldPower < 1)
-		shieldPower += 0.33333;
-	shipShield.alpha = shieldPower;
 	
 	[self increaseShield];
 	int score = [UIAppDelegate.currentUser.score score];
@@ -1276,8 +1214,8 @@
 	// update the feedback label
 	[feedbackLabel setTextColor:[UIColor greenColor]];
 	[self updateFeedbackLabelTo: @"Correct!"];
-//	[self beginFeedbackAnimation];
 	warningAnimationCounter = WARNING_ANIMATION_DURATION;
+	
 	
 	// update the scoreboard 
 	score = score + CORRECT_ANSWER_REWARD;
@@ -1286,36 +1224,7 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	//jkehler following code is to prevent spawns too close to ship
-
-	//int i=0;
-	int xloc,yloc;
-	for(int i=0;i<5;i++){ //we want them to spawn outside range of ship x: outside 50-410,y outside 50-270
-		//either %50 or 410+%50
-		if(arc4random()%3<2){
-			xloc = arc4random()%50;
-		}else
-			xloc = 410+arc4random()%50;
-		
-		if(arc4random()%3<2){
-			yloc = arc4random()%50;
-		}else
-			yloc = 270 + arc4random()%50;
-		
-		//(Max - Min) * random(0 to 1) + Min = random(Min to Max)
-		/*
-		int xloc=460/2;
-		int yloc=320/2;
-		while(xloc > 100 && xloc < 360){
-			xloc=arc4random()%460;
-		}
-		while(yloc > 100 && yloc < 220){
-			yloc=arc4random()%320;
-		}*/
-		//[[asteroids objectAtIndex:index] setAsteroidPosition:xloc: yloc];
-		[[asteroids objectAtIndex:i] setAsteroidPosition:xloc:yloc];//reset all the asteroid positions.
-	}
-	//[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	[UIAppDelegate.currentUser.score setScore: score];
 	
@@ -1324,7 +1233,6 @@
 	
 	// reset question and asteroid labels
 	[self setQuestion];
-	
 }
 
 // hit wrong asteroid
@@ -1348,26 +1256,15 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	//should be OFF the screen!
-	int xpos,ypos;
-	//either -20 or 320
-	if(rand()%3<2){
-		xpos=-20;
-	}else
-		xpos=320;
-	if(rand()%3<2){
-		ypos=-20;
-	}else
-		ypos=490;
-	//now changed vector as well
-	//[as setAsteroidPosition:xpos:ypos];
-	[[asteroids objectAtIndex: index] setAsteroidPosition: xpos : ypos];
-	//[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	[UIAppDelegate.currentUser.score setScore: score];
 	
 	// check if game is over
 	[self checkScore];
+	
+	// set the next question
+	[self setQuestion];
 }
 
 // hit a blank asteroid
@@ -1386,20 +1283,7 @@
 	[inputString release];
 	
 	// update the location of the asteroid to a random point on the screen
-	int xpos,ypos;
-	//either -20 or 320
-	if(rand()%3<2){
-		xpos=-20;
-	}else
-		xpos=320;
-	if(rand()%3<2){
-		ypos=-20;
-	}else
-		ypos=490;
-	//now changed vector as well
-	//[as setAsteroidPosition:xpos:ypos];
-	[[asteroids objectAtIndex: index] setAsteroidPosition: xpos : ypos];
-	//[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
+	[[asteroids objectAtIndex: index] setAsteroidPosition: (arc4random() % 460) : (arc4random() % 320)];
 	
 	[UIAppDelegate.currentUser.score setScore: score];
 	
@@ -1410,7 +1294,7 @@
 // raise the difficulty if the user reached the limit and as long as it's not already on hardest
 // if it's lower than 0 then the game is over (lose scenario)
 // if it's over the limit of the hardest difficulty then the game is over (win scenario)
--(void) checkScore {//jkehler settings are saved once at the end of the function now
+-(void) checkScore {
 	
 	int diff = [UIAppDelegate.currentUser.currentTopic difficulty];
 	int score = [UIAppDelegate.currentUser.score score];
@@ -1418,7 +1302,7 @@
 	// if the current score is higher than highestScore, update the AppDelegate profile.
 	if (score > [UIAppDelegate.currentUser.highestScore score]) {
 		
-		//NSLog(@"saving highest score : %d", score);
+		NSLog(@"saving highest score : %d", score);
 		[UIAppDelegate.currentUser.highestScore setScore: score];
 	}
 	
@@ -1428,19 +1312,17 @@
 		[UIAppDelegate.currentUser setLastTopicCompleted: UIAppDelegate.currentUser.currentTopic];
 		
 		// and save settings
-		//[GlobalAdmin saveSettings];
+		[GlobalAdmin saveSettings];
 	}
 	
-	//jkehler isn't this handled by the asteroid destrcution function ????
 	// if score is higher than set limit for difficulty, then raise the difficulty
-
 	if (score > DIFFICULTY_LIMIT * diff && diff < DIFFICULTY_HARDEST) {
 		
 		// raise difficulty by one
 		[[UIAppDelegate.currentUser currentTopic] setDifficulty: diff + 1];
-		//also update
+		
 		// and save settings
-		//[GlobalAdmin saveSettings];
+		[GlobalAdmin saveSettings];
 		
 		
 		// reset the label
@@ -1473,7 +1355,7 @@
 		[UIAppDelegate.currentUser.lastTopicCompleted setDifficulty: diff];
 		
 		// save settings
-		//[GlobalAdmin saveSettings];
+		[GlobalAdmin saveSettings];
 	}
 	
 	// if the score is higher than the set limit for topic
@@ -1491,29 +1373,29 @@
 		}
 		
 		else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_SUBTRACTION &&
-				  [[UIAppDelegate.currentUser stats] subtractionTime] < [temp intValue]) {
-				
+				 [[UIAppDelegate.currentUser stats] subtractionTime] < [temp intValue]) {
+			
 			[[UIAppDelegate.currentUser stats] setSubtractionTime: [temp intValue]];
 		}
-	
+		
 		else if ([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION &&
-				  [[UIAppDelegate.currentUser stats] multiplicationTime] < [temp intValue]) {
-				
+				 [[UIAppDelegate.currentUser stats] multiplicationTime] < [temp intValue]) {
+			
 			[[UIAppDelegate.currentUser stats] setMultiplicationTime: [temp intValue]];
 		}
-			
+		
 		else if([[UIAppDelegate.currentUser currentTopic] topic] == TOPIC_MULTIPLICATION &&
-				 [[UIAppDelegate.currentUser stats] divisionTime]< [temp intValue]) {
+				[[UIAppDelegate.currentUser stats] divisionTime]< [temp intValue]) {
 			
-				[[UIAppDelegate.currentUser stats] setDivisionTime:[temp intValue]];
+			[[UIAppDelegate.currentUser stats] setDivisionTime:[temp intValue]];
 		}
-
+		
 		topicTimeCount = 0;
-
+		
 		
 		// if we haven't yet exhaused all our topics, progress to the next topic
 		if ([UIAppDelegate.currentUser.currentTopic nextTopic]) {
-
+			
 			// increase lives by 1
 			[self increaseLives];
 			
@@ -1525,7 +1407,7 @@
 			else {};	// avoid nested ambiguities.
 			
 			// save settings
-			//[GlobalAdmin saveSettings];
+			[GlobalAdmin saveSettings];
 			
 			// reset the score
 			score = 0;
@@ -1541,7 +1423,6 @@
 			[self winScenario];
 		}
 	}
-	[GlobalAdmin saveSettings];
 }
 
 // update the score label to the current score value
@@ -1555,47 +1436,20 @@
 // begin lose scenario
 -(void) loseScenario {
 	
-	//ship explodes animation and game over warning
-	[self updateFeedbackLabelTo: @"Game Over!"];
-	warningAnimationCounter = WARNING_ANIMATION_DURATION;
-	explosionAnimationCounter = EXPLOSION_ANIMATION_DURATION;
-	explosion.center = shipIcon.center;
-	shipIcon.hidden = YES;
-	NSLog(@"Ship explodes for game over.");
-	for(int i = 0; i<EXPLOSION_ANIMATION_DURATION; i++)
-	{
-		[self animateExplosion: TRUE ];
-		[self animateWarning];
-		
-	}
-	for(int i=EXPLOSION_ANIMATION_DURATION; i<WARNING_ANIMATION_DURATION; i++)
-	{
-		[self animateWarning];
-		usleep(100000);
-	}
-	
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
 	// reset score, shield and lives
 	[self resetValues];
 	
-	//play you loose warning
-	//[feedbackLabel setTextColor:[UIColor redColor]];
-	[self updateFeedbackLabelTo: @"Game Over!"];
-	//[self beginFeedbackAnimation];
-	warningAnimationCounter = WARNING_ANIMATION_DURATION;
-	
 	// show lose alert
 	UIAlertView *loseAlert = [[[UIAlertView alloc] initWithTitle: @" ): "
-														message: @"Don't give up!"
-													   delegate: self
-											  cancelButtonTitle: nil
-											  otherButtonTitles: @"OK", nil] autorelease];
+														 message: @"Them asteroids is quick."
+														delegate: self
+											   cancelButtonTitle: nil
+											   otherButtonTitles: @"OK", nil] autorelease];
 	
 	[loseAlert show];
-	
-
 	
 	[self nextScreen];
 }
@@ -1603,29 +1457,23 @@
 // begin win scenario
 -(void) winScenario {
 	
-	//unlock last topic diff (couldn't figureu out where to put this in checkScore so putting it here.
-	[[UIAppDelegate.currentUser lastTopicCompleted] setDifficulty: DIFFICULTY_HARDEST];
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
 	
 	// show win alert
 	UIAlertView *winAlert = [[[UIAlertView alloc] initWithTitle: @"CONGRATULATIONS !!!!"
-													 message: @"You've won the game."
-													delegate: self
-										   cancelButtonTitle: nil
-										   otherButtonTitles: @"OK", nil] autorelease];
-
+														message: @"You've won the game."
+													   delegate: self
+											  cancelButtonTitle: nil
+											  otherButtonTitles: @"OK", nil] autorelease];
+	
 	[winAlert show];
 	
 	//[self nextScreen];
 	
 	// go directly to main menu from here
-	//add option to keep playing?
-	if(ENABLE_BONUS_SPEED_GAME == 1){
-		UIAppDelegate.bonusSpeedGameEnable=1;
-	}else
-		[self.navigationController popToRootViewControllerAnimated:YES];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 // initialize the sound files
@@ -1654,8 +1502,6 @@
 	
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
-	if(gamePaused == FALSE)  //pause game while entering the help screen
-		[self pauseGame];
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
 	[self.navigationController pushViewController:helpView animated:YES];
 	[helpView release];
@@ -1680,7 +1526,10 @@
 	
 	UITouch *touch = [[event allTouches] anyObject];		//records touch as touch object
     CGPoint location = [touch locationInView:touch.view];	//records touch's location
-
+    //NSLog(@"X: %f",location.x);
+    //NSLog(@"Y: %f",location.y);
+	
+	
 	double x,y;
 	double radius = 48;  //radius of rotation wheel
 	double radiusSquared = radius*radius; //radius squared
@@ -1738,8 +1587,7 @@
  */
 - (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
 	
-	if(gamePaused == FALSE)  //only execute touch actions, such as rotation if the game is unpaused
-		[self touchesUpdate:touches : event];
+	[self touchesUpdate:touches : event];
 	
 	//[self touchesUpdateUnitTest:touches : event];
 	
@@ -1753,8 +1601,8 @@
 /*This function is called when a finger is dragged on the screen */
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 { 
-	if(gamePaused == FALSE)   //only execute touch actions, such as rotation if the game is unpaused
-		[self touchesUpdate:touches : event];
+	[self touchesUpdate:touches : event];
+	
 }
 
 // override to allow orientations other than the default portrait orientation
@@ -1783,6 +1631,7 @@
 	[bulletIcons release];
 	[solutionLabels release];
 	[asteroids release];
+	[explosions release];
 	[bullets release];
 	[question release];
 	[sound release];

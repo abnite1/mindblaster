@@ -16,7 +16,7 @@
 // set the question
 
 -(IBAction)setQuestion{
-
+	
 	// base range =  (0 - 10), add +10 to max positive range for every added difficulty level.
 	//int diff = [UIAppDelegate.currentUser currentDifficulty];
 	int diff = [[UIAppDelegate.currentUser currentTopic] difficulty];
@@ -30,7 +30,7 @@
 	
 	// get the operator
 	char* operator = [UIAppDelegate.currentUser.currentTopic operator];
-
+	
 	// calculate the answer based on topic type
 	if (topicType == TOPIC_ADDITION) {
 		
@@ -39,7 +39,7 @@
 	
 	// the max value should be on the left for subtraction
 	else if (topicType == TOPIC_SUBTRACTION) {
-	
+		
 		int maxVal = MAX (operand1, operand2);
 		int minVal = MIN (operand1, operand2);
 		operand1 = maxVal;
@@ -58,7 +58,7 @@
 	// there should always be an integer solution for division
 	// and we cannot divide by 0
 	else if ( topicType == TOPIC_DIVISION ) {
-
+		
 		operand1 = 1 + arc4random() % (2 * diff); 	
 		operand2 = 1 + arc4random() % (10 * diff);
 		
@@ -73,7 +73,7 @@
 								 operand1,operator,operand2];
 	// set the label
 	[questionLabelOutletPointer setText:numericQuestion];
-
+	
 	// release all allocated objects
 	[numericQuestion release];
 }

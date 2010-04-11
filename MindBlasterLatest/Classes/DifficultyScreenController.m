@@ -70,7 +70,7 @@
 	
 	// set it in the profile
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARD];
-
+	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,30]"];
 	[difficultyDescription setText:msg];
 	[msg release];
@@ -84,7 +84,7 @@
 	
 	// set it in the profile
 	[[UIAppDelegate.currentUser currentTopic] setDifficulty:DIFFICULTY_HARDEST];
-
+	
 	
 	NSString *msg = [[NSString alloc] initWithFormat:@"Range: [0,40]"];
 	[difficultyDescription setText:msg];
@@ -108,13 +108,13 @@
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 // animate the space background
 -(void)animateBackground {
@@ -137,20 +137,20 @@
 				
 			case 1:
 				[easy setEnabled:NO];
-				easy.alpha = 0.5;	//makes difficulty options faded (user must beat previous difficulty first
+				easy.alpha = 0.5;
 			case 2:
 				[hard setEnabled:NO];
-				hard.alpha = 0.5;	//makes difficulty options faded (user must beat previous difficulty first
+				hard.alpha = 0.5;
 			case 3:
 				[hardest setEnabled:NO];
-				hardest.alpha = 0.5;	//makes difficulty options faded (user must beat previous difficulty first
-			
+				hardest.alpha = 0.5;
+				
 			default:
 				break;
 		}
-
+		
 	} 
-		 
+	
 	
 	// start space animation
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
@@ -158,7 +158,7 @@
 	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
 								   selector:@selector(animateBackground) userInfo:nil repeats:YES];
 	[background setSpeedX:0.2 Y:0.2];
-
+	
 }
 
 // delegate function that runs every time the view returns from "back" of another screen

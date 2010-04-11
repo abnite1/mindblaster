@@ -212,14 +212,14 @@
 		[stats setCorrectHits: [[prefs objectForKey:@"CorrectHits"] intValue]];
 		[stats setIncorrectHits: [[prefs objectForKey:@"IncorrectHits"] intValue]];
 		[stats setBlankHits: [[prefs objectForKey:@"BlankHits"] intValue]];
-		 
-		 [UIAppDelegate.currentUser setStats: stats];
-		 
+		
+		[UIAppDelegate.currentUser setStats: stats];
+		
 		[stats release];
-
 		
 		
-
+		
+		
 		
 		// load the current topic
 		int top = [[prefs objectForKey: @"CurrentTopic"] intValue];

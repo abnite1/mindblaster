@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GlobalAdmin.h"
 
 
 @interface WebController : UIViewController {
-
+	
 	//CGRect webFrame;
-	//IBOutlet UIWebView *webView;
-	IBOutlet UIButton *back;
+	IBOutlet UIWebView *webView;
+	
 }
-@property (nonatomic, retain) IBOutlet UIButton *back;
 
 -(void) showWebView;
--(IBAction)backScreen;
-
+-(IBAction) goBack:(id)sender;
+-(IBAction) reload:(id)sender;
 @end

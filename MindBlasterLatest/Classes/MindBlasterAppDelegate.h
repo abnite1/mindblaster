@@ -20,15 +20,14 @@
 	
 	NSInteger					networkingCount;
 	UserProfile *				currentUser;
-	int							bonusSpeedGameEnable;
-
+	
+	
 }
 
 @property (nonatomic, retain) UserProfile *						currentUser;
 @property (nonatomic, retain) IBOutlet UIWindow *				window;
 @property (nonatomic, retain) IBOutlet UINavigationController *	navigationController;
 @property (nonatomic, assign) NSInteger							networkingCount;
-@property (nonatomic) int								bonusSpeedGameEnable;
 
 
 

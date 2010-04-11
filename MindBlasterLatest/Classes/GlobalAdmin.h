@@ -13,7 +13,7 @@
 #import <SystemConfiguration/SCNetworkReachability.h>
 
 @interface GlobalAdmin : NSObject {
-
+	
 }
 
 +(NSString *)getPath;

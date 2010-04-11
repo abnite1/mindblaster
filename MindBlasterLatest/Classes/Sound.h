@@ -34,18 +34,18 @@
 	NSError *errorBG;
 	NSError *errorLaser;
 	NSError *errorExplosion;
-
+	
 	
 	NSURL *bgSoundURL;
 	NSURL *laserSoundURL;
 	NSURL *asteroidExplosionSoundURL;
 	NSURL *shipExplosionSoundURL;
-
+	
 	
 	AVAudioPlayer *bgPlayer;
 	AVAudioPlayer *laserPlayer;
 	AVAudioPlayer *explosionPlayer;
-
+	
 	
 	BOOL			bgIsPlaying;
 	

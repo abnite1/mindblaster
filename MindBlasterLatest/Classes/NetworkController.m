@@ -117,7 +117,7 @@
 		
 		NSLog(@"finished loading upload script");
 	}
-		
+	
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -233,7 +233,7 @@
 		[self download];
 		
 	}
-
+	
 }
 
 
@@ -254,7 +254,7 @@
 	else {
 		statusLabel.text = @"There is no profile to upload.";
 	}
-
+	
 }
 
 // we have the email, get the rest done.
@@ -268,56 +268,56 @@
 	
 	// otherwise check if folder exists, and if it does, write to it.
 	else {
-	
+		
 		if (![activityIndicator isAnimating]) {
 			
 			activityIndicator.hidden = NO;
 			[activityIndicator startAnimating];
 		}
 		connectionType = UPLOAD;
-
+		
 		
 		// attach the email as the url parameter
 		NSString *urlWithEmail = [[NSString alloc] initWithFormat: @"%@%@", 
-							  [GlobalAdmin getUploadFolderCheckURL], emailUp.text];
+								  [GlobalAdmin getUploadFolderCheckURL], emailUp.text];
 		NSLog(@"%@", urlWithEmail);
-	
+		
 		NSURL *url = [NSURL URLWithString: urlWithEmail];
 		[urlWithEmail release];
 		NSURLRequest *request = [NSURLRequest requestWithURL: url];
-	
+		
 		// load the url and parse the reponse to see if folder was created so we can write to it.
 		NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest: request delegate: self startImmediately: YES];
-	
+		
 		if (urlConnection ){
 			NSLog(@"upload folder check URL connected.");
 		}
 		else {
 			NSLog(@"upload folder check URL failed to connect.");
 		}
-	
+		
 		NSError *fcError;
 		NSURLResponse *fcResponse;
-	
+		
 		// get response
 		NSData *fcData = [NSURLConnection sendSynchronousRequest: request
 											   returningResponse: &fcResponse error: &fcError];
-	
+		
 		// response positive => folder created. write to it.
 		if ([self parseFolderCheckResponse: fcData]) {
-		
+			
 			NSLog(@"folder created.");
 			//[activityIndicator startAnimating];
 			[self upload];
 		}
 		// response negative => folder not created. fail.
 		else {
-		
+			
 			NSLog(@"failed to create folder.");
 			[statusLabel setText: @"Error while uploading, try again."];
-		
+			
 		}
-	
+		
 		// release connection
 		NSLog(@"before urlConnection release in uploadrequested");
 		[urlConnection release];
@@ -327,7 +327,7 @@
 // check response of folder check URL
 // returns YES if folder was created, NO otherwise.
 -(BOOL) parseFolderCheckResponse: (NSData*)data {
-
+	
 	NSString *webpageResponse = [[NSString alloc] initWithData: data encoding:NSUTF8StringEncoding];
 	if (webpageResponse == nil) return NO;
 	NSLog(@"response: %@", webpageResponse);
@@ -365,7 +365,7 @@
 	// return YES if email has been already entered with a non empty value
 	if (email.text != nil && ! [email.text isEqualToString:@""]) {
 		
-
+		
 		return YES;
 	}
 	else  {
@@ -394,7 +394,7 @@
 		NSLog(@"inside _upadateStatus with status: %@", statusString);
 	else NSLog(@"update status with nil statusstring");
     //assert(statusString != nil);
-   // self.statusLabel.text = statusString;
+	// self.statusLabel.text = statusString;
 }
 
 - (void)_sendDidStopWithStatus:(NSString *)statusString {
@@ -406,7 +406,7 @@
     }
 	else NSLog(@"send did stop with status = nil");
     //self.statusLabel.text = statusString;
-   // self.cancelButton.enabled = NO;
+	// self.cancelButton.enabled = NO;
 	//[[AppDelegate sharedAppDelegate] didStartNetworking];
 }
 
@@ -539,13 +539,13 @@
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 - (void)viewDidLoad {
 	
@@ -584,12 +584,12 @@
 	}
     
 	NSLog(@"end of viewDidLoad");
-
+	
 }
 
 // delegate function that runs whenever view appears (when returning from subview, etc.)
 - (void)viewWillAppear:(BOOL)animated {
-   
+	
 	[super viewWillAppear:animated];
 	
 }
@@ -619,7 +619,7 @@
 
 // converts email string to md5 string
 -(NSString*) emailToMD5: (NSString*) email {
-
+	
 	const char *cStr = [email UTF8String];
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
 	CC_MD5( cStr, [email length], result );
@@ -633,11 +633,11 @@
 	// return in lowercase
 	return [tempString lowercaseString];
 }
- 
+
 
 // download a file
 -(IBAction) download {	
-		
+	
 	assert (emailDown.text != nil && ! [emailDown.text isEqualToString: @""]);
 	
 	NSString *md5Email = [self emailToMD5: emailDown.text];
@@ -647,7 +647,7 @@
 	//NSLog(@"updating the download DB script");
 	//NSLog(@"email: %@",[UIAppDelegate.currentUser email]);
 	//[self updateDBDownload];
-
+	
 	
 	// save path
 	//NSString *fileString = [[GlobalAdmin getPath] retain];
@@ -662,11 +662,11 @@
 			NSLog(@"Failed to delete existing profile");
 	}
 	
-/*
-	// set the send-to-file stream
-	self.fileStreamOut = [NSOutputStream outputStreamToFileAtPath: fileString append:NO];
-	[self.fileStreamOut open];
-*/
+	/*
+	 // set the send-to-file stream
+	 self.fileStreamOut = [NSOutputStream outputStreamToFileAtPath: fileString append:NO];
+	 [self.fileStreamOut open];
+	 */
 	
 	NSLog(@"md5: %@",[GlobalAdmin getURL]);
 	
@@ -681,11 +681,11 @@
 	NSLog(@"before urlString release in download");
 	[urlString release];
 	
-/*	
-	self.connection = [NSURLConnection connectionWithRequest: request delegate: self];
-	assert(self.connection != nil);
-*/
-
+	/*	
+	 self.connection = [NSURLConnection connectionWithRequest: request delegate: self];
+	 assert(self.connection != nil);
+	 */
+	
 	//self.activityIndicator.hidden = NO;
 	//[self.activityIndicator startAnimating];
 	
@@ -695,11 +695,11 @@
 	// start UI progress indicators
 	//[self.activityIndicator stopAnimating];
 	//self.activityIndicator.hidden = YES;
-
+	
 	NSLog(@"Saving to file: %@", fileString);
-
+	
 	[profile writeToFile: fileString atomically: YES];
-
+	
 	[url release];
 	[profile release];
 	
@@ -724,13 +724,13 @@
 	
 	NSString *md5Email = [self emailToMD5: emailUp.text];
 	NSLog(@"email: %@ md5(32): %@", emailUp.text, md5Email);
-
-
+	
+	
 	
 	// get the ftp url from ApplicationSettings.plist
 	NSString *urlString = [[NSString alloc] initWithFormat: @"%@%@/UserProfile.plist", [GlobalAdmin getURL],  md5Email];
 	NSLog(@"upload URL path: %@",urlString);
-
+	
 	// get the local file path for the profile
 	NSString *fileString = [GlobalAdmin getPath];
 	
@@ -744,11 +744,11 @@
 	// make sure we have a file to upload
 	if ( [[NSFileManager defaultManager] fileExistsAtPath: fileString ] ) 
 	{
-	
+		
 		// for debugging
 		NSLog(@"uploading: %@", fileString);
 		NSLog(@"to: %@", urlString);
-	
+		
 		// update UI indicators
 		self.statusLabel.text = @"Upload Started.";
 		if (![activityIndicator isAnimating]) {
@@ -760,21 +760,21 @@
 		emailUp.hidden = YES;
 		//self.activityIndicator.hidden = NO;
 		//[self.activityIndicator startAnimating];
-	
+		
 		// set the streams
 		self.fileStreamIn = [NSInputStream inputStreamWithFileAtPath: fileString];
-	
+		
 		[self.fileStreamIn open];
 		CFWriteStreamRef ftpStream = CFWriteStreamCreateWithFTPURL(NULL, (CFURLRef) url);
-	
+		
 		self.networkStreamOut = (NSOutputStream *) ftpStream;
-	
+		
 		self.networkStreamOut.delegate = self;
 		[self.networkStreamOut scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 		
 		// and send
 		[self.networkStreamOut open];
-	
+		
 		// Have to release ftpStream to balance out the create.  self.networkStream 
 		// has retained this for our persistent use.
 		CFRelease(ftpStream);
@@ -787,7 +787,7 @@
 	}
 	
 	//[self didStartNetworking];
-	 NSLog(@"end of upload");
+	NSLog(@"end of upload");
 	
 	connectionType = -1;
 }
@@ -813,9 +813,9 @@
 	NSLog(@"updating upload script");
 	
 	[self updateDBUpload];
-
+	
 }
- 
+
 
 // to be implemented
 -(void) didStartNetworking {
@@ -833,12 +833,12 @@
 
 
 /*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -849,7 +849,7 @@
 
 // plays an inside click when hitting email or name text edit panes
 -(IBAction) playClick {
-
+	
 	//NSLog(@"starting indicator");
 	
 	//activityIndicator.hidden = NO;
@@ -860,7 +860,7 @@
 	//[uploadButton setEnabled: NO];
 	//[backButton setEnabled: NO];
 	//[helpButton setEnabled: NO];
-
+	
 	
 	// play inside click
 	[MindBlasterAppDelegate playInsideClick];
@@ -868,7 +868,7 @@
 
 // start progress indicator animation
 -(IBAction)startIndicator{
-
+	
 	//activityIndicator.hidden = NO;
 	//[activityIndicator startAnimating];
 }
@@ -884,7 +884,7 @@
 
 - (void)dealloc
 {
-
+	
     //[self _stopSendWithStatus:@"Stopped"];
     [super dealloc];
 }

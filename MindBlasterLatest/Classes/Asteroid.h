@@ -13,7 +13,7 @@
  *  asteroids currently phase through each other instead of colliding and changing direction, and bounce off the wall instead
  *  of phasing through to the other side of the screen as is more appropriate in a space setting.
  *
-*/
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -28,22 +28,20 @@ static const int ASTEROID_SIZE_Y = 32;
 
 // constants
 static const float ROTATION_COEFFICIENT = 0.07;
-//static const int ASTEROID_SPEED_FACTOR = 3; //range approx 2-5, less than 2 and all the vectors will be 45deg, more than 5 and too fast.
 
 
 @interface Asteroid : NSObject {
-
-
+	
+	
 	int					asteroidType;					// constant types defined at the top of the class
 	CGPoint				asteroidDirection;				// direction of the asteroid's movement
 	CGPoint				asteroidPosition;				// position of the asteroid
-//	IBOutlet			UIImageView *asteroidIcon;		// UIImage of the asteroid
+	//	IBOutlet			UIImageView *asteroidIcon;		// UIImage of the asteroid
 	UIImageView			*asteroidIcon;
 	UIImageView			*animatedExplosion;				// the animation of an explosion when an asteroid gets hit
 	IBOutlet UILabel	*asteroidLabel;		// label correct/incorret answers
 	CGPoint				asteroidSize;
 	int					asteroidSpeed;
-	int					asteroidSolution;
 	float				mAngle;
 }
 
@@ -61,7 +59,7 @@ static const float ROTATION_COEFFICIENT = 0.07;
 
 //-(id) init;
 -(void)setAsteroidDirectionUnitTest;
--(void)setAsteroidDirection:(float)x :(float)y;
+-(void)setAsteroidDirection:(int)x :(int)y;
 -(void)setAsteroidPosition:(int)x :(int)y;
 -(IBAction)move;
 -(void)bounceOffBoundaries;
@@ -72,7 +70,6 @@ static const float ROTATION_COEFFICIENT = 0.07;
 //unit tests
 - (void)initWithElementsUnitTest:(UIImageView*)icon :(UILabel*)label;
 -(void) moveUnitTest;
--(CGPoint)returnAsteroidCenter;
 
 @end
 

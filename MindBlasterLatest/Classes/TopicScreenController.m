@@ -66,7 +66,7 @@
 	
 	// update the AppDelegate profile
 	[UIAppDelegate.currentUser setCurrentTopic: topic];
-
+	
 	[msg release];
 	[topic release];
 }
@@ -94,7 +94,7 @@
 
 // multiplication selected
 -(IBAction) thirdTopicSelected {
-
+	
 	// play inside click
 	[MindBlasterAppDelegate playInsideClick];
 	
@@ -115,7 +115,7 @@
 
 // division selected
 -(IBAction) fourthTopicSelected {
-
+	
 	// play inside click
 	[MindBlasterAppDelegate playInsideClick];
 	
@@ -145,13 +145,13 @@
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 // animate the space background
 -(void)animateBackground {
@@ -169,23 +169,23 @@
 	// display a current profile representation. 
 	[UIAppDelegate.currentUser userLog];
 	
-
+	
 	//block and hide any locked topics
 	//NSLog(@"Last Topic Completed is currently set to: %d \n",[[UIAppDelegate.currentUser lastTopicCompleted] topic]);
 	//purposely don't do break so excecute all rest as well
-
+	
 	switch([[UIAppDelegate.currentUser lastTopicCompleted] topic]) {
-		
+			
 		case 0:		// addition
 			[subtraction setEnabled: NO];
-			subtraction.alpha = 0.5;	//makes topics faded (user must beat previous topic first)
+			subtraction.alpha = 0.5;
 			
 		case 1:		// subtraction
 			[multiplication setEnabled:NO];
-			multiplication.alpha = 0.5;	 //makes topics faded (user must beat previous topic first)
+			multiplication.alpha = 0.5;
 			
 		case 2:		// multiplication
-			[division setEnabled:NO];  //makes topics faded (user must beat previous topic first)
+			[division setEnabled:NO];
 			division.alpha = 0.5;
 			
 		default:
@@ -193,15 +193,15 @@
 	}
 	/*
 	 The locking aspect was tested as follows:
-	  LoadGame loaded a userprofile with Topics 2,3,4 locked and diff 1,2,3 unlocked on that topic
-	  This was evident in choice availability on topic and diff screens.
-	  Then diffscreen changed the topics available to 1,2,3 (only 4 locked) 
-	  Went back to topicscreen to see if changes took effect:
-		Changes only took effect if got back from GameOver (quit -> mainmenu) OR changetopic
-		If went straight back to topic from diff, viewdidload did not run and didn't take effect.
-		This shouldn't cause any problems.
-	*/
-
+	 LoadGame loaded a userprofile with Topics 2,3,4 locked and diff 1,2,3 unlocked on that topic
+	 This was evident in choice availability on topic and diff screens.
+	 Then diffscreen changed the topics available to 1,2,3 (only 4 locked) 
+	 Went back to topicscreen to see if changes took effect:
+	 Changes only took effect if got back from GameOver (quit -> mainmenu) OR changetopic
+	 If went straight back to topic from diff, viewdidload did not run and didn't take effect.
+	 This shouldn't cause any problems.
+	 */
+	
 	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
 	
 	[NSTimer scheduledTimerWithTimeInterval:0.03 target:self
@@ -236,12 +236,12 @@
 }
 
 /*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

@@ -10,9 +10,9 @@
 
 
 @interface Bullet : NSObject {
-
 	
-
+	
+	
 	IBOutlet UIImageView *bulletIcon;
 	CGPoint bulletPosition;
 	CGPoint bulletDirection;

@@ -51,14 +51,14 @@
 	[self setBulletPosition: newPosition.x :newPosition.y];
 	
 	bulletIcon.center = CGPointMake(bulletPosition.x + bulletDirection.x, 
-									  bulletPosition.y + bulletDirection.y);
-
+									bulletPosition.y + bulletDirection.y);
+	
 }
 -(void) moveUnitTest {
 	
 	[self move];
 	CGPoint tempBulletPoint = bulletIcon.center ;
-
+	
 	bulletDirection.x = 2;
 	bulletDirection.y = 3;
 	

@@ -36,7 +36,7 @@
  *	navigate to the help screen
  */
 -(IBAction) helpScreen {
-
+	
 	
 	// Navigation logic may go here -- for example, create and push another view controller.
 	HelpScreenController *helpView = [[HelpScreenController alloc] initWithNibName:@"HelpScreenController" bundle:nil];
@@ -74,16 +74,16 @@
 	
 	// old loadgame controller phased out while we integrate the network controller
 	/*
-    // Navigation logic may go here -- for example, create and push another view controller.
-	LoadGameScreenController *loadGameView = [[LoadGameScreenController alloc] initWithNibName:@"LoadGameScreenController" bundle:nil];
-	[self.navigationController pushViewController:loadGameView animated:YES];
-	[loadGameView release];
+	 // Navigation logic may go here -- for example, create and push another view controller.
+	 LoadGameScreenController *loadGameView = [[LoadGameScreenController alloc] initWithNibName:@"LoadGameScreenController" bundle:nil];
+	 [self.navigationController pushViewController:loadGameView animated:YES];
+	 [loadGameView release];
 	 */
 }
 
 // continue to topic selection with the current profile
 - (IBAction) continueSelected {
-
+	
 	
 	if(! [GlobalAdmin loadSettings])  {
 		
@@ -98,14 +98,11 @@
 		[self.navigationController pushViewController: topicView animated: YES];
 		[topicView release];
 	}	
-
+	
 }
 
 // navigate to web broswer
 - (IBAction) webScreen {
-	
-	self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil] autorelease];
-	[self.navigationController setNavigationBarHidden:FALSE animated: NO ];
 	
 	// first load user settings from plist
 	[GlobalAdmin loadSettings];
@@ -118,8 +115,6 @@
 }
 
 
-
-
 // selector function for the background animation
 -(void)moveBackground {
 	
@@ -128,7 +123,7 @@
 
 // delegate function that runs every time the view returns from "back" of another screen
 - (void)viewWillAppear:(BOOL)animated {
-
+	
     [super viewWillAppear:animated];
 	NSLog(@"root view will appear.");
 }
@@ -138,7 +133,7 @@
     
 	[super viewDidAppear:animated];
 	NSLog(@"root view did appear.");
-
+	
 	[self.navigationController setTitle: @"rootView"];
 	[GlobalAdmin loadSettings];
 	if ([UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser userName] != nil) {
@@ -152,9 +147,9 @@
 		[continueButton setTitle: @"Continue" forState: 0];
 		continueButton.hidden = YES;
 		[continueButton setEnabled: NO];
-
+		
 	}
-	[self.navigationController setNavigationBarHidden:TRUE animated: NO ];
+	
 	[[UIApplication sharedApplication] setStatusBarHidden: YES animated: NO];
 }
 
@@ -165,10 +160,10 @@
 	[MindBlasterAppDelegate playButtonClick];
 }
 /*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
+ - (void)viewDidDisappear:(BOOL)animated {
+ [super viewDidDisappear:animated];
+ }
+ */
 
 
 - (void)didReceiveMemoryWarning {
@@ -184,18 +179,18 @@
 }
 
 
- 
+
 
 /*
-// Override to support row selection in the table view.
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    // Navigation logic may go here -- for example, create and push another view controller.
-	 AnotherView *anotherViewController = [[AnotherView alloc] initWithNibName:@"AnotherView" bundle:nil];
-	 [self.navigationController pushViewController:anotherViewController animated:YES];
-	 [anotherViewController release];
-}
-*/
+ // Override to support row selection in the table view.
+ - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+ // Navigation logic may go here -- for example, create and push another view controller.
+ AnotherView *anotherViewController = [[AnotherView alloc] initWithNibName:@"AnotherView" bundle:nil];
+ [self.navigationController pushViewController:anotherViewController animated:YES];
+ [anotherViewController release];
+ }
+ */
 
 
 // override to allow orientations other than the default portrait orientation
