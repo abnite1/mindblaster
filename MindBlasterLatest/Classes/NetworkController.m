@@ -120,6 +120,7 @@
 	
 }
 
+// set it in landscape mode
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // return YES for supported orientations
