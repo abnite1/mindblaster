@@ -335,7 +335,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>77D145FD1171648600674095</string>
+										<string>77D877DF1171657900E9B6E3</string>
 										<key>history</key>
 										<array>
 											<string>77203E581141290800127EC1</string>
@@ -402,7 +402,7 @@
 											<string>77D145F61171648600674095</string>
 											<string>77D145F71171648600674095</string>
 											<string>77D145F81171648600674095</string>
-											<string>77D145F91171648600674095</string>
+											<string>77D145FD1171648600674095</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -465,59 +465,10 @@
 											<string>77E490C6116C6F2600E629BF</string>
 											<string>7713A4D2116C9A2F002F3603</string>
 											<string>77A766B4116FA869002831EB</string>
-											<string>77D1453311715CCB00674095</string>
-											<string>77D1454811715CF500674095</string>
 											<string>77D1454911715CF500674095</string>
-											<string>77D1454A11715CF500674095</string>
-											<string>77D1454E11715D1C00674095</string>
-											<string>77D1455A11715DAE00674095</string>
-											<string>77D1455B11715DAE00674095</string>
-											<string>77D1455C11715DAE00674095</string>
-											<string>77D1455D11715DAE00674095</string>
 											<string>77D1455E11715DAE00674095</string>
-											<string>77D1455F11715DAE00674095</string>
 											<string>77D1456311715DCE00674095</string>
 											<string>77D1456411715DCE00674095</string>
-											<string>77D1456511715DCE00674095</string>
-											<string>77D1456911715DEE00674095</string>
-											<string>77D1456D11715E0200674095</string>
-											<string>77D1457111715E1700674095</string>
-											<string>77D1457511715E2700674095</string>
-											<string>77D1457911715E3F00674095</string>
-											<string>77D1457A11715E3F00674095</string>
-											<string>77D1457B11715E3F00674095</string>
-											<string>77D1457F11715E5A00674095</string>
-											<string>77D1458311715E6F00674095</string>
-											<string>77D1458711715E7E00674095</string>
-											<string>77D1458C11715E9600674095</string>
-											<string>77D1458D11715E9600674095</string>
-											<string>77D1458E11715E9600674095</string>
-											<string>77D1459311715EAA00674095</string>
-											<string>77D145991171602100674095</string>
-											<string>77D1459A1171602100674095</string>
-											<string>77D1459B1171602100674095</string>
-											<string>77D1459F1171604E00674095</string>
-											<string>77D145A31171606400674095</string>
-											<string>77D145A71171607E00674095</string>
-											<string>77D145AB1171608C00674095</string>
-											<string>77D145AF117160A400674095</string>
-											<string>77D145B3117160B200674095</string>
-											<string>77D145B7117160D900674095</string>
-											<string>77D145BB117160EC00674095</string>
-											<string>77D145BF117160FF00674095</string>
-											<string>77D145C31171612D00674095</string>
-											<string>77D145C71171614700674095</string>
-											<string>77D145CB1171616400674095</string>
-											<string>77D145CF1171618B00674095</string>
-											<string>77D145D3117161AA00674095</string>
-											<string>77D145D7117161C600674095</string>
-											<string>77D145DB117161D700674095</string>
-											<string>77D145DF117161E700674095</string>
-											<string>77D145E3117161FA00674095</string>
-											<string>77D145E71171624300674095</string>
-											<string>77D145EB1171627800674095</string>
-											<string>77D145EF1171629100674095</string>
-											<string>77D145FA1171648600674095</string>
 											<string>77D145FB1171648600674095</string>
 											<string>77D145FC1171648600674095</string>
 										</array>
@@ -663,11 +614,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>77D1453511715CCB00674095</string>
+				<string>77D877E01171657900E9B6E3</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>77D1453611715CCB00674095</string>
+				<string>77D877E11171657900E9B6E3</string>
 				<string>77203D691141106A00127EC1</string>
-				<string>77D1453711715CCB00674095</string>
+				<string>77D877E21171657900E9B6E3</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -814,14 +765,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>77D1453811715CCB00674095</string>
+				<string>77D877E31171657900E9B6E3</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>77D1453911715CCB00674095</string>
-				<string>77D1453A11715CCB00674095</string>
-				<string>77D1453B11715CCB00674095</string>
-				<string>77D1453C11715CCB00674095</string>
-				<string>77D1453D11715CCB00674095</string>
+				<string>77D877E41171657900E9B6E3</string>
+				<string>77D877E51171657900E9B6E3</string>
+				<string>77D877E61171657900E9B6E3</string>
+				<string>77D877E71171657900E9B6E3</string>
+				<string>77D877E81171657900E9B6E3</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -851,7 +802,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/yanivharamati/MindBlaster183/MindBlasterLatest/MindBlaster.xcodeproj</string>
+		<string>/Users/yanivharamati/MindBlaster Final!/MindBlasterLatest/MindBlaster.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>-2 111 1280 665 0 0 1280 778 </string>
