@@ -29,7 +29,7 @@
 //@synthesize fileText;
 //@synthesize connection    = _connection;
 
-@synthesize fileStreamIn, fileStreamOut;
+//@synthesize fileStreamIn, fileStreamOut;
 @synthesize fileStreamIn, fileStreamOut, networkStreamIn, networkStreamOut; 
 @synthesize connection;
 @synthesize statusLabel, titleLabel;
@@ -378,37 +378,6 @@
 }
 
 
-// returns YES if network connection found, otherwise NO.
-// function taken from : http://www.iphonedevsdk.com/forum/iphone-sdk-development/7300-test-if-internet-connection-available.html
-// with permission of author.
-- (BOOL) connectedToNetwork {
-    // Create zero addy
-    struct sockaddr_in zeroAddress;
-    bzero(&zeroAddress, sizeof(zeroAddress));
-    zeroAddress.sin_len = sizeof(zeroAddress);
-    zeroAddress.sin_family = AF_INET;
-	
-    // Recover reachability flags
-    SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
-    SCNetworkReachabilityFlags flags;
-	
-    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
-    CFRelease(defaultRouteReachability);
-	
-    if (!didRetrieveFlags)
-    {
-        printf("Error. Could not recover network reachability flags\n");
-        return 0;
-    }
-	
-    BOOL isReachable = flags & kSCNetworkFlagsReachable;
-    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
-	
-    BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
-	
-	return ((isReachable && !needsConnection) || nonWiFi) ? YES : NO;
-	
-}
 
 // display help for the load profile menu
 -(IBAction) helpScreen {
@@ -562,6 +531,9 @@
 -(void) failedConnectionResponse {
 	
 	[statusLabel setText: @"Couldn't connect..."];
+	[self enableButtons];
+	emailUp.hidden = YES;
+	emailDown.hidden = YES;
 	
 }
 
@@ -596,7 +568,7 @@
 	
 	// test for an internet connection
 	// if none was found
-	if (! [self connectedToNetwork]) {
+	if (! [GlobalAdmin connectedToNetwork]) {
 		
 		NSLog(@"no connection.");
 		[downloadButton setEnabled: NO];

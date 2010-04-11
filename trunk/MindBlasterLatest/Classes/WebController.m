@@ -72,16 +72,64 @@
 
 -(void) showWebView {
 	
-	CGRect webFrame = CGRectMake(0.0, 0.0, 460.0, 320.0); 
-	UIWebView * webView = [[UIWebView alloc] initWithFrame: webFrame]; 
+	CGRect webFrame = CGRectMake(0, 44.0, 480.0, 298.0); 
+	//UIWebView * webView = [[UIWebView alloc] initWithFrame: webFrame]; 
+	webView =  [[UIWebView alloc] initWithFrame: webFrame];
 	[webView setBackgroundColor: [UIColor whiteColor]]; 
-	NSString *urlAddress = [[NSString alloc] initWithString: @"http://mindblaster.byethost16.com/"]; 
+	//[webView autoresizesSubviews];
+	
+	// get the user email if a profile exists and an email has been entered
+	NSString * email;
+	if ([UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser email] != nil) {
+	
+		email = [[NSString alloc] initWithString: [UIAppDelegate.currentUser email]];
+	}
+	else {
+		
+		email = [[NSString alloc] initWithString: @""];
+	}
+	
+	// combine the email with the php url 
+	NSString * urlString = [[NSString alloc] initWithFormat: @"%@%@", 
+							[GlobalAdmin getStatsURL], email];
+	[email release];
+	
+	// set-up the url
+	NSString *urlAddress = [[NSString alloc] initWithString: urlString];
+	[urlString release];
+	
 	NSURL *url = [NSURL URLWithString: urlAddress]; 
 	[urlAddress release];
+	
+	// make the request
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL: url]; 
 	[webView loadRequest: urlRequest]; 
 	[[self view] addSubview: webView]; 
 	[webView release]; 
+}
+
+// navigate to the previous page
+-(IBAction) goBack:(id)sender {
+
+	NSLog(@"webview url: %@", [webView.request.URL path]);
+	
+	// if there's no connection or if it's the homepage go back to root menu
+	if (![GlobalAdmin connectedToNetwork] || [[webView.request.URL path] isEqual: @"/showuser.php"]) {
+
+		NSLog(@"home page");
+		// navigate to the help menu
+		[self.navigationController popViewControllerAnimated:TRUE];
+	}
+	// otherwise navigate back
+	else {
+		
+		[webView goBack];
+	}
+}
+
+// refresh the current page
+-(IBAction) reload:(id)sender {
+	[webView reload];
 }
 
 

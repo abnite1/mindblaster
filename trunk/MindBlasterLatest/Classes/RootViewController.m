@@ -138,6 +138,7 @@
     
 	[super viewDidAppear:animated];
 	NSLog(@"root view did appear.");
+
 	[self.navigationController setTitle: @"rootView"];
 	[GlobalAdmin loadSettings];
 	if ([UIAppDelegate currentUser] != nil && [UIAppDelegate.currentUser userName] != nil) {

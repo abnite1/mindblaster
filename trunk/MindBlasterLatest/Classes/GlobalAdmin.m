@@ -314,5 +314,50 @@
 	return result;
 }
 
+// returns the url with the user logon to show stats immediately
++(NSString*)getStatsURL {
+	
+	// read the general settings plist into a dictionary
+	NSString *path = [[NSBundle mainBundle] bundlePath];
+	NSString *finalPath = [path stringByAppendingPathComponent: @"ApplicationSettings.plist"];
+	NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile: finalPath];
+	NSString *result = [plistData objectForKey: @"ShowStatsURL"];
+	NSLog(@"ShowStatsURL: %@", result);
+	return [plistData objectForKey: @"ShowStatsURL"];
+}
+
+// returns YES if network connection found, otherwise NO.
+// function taken from : http://www.iphonedevsdk.com/forum/iphone-sdk-development/7300-test-if-internet-connection-available.html
+// with permission of author.
++ (BOOL) connectedToNetwork {
+    // Create zero addy
+    struct sockaddr_in zeroAddress;
+    bzero(&zeroAddress, sizeof(zeroAddress));
+    zeroAddress.sin_len = sizeof(zeroAddress);
+    zeroAddress.sin_family = AF_INET;
+	
+    // Recover reachability flags
+    SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
+    SCNetworkReachabilityFlags flags;
+	
+    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
+    CFRelease(defaultRouteReachability);
+	
+    if (!didRetrieveFlags)
+    {
+        printf("Error. Could not recover network reachability flags\n");
+        return 0;
+    }
+	
+    BOOL isReachable = flags & kSCNetworkFlagsReachable;
+    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
+	
+    BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
+	
+	return ((isReachable && !needsConnection) || nonWiFi) ? YES : NO;
+	
+}
+
+
 
 @end

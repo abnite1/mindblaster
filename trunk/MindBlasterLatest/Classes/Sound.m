@@ -26,7 +26,7 @@
 	
 	if ( self = [super init] ) {
 		
-		NSLog(@"inside sound init");		
+		//NSLog(@"inside sound init");		
 		bgSoundURL = [NSURL fileURLWithPath: [[NSBundle mainBundle] pathForResource: 
 											  newBackground ofType: newBGExtension]];
 		[bgSoundURL retain];
@@ -89,7 +89,7 @@
 // play a sound file for background
 -(void) playBG{
 	
-	NSLog(@"inside playBG");
+	//NSLog(@"inside playBG");
 	bgPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: bgSoundURL error: &errorBG];
 	
 	if (!bgPlayer) {
@@ -110,10 +110,10 @@
 // play a laser sound
 -(void) playLaser{
 	
-	NSLog(@"inside playLaser");
+	//NSLog(@"inside playLaser");
 	
 	laserPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: laserSoundURL error: &errorLaser];
-	NSLog(@"inside playLaser and after alloc");
+	//NSLog(@"inside playLaser and after alloc");
 	
 	if (!laserPlayer) {
 		
@@ -132,7 +132,7 @@
 // play an asteroid explosion
 -(void) playAsteroidExplosion {
 	
-	NSLog(@"inside playAsteroidExplosion");
+	//NSLog(@"inside playAsteroidExplosion");
 	explosionPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: asteroidExplosionSoundURL error: &errorExplosion];
 	
 	if (!explosionPlayer) {
@@ -150,8 +150,8 @@
 // delegate function to take effect when player finishes playing
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
 	
-	if (flag) NSLog(@"finished playing successfully.");
-	else NSLog(@"Error while playing.");
+	if (!flag) 
+		NSLog(@"audio player interrupted.");
 	
 	if ([player url] == bgSoundURL) {
 		
