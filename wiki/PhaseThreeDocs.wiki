@@ -3,3 +3,5 @@
 ===[http://mindblaster.googlecode.com/files/Group-3-Requirements-PHASE3.doc Requirements]===
 ===[http://mindblaster.googlecode.com/files/Group-3-Design-PHASE3.doc Design]===
 ===[http://mindblaster.googlecode.com/files/Group-3-QA-PHASE3.doc QA]===
+===[http://mindblaster.googlecode.com/files/Group-3-Presentation-PHASE3.doc Presentation]===
+===[http://mindblaster.googlecode.com/files/Group-3-Demo-PHASE3.doc Short Demo]===
