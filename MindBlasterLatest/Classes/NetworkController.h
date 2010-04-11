@@ -8,13 +8,13 @@
 
 #include <CFNetwork/CFNetwork.h>
 
-#include <netinet/in.h>
+//#include <netinet/in.h>
 #import <UIKit/UIKit.h>
 #import <CommonCrypto/CommonDigest.h>
 #import "GlobalAdmin.h"
 #import "MindBlasterAppDelegate.h"
 #import "HelpScreenController.h"
-#import <SystemConfiguration/SCNetworkReachability.h>
+//#import <SystemConfiguration/SCNetworkReachability.h>
 
 static const int DOWNLOAD = 0;
 static const int UPLOAD = 1;
@@ -98,7 +98,7 @@ enum {
 -(void)updateDBUpload;
 -(void)updateDBDownload;
 -(void) failedConnectionResponse;
-- (BOOL) connectedToNetwork;
+//- (BOOL) connectedToNetwork;
 - (BOOL) getEmailFromHiddenField;
 -(IBAction) downloadRequested;
 -(IBAction) uploadRequestedInitialAction;
