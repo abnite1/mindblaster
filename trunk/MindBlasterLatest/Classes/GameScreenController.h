@@ -25,6 +25,9 @@
 #import "MindBlasterAppDelegate.h"
 #import "Sound.h"
 
+#define LOSE_ALERT	0
+#define WIN_ALERT	1
+
 
 // this preprocessor directive value is used to set whether unit tests will be executed or not 
 #define UNIT_TESTS_EXECUTED  FALSE

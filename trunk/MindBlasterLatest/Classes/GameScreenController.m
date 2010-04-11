@@ -1436,6 +1436,8 @@
 // begin lose scenario
 -(void) loseScenario {
 	
+	[self pauseGame];
+	
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
 	
@@ -1448,14 +1450,29 @@
 														delegate: self
 											   cancelButtonTitle: nil
 											   otherButtonTitles: @"OK", nil] autorelease];
+	[loseAlert setTag: LOSE_ALERT];
 	
 	[loseAlert show];
+}
+// responds to the different alerts
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	
-	[self nextScreen];
+	// go to gameover page
+	if(alertView.tag == LOSE_ALERT) {
+		
+		[self nextScreen];
+	}
+	else if (alertView.tag == WIN_ALERT) {
+		
+		// go directly to main menu from here
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	}
 }
 
 // begin win scenario
 -(void) winScenario {
+	
+	[self pauseGame];
 	
 	// first save settings to plist
 	[GlobalAdmin saveSettings];
@@ -1467,13 +1484,12 @@
 													   delegate: self
 											  cancelButtonTitle: nil
 											  otherButtonTitles: @"OK", nil] autorelease];
+	[winAlert setTag: WIN_ALERT];
 	
 	[winAlert show];
 	
 	//[self nextScreen];
 	
-	// go directly to main menu from here
-	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 // initialize the sound files
