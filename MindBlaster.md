@@ -1,0 +1,7 @@
+Do you find it difficult to get your children to study?  Can't to get them to do their homework?  Well get ready for the ultimate in educational gaming with an old classic revamped with a unique spin!  Based on the arcade cult classic "Asteroids", **MindBlaster** combines unique gameplay with educational content.
+Geared at the elementary school level, **MindBlaster** keeps the players engaged by providing online update of each user's relative placement to that of their friends. Players will battle hoards of asteroids in a multitude of learning-based levels, following basic school curriculum. Players can progress through varying levels of difficulty, testing and strengthening their knowledge of math, trivia and spelling. Mixing the learning process with interactive competitive gameplay, while capturing their attention with immersive dynamic animation and fast-paced action. Player's progress is automatically uploaded to the **MindBlaster** server where it is available for viewing by both parents and teachers, appraising them of individual and overal progress. Teachers can post rankings for encouragement and reward successful learning.
+
+**MindBlaster** perfectly balances study and play -- they won't even know they're learning!
+
+
+Coming soon: Customized curriculum! Enhanced animation! Superior AI!
